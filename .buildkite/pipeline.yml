@@ -1,0 +1,25 @@
+steps:
+  - name: ':hammer: Build Android Demo'
+    commands:
+      - bundle install
+      - bundle exec fastlane build
+    artifact_paths:
+      - "app/**/*.apk"
+    plugins:
+      - docker-compose#v3.0.0:
+          config: ./docker-compose.yml
+          run: build_android
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            STORE_PASSWORD:
+              secret-id: 'stage-android-sdk-buildkite'
+              json-key: '.STORE_PASSWORD'
+            KEY_ALIAS:
+              secret-id: 'stage-android-sdk-buildkite'
+              json-key: '.KEY_ALIAS'
+            KEY_PASSWORD:
+              secret-id: 'stage-android-sdk-buildkite'
+              json-key: '.KEY_PASSWORD'
+    agents:
+      queue: 'stage-us-west-2-default'
+    timeout_in_minutes: 25
