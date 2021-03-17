@@ -1,8 +1,9 @@
 steps:
-  - name: ':hammer: Build Android Demo'
+  - name: ':hammer: Build and Unit Test Android Demo'
     commands:
       - bundle install
-      - bundle exec fastlane build
+      - bundle exec fastlane buildAndKtlint
+      - bundle exec fastlane test
     artifact_paths:
       - "app/**/*.apk"
     plugins:
