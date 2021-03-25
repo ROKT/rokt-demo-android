@@ -29,6 +29,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Libs.AndroidX.Compose.version
+    }
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -44,7 +50,9 @@ dependencies {
     implementation Libs.Coroutines.core
     implementation Libs.Coroutines.android
 
+    //Compose
     implementation Libs.AndroidX.Compose.material
+    implementation Libs.AndroidX.Activity.activityCompose
 
     testImplementation Libs.Test.Ext.junit
     testImplementation Libs.Test.core
