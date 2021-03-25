@@ -1,11 +1,15 @@
 package com.rokt.roktdemo
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.compose.setContent
+import androidx.core.view.WindowCompat
+import com.rokt.roktdemo.ui.RoktDemoApp
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : androidx.activity.ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        setContent { RoktDemoApp() }
     }
 }
