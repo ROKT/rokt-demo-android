@@ -53,6 +53,10 @@ dependencies {
     //Compose
     implementation Libs.AndroidX.Compose.material
     implementation Libs.AndroidX.Activity.activityCompose
+    implementation Libs.AndroidX.Compose.foundation
+    implementation Libs.AndroidX.Compose.layout
+    implementation Libs.AndroidX.Compose.uiUtil
+    implementation Libs.AndroidX.Compose.tooling
 
     testImplementation Libs.Test.Ext.junit
     testImplementation Libs.Test.core
