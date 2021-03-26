@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   build_android:
-    image: circleci/android:api-29
+    image: alvrme/android-30-jdk11
     user: root
     volumes:
       - ./:/source
