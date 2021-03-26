@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   build_android:
-    image: alvrme/android-30-jdk11
+    image: alvr/alpine-android:android-s-jdk11-v2021.03.17
     user: root
     volumes:
       - ./:/source
