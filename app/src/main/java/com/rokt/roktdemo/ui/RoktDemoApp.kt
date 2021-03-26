@@ -4,7 +4,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.rokt.roktdemo.ui.home.Home
-import com.rokt.roktdemo.ui.theme.LightColors
+import com.rokt.roktdemo.ui.theme.RoktColors.LightColors
 
 @Composable
 fun RoktDemoApp() {

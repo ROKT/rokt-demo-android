@@ -3,6 +3,6 @@
     <string name="menu_button_demo">Demo Library</string>
     <string name="menu_button_about">About Rokt</string>
     <string name="menu_button_contact">Contact Us</string>
-    <string name="footer_copyright">© Rokt 2021 - A ll rights reserved</string>
+    <string name="footer_copyright">© Rokt 2021 - All rights reserved</string>
     <string name="footer_text_version">App Version </string>
 </resources>
