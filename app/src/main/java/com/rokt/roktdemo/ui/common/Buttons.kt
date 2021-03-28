@@ -32,11 +32,7 @@ fun ButtonDark(text: String, onClick: () -> Unit) {
         ),
         shape = RectangleShape
     ) {
-        Text(
-            text, fontSize = BUTTON_FONT_SIZE.sp,
-            fontFamily = RoktFonts.DefaultFontFamily,
-            fontWeight = FontWeight.Bold
-        )
+        ButtonText(text = text)
     }
 }
 
@@ -54,9 +50,14 @@ fun ButtonLight(text: String, onClick: () -> Unit) {
         shape = RectangleShape,
         border = BorderStroke(2.dp, MaterialTheme.colors.secondary)
     ) {
-        Text(
-            text, fontSize = BUTTON_FONT_SIZE.sp, fontFamily = RoktFonts.DefaultFontFamily,
-            fontWeight = FontWeight.Bold
-        )
+        ButtonText(text = text)
     }
+}
+
+@Composable
+fun ButtonText(text: String) {
+    Text(
+        text, fontSize = BUTTON_FONT_SIZE.sp, fontFamily = RoktFonts.DefaultFontFamily,
+        fontWeight = FontWeight.Bold
+    )
 }

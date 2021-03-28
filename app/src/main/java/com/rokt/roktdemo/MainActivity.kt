@@ -9,6 +9,7 @@ class MainActivity : androidx.activity.ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // Draw behind status bar
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent { RoktDemoApp() }
     }

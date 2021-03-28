@@ -67,7 +67,7 @@ private fun HomeLogo() {
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_home_background),
-            contentDescription = "Rokt Background", contentScale = ContentScale.FillBounds
+            contentDescription = stringResource(R.string.content_description_rokt_bg), contentScale = ContentScale.FillBounds
         )
 
         Column(
@@ -79,14 +79,14 @@ private fun HomeLogo() {
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_rokt_logo),
-                contentDescription = "Rokt Logo", contentScale = ContentScale.FillBounds
+                contentDescription = stringResource(R.string.content_description_rokt_logo), contentScale = ContentScale.FillBounds
             )
 
             Text(
                 modifier = Modifier
                     .fillMaxWidth(0.8F)
                     .padding(PaddingValues(top = DEFAULT_SPACE.dp)),
-                text = "Powering the Transaction Moment™",
+                text = stringResource(R.string.content_description_rokt_title),
                 fontFamily = RoktFonts.DefaultFontFamily,
                 fontWeight = FontWeight.Normal,
                 fontSize = 24.sp,
