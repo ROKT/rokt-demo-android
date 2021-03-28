@@ -1,8 +1,6 @@
 steps:
   - name: ':hammer: Build and Unit Test Android Demo'
     commands:
-      - yum install rubygems
-      - gem install bundler
       - bundle install
       - bundle exec fastlane buildAndKtlint
       - bundle exec fastlane test
