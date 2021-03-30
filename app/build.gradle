@@ -3,6 +3,8 @@ import com.rokt.roktdemo.buildsrc.Libs
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -50,9 +52,17 @@ dependencies {
     implementation Libs.Coroutines.core
     implementation Libs.Coroutines.android
 
-    //Compose
+    // Compose
     implementation Libs.AndroidX.Compose.material
     implementation Libs.AndroidX.Activity.activityCompose
+    implementation Libs.AndroidX.Compose.foundation
+    implementation Libs.AndroidX.Compose.layout
+    implementation Libs.AndroidX.Compose.uiUtil
+    implementation Libs.AndroidX.Compose.tooling
+
+    // Hilt
+    implementation Libs.Hilt.android
+    kapt Libs.Hilt.compiler
 
     testImplementation Libs.Test.Ext.junit
     testImplementation Libs.Test.core
