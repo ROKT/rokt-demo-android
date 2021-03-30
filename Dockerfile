@@ -14,7 +14,6 @@ ENV LANG=en_US.UTF-8
 ## Install dependencies
 RUN apt-get update && apt-get install --no-install-recommends -y \
   openjdk-11-jdk \
-  openjdk-8-jdk \
   git \
   wget \
   build-essential \
@@ -43,7 +42,6 @@ RUN git clone https://github.com/jenv/jenv.git $JENV_ROOT
 ENV PATH "$PATH:$JENV_ROOT/bin"
 RUN mkdir $JENV_ROOT/versions
 ENV JDK_ROOT "/usr/lib/jvm/"
-RUN jenv add ${JDK_ROOT}/java-8-openjdk-amd64
 RUN jenv add ${JDK_ROOT}/java-11-openjdk-amd64
 RUN echo 'export PATH="$JENV_ROOT/bin:$PATH"' >> ~/.bashrc
 RUN echo 'eval "$(jenv init -)"' >> ~/.bashrc
@@ -86,12 +84,3 @@ RUN sdkmanager --sdk_root=$ANDROID_HOME --install \
   "platform-tools" \
   "build-tools;${android_build_tools}" \
   "platforms;${android_api}"
-RUN if [ "$android_ndk" = true ] ; \
-  then \
-    echo "Installing Android NDK ($ndk_version, cmake: $cmake)"; \
-    sdkmanager --sdk_root="$ANDROID_HOME" --install \
-    "ndk;${ndk_version}" \
-    "cmake;${cmake}" ; \
-  else \
-    echo "Skipping NDK installation"; \
-  fi
