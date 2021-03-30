@@ -24,7 +24,7 @@ platform :android do
   desc "Build Android Demo"
   lane :buildAndKtlint do
     # Build android flavours and unit test
-    gradle(task: "assembleDebug")
+    gradle(task: "assembleDebug", flags: "--profile")
     gradle(task: "ktlintCheck")
   end
 end
