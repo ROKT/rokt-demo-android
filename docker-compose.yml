@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   build_android:
-    build: .
+    image: nedarm/docker-android-java-11-fastlane
     user: root
     volumes:
       - ./:/source
