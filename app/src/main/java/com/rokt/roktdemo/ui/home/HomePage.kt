@@ -17,14 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import com.rokt.roktdemo.BuildConfig
 import com.rokt.roktdemo.R
+import com.rokt.roktdemo.ui.MainActions
 import com.rokt.roktdemo.ui.common.ButtonDark
 import com.rokt.roktdemo.ui.common.ButtonLight
 import com.rokt.roktdemo.ui.common.DEFAULT_SPACE
@@ -34,7 +37,9 @@ import com.rokt.roktdemo.ui.common.LargeSpace
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
-fun Home() {
+fun HomePage(actions: MainActions) {
+    val viewModel: HomeViewModel = hiltNavGraphViewModel()
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -51,7 +56,7 @@ fun Home() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            HomeButtons()
+            HomeButtons(viewModel, actions = actions)
             Footer()
             LargeSpace()
         }
@@ -67,7 +72,8 @@ private fun HomeLogo() {
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_home_background),
-            contentDescription = stringResource(R.string.content_description_rokt_bg), contentScale = ContentScale.FillBounds
+            contentDescription = stringResource(R.string.content_description_rokt_bg),
+            contentScale = ContentScale.FillBounds
         )
 
         Column(
@@ -79,7 +85,8 @@ private fun HomeLogo() {
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_rokt_logo),
-                contentDescription = stringResource(R.string.content_description_rokt_logo), contentScale = ContentScale.FillBounds
+                contentDescription = stringResource(R.string.content_description_rokt_logo),
+                contentScale = ContentScale.FillBounds
             )
 
             Text(
@@ -97,7 +104,8 @@ private fun HomeLogo() {
 }
 
 @Composable
-private fun HomeButtons() {
+private fun HomeButtons(viewModel: HomeViewModel, actions: MainActions) {
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxWidth(0.9F)
@@ -105,11 +113,19 @@ private fun HomeButtons() {
             .padding(PaddingValues(top = LARGE_SPACE.dp, bottom = DEFAULT_SPACE.dp)),
         verticalArrangement = Arrangement.SpaceAround,
     ) {
-        ButtonDark(text = stringResource(R.string.menu_button_demo), onClick = {})
+        ButtonDark(
+            text = stringResource(R.string.menu_button_demo),
+            onClick = actions.demoLibraryClicked
+        )
         DefaultSpace()
-        ButtonLight(text = stringResource(R.string.menu_button_about), onClick = {})
+        ButtonLight(
+            text = stringResource(R.string.menu_button_about),
+            onClick = actions.aboutRoktClicked
+        )
         DefaultSpace()
-        ButtonLight(text = stringResource(R.string.menu_button_contact), onClick = {})
+        ButtonLight(
+            text = stringResource(R.string.menu_button_contact),
+            onClick = { viewModel.contactUsClicked(context) })
     }
 }
 

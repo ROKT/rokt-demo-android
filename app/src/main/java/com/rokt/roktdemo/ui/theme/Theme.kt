@@ -16,7 +16,8 @@ object RoktColors {
         primary = Color.White,
         secondary = RoktPink,
         primaryVariant = RoktGrey,
-        secondaryVariant = TextLight
+        secondaryVariant = TextLight,
+        onPrimary = Color.White
     )
 }
 
@@ -25,5 +26,9 @@ object RoktFonts {
     private val regular = Font(R.font.font_soleil_regular, FontWeight.Medium)
     private val bold = Font(R.font.font_soleil_bold, FontWeight.Bold)
 
+    // Balto
+    private val heading = Font(R.font.balto_bold, FontWeight.Bold)
+
     val DefaultFontFamily = FontFamily(light, regular, bold)
+    val HeadingsFontFamily = FontFamily(heading)
 }

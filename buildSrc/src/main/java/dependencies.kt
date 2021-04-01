@@ -23,6 +23,8 @@ object Libs {
     object AndroidX {
         const val coreKtx = "androidx.core:core-ktx:1.5.0-beta03"
         const val appcompat = "androidx.appcompat:appcompat:1.2.0-rc01"
+        const val navigation = "androidx.navigation:navigation-ui-ktx:2.3.4"
+        const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha01"
 
         object Compose {
             const val version = "1.0.0-beta02"
@@ -35,6 +37,7 @@ object Libs {
             const val material = "androidx.compose.material:material:$version"
             const val animation = "androidx.compose.animation:animation:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:$version"
+            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha08"
         }
 
         object Activity {
