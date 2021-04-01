@@ -48,6 +48,7 @@ dependencies {
     implementation Libs.Kotlin.stdlib
     implementation Libs.AndroidX.coreKtx
     implementation Libs.AndroidX.appcompat
+
     implementation Libs.googleMaterial
 
     implementation Libs.Coroutines.core
@@ -60,6 +61,9 @@ dependencies {
     implementation Libs.AndroidX.Compose.layout
     implementation Libs.AndroidX.Compose.uiUtil
     implementation Libs.AndroidX.Compose.tooling
+    implementation Libs.AndroidX.Compose.navigation
+    implementation Libs.AndroidX.Lifecycle.viewModelCompose
+    implementation Libs.AndroidX.hiltNavigation
 
     // Hilt
     implementation Libs.Hilt.android

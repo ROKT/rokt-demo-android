@@ -8,4 +8,11 @@
     <string name="content_description_rokt_bg">Rokt Background</string>
     <string name="content_description_rokt_logo">Rokt Logo</string>
     <string name="content_description_rokt_title">Powering the Transaction Moment™</string>
+    <string name="content_description_about_header">About Rokt Header Image</string>
+    <string name="content_description_connector">Rokt Connector Image</string>
+    <string name="content_description_header_about_text">About Rokt</string>
+    <string name="content_description_back">Back Button</string>
+    <string name="content_description_top_bar_background">About Rokt Header Image</string>
+    <string name="content_description_gradient">Gradient background</string>
+    <string name="link_contact_us">https://rokt.com/contact-us/</string>
 </resources>
