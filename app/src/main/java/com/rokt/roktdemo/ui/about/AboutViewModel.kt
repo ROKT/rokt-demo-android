@@ -3,7 +3,7 @@ package com.rokt.roktdemo.ui.about
 import android.content.Context
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
-import com.rokt.roktdemo.data.AboutRoktRepository
+import com.rokt.roktdemo.data.about.AboutRoktRepository
 import com.rokt.roktdemo.model.AboutRokt
 import com.rokt.roktdemo.utils.openInBrowser
 import dagger.hilt.android.lifecycle.HiltViewModel

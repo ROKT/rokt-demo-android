@@ -1,6 +1,5 @@
 package com.rokt.roktdemo.data.about
 
-import com.rokt.roktdemo.data.AboutRoktRepository
 import com.rokt.roktdemo.model.AboutContent
 import com.rokt.roktdemo.model.AboutLink
 import com.rokt.roktdemo.model.AboutRokt

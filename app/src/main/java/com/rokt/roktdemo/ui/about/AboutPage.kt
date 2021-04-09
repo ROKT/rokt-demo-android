@@ -2,7 +2,6 @@ package com.rokt.roktdemo.ui.about
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,16 +11,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -31,16 +26,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.model.AboutContent
 import com.rokt.roktdemo.model.AboutLink
 import com.rokt.roktdemo.model.AboutRokt
-import com.rokt.roktdemo.ui.MainActions
+import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.ButtonLight
+import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.DefaultSpace
+import com.rokt.roktdemo.ui.common.Heading
 import com.rokt.roktdemo.ui.common.LargeSpace
-import com.rokt.roktdemo.ui.home.HomeViewModel
 import com.rokt.roktdemo.ui.theme.RoktColors
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
@@ -48,7 +43,7 @@ private const val FIXED_HEADER_HEIGHT = 70 // The non scrolling top bar height
 private const val HEADER_TOP_PADDING = 50 // How far from the top the header items sit
 
 @Composable
-fun AboutPage(actions: MainActions) {
+fun AboutPage(backPressed : () -> Unit) {
     val viewModel: AboutViewModel = hiltNavGraphViewModel()
 
     val aboutPageContent = viewModel.getAboutPage()
@@ -60,7 +55,7 @@ fun AboutPage(actions: MainActions) {
     ) {
 
         AboutPageContent(scroll, aboutPageContent, viewModel)
-        StickyHeader(actions.backPressed)
+        StickyHeader(backPressed)
     }
 }
 
@@ -99,9 +94,8 @@ private fun Contents(content: List<AboutContent>) {
                 DefaultSpace()
             }
 
-            Title(text = it.title)
-            HeadingDivider()
-            AboutPageContent(text = it.content)
+            Heading(it.title)
+            ContentText(text = it.content)
         }
     }
 }
@@ -150,6 +144,7 @@ private fun StickyHeader(backPressed: () -> Unit) {
     }
 }
 
+
 @Composable
 private fun Header() {
     Box(
@@ -195,46 +190,3 @@ private fun Header() {
     }
 }
 
-@Composable
-private fun BackButton(backPressed: () -> Unit) {
-    IconButton(onClick = backPressed) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_back),
-            contentDescription = stringResource(R.string.content_description_back),
-            tint = Color.White
-        )
-    }
-}
-
-@Composable
-private fun Title(text: String) {
-    Text(
-        text = text,
-        fontFamily = RoktFonts.HeadingsFontFamily,
-        fontWeight = FontWeight.Bold,
-        fontSize = 32.sp
-    )
-}
-
-@Composable
-private fun AboutPageContent(text: String) {
-    Text(
-        text = text, fontFamily = RoktFonts.DefaultFontFamily,
-        fontWeight = FontWeight.Normal,
-        fontSize = 16.sp
-    )
-}
-
-@Composable
-private fun HeadingDivider() {
-    Column {
-        DefaultSpace()
-        Box(
-            Modifier
-                .width(34.dp)
-                .height(6.dp)
-                .background(RoktColors.LightColors.secondary)
-        )
-        DefaultSpace()
-    }
-}
