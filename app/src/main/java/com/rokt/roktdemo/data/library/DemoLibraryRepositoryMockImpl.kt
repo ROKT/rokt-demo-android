@@ -56,9 +56,13 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
 
     )
 
+    val DEFAULT_PLACEMENT_LONG_DESC =
+        "The in-app feature walkthrough highlights the various placement and offer types that are available to native app integrations. \n\nThis includes overlay and embedded placements as well as email, traffic, phone, and app install offers. \n"
+
     val defaultPlacementExamples = DefaultPlacements(
         "Feature Walkthrough",
         "View various examples of Rokt placements and offers that can be used or combined with your native app integration. ",
+        DEFAULT_PLACEMENT_LONG_DESC,
         DEMO_LIB_IMAGE_URL,
         TAG_ID,
         screens
@@ -73,11 +77,14 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
     val CUSTOM_CONFIG_VIEW_NAME = "RoktExperience"
     val CUSTOM_CONFIG_LOC_1 = ""
     val CUSTOM_CONFIG_LOC_2 = ""
+    val CUSTOM_CONFIG_LONG_DESC =
+        "The Custom Checkout Flow allows you to preview a specific placement from a specific account in an unbranded confirmation page. This allows you to preview the specific UI of this placement and experience the in-app behaviour of the Rokt placement.\n\nNote: In order to preview a specific placement, you will require details about your Rokt account and placement configuration. If you do not have these, please reach out to your Rokt Account Manager.\n"
 
     val customConfigurationPage = CustomConfigurationPage(
         CUSTOM_CONFIG_TITLE,
         CUSTOM_CONFIG_SHORT_DESC,
         CUSTOM_CONFIG_ICON_URL,
+        CUSTOM_CONFIG_LONG_DESC,
         AccountDetails(
             CUSTOM_CONFIG_ACCOUNT_ID,
             CUSTOM_CONFIG_VIEW_NAME,

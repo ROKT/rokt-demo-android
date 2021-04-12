@@ -10,7 +10,7 @@ import com.rokt.roktdemo.R
 object RoktColors {
     private val RoktPink = Color(181, 30, 109)
     private val RoktGrey = Color(24, 24, 24)
-    private val TextLight = Color(67,67,67)
+    private val TextLight = Color(67, 67, 67)
     private val BackgroundColor = Color(245, 245, 245)
     private val BorderColor = Color(217, 217, 217)
     val LightColors = lightColors(
