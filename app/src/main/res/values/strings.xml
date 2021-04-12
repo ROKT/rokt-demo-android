@@ -15,4 +15,5 @@
     <string name="content_description_top_bar_background">About Rokt Header Image</string>
     <string name="content_description_gradient">Gradient background</string>
     <string name="link_contact_us">https://rokt.com/contact-us/</string>
+    <string name="content_description_arrow_go">Arrow</string>
 </resources>

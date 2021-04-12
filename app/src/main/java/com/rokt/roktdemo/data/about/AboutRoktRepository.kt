@@ -1,4 +1,4 @@
-package com.rokt.roktdemo.data
+package com.rokt.roktdemo.data.about
 
 import com.rokt.roktdemo.model.AboutRokt
 import javax.inject.Singleton

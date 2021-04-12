@@ -14,7 +14,6 @@ object MainDestinations {
     const val HOME = "home"
     const val DEMO = "demo"
     const val ABOUT_ROKT = "about"
-    const val CONTACT = "contact"
 }
 
 /**
@@ -23,6 +22,7 @@ object MainDestinations {
 
 class MainActions constructor(navController: NavController) {
     val demoLibraryClicked: () -> Unit = {
+        navController.navigate(MainDestinations.DEMO)
     }
 
     val aboutRoktClicked: () -> Unit = {

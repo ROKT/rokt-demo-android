@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rokt.roktdemo.ui.about.AboutPage
+import com.rokt.roktdemo.ui.demo.DemoPage
 import com.rokt.roktdemo.ui.home.HomePage
 import com.rokt.roktdemo.ui.theme.RoktColors.LightColors
 
@@ -21,8 +22,12 @@ fun RoktDemoApp() {
                 HomePage(actions)
             }
 
+            composable(MainDestinations.DEMO) {
+                DemoPage(actions.backPressed)
+            }
+
             composable(MainDestinations.ABOUT_ROKT) {
-                AboutPage(actions)
+                AboutPage(actions.backPressed)
             }
         }
     }
