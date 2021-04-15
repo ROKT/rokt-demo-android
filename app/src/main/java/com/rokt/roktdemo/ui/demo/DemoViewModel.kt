@@ -1,7 +1,6 @@
 package com.rokt.roktdemo.ui.demo
 
 import androidx.lifecycle.ViewModel
-import com.rokt.roktdemo.R
 import com.rokt.roktdemo.data.library.DemoLibraryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -21,39 +20,44 @@ class DemoViewModel @Inject constructor(private val demoLibraryRepository: DemoL
                     DemoPageListItem(
                         library.defaultPlacementsExamples.title,
                         library.defaultPlacementsExamples.shortDescription,
-                        R.drawable.ic_feature_walkthrough
+                        DestinationType.FEATURE_WALKTHROUGH.getImageResource(),
+                        DestinationType.FEATURE_WALKTHROUGH
                     )
                 )
                 add(
                     DemoPageListItem(
                         library.customCustomConfigurationPage.title,
                         library.customCustomConfigurationPage.shortDescription,
-                        R.drawable.ic_custom_checkout
-
+                        DestinationType.CUSTOM_CHECKOUT.getImageResource(),
+                        DestinationType.CUSTOM_CHECKOUT
                     )
                 )
                 add(
                     DemoPageListItem(
                         library.preDefinedScreen1.title,
                         library.preDefinedScreen1.shortDescription,
-                        R.drawable.ic_groupon_logo
+                        DestinationType.CONFIRMATION_GROUPON.getImageResource(),
+                        DestinationType.CONFIRMATION_GROUPON
                     )
                 )
                 add(
                     DemoPageListItem(
                         library.preDefinedScreen2.title,
                         library.preDefinedScreen2.shortDescription,
-                        R.drawable.ic_stubhub_logo
+                        DestinationType.CONFIRMATION_STUBHUB.getImageResource(),
+                        DestinationType.CONFIRMATION_STUBHUB
                     )
                 )
                 add(
                     DemoPageListItem(
                         library.preDefinedScreen3.title,
                         library.preDefinedScreen3.shortDescription,
-                        R.drawable.ic_gumtree_logo
+                        DestinationType.CONFIRMATION_GUMTREE.getImageResource(),
+                        DestinationType.CONFIRMATION_GUMTREE
                     )
                 )
-            })
+            }
+        )
     }
 }
 
@@ -63,4 +67,9 @@ data class DemoScreenState(
     val items: List<DemoPageListItem>
 )
 
-class DemoPageListItem(val title: String, val description: String, val drawableResource: Int)
+class DemoPageListItem(
+    val title: String,
+    val description: String,
+    val drawableResource: Int,
+    val navAction: DestinationType
+)

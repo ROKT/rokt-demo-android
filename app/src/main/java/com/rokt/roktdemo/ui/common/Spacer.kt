@@ -10,9 +10,9 @@ import androidx.compose.ui.unit.dp
 const val X_SMALL_SPACE = 8
 const val SMALL_SPACE = 16
 const val DEFAULT_SPACE = 20
+const val MEDIUM_SPACE = 24
 const val LARGE_SPACE = 40
 
-const val DEFAULT_PADDING = 24
 
 
 @Composable
@@ -30,6 +30,15 @@ fun LargeSpace() {
         Modifier
             .fillMaxWidth()
             .height(LARGE_SPACE.dp)
+    )
+}
+
+@Composable
+fun MediumSpace() {
+    Spacer(
+        Modifier
+            .fillMaxWidth()
+            .height(MEDIUM_SPACE.dp)
     )
 }
 

@@ -2,10 +2,6 @@ package com.rokt.roktdemo.ui
 
 import androidx.navigation.NavController
 import androidx.navigation.compose.navigate
-import dagger.Module
-import dagger.hilt.android.scopes.ActivityScoped
-import javax.inject.Inject
-import javax.inject.Singleton
 
 /**
  * Destinations used in RoktDemo app.

@@ -63,6 +63,7 @@ dependencies {
     implementation Libs.AndroidX.Compose.navigation
     implementation Libs.AndroidX.Lifecycle.viewModelCompose
     implementation Libs.AndroidX.hiltNavigation
+    implementation Libs.Accompanist.insets
 
     // Hilt
     implementation Libs.Hilt.android

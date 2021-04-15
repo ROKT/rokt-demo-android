@@ -15,12 +15,11 @@ class CustomConfigurationPage(
     title: String,
     shortDescription: String,
     iconUrl: String,
-    val longDescription:String,
+    val longDescription: String,
     val accountDetails: AccountDetails,
     val customerDetails: CustomerDetails,
-    val advancedDetails: List<Pair<String, String>>,
-
-    ) : RoktDemoScreen(title, shortDescription, iconUrl)
+    val advancedDetails: List<Pair<String, String>>
+) : RoktDemoScreen(title, shortDescription, iconUrl)
 
 class AccountDetails(
     val accountId: String,
@@ -44,7 +43,7 @@ class CustomerDetails(
 class DefaultPlacements(
     title: String,
     shortDescription: String,
-    val longDescription:String,
+    val longDescription: String,
     iconUrl: String,
     val tagId: String,
     val screens: List<Screen>,

@@ -9,15 +9,20 @@ object Libs {
     const val googleMaterial = "com.google.android.material:material:1.3.0"
 
     object Kotlin {
-        private const val version = "1.4.31"
+        private const val version = "1.4.32"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
-        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+        const val gradlePlugin =
+            "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
     }
 
     object Coroutines {
         private const val version = "1.4.1"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
+    }
+
+    object Accompanist {
+        const val insets = "com.google.accompanist:accompanist-insets:0.7.1"
     }
 
     object AndroidX {
@@ -27,7 +32,7 @@ object Libs {
         const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha01"
 
         object Compose {
-            const val version = "1.0.0-beta02"
+            private const val version = "1.0.0-beta04"
 
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val layout = "androidx.compose.foundation:foundation-layout:$version"
