@@ -24,13 +24,12 @@ import androidx.compose.ui.unit.dp
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.ContentText
-import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
 import com.rokt.roktdemo.ui.common.DefaultSpace
 import com.rokt.roktdemo.ui.common.Heading
 import com.rokt.roktdemo.ui.common.LargeSpace
+import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
 import com.rokt.roktdemo.ui.common.SubHeading
 import com.rokt.roktdemo.ui.common.XSmallSpace
-
 
 @Composable
 fun DemoHome(demoPage: DemoScreenState, backPressed: () -> Unit, actions: DemoActions) {
@@ -45,7 +44,6 @@ fun DemoHome(demoPage: DemoScreenState, backPressed: () -> Unit, actions: DemoAc
         }
 
         Column(
-
             modifier = Modifier
                 .verticalScroll(scroll)
                 .padding(PaddingValues(MEDIUM_SPACE.dp, 10.dp))
