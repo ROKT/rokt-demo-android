@@ -16,4 +16,9 @@
     <string name="content_description_gradient">Gradient background</string>
     <string name="link_contact_us">https://rokt.com/contact-us/</string>
     <string name="content_description_arrow_go">Arrow</string>
+    <string name="content_description_walkrough_icon">Feature Walkthrough Icon</string>
+    <string name="summary_page_button_text">Let\'s Begin</string>
+    <string name="text_disclaimer">Disclaimer</string>
+    <string name="summary_dialog_btn_negative">No Thanks</string>
+    <string name="summary_dialog_btn_positive">Yes Please</string>
 </resources>
