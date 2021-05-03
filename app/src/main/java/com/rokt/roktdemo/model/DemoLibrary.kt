@@ -54,9 +54,14 @@ class Screen(
     val description: String,
     val viewName: String,
     val placeholderName: String,
-    val type: String,
-    val attributes: List<Pair<String, String>>
+    val type: ScreenType,
+    val attributes: HashMap<String, String>
 )
+
+
+enum class ScreenType {
+    Overlay, Embedded
+}
 
 open class PredefinedScreen(
 //    val descriptions: List<String>,

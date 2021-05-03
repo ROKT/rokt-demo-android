@@ -7,13 +7,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.insets.ProvideWindowInsets
+import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.ui.about.AboutPage
 import com.rokt.roktdemo.ui.demo.DemoPage
 import com.rokt.roktdemo.ui.home.HomePage
 import com.rokt.roktdemo.ui.theme.RoktColors.LightColors
 
 @Composable
-fun RoktDemoApp() {
+fun RoktDemoApp(viewModel: MainActivityViewModel) {
     // TODO: Dark theme
     MaterialTheme(colors = LightColors) {
         ProvideWindowInsets {
@@ -25,7 +26,7 @@ fun RoktDemoApp() {
                 }
 
                 composable(MainDestinations.DEMO) {
-                    DemoPage(actions.backPressed)
+                    DemoPage(actions.backPressed, viewModel)
                 }
 
                 composable(MainDestinations.ABOUT_ROKT) {

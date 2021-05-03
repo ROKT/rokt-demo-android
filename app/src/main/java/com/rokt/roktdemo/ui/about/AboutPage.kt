@@ -43,9 +43,7 @@ private const val FIXED_HEADER_HEIGHT = 70 // The non scrolling top bar height
 private const val HEADER_TOP_PADDING = 50 // How far from the top the header items sit
 
 @Composable
-fun AboutPage(backPressed : () -> Unit) {
-    val viewModel: AboutViewModel = hiltNavGraphViewModel()
-
+fun AboutPage(backPressed: () -> Unit, viewModel: AboutViewModel = hiltNavGraphViewModel()) {
     val aboutPageContent = viewModel.getAboutPage()
     val scroll = rememberScrollState(0)
 
@@ -60,7 +58,11 @@ fun AboutPage(backPressed : () -> Unit) {
 }
 
 @Composable
-private fun AboutPageContent(scroll: ScrollState, aboutPageContent: AboutRokt, viewModel: AboutViewModel) {
+private fun AboutPageContent(
+    scroll: ScrollState,
+    aboutPageContent: AboutRokt,
+    viewModel: AboutViewModel,
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -144,7 +146,6 @@ private fun StickyHeader(backPressed: () -> Unit) {
     }
 }
 
-
 @Composable
 private fun Header() {
     Box(
@@ -189,4 +190,3 @@ private fun Header() {
         }
     }
 }
-

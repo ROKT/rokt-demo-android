@@ -6,12 +6,12 @@ import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.ui.demo.summary.SummaryPage
-
+import com.rokt.roktdemo.ui.demo.walkthrough.WalkthroughHome
 
 @Composable
-fun DemoPage(backPressed: () -> Unit) {
-    val viewModel: DemoViewModel = hiltNavGraphViewModel()
+fun DemoPage(backPressed: () -> Unit, mainActivityViewModel: MainActivityViewModel, viewModel: DemoViewModel = hiltNavGraphViewModel()) {
     val demoPage = viewModel.getDemoPage()
     val navController = rememberNavController()
     val actions = remember(navController) { DemoActions(navController) }
@@ -24,8 +24,13 @@ fun DemoPage(backPressed: () -> Unit) {
         DestinationType
             .values().forEach { type ->
                 composable(DemoDestinations.SUMMARY + type) {
-                    SummaryPage(actions.backPressed, type)
+                    SummaryPage(actions.backPressed,
+                        { actions.navigateToDemoDestination(type) }, type, mainActivityViewModel)
                 }
             }
+
+        composable(DemoDestinations.DEMO_DESTINATION + DestinationType.FEATURE_WALKTHROUGH.value) {
+            WalkthroughHome(actions.backPressed)
+        }
     }
 }

@@ -7,6 +7,7 @@ object Versions {
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha10"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
+    const val rokt = "com.rokt:roktsdk:3.5.2-alpha.1153"
 
     object Kotlin {
         private const val version = "1.4.32"
@@ -30,6 +31,7 @@ object Libs {
         const val appcompat = "androidx.appcompat:appcompat:1.2.0-rc01"
         const val navigation = "androidx.navigation:navigation-ui-ktx:2.3.4"
         const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha01"
+        const val lifeCycle = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
         object Compose {
             private const val version = "1.0.0-beta04"
@@ -51,7 +53,7 @@ object Libs {
 
         object Lifecycle {
             const val viewModelCompose =
-            "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha03"
+                "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha03"
         }
     }
 
@@ -68,6 +70,9 @@ object Libs {
         private const val version = "1.3.0"
         const val core = "androidx.test:core:$version"
         const val rules = "androidx.test:rules:$version"
+        const val mockk = "io.mockk:mockk:1.11.0"
+        const val truth = "com.google.truth:truth:1.1.2"
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.3"
 
         object Ext {
             private const val version = "1.1.2"

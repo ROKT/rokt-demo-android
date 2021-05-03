@@ -7,6 +7,7 @@ import com.rokt.roktdemo.model.DefaultPlacements
 import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.model.PredefinedScreen
 import com.rokt.roktdemo.model.Screen
+import com.rokt.roktdemo.model.ScreenType
 
 class DemoLibraryRepositoryMockImpl : DemoLibraryRepository {
     val DEMO_LIB_TITLE = "Demo Library"
@@ -17,43 +18,59 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
 """
 
     val DEMO_LIB_IMAGE_URL = ""
-    val TAG_ID = ""
+    val TAG_ID = "2754655826098840951"
 
     val SCREEN_NAME_1 = "Embedded Placement (1)"
     val SCREEN_DESC_1 =
         "The below preview shows an embedded placement with brand logos displayed. You can progress through the offers by clicking “Yes Please” or “No Thanks”. \n\nThe Rokt placement powers traffic, email, phone and, app install campaigns. Opting-in to a traffic or app install campaign will direct the customer to a landing page in either an in-app webview, the associated app or app store.\n"
 
-    val SCREEN_VIEW_NAME_1 = ""
-    val SCREEN_PLACEHOLDER_NAME_1 = ""
-    val SCREEN_TYPE_NAME_1 = ""
-
     val SCREEN_NAME_2 = "Embedded Placement (2)"
     val SCREEN_DESC_2 =
         "The below preview shows an embedded placement with brand logos displayed. You can progress through the offers by clicking “Yes Please” or “No Thanks”. \n\nThe Rokt placement powers traffic, email, phone and, app install campaigns. Opting-in to a traffic or app install campaign will direct the customer to a landing page in either an in-app webview, the associated app or app store.\n"
 
-    val SCREEN_VIEW_NAME_2 = ""
-    val SCREEN_PLACEHOLDER_NAME_2 = ""
+    val SCREEN_DESC_3 =
+        "Click “View Example” to preview a Rokt overlay placement. You can progress through the offers by clicking “Yes Please” or “No Thanks”. \n" +
+                "\n" +
+                "On iOS devices, the overlay placement follows Apple’s best practice automatic presentation style for overlays. \n" +
+                "\n" +
+                "On Android devices, the overlay placements can be configured as a “full-screen overlay” or a “lightbox overlay” with a transparent background.\n"
     val SCREEN_TYPE_NAME_2 = ""
 
-    val attributes1 = listOf(Pair("first", "jenny"), Pair("email", "jenny@email.com"))
+    val attributes1 = hashMapOf(
+        Pair("name", "Roktstar"),
+        Pair("lastname", "Smith"),
+        Pair("mobile", "(323) 867-5309"),
+        Pair("postcode", "90210"),
+        Pair("country", "AU"),
+        Pair("email", "demotester123@gmail.com"),
+        Pair("sandbox", "true")
+    )
+
     val screens = listOf(
         Screen(
             SCREEN_NAME_1,
             SCREEN_DESC_1,
-            SCREEN_VIEW_NAME_1,
-            SCREEN_DESC_1,
-            SCREEN_TYPE_NAME_1,
+            "testAndroid",
+            "Location1",
+            ScreenType.Embedded,
             attributes1
         ),
         Screen(
             SCREEN_NAME_2,
             SCREEN_DESC_2,
-            SCREEN_VIEW_NAME_2,
-            SCREEN_DESC_2,
-            SCREEN_TYPE_NAME_2,
+            "testAndroid",
+            "Location1",
+            ScreenType.Embedded,
+            attributes1
+        ),
+        Screen(
+            "Overlay Placement",
+            SCREEN_DESC_3,
+            "testAndroidLightbox",
+            "Location1",
+            ScreenType.Overlay,
             attributes1
         )
-
     )
 
     val DEFAULT_PLACEMENT_LONG_DESC =
