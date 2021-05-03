@@ -33,7 +33,7 @@ class WalkthroughViewModelTest {
     }
 
     @Test
-    fun `getCounterText should return index + 1 over screenCount when index is within range`() {
+    fun `getCounterText should return index + 1 over screenCount when index is less than screenCount - 1`() {
         val text = walkthroughViewModel.getCounterText(2, 0)
         assertThat(text).isEqualTo("1/2")
 
@@ -60,14 +60,14 @@ class WalkthroughViewModelTest {
     }
 
     @Test
-    fun `nextButtonPressed should increment index when index is within range`() {
+    fun `nextButtonPressed should increment index when index is less than screenCount - 1`() {
         assertThat(walkthroughViewModel.state.value.currentIndex == 0)
         walkthroughViewModel.nextButtonPressed()
         assertThat(walkthroughViewModel.state.value.currentIndex == 1)
     }
 
     @Test
-    fun `nextButtonPressed should not do anything if index is out of range`() {
+    fun `nextButtonPressed should not do anything if index is equal to screenCount - 1`() {
         assertThat(walkthroughViewModel.state.value.currentIndex == 0)
 
         // Next until the end of the list
@@ -83,7 +83,7 @@ class WalkthroughViewModelTest {
     }
 
     @Test
-    fun `backButtonPressed should decrement index when index is within range`() {
+    fun `backButtonPressed should decrement index when index greater than zero`() {
         assertThat(walkthroughViewModel.state.value.currentIndex == 0)
         walkthroughViewModel.nextButtonPressed()
         assertThat(walkthroughViewModel.state.value.currentIndex == 1)
@@ -92,7 +92,7 @@ class WalkthroughViewModelTest {
     }
 
     @Test
-    fun `backButtonPressed should not do anything if index is out of range`() {
+    fun `backButtonPressed should not do anything if index is zero`() {
         assertThat(walkthroughViewModel.state.value.currentIndex == 0)
         walkthroughViewModel.backButtonPressed()
         assertThat(walkthroughViewModel.state.value.currentIndex == 0)

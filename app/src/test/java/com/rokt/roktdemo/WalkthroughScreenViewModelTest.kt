@@ -18,7 +18,7 @@ class WalkthroughScreenViewModelTest {
     val coroutineTestRule = CoroutineTestRule()
 
     @Test
-    fun `state isEmbedded should be null until screenIndex is set`() {
+    fun `isEmbedded should be null until screenIndex value is set`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val walkthroughViewModel = WalkthroughScreenViewModel(DemoLibraryRepositoryMockImpl())
             assertThat(walkthroughViewModel.state.value.isEmbedded).isEqualTo(null)

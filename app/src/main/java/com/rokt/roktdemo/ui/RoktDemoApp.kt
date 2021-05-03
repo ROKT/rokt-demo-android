@@ -3,7 +3,6 @@ package com.rokt.roktdemo.ui
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -15,7 +14,7 @@ import com.rokt.roktdemo.ui.home.HomePage
 import com.rokt.roktdemo.ui.theme.RoktColors.LightColors
 
 @Composable
-fun RoktDemoApp(viewModel: MainActivityViewModel = hiltNavGraphViewModel()) {
+fun RoktDemoApp(viewModel: MainActivityViewModel) {
     // TODO: Dark theme
     MaterialTheme(colors = LightColors) {
         ProvideWindowInsets {
