@@ -63,14 +63,16 @@ fun ButtonLight(text: String, onClick: () -> Unit) {
 @Composable
 fun ButtonText(text: String) {
     Text(
-        text, fontSize = BUTTON_FONT_SIZE.sp, fontFamily = RoktFonts.DefaultFontFamily,
+        text,
+        fontSize = BUTTON_FONT_SIZE.sp,
+        fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Bold
     )
 }
 
 @Composable
 fun BackButton(backPressed: () -> Unit, tintColor : Color = Color.White) {
-    IconButton(onClick = backPressed) {
+    IconButton(onClick = { backPressed.invoke() }) {
         Icon(
             painter = painterResource(id = R.drawable.ic_back),
             contentDescription = stringResource(R.string.content_description_back),

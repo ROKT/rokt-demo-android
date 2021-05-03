@@ -13,6 +13,7 @@ object RoktColors {
     private val TextLight = Color(67, 67, 67)
     private val BackgroundColor = Color(245, 245, 245)
     private val BorderColor = Color(217, 217, 217)
+
     val LightColors = lightColors(
         primary = Color.White,
         secondary = RoktPink,

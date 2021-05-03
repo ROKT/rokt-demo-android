@@ -25,6 +25,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import com.google.accompanist.insets.systemBarsPadding
+import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.ButtonDark
@@ -38,12 +39,16 @@ import com.rokt.roktdemo.ui.demo.DestinationType
 @Composable
 fun SummaryPage(
     backPressed: () -> Unit,
-    destinationType: DestinationType
+    startDemoPressed: () -> Unit,
+    destinationType: DestinationType,
+    activityViewModel: MainActivityViewModel,
+    viewModel: SummaryViewModel = hiltNavGraphViewModel(),
 ) {
-    val viewModel: SummaryViewModel = hiltNavGraphViewModel()
     val summaryPageState = viewModel.getSummaryPageState(destinationType = destinationType)!!
     val scroll = rememberScrollState(0)
     val openDialog = remember { mutableStateOf(false) }
+
+    activityViewModel.updateSelectedTagId(summaryPageState.selectedTagId)
 
     Column(
         Modifier
@@ -59,9 +64,7 @@ fun SummaryPage(
             openDialog = openDialog,
             text = summaryPageState.disclaimerText,
             onDismiss = { openDialog.value = false },
-            onPositive = {
-                // TODO: Navigate to destination type
-            }
+            onPositive = startDemoPressed
         )
 
         Column(

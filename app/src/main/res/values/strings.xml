@@ -21,4 +21,7 @@
     <string name="text_disclaimer">Disclaimer</string>
     <string name="summary_dialog_btn_negative">No Thanks</string>
     <string name="summary_dialog_btn_positive">Yes Please</string>
+    <string name="text_preview">Preview</string>
+    <string name="button_view_example_text">View Example</string>
+    <string name="button_view_example_icon">Icon eye</string>
 </resources>

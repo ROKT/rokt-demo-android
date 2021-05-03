@@ -23,7 +23,8 @@ class SummaryViewModel @Inject constructor(private val demoLibraryRepository: De
                     demoLibraryItem.title,
                     demoLibraryItem.longDescription,
                     destinationType.getDisclaimer(),
-                    destinationType.getImageResource()
+                    destinationType.getImageResource(),
+                    demoLibraryItem.tagId
                 )
             }
             CUSTOM_CHECKOUT.value -> {
@@ -33,7 +34,8 @@ class SummaryViewModel @Inject constructor(private val demoLibraryRepository: De
                     demoLibraryItem.title,
                     demoLibraryItem.longDescription,
                     destinationType.getDisclaimer(),
-                    destinationType.getImageResource()
+                    destinationType.getImageResource(),
+                    demoLibraryItem.accountDetails.accountId
                 )
             }
             else -> null // TODO: Predefined Screens
@@ -45,5 +47,6 @@ data class SummaryPageState(
     val title: String,
     val longDescription: String,
     val disclaimerText: String,
-    val drawableResourceId: Int
+    val drawableResourceId: Int,
+    val selectedTagId: String
 )
