@@ -5,11 +5,14 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -51,6 +54,27 @@ fun ContentText(text: String, fontSize: Int = 16) {
         fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = fontSize.sp,
+        color = MaterialTheme.colors.primaryVariant
+    )
+}
+
+@Composable
+fun HeaderTextButton(text: String, onClick: (Int) -> Unit) {
+    ClickableText(AnnotatedString(text),
+        onClick = onClick,
+        style = TextStyle(color = Color.White,
+            fontFamily = RoktFonts.DefaultFontFamily,
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp))
+}
+
+@Composable
+fun ScreenHeader(text: String) {
+    Text(
+        text,
+        fontSize = 28.sp,
+        fontFamily = RoktFonts.HeadingsFontFamily,
+        fontWeight = FontWeight.Bold,
         color = MaterialTheme.colors.primaryVariant
     )
 }

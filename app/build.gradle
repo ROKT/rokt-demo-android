@@ -73,19 +73,24 @@ dependencies {
 
     implementation Libs.Accompanist.insets
 
+    // Rokt
     implementation Libs.rokt
+
+    // Logging
+    implementation Libs.timber
 
     // Hilt
     implementation Libs.Hilt.android
     kapt Libs.Hilt.compiler
 
-    //Test
+    // Test
     testImplementation Libs.Test.Ext.junit
     testImplementation Libs.Test.core
     testImplementation Libs.Test.rules
     testImplementation Libs.Test.mockk
     testImplementation Libs.Test.truth
     testImplementation Libs.Test.coroutines
+
 }
 
 repositories {

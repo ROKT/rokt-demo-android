@@ -1,5 +1,6 @@
 package com.rokt.roktdemo.ui.demo.walkthrough.screen
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,7 +17,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -24,9 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import com.google.accompanist.insets.navigationBarsPadding
@@ -35,9 +33,9 @@ import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.ButtonText
 import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
+import com.rokt.roktdemo.ui.common.ScreenHeader
 import com.rokt.roktdemo.ui.common.SmallSpace
 import com.rokt.roktdemo.ui.common.SubHeading
-import com.rokt.roktdemo.ui.theme.RoktFonts
 import com.rokt.roktsdk.Widget
 import java.lang.ref.WeakReference
 
@@ -51,6 +49,25 @@ fun WalkthroughScreen(
     val state by viewModel.state.collectAsState()
     val scroll = rememberScrollState(0)
 
+    if (state.didLoad) {
+        WalkthroughScreenContent(scroll,
+            state.title,
+            state.description,
+            state.isEmbedded,
+            viewModel::onEmbeddedWidgetAddedToView,
+            viewModel::onViewExampleButtonClicked)
+    }
+}
+
+@Composable
+private fun WalkthroughScreenContent(
+    scroll: ScrollState,
+    title: String,
+    description: String,
+    isEmbedded: Boolean,
+    onEmbeddedWidgetAddedToView: (WeakReference<Widget>) -> Unit,
+    onViewExampleButtonClicked: () -> Unit,
+) {
     Column(
         Modifier
             .fillMaxSize()
@@ -65,27 +82,19 @@ fun WalkthroughScreen(
             .navigationBarsPadding()
             .verticalScroll(scroll)
     ) {
-        Text(
-            state.title,
-            fontSize = 28.sp,
-            fontFamily = RoktFonts.HeadingsFontFamily,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colors.primaryVariant
-        )
+        ScreenHeader(title)
         SmallSpace()
-        ContentText(state.description)
-        state.isEmbedded?.let { isEmbedded ->
-            if (isEmbedded) {
-                RoktEmbeddedWidget(viewModel::onEmbeddedWidgetAddedToView)
-            } else {
-                RoktFullscreenWidget(viewModel::onViewExampleButtonClicked)
-            }
+        ContentText(description)
+        if (isEmbedded) {
+            RoktEmbeddedWidget(onEmbeddedWidgetAddedToView)
+        } else {
+            RoktFullscreenWidget(onViewExampleButtonClicked)
         }
     }
 }
 
 @Composable
-fun RoktEmbeddedWidget(onWidgetAdded: (WeakReference<Widget>) -> Unit) {
+private fun RoktEmbeddedWidget(onWidgetAdded: (WeakReference<Widget>) -> Unit) {
     SubHeading(stringResource(R.string.text_preview))
     SmallSpace()
     AndroidView(
@@ -99,7 +108,7 @@ fun RoktEmbeddedWidget(onWidgetAdded: (WeakReference<Widget>) -> Unit) {
 }
 
 @Composable
-fun ColumnScope.RoktFullscreenWidget(onViewExampleButtonClicked: () -> Unit) {
+private fun ColumnScope.RoktFullscreenWidget(onViewExampleButtonClicked: () -> Unit) {
     Column(
         Modifier
             .fillMaxSize()
