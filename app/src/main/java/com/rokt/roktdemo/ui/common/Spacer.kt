@@ -13,8 +13,6 @@ const val DEFAULT_SPACE = 20
 const val MEDIUM_SPACE = 24
 const val LARGE_SPACE = 40
 
-
-
 @Composable
 fun DefaultSpace() {
     Spacer(

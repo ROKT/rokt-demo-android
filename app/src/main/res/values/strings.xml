@@ -24,4 +24,13 @@
     <string name="text_preview">Preview</string>
     <string name="button_view_example_text">View Example</string>
     <string name="button_view_example_icon">Icon eye</string>
+    <string name="text_account_details_description">Please enter your Rokt Account ID and the ViewName and Placement Location Name of the placement you’d like to preview. If you do not know these details, please contact your Rokt Account Manager.</string>
+    <string name="account_details_step_count_text">Step 1/2</string>
+    <string name="label_account_id">Account Id</string>
+    <string name="label_account_details">Account Details</string>
+    <string name="label_view_name">View Name</string>
+    <string name="label_location_1">Placement Location 1</string>
+    <string name="label_location_2">Placement Location 2</string>
+    <string name="button_continue">Continue</string>
+    <string name="content_description_exclamation">Exclamation mark</string>
 </resources>

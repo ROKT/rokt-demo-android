@@ -38,7 +38,8 @@ class WalkthroughScreenViewModel @Inject constructor(
                             screen.placeholderName,
                             screen.attributes,
                             screen.viewName,
-                            screen.type == ScreenType.Embedded
+                            screen.type == ScreenType.Embedded,
+                            didLoad = true
                         )
                     }
                 }
@@ -54,9 +55,7 @@ class WalkthroughScreenViewModel @Inject constructor(
         screenIndex.value = index
     }
 
-    fun onEmbeddedWidgetAddedToView(
-        widget: WeakReference<Widget>,
-    ) {
+    fun onEmbeddedWidgetAddedToView(widget: WeakReference<Widget>) {
         executeRokt(hashMapOf(state.value.placeholderName to widget))
     }
 
@@ -90,5 +89,6 @@ data class WalkthroughScreenState(
     val placeholderName: String = "",
     val attributes: Map<String, String> = hashMapOf(),
     val viewName: String = "",
-    val isEmbedded: Boolean? = null,
+    val isEmbedded: Boolean = true,
+    val didLoad: Boolean = false,
 )

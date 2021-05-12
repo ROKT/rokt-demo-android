@@ -4,6 +4,8 @@ import com.rokt.roktdemo.data.about.AboutRoktRepository
 import com.rokt.roktdemo.data.about.AboutRoktRepositoryMockImpl
 import com.rokt.roktdemo.data.library.DemoLibraryRepository
 import com.rokt.roktdemo.data.library.DemoLibraryRepositoryMockImpl
+import com.rokt.roktdemo.data.validate.ValidatorMockImplementation
+import com.rokt.roktdemo.data.validate.ValidatorRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,5 +25,11 @@ class ApplicationModule {
     @Provides
     fun provideDemoRepository(): DemoLibraryRepository {
         return DemoLibraryRepositoryMockImpl()
+    }
+
+    @Singleton
+    @Provides
+    fun provideValidator(): ValidatorRepository {
+        return ValidatorMockImplementation()
     }
 }

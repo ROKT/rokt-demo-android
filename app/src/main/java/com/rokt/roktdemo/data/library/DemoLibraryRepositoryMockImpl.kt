@@ -90,10 +90,10 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
         "View a specific placement or combination of placements on an unbranded confirmation page via a custom checkout flow with configurable options."
 
     val CUSTOM_CONFIG_ICON_URL = ""
-    val CUSTOM_CONFIG_ACCOUNT_ID = ""
-    val CUSTOM_CONFIG_VIEW_NAME = "RoktExperience"
-    val CUSTOM_CONFIG_LOC_1 = ""
-    val CUSTOM_CONFIG_LOC_2 = ""
+    val CUSTOM_CONFIG_ACCOUNT_ID = "2754655826098840951"
+    val CUSTOM_CONFIG_VIEW_NAME = "testAndroid"
+    val CUSTOM_CONFIG_LOC_1 = "Location1"
+    val CUSTOM_CONFIG_LOC_2 = "Location2"
     val CUSTOM_CONFIG_LONG_DESC =
         "The Custom Checkout Flow allows you to preview a specific placement from a specific account in an unbranded confirmation page. This allows you to preview the specific UI of this placement and experience the in-app behaviour of the Rokt placement.\n\nNote: In order to preview a specific placement, you will require details about your Rokt account and placement configuration. If you do not have these, please reach out to your Rokt Account Manager.\n"
 

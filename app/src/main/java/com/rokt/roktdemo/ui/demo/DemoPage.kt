@@ -7,11 +7,16 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rokt.roktdemo.MainActivityViewModel
+import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutPage
 import com.rokt.roktdemo.ui.demo.summary.SummaryPage
-import com.rokt.roktdemo.ui.demo.walkthrough.WalkthroughHome
+import com.rokt.roktdemo.ui.demo.walkthrough.WalkthroughPage
 
 @Composable
-fun DemoPage(backPressed: () -> Unit, mainActivityViewModel: MainActivityViewModel, viewModel: DemoViewModel = hiltNavGraphViewModel()) {
+fun DemoPage(
+    backPressed: () -> Unit,
+    mainActivityViewModel: MainActivityViewModel,
+    viewModel: DemoViewModel = hiltNavGraphViewModel(),
+) {
     val demoPage = viewModel.getDemoPage()
     val navController = rememberNavController()
     val actions = remember(navController) { DemoActions(navController) }
@@ -30,7 +35,11 @@ fun DemoPage(backPressed: () -> Unit, mainActivityViewModel: MainActivityViewMod
             }
 
         composable(DemoDestinations.DEMO_DESTINATION + DestinationType.FEATURE_WALKTHROUGH.value) {
-            WalkthroughHome(actions.backPressed)
+            WalkthroughPage(actions.backPressed)
+        }
+
+        composable(DemoDestinations.DEMO_DESTINATION + DestinationType.CUSTOM_CHECKOUT.value) {
+            CustomCheckoutPage(actions.backPressed)
         }
     }
 }

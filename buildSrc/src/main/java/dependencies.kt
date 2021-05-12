@@ -8,6 +8,7 @@ object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha10"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
     const val rokt = "com.rokt:roktsdk:3.5.2-alpha.1153"
+    const val timber = "com.jakewharton.timber:timber:4.7.1"
 
     object Kotlin {
         private const val version = "1.4.32"
