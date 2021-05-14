@@ -112,7 +112,7 @@ fun RowScope.HeaderContent(
         .fillMaxWidth(),
         contentAlignment = Alignment.CenterEnd) {
 
-        HeaderTextButton(navButtonText) { onNextPressed(currentIndex) }
+        HeaderTextButton(navButtonText, { onNextPressed(currentIndex) })
     }
 
 }

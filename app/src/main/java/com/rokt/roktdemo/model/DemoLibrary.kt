@@ -1,5 +1,7 @@
 package com.rokt.roktdemo.model
 
+import java.util.HashMap
+
 class DemoLibrary(
     val demoTitle: String,
     val demoDescription: String,
@@ -18,7 +20,7 @@ class CustomConfigurationPage(
     val longDescription: String,
     val accountDetails: AccountDetails,
     val customerDetails: CustomerDetails,
-    val advancedDetails: List<Pair<String, String>>
+    val advancedDetails: HashMap<String, String>
 ) : RoktDemoScreen(title, shortDescription, iconUrl)
 
 class AccountDetails(

@@ -2,41 +2,35 @@ package com.rokt.roktdemo.ui.demo.custom.screen.account
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import com.google.accompanist.insets.systemBarsPadding
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.ButtonLight
 import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.MediumSpace
 import com.rokt.roktdemo.ui.common.ScreenHeader
 import com.rokt.roktdemo.ui.common.SmallSpace
+import com.rokt.roktdemo.ui.common.RoktTextField
 import com.rokt.roktdemo.ui.common.XSmallSpace
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutViewModel
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
-import com.rokt.roktdemo.ui.theme.RoktColors
 import com.rokt.roktdemo.ui.theme.RoktColors.ErrorColor
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
@@ -89,8 +83,9 @@ private fun AccountDetailsScreenContent(
     Column(
         Modifier
             .fillMaxSize()
-            .padding(24.dp)
+            .padding(start = 24.dp, end = 24.dp, bottom = 24.dp)
             .verticalScroll(scrollState)
+            .systemBarsPadding()
     ) {
         Text(
             text = stringResource(R.string.account_details_step_count_text),
@@ -108,17 +103,17 @@ private fun AccountDetailsScreenContent(
             accountId.onValueChanged,
             accountId.errorText
         )
-        TextField(
+        RoktTextField(
             stringResource(R.string.label_view_name),
             viewName.text,
             viewName.onValueChanged
         )
-        TextField(
+        RoktTextField(
             stringResource(R.string.label_location_1),
             placementLocation1.text,
             placementLocation1.onValueChanged
         )
-        TextField(
+        RoktTextField(
             stringResource(R.string.label_location_2),
             placementLocation2.text,
             placementLocation2.onValueChanged
@@ -138,7 +133,7 @@ private fun ErrorTextField(
     errorText: String,
 ) {
     Column(Modifier.fillMaxWidth()) {
-        TextField(
+        RoktTextField(
             label,
             text,
             onValueChange,
@@ -149,42 +144,6 @@ private fun ErrorTextField(
             ErrorMessage(errorText)
         }
     }
-}
-
-@Composable
-private fun TextField(
-    label: String,
-    text: String,
-    onValueChange: (String) -> Unit,
-    errorText: String = "",
-) {
-    val borderColor =
-        if (errorText.isBlank()) MaterialTheme.colors.onSurface else ErrorColor
-
-    TextField(
-        value = text,
-        onValueChange = { onValueChange(it) },
-        singleLine = true,
-        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-        label = {
-            Text(
-                label,
-                color = RoktColors.HintTextColor,
-                fontFamily = RoktFonts.DefaultFontFamily,
-                fontSize = 12.sp
-            )
-        },
-        textStyle = TextStyle(
-            color = MaterialTheme.colors.primaryVariant,
-            fontSize = 16.sp,
-            fontFamily = RoktFonts.DefaultFontFamily
-        ),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 20.dp)
-            .background(Color.White)
-            .border(2.dp, borderColor)
-    )
 }
 
 @Composable
