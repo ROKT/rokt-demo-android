@@ -28,6 +28,10 @@ class CustomCheckoutViewModel @Inject constructor() : ViewModel() {
             placementLocation1 = placementLocation1,
             placementLocation2 = placementLocation2)
     }
+
+    fun onCustomerDetailsSubmitted(attributes: Map<String, String>) {
+        state = state.copy(attributes = attributes)
+    }
 }
 
 data class CustomCheckoutPageState(
@@ -35,4 +39,5 @@ data class CustomCheckoutPageState(
     val viewName: String = "",
     val placementLocation1: String = "",
     val placementLocation2: String = "",
+    val attributes: Map<String, String> = hashMapOf(),
 )

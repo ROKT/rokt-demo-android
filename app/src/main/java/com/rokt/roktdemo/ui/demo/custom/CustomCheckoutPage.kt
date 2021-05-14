@@ -17,6 +17,7 @@ import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.HeaderTextButton
 import com.rokt.roktdemo.ui.common.RoktHeader
 import com.rokt.roktdemo.ui.demo.custom.screen.account.AccountDetailsScreen
+import com.rokt.roktdemo.ui.demo.custom.screen.customer.CustomerDetailsScreen
 
 @Composable
 fun CustomCheckoutPage(exitCheckoutPage: () -> Unit) {
@@ -32,7 +33,7 @@ fun CustomCheckoutPage(exitCheckoutPage: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween) {
                 BackButton(backPressed = actions.backPressed)
-                HeaderTextButton("Quit Demo") { exitCheckoutPage() }
+                HeaderTextButton("Quit Demo", { exitCheckoutPage() })
             }
         }
         val customCheckoutViewModel = CustomCheckoutViewModel()
@@ -44,18 +45,14 @@ fun CustomCheckoutPage(exitCheckoutPage: () -> Unit) {
                 AccountDetailsScreen(actions.navigateToCustomerDetails, customCheckoutViewModel)
             }
             composable(CustomCheckoutDestinations.CustomerDetails) {
-                CustomerDetailsScreen(actions.navigateToConfirmationScreen)
+                CustomerDetailsScreen(actions.navigateToConfirmationScreen, customCheckoutViewModel)
+
             }
             composable(CustomCheckoutDestinations.ConfirmationScreen) {
                 CustomCheckoutConfirmationScreen()
             }
         }
     }
-}
-
-@Composable
-fun CustomerDetailsScreen(launchDemoPressed: () -> Unit) {
-    Text("Hello customer details screen")
 }
 
 @Composable

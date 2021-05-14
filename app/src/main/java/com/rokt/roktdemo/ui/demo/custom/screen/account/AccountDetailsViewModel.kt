@@ -8,6 +8,7 @@ import com.rokt.roktdemo.data.validate.ValidationState
 import com.rokt.roktdemo.data.validate.ValidationStatus
 import com.rokt.roktdemo.data.validate.ValidatorRepository
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
+import com.rokt.roktdemo.ui.demo.custom.screen.common.createEditableField
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -102,19 +103,6 @@ class AccountDetailsViewModel @Inject constructor(
     }
 }
 
-fun createEditableField(
-    text: String,
-    onFieldEdited: (String) -> Unit,
-    errorText: String = "",
-): EditableField {
-    return EditableField(
-        text = text,
-        onValueChanged = fun(value: String) {
-            onFieldEdited.invoke(value)
-        },
-        errorText = errorText
-    )
-}
 
 data class AccountDetailsViewState(
     val accountId: EditableField = EditableField(),

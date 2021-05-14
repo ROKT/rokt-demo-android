@@ -27,7 +27,7 @@ import com.rokt.roktdemo.ui.demo.walkthrough.screen.WalkthroughScreen
 @Composable
 fun WalkthroughPage(
     onBackPressed: () -> Unit,
-    viewModel: WalkthroughViewModel = hiltNavGraphViewModel()
+    viewModel: WalkthroughViewModel = hiltNavGraphViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
     val navController = rememberNavController()
@@ -112,7 +112,7 @@ fun RowScope.HeaderContent(
         .fillMaxWidth(),
         contentAlignment = Alignment.CenterEnd) {
 
-        HeaderTextButton(navButtonText) { onNextPressed(currentIndex) }
+        HeaderTextButton(navButtonText, { onNextPressed(currentIndex) })
     }
 
 }

@@ -18,7 +18,7 @@ class CustomCheckoutViewModelTest {
     val coroutineTestRule = CoroutineTestRule()
 
     @Test
-    fun `onAccountDetailsSubmitted() should set account details to the state`() {
+    fun `onAccountDetailsSubmitted should set account details to the state`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val customCheckoutViewModel = CustomCheckoutViewModel()
             customCheckoutViewModel.onAccountDetailsSubmitted(
@@ -34,6 +34,20 @@ class CustomCheckoutViewModelTest {
                 .isEqualTo("Location1")
             Truth.assertThat(customCheckoutViewModel.state.placementLocation2)
                 .isEqualTo("Location2")
+        }
+    }
+
+    @Test
+    fun `onCustomerDetailsSubmitted should set customer details to the state`() {
+        coroutineTestRule.testDispatcher.runBlockingTest {
+            val customCheckoutViewModel = CustomCheckoutViewModel()
+            customCheckoutViewModel.onCustomerDetailsSubmitted(
+                hashMapOf("country" to "Australia", "postcode" to "2323")
+            )
+            Truth.assertThat(customCheckoutViewModel.state.attributes)
+                .containsEntry("country", "Australia")
+            Truth.assertThat(customCheckoutViewModel.state.attributes)
+                .containsEntry("postcode", "2323")
         }
     }
 }

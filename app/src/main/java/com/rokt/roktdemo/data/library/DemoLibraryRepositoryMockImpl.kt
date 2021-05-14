@@ -108,8 +108,8 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
             CUSTOM_CONFIG_LOC_1,
             CUSTOM_CONFIG_LOC_2
         ),
-        CustomerDetails("AU", "NSW", "2000"),
-        listOf(Pair("experience", "true"), Pair("majorCat", "true"))
+        CustomerDetails("Australia", "NSW", "2000"),
+        hashMapOf("experience" to "true", "majorCat" to "true")
     )
 
     val PREDEFINED_TITLE_1 = "Confirmation Page"

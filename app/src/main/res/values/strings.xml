@@ -33,4 +33,16 @@
     <string name="label_location_2">Placement Location 2</string>
     <string name="button_continue">Continue</string>
     <string name="content_description_exclamation">Exclamation mark</string>
+    <string name="drop_down_content_description">Arrow</string>
+    <string name="label_country">Country</string>
+    <string name="advanced_options_toggle_text">Advanced Options</string>
+    <string name="advanced_options_description">Brief sentence explaining this step lorem ipsum the quick brown fox jumps over the lazy dog.</string>
+    <string name="label_attribute_name">Attribute Name</string>
+    <string name="label_attribute_value">Value</string>
+    <string name="customer_details_screen_description">Please enter your customer details to be used in the offer selection process.</string>
+    <string name="customer_details_screen_title">Customer Details</string>
+    <string name="textfield_label_state">State</string>
+    <string name="textfield_label_postcode">Postcode</string>
+    <string name="customer_screen_step_label">Step 2/2</string>
+    <string name="launch_demo_button_text">Launch Demo</string>
 </resources>

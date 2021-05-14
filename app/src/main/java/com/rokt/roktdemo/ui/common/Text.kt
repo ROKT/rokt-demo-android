@@ -59,10 +59,10 @@ fun ContentText(text: String, fontSize: Int = 16) {
 }
 
 @Composable
-fun HeaderTextButton(text: String, onClick: (Int) -> Unit) {
+fun HeaderTextButton(text: String, onClick: (Int) -> Unit, color: Color = Color.White) {
     ClickableText(AnnotatedString(text),
         onClick = onClick,
-        style = TextStyle(color = Color.White,
+        style = TextStyle(color = color,
             fontFamily = RoktFonts.DefaultFontFamily,
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp))

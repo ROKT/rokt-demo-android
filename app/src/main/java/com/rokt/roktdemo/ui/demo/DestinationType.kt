@@ -2,7 +2,6 @@ package com.rokt.roktdemo.ui.demo
 
 import com.rokt.roktdemo.R
 
-
 enum class DestinationType(val value: String) {
     FEATURE_WALKTHROUGH("walkthrough"),
     CUSTOM_CHECKOUT("custom_check"),
@@ -39,7 +38,6 @@ As you progress, try interacting with the Rokt placements by clicking “Yes ple
 
 Click ‘NEXT’ to progress through different placement types."""
 
-
 private const val DISCLAIMER_DEFAULT =
     """This is a Rokt demo used to show Rokt’s in-app capabilities. This demo does not capture or store any personal or device data.
 
@@ -53,5 +51,3 @@ fun DestinationType.getDisclaimer(): String {
         else -> DISCLAIMER_DEFAULT
     }
 }
-
-
