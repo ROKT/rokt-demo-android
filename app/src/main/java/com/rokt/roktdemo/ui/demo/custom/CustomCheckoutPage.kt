@@ -46,6 +46,7 @@ fun CustomCheckoutPage(exitCheckoutPage: () -> Unit) {
             }
             composable(CustomCheckoutDestinations.CustomerDetails) {
                 CustomerDetailsScreen(actions.navigateToConfirmationScreen, customCheckoutViewModel)
+
             }
             composable(CustomCheckoutDestinations.ConfirmationScreen) {
                 CustomCheckoutConfirmationScreen()

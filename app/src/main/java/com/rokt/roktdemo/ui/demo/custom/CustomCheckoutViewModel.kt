@@ -32,7 +32,7 @@ class CustomCheckoutViewModel @Inject constructor() : ViewModel() {
     fun onCustomerDetailsSubmitted(attributes: Map<String, String>) {
         state = state.copy(attributes = attributes)
     }
-}
+
 
 data class CustomCheckoutPageState(
     val accountId: String = "",
