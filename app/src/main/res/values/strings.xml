@@ -45,4 +45,28 @@
     <string name="textfield_label_postcode">Postcode</string>
     <string name="customer_screen_step_label">Step 2/2</string>
     <string name="launch_demo_button_text">Launch Demo</string>
+    <string name="text_order_summary">Order summary</string>
+    <string name="text_basic_tshirt">Basic T-Shirt (3)</string>
+    <string name="text_basic_tshirt_price">$59.95</string>
+    <string name="text_medium">Medium</string>
+    <string name="text_subtotal">Subtotal</string>
+    <string name="text_shipping">Shipping</string>
+    <string name="text_shipping_price">FREE</string>
+    <string name="text_total">Total</string>
+    <string name="text_customer_details">Customer Details</string>
+    <string name="text_email">Email</string>
+    <string name="text_email_value">demo@rokt.com</string>
+    <string name="text_shipping_address">Shipping address</string>
+    <string name="text_shipping_address_value"> Rokt\n175 Varick Street\nNew York NY 10014\nUnited States\n(646) 693–7411</string>
+    <string name="text_billing_address">Billing address</string>
+    <string name="text_payment_method">Payment method</string>
+    <string name="content_description_apple_logo">Apple Logo</string>
+    <string name="text_shipping_method">Shipping method</string>
+    <string name="text_shipping_duration">Economy (4-6 Business Days)</string>
+    <string name="content_description_map_image">Map Image</string>
+    <string name="text_payment_details"> ending in 7594 – $59.95</string>
+    <string name="content_description_tick_icon">Tick Icon</string>
+    <string name="confirmation_heading_text">Thank you John Smith!</string>
+    <string name="text_order_numbr">Order #MH123456</string>
+
 </resources>
