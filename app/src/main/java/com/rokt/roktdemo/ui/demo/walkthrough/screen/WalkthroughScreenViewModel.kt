@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rokt.roktdemo.data.library.DemoLibraryRepository
 import com.rokt.roktdemo.model.ScreenType
-import com.rokt.roktsdk.Rokt
+import com.rokt.roktdemo.ui.demo.RoktExecutor
 import com.rokt.roktsdk.Widget
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
+import java.util.HashMap
 import javax.inject.Inject
 
 @HiltViewModel
@@ -62,24 +63,7 @@ class WalkthroughScreenViewModel @Inject constructor(
     fun onViewExampleButtonClicked() = executeRokt()
 
     private fun executeRokt(placeholders: HashMap<String, WeakReference<Widget>>? = null) {
-        Rokt.execute(
-            state.value.viewName,
-            state.value.attributes,
-            placeholders = placeholders,
-            callback = object : Rokt.RoktCallback {
-                override fun onLoad() {
-                }
-
-                override fun onShouldHideLoadingIndicator() {
-                }
-
-                override fun onShouldShowLoadingIndicator() {
-                }
-
-                override fun onUnload(reason: Rokt.UnloadReasons) {
-                }
-            }
-        )
+        RoktExecutor.executeRokt(state.value.viewName, state.value.attributes, placeholders)
     }
 }
 

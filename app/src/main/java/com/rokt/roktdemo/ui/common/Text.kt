@@ -37,12 +37,12 @@ fun Title(text: String, color: Color = MaterialTheme.colors.primaryVariant) {
 }
 
 @Composable
-fun SubHeading(text: String) {
+fun SubHeading(text: String, fontSize: Int = 20) {
     Text(
         text = text,
         fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
+        fontSize = fontSize.sp,
         color = MaterialTheme.colors.primaryVariant
     )
 }

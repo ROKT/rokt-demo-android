@@ -47,8 +47,8 @@ import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
 fun CustomerDetailsScreen(
-    navigateToNextScreen: () -> Unit,
     customCheckoutViewModel: CustomCheckoutViewModel,
+    navigateToNextScreen: () -> Unit,
 ) {
     val scroll = rememberScrollState(0)
     val viewModel: CustomerDetailsViewModel = hiltNavGraphViewModel()

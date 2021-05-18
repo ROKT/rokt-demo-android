@@ -29,15 +29,15 @@ import com.rokt.roktdemo.ui.common.ScreenHeader
 import com.rokt.roktdemo.ui.common.SmallSpace
 import com.rokt.roktdemo.ui.common.RoktTextField
 import com.rokt.roktdemo.ui.common.XSmallSpace
+import com.rokt.roktdemo.ui.demo.RoktExecutor
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutViewModel
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
 import com.rokt.roktdemo.ui.theme.RoktColors.ErrorColor
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
-fun AccountDetailsScreen(
+fun AccountDetailsScreen(parentViewModel: CustomCheckoutViewModel,
     navigateToNextScreen: () -> Unit,
-    parentViewModel: CustomCheckoutViewModel,
 ) {
 
     val viewModel: AccountDetailsViewModel = hiltNavGraphViewModel()

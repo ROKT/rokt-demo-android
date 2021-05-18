@@ -29,11 +29,12 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
         "The below preview shows an embedded placement with brand logos displayed. You can progress through the offers by clicking “Yes Please” or “No Thanks”. \n\nThe Rokt placement powers traffic, email, phone and, app install campaigns. Opting-in to a traffic or app install campaign will direct the customer to a landing page in either an in-app webview, the associated app or app store.\n"
 
     val SCREEN_DESC_3 =
-        "Click “View Example” to preview a Rokt overlay placement. You can progress through the offers by clicking “Yes Please” or “No Thanks”. \n" +
-                "\n" +
-                "On iOS devices, the overlay placement follows Apple’s best practice automatic presentation style for overlays. \n" +
-                "\n" +
-                "On Android devices, the overlay placements can be configured as a “full-screen overlay” or a “lightbox overlay” with a transparent background.\n"
+        """Click “View Example” to preview a Rokt overlay placement. You can progress through the offers by clicking “Yes Please” or “No Thanks”. 
+
+On iOS devices, the overlay placement follows Apple’s best practice automatic presentation style for overlays. 
+
+On Android devices, the overlay placements can be configured as a “full-screen overlay” or a “lightbox overlay” with a transparent background.
+"""
     val SCREEN_TYPE_NAME_2 = ""
 
     val attributes1 = hashMapOf(
@@ -104,12 +105,16 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
         CUSTOM_CONFIG_LONG_DESC,
         AccountDetails(
             CUSTOM_CONFIG_ACCOUNT_ID,
-            CUSTOM_CONFIG_VIEW_NAME,
+            "testTwoEmbedded",
             CUSTOM_CONFIG_LOC_1,
             CUSTOM_CONFIG_LOC_2
         ),
         CustomerDetails("Australia", "NSW", "2000"),
-        hashMapOf("experience" to "true", "majorCat" to "true")
+        hashMapOf(
+            "experience" to "true",
+            "majorCat" to "true",
+            "email" to "testingEmail@testing.com"
+        )
     )
 
     val PREDEFINED_TITLE_1 = "Confirmation Page"
