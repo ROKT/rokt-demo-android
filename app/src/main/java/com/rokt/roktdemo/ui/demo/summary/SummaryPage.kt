@@ -1,6 +1,7 @@
 package com.rokt.roktdemo.ui.demo.summary
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,7 +25,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import com.google.accompanist.insets.systemBarsPadding
 import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.R
@@ -40,16 +41,25 @@ import com.rokt.roktdemo.ui.demo.DestinationType
 fun SummaryPage(
     backPressed: () -> Unit,
     startDemoPressed: () -> Unit,
-    destinationType: DestinationType,
     activityViewModel: MainActivityViewModel,
-    viewModel: SummaryViewModel = hiltNavGraphViewModel(),
+    viewModel: SummaryViewModel,
 ) {
-    val summaryPageState = viewModel.getSummaryPageState(destinationType = destinationType)!!
+    val summaryPageState = viewModel.state
     val scroll = rememberScrollState(0)
     val openDialog = remember { mutableStateOf(false) }
 
     activityViewModel.updateSelectedTagId(summaryPageState.selectedTagId)
+    SummaryPageSuccessPage(backPressed, summaryPageState, openDialog, startDemoPressed, scroll)
+}
 
+@Composable
+fun SummaryPageSuccessPage(
+    backPressed: () -> Unit,
+    summaryPageState: SummaryPageState,
+    openDialog: MutableState<Boolean>,
+    startDemoPressed: () -> Unit,
+    scroll: ScrollState,
+) {
     Column(
         Modifier
             .background(color = MaterialTheme.colors.primaryVariant)

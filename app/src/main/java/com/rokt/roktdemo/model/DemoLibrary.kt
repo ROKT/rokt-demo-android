@@ -10,7 +10,7 @@ class DemoLibrary(
     // TODO: Predefined screens
     val preDefinedScreen1: PredefinedScreen,
     val preDefinedScreen2: PredefinedScreen,
-    val preDefinedScreen3: PredefinedScreen
+    val preDefinedScreen3: PredefinedScreen,
 )
 
 class CustomConfigurationPage(
@@ -20,14 +20,14 @@ class CustomConfigurationPage(
     val longDescription: String,
     val accountDetails: AccountDetails,
     val customerDetails: CustomerDetails,
-    val advancedDetails: HashMap<String, String>
+    val advancedDetails: HashMap<String, String>,
 ) : RoktDemoScreen(title, shortDescription, iconUrl)
 
 class AccountDetails(
     val accountId: String,
     val viewName: String,
     val placementLocation1: String,
-    val placementLocation2: String
+    val placementLocation2: String,
 )
 
 class CustomerDetails(
@@ -39,7 +39,7 @@ class CustomerDetails(
 //    val mobile: String,
     val country: String,
     val state: String,
-    val postcode: String
+    val postcode: String,
 )
 
 class DefaultPlacements(
@@ -57,7 +57,7 @@ class Screen(
     val viewName: String,
     val placeholderName: String,
     val type: ScreenType,
-    val attributes: HashMap<String, String>
+    val attributes: HashMap<String, String>,
 )
 
 

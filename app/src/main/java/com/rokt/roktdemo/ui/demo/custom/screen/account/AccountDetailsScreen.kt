@@ -25,18 +25,19 @@ import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.ButtonLight
 import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.MediumSpace
+import com.rokt.roktdemo.ui.common.RoktTextField
 import com.rokt.roktdemo.ui.common.ScreenHeader
 import com.rokt.roktdemo.ui.common.SmallSpace
-import com.rokt.roktdemo.ui.common.RoktTextField
 import com.rokt.roktdemo.ui.common.XSmallSpace
-import com.rokt.roktdemo.ui.demo.RoktExecutor
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutViewModel
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
+import com.rokt.roktdemo.ui.demo.error.GeneralError
 import com.rokt.roktdemo.ui.theme.RoktColors.ErrorColor
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
-fun AccountDetailsScreen(parentViewModel: CustomCheckoutViewModel,
+fun AccountDetailsScreen(
+    parentViewModel: CustomCheckoutViewModel,
     navigateToNextScreen: () -> Unit,
 ) {
 
@@ -44,12 +45,37 @@ fun AccountDetailsScreen(parentViewModel: CustomCheckoutViewModel,
     val state = viewModel.state.collectAsState()
     val scroll = rememberScrollState(0)
 
-    if (state.value.formValidated) {
+    when {
+        state.value.loading -> {
+            // TODO: Loading
+        }
+        state.value.hasData -> {
+            AccountDetailsSuccess(state.value.data!!,
+                scroll,
+                parentViewModel,
+                viewModel,
+                navigateToNextScreen)
+        }
+        else -> {
+            GeneralError()
+        }
+    }
+}
+
+@Composable
+private fun AccountDetailsSuccess(
+    data: AccountDetailsViewState,
+    scroll: ScrollState,
+    parentViewModel: CustomCheckoutViewModel,
+    viewModel: AccountDetailsViewModel,
+    navigateToNextScreen: () -> Unit,
+) {
+    if (data.formValidated) {
         parentViewModel.onAccountDetailsSubmitted(
-            state.value.accountId.text,
-            state.value.viewName.text,
-            state.value.placementLocation1.text,
-            state.value.placementLocation2.text
+            data.accountId.text,
+            data.viewName.text,
+            data.placementLocation1.text,
+            data.placementLocation2.text
         )
 
         viewModel.onNavigatedAway()
@@ -64,10 +90,10 @@ fun AccountDetailsScreen(parentViewModel: CustomCheckoutViewModel,
     AccountDetailsScreenContent(
         scroll,
         onContinueButtonPress,
-        state.value.accountId,
-        state.value.viewName,
-        state.value.placementLocation1,
-        state.value.placementLocation2,
+        data.accountId,
+        data.viewName,
+        data.placementLocation1,
+        data.placementLocation2,
     )
 }
 

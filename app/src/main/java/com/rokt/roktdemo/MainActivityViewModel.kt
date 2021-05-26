@@ -11,7 +11,7 @@ class MainActivityViewModel @Inject constructor() : ViewModel() {
     private val _selectedTagId = MutableLiveData<String>()
     val selectedTagId = _selectedTagId.distinctUntilChanged()
 
-    fun updateSelectedTagId(tagId: String){
+    fun updateSelectedTagId(tagId: String) {
         _selectedTagId.value = tagId
     }
 }

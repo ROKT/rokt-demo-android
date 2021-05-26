@@ -1,6 +1,7 @@
 package com.rokt.roktdemo.ui.demo
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -32,9 +33,27 @@ import com.rokt.roktdemo.ui.common.SubHeading
 import com.rokt.roktdemo.ui.common.XSmallSpace
 
 @Composable
-fun DemoHome(demoPage: DemoScreenState, backPressed: () -> Unit, actions: DemoActions) {
+fun DemoHome(
+    demoScreenState: DemoScreenState,
+    backPressed: () -> Unit,
+    actions: DemoActions,
+) {
     val scroll = rememberScrollState(0)
+    DemoPageSuccess(
+        demoPage = demoScreenState,
+        backPressed = backPressed,
+        scroll = scroll,
+        actions = actions
+    )
+}
 
+@Composable
+private fun DemoPageSuccess(
+    demoPage: DemoScreenState,
+    backPressed: () -> Unit,
+    scroll: ScrollState,
+    actions: DemoActions,
+) {
     Column(
         Modifier
             .background(MaterialTheme.colors.surface)
@@ -62,7 +81,7 @@ fun DemoHome(demoPage: DemoScreenState, backPressed: () -> Unit, actions: DemoAc
 }
 
 @Composable
-fun DemoListItemView(item: DemoPageListItem, actions: DemoActions) {
+private fun DemoListItemView(item: DemoPageListItem, actions: DemoActions) {
     Column(
         Modifier
             .fillMaxWidth()

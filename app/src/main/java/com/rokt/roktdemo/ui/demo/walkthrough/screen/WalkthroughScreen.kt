@@ -36,6 +36,7 @@ import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
 import com.rokt.roktdemo.ui.common.ScreenHeader
 import com.rokt.roktdemo.ui.common.SmallSpace
 import com.rokt.roktdemo.ui.common.SubHeading
+import com.rokt.roktdemo.ui.demo.error.GeneralError
 import com.rokt.roktsdk.Widget
 import java.lang.ref.WeakReference
 
@@ -49,13 +50,21 @@ fun WalkthroughScreen(
     val state by viewModel.state.collectAsState()
     val scroll = rememberScrollState(0)
 
-    if (state.didLoad) {
-        WalkthroughScreenContent(scroll,
-            state.title,
-            state.description,
-            state.isEmbedded,
-            viewModel::onEmbeddedWidgetAddedToView,
-            viewModel::onViewExampleButtonClicked)
+    when {
+        state.loading -> {
+            // TODO: Loading
+        }
+        state.hasData -> {
+            WalkthroughScreenContent(scroll,
+                state.data!!.title,
+                state.data!!.description,
+                state.data!!.isEmbedded,
+                viewModel::onEmbeddedWidgetAddedToView,
+                viewModel::onViewExampleButtonClicked)
+        }
+        else -> {
+            GeneralError()
+        }
     }
 }
 

@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rokt.roktdemo.ui.theme.RoktColors
@@ -26,13 +27,14 @@ fun Heading(text: String) {
 }
 
 @Composable
-fun Title(text: String, color: Color = MaterialTheme.colors.primaryVariant) {
+fun Title(text: String, color: Color = MaterialTheme.colors.primaryVariant, textAlign: TextAlign = TextAlign.Start) {
     Text(
         text = text,
         fontFamily = RoktFonts.HeadingsFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
-        color = color
+        color = color,
+        textAlign = textAlign
     )
 }
 
@@ -48,13 +50,14 @@ fun SubHeading(text: String, fontSize: Int = 20) {
 }
 
 @Composable
-fun ContentText(text: String, fontSize: Int = 16) {
+fun ContentText(text: String, fontSize: Int = 16, textAlign: TextAlign = TextAlign.Start) {
     Text(
         text = text,
         fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = fontSize.sp,
-        color = MaterialTheme.colors.primaryVariant
+        color = MaterialTheme.colors.primaryVariant,
+        textAlign = textAlign
     )
 }
 

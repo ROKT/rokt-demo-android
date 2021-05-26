@@ -2,13 +2,16 @@ package com.rokt.roktdemo.ui.demo.walkthrough.screen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rokt.roktdemo.data.data
 import com.rokt.roktdemo.data.library.DemoLibraryRepository
+import com.rokt.roktdemo.data.succeeded
 import com.rokt.roktdemo.model.ScreenType
 import com.rokt.roktdemo.ui.demo.RoktExecutor
+import com.rokt.roktdemo.ui.state.RoktDemoErrorTypes
+import com.rokt.roktdemo.ui.state.UiState
 import com.rokt.roktsdk.Widget
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -20,34 +23,32 @@ import javax.inject.Inject
 class WalkthroughScreenViewModel @Inject constructor(
     demoLibraryRepository: DemoLibraryRepository,
 ) : ViewModel() {
-    private val _state = MutableStateFlow(WalkthroughScreenState())
-    val state: StateFlow<WalkthroughScreenState>
+    private val _state = MutableStateFlow(UiState<WalkthroughScreenState>())
+    val state: MutableStateFlow<UiState<WalkthroughScreenState>>
         get() = _state
 
-    private val screenIndex: MutableStateFlow<Int?> = MutableStateFlow(null)
-    private val screens =
-        MutableStateFlow(demoLibraryRepository.getDemoLibrary().defaultPlacementsExamples.screens)
+    private val screenIndex: MutableStateFlow<Int> = MutableStateFlow(0)
 
     init {
         viewModelScope.launch {
-            combine(screenIndex, screens) { screenIndex, screens ->
-                screenIndex?.let { index ->
-                    screens[index].let { screen ->
-                        WalkthroughScreenState(
+            combine(screenIndex, demoLibraryRepository.getDemoLibrary()) { screenIndex, library ->
+                if (library.succeeded) {
+                    val screens = library.data().defaultPlacementsExamples.screens
+                    screens[screenIndex].let { screen ->
+                        UiState(data = WalkthroughScreenState(
                             screen.title,
                             screen.description,
                             screen.placeholderName,
                             screen.attributes,
                             screen.viewName,
-                            screen.type == ScreenType.Embedded,
-                            didLoad = true
-                        )
+                            screen.type == ScreenType.Embedded))
                     }
+                } else {
+                    UiState(error = RoktDemoErrorTypes.GENERAL)
                 }
+
             }.collect {
-                it?.let {
-                    _state.value = it
-                }
+                _state.value = it
             }
         }
     }
@@ -57,13 +58,17 @@ class WalkthroughScreenViewModel @Inject constructor(
     }
 
     fun onEmbeddedWidgetAddedToView(widget: WeakReference<Widget>) {
-        executeRokt(hashMapOf(state.value.placeholderName to widget))
+        state.value.data?.let {
+            executeRokt(hashMapOf(it.placeholderName to widget))
+        }
     }
 
     fun onViewExampleButtonClicked() = executeRokt()
 
     private fun executeRokt(placeholders: HashMap<String, WeakReference<Widget>>? = null) {
-        RoktExecutor.executeRokt(state.value.viewName, state.value.attributes, placeholders)
+        state.value.data?.let {
+            RoktExecutor.executeRokt(it.viewName, it.attributes, placeholders)
+        }
     }
 }
 
@@ -73,6 +78,5 @@ data class WalkthroughScreenState(
     val placeholderName: String = "",
     val attributes: Map<String, String> = hashMapOf(),
     val viewName: String = "",
-    val isEmbedded: Boolean = true,
-    val didLoad: Boolean = false,
+    val isEmbedded: Boolean = false,
 )
