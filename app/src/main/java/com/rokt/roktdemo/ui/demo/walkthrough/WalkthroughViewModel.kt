@@ -33,7 +33,8 @@ class WalkthroughViewModel @Inject constructor(demoLibraryRepository: DemoLibrar
             combine(selectedIndex, demoLibraryRepository.getDemoLibrary()) { index, result ->
                 if (result.succeeded) {
                     UiState(data = getWalkthroughPage(result.data().defaultPlacementsExamples.screens.count(),
-                        index))
+                        index)
+                    )
                 } else {
                     UiState(error = RoktDemoErrorTypes.GENERAL)
                 }
@@ -76,7 +77,6 @@ class WalkthroughViewModel @Inject constructor(demoLibraryRepository: DemoLibrar
                 selectedIndex.value = selectedIndex.value + 1
             }
         }
-
     }
 
     internal fun backButtonPressed() {

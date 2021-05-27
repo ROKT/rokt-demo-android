@@ -122,7 +122,10 @@ private fun HomeButtons(viewModel: HomeViewModel, actions: MainActions) {
         DefaultSpace()
         ButtonLight(
             text = stringResource(R.string.menu_button_contact),
-            onClick = { viewModel.contactUsClicked(context) })
+            onClick = {
+                viewModel.contactUsClicked(context)
+            }
+        )
     }
 }
 

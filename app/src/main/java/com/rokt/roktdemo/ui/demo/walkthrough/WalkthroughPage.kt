@@ -41,12 +41,15 @@ fun WalkthroughPage(
         state.hasData -> {
             val data = state.data!!
             val actions = remember(navController) {
-                WalkthroughActions(navController,
+                WalkthroughActions(
+                    navController,
                     data.screenCount,
-                    onBackPressed)
+                    onBackPressed
+                )
             }
 
-            WalkthroughPageContent(screenCount = data.screenCount,
+            WalkthroughPageContent(
+                screenCount = data.screenCount,
                 currentIndex = data.currentIndex,
                 screenCounterText = data.screenCounterText,
                 navButtonText = data.navButtonText,
@@ -58,7 +61,8 @@ fun WalkthroughPage(
                     viewModel.nextButtonPressed()
                     actions.forwardPressed.invoke(it)
                 },
-                navController = navController)
+                navController = navController
+            )
         }
         else -> {
             GeneralError()
@@ -76,9 +80,10 @@ private fun WalkthroughPageContent(
     onNextPressed: (index: Int) -> Unit,
     navController: NavHostController,
 ) {
-    Column(Modifier
-        .fillMaxSize()
-        .background(color = MaterialTheme.colors.surface)
+    Column(
+        Modifier
+            .fillMaxSize()
+            .background(color = MaterialTheme.colors.surface)
     ) {
         WalkthroughHeader(
             currentIndex,
@@ -89,10 +94,12 @@ private fun WalkthroughPageContent(
             },
             onNextPressed = {
                 onNextPressed(it)
-            })
-
-        NavHost(navController = navController,
-            startDestination = WalkthroughDestination.WalkthroughScreen + 0) {
+            }
+        )
+        NavHost(
+            navController = navController,
+            startDestination = WalkthroughDestination.WalkthroughScreen + 0
+        ) {
             for (index in 0 until screenCount) {
                 composable(WalkthroughDestination.WalkthroughScreen + index) {
                     WalkthroughScreen(index)
@@ -111,11 +118,13 @@ fun WalkthroughHeader(
     onNextPressed: (index: Int) -> Unit,
 ) {
     RoktHeader {
-        HeaderContent(currentIndex = currentIndex,
+        HeaderContent(
+            currentIndex = currentIndex,
             counterText = counterText,
             navButtonText = navButtonText,
             onBackPressed = onBackPressed,
-            onNextPressed = onNextPressed)
+            onNextPressed = onNextPressed
+        )
     }
 }
 
@@ -128,15 +137,19 @@ fun RowScope.HeaderContent(
     onNextPressed: (index: Int) -> Unit,
 ) {
 
-    Box(Modifier
-        .weight(1f)
-        .fillMaxWidth()) {
+    Box(
+        Modifier
+            .weight(1f)
+            .fillMaxWidth()
+    ) {
         BackButton(backPressed = { onBackPressed(currentIndex) })
     }
-    Box(Modifier
-        .weight(1f)
-        .fillMaxWidth(),
-        contentAlignment = Alignment.Center) {
+    Box(
+        Modifier
+            .weight(1f)
+            .fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
         Text(
             text = counterText,
             color = androidx.compose.ui.graphics.Color.White,
@@ -145,12 +158,12 @@ fun RowScope.HeaderContent(
             fontSize = 16.sp
         )
     }
-    Box(Modifier
-        .weight(1f)
-        .fillMaxWidth(),
-        contentAlignment = Alignment.CenterEnd) {
-
+    Box(
+        Modifier
+            .weight(1f)
+            .fillMaxWidth(),
+        contentAlignment = Alignment.CenterEnd
+    ) {
         HeaderTextButton(navButtonText, { onNextPressed(currentIndex) })
     }
-
 }
