@@ -60,7 +60,6 @@ class Screen(
     val attributes: HashMap<String, String>,
 )
 
-
 enum class ScreenType {
     Overlay, Embedded
 }

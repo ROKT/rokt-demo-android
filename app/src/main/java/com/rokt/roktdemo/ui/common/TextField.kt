@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.sp
 import com.rokt.roktdemo.ui.theme.RoktColors
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
-
 @Composable
 fun RoktTextField(
     label: String,

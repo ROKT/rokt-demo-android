@@ -11,12 +11,10 @@ import com.rokt.roktdemo.data.validate.ValidationStatus
 import com.rokt.roktdemo.data.validate.ValidatorRepository
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
 import com.rokt.roktdemo.ui.demo.custom.screen.common.createEditableField
-import com.rokt.roktdemo.ui.demo.error.GeneralError
 import com.rokt.roktdemo.ui.state.RoktDemoErrorTypes
 import com.rokt.roktdemo.ui.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch

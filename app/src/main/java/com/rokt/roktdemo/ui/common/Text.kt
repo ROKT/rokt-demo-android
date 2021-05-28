@@ -27,7 +27,11 @@ fun Heading(text: String) {
 }
 
 @Composable
-fun Title(text: String, color: Color = MaterialTheme.colors.primaryVariant, textAlign: TextAlign = TextAlign.Start) {
+fun Title(
+    text: String,
+    color: Color = MaterialTheme.colors.primaryVariant,
+    textAlign: TextAlign = TextAlign.Start,
+) {
     Text(
         text = text,
         fontFamily = RoktFonts.HeadingsFontFamily,
@@ -63,12 +67,16 @@ fun ContentText(text: String, fontSize: Int = 16, textAlign: TextAlign = TextAli
 
 @Composable
 fun HeaderTextButton(text: String, onClick: (Int) -> Unit, color: Color = Color.White) {
-    ClickableText(AnnotatedString(text),
+    ClickableText(
+        AnnotatedString(text),
         onClick = onClick,
-        style = TextStyle(color = color,
+        style = TextStyle(
+            color = color,
             fontFamily = RoktFonts.DefaultFontFamily,
             fontWeight = FontWeight.Bold,
-            fontSize = 16.sp))
+            fontSize = 16.sp
+        )
+    )
 }
 
 @Composable

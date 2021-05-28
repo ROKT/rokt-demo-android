@@ -15,20 +15,24 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.statusBarsPadding
 import com.rokt.roktdemo.ui.theme.RoktColors
 
-
 @Composable
 fun RoktHeader(content: @Composable RowScope.() -> Unit) {
-    Box(Modifier
-        .fillMaxWidth()
-        .height(99.dp)
-        .background(RoktColors.LightColors.primaryVariant)) {
-
-        Row(modifier = Modifier
-            .statusBarsPadding()
-            .fillMaxHeight()
+    Box(
+        Modifier
             .fillMaxWidth()
-            .padding(end = 16.dp),
-            verticalAlignment = Alignment.CenterVertically) {
+            .height(99.dp)
+            .background(
+                RoktColors.LightColors.primaryVariant
+            )
+    ) {
+        Row(
+            modifier = Modifier
+                .statusBarsPadding()
+                .fillMaxHeight()
+                .fillMaxWidth()
+                .padding(end = 16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             content()
         }
     }

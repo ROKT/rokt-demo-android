@@ -27,7 +27,8 @@ class CustomerDetailsViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _state: MutableStateFlow<UiState<CustomerDetailsScreenState>> = MutableStateFlow(
-        UiState(loading = true))
+        UiState(loading = true)
+    )
 
     private val showAdvancedOptions = MutableStateFlow(false)
     private val selectedCountry = MutableStateFlow("")
@@ -57,29 +58,44 @@ class CustomerDetailsViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            combine(selectedCountry,
+            combine(
+                selectedCountry,
                 advancedDetailsList,
                 selectedState,
                 selectedPostcode,
-                showAdvancedOptions) { country, advanced, state, postcode, showAdvanced ->
+                showAdvancedOptions
+            ) { country, advanced, state, postcode, showAdvanced ->
                 val advancedFields = advanced.mapIndexed { index, item ->
-                    EditableFieldSet(index, key = item.first, value = item.second,
+                    EditableFieldSet(
+                        index, key = item.first, value = item.second,
                         onKeyChanged = { newKey ->
                             onKeyChanged(newKey, index)
                         },
                         onValueChanged = { newValue ->
                             onValueChanged(newValue, index)
-                        })
+                        }
+                    )
                 }
 
-                UiState(data = CustomerDetailsScreenState(
-                    showAdvanced,
-                    country,
-                    createEditableField(state, {
-                        selectedState.value = it
-                    }), createEditableField(postcode, {
-                        selectedPostcode.value = it
-                    }), advancedFields))
+                UiState(
+                    data = CustomerDetailsScreenState(
+                        showAdvanced,
+                        country,
+                        createEditableField(
+                            state,
+                            {
+                                selectedState.value = it
+                            }
+                        ),
+                        createEditableField(
+                            postcode,
+                            {
+                                selectedPostcode.value = it
+                            }
+                        ),
+                        advancedFields
+                    )
+                )
             }.collect {
                 _state.value = it
             }
