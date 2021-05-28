@@ -61,7 +61,7 @@ fun CustomerDetailsScreen(
 
     when {
         state.value.loading -> {
-            //TODO: Loading state
+            // TODO: Loading state
         }
         state.value.hasData -> {
             val data = state.value.data!!

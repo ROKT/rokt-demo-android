@@ -12,7 +12,7 @@ object RoktExecutor {
         placeholders: Map<String, WeakReference<Widget>>?,
     ) {
 
-        Timber.d("Calling Execute with viewName $viewName, attributes ${attributes.toString()} and placeholders ${placeholders.toString()}")
+        Timber.d("Calling Execute with viewName $viewName, attributes $attributes and placeholders $placeholders")
 
         Rokt.execute(
             viewName,
@@ -20,9 +20,11 @@ object RoktExecutor {
             placeholders = placeholders,
             callback = object : Rokt.RoktCallback {
                 override fun onLoad() {
-                    Timber.d("%s%s",
+                    Timber.d(
+                        "%s%s",
                         "Widget loaded for viewName $viewName with attributes ",
-                        attributes.toString())
+                        attributes.toString()
+                    )
                 }
 
                 override fun onShouldHideLoadingIndicator() {

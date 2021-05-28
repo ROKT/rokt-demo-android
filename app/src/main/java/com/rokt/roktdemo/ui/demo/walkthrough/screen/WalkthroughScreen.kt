@@ -55,12 +55,14 @@ fun WalkthroughScreen(
             // TODO: Loading
         }
         state.hasData -> {
-            WalkthroughScreenContent(scroll,
+            WalkthroughScreenContent(
+                scroll,
                 state.data!!.title,
                 state.data!!.description,
                 state.data!!.isEmbedded,
                 viewModel::onEmbeddedWidgetAddedToView,
-                viewModel::onViewExampleButtonClicked)
+                viewModel::onViewExampleButtonClicked
+            )
         }
         else -> {
             GeneralError()

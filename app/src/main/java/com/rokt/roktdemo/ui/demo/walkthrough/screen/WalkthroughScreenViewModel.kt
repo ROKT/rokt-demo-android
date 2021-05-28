@@ -35,18 +35,20 @@ class WalkthroughScreenViewModel @Inject constructor(
                 if (library.succeeded) {
                     val screens = library.data().defaultPlacementsExamples.screens
                     screens[screenIndex].let { screen ->
-                        UiState(data = WalkthroughScreenState(
-                            screen.title,
-                            screen.description,
-                            screen.placeholderName,
-                            screen.attributes,
-                            screen.viewName,
-                            screen.type == ScreenType.Embedded))
+                        UiState(
+                            data = WalkthroughScreenState(
+                                screen.title,
+                                screen.description,
+                                screen.placeholderName,
+                                screen.attributes,
+                                screen.viewName,
+                                screen.type == ScreenType.Embedded
+                            )
+                        )
                     }
                 } else {
                     UiState(error = RoktDemoErrorTypes.GENERAL)
                 }
-
             }.collect {
                 _state.value = it
             }

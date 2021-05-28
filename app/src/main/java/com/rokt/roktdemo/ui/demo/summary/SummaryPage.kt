@@ -35,7 +35,6 @@ import com.rokt.roktdemo.ui.common.LargeSpace
 import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
 import com.rokt.roktdemo.ui.common.MediumSpace
 import com.rokt.roktdemo.ui.common.Title
-import com.rokt.roktdemo.ui.demo.DestinationType
 
 @Composable
 fun SummaryPage(
