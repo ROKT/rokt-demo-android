@@ -26,14 +26,16 @@ fun DemoPage(
 
     when {
         demoPage.value.loading -> {
-            //TODO: Loading
+            // TODO: Loading
         }
         demoPage.value.hasData -> {
-            DemoPageContent(navController,
+            DemoPageContent(
+                navController,
                 demoPage.value.data!!,
                 actions,
                 backPressed,
-                mainActivityViewModel)
+                mainActivityViewModel
+            )
         }
         else -> {
             GeneralError()
@@ -56,10 +58,12 @@ fun DemoPageContent(
 
         demoScreenState.items.forEach { item ->
             composable(DemoDestinations.SUMMARY + item.navAction) {
-                SummaryPage(backPressed,
+                SummaryPage(
+                    backPressed,
                     { actions.navigateToDemoDestination(item.navAction) },
                     mainActivityViewModel,
-                    item.summaryViewModel)
+                    item.summaryViewModel
+                )
             }
         }
 

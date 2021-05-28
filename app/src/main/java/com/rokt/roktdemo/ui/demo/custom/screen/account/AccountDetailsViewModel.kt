@@ -51,38 +51,40 @@ class AccountDetailsViewModel @Inject constructor(
                 validationState
             ) { id, name, placement1, placement2, validation ->
 
-                UiState(data = AccountDetailsViewState(
-                    accountId = createEditableField(
-                        text = id,
-                        onFieldEdited = {
-                            accountId.value = it
-                            onFieldEdited()
-                        },
-                        validation.fieldErrorMessage
-                    ),
-                    viewName = createEditableField(
-                        text = name,
-                        onFieldEdited = {
-                            viewName.value = it
-                            onFieldEdited()
-                        }
-                    ),
-                    placementLocation1 = createEditableField(
-                        text = placement1,
-                        onFieldEdited = {
-                            placementLocation1.value = it
-                            onFieldEdited()
-                        }
-                    ),
-                    placementLocation2 = createEditableField(
-                        text = placement2,
-                        onFieldEdited = {
-                            placementLocation2.value = it
-                            onFieldEdited()
-                        }
-                    ),
-                    formValidated = validationState.value.fieldStatus == ValidationStatus.VALID
-                ))
+                UiState(
+                    data = AccountDetailsViewState(
+                        accountId = createEditableField(
+                            text = id,
+                            onFieldEdited = {
+                                accountId.value = it
+                                onFieldEdited()
+                            },
+                            validation.fieldErrorMessage
+                        ),
+                        viewName = createEditableField(
+                            text = name,
+                            onFieldEdited = {
+                                viewName.value = it
+                                onFieldEdited()
+                            }
+                        ),
+                        placementLocation1 = createEditableField(
+                            text = placement1,
+                            onFieldEdited = {
+                                placementLocation1.value = it
+                                onFieldEdited()
+                            }
+                        ),
+                        placementLocation2 = createEditableField(
+                            text = placement2,
+                            onFieldEdited = {
+                                placementLocation2.value = it
+                                onFieldEdited()
+                            }
+                        ),
+                        formValidated = validationState.value.fieldStatus == ValidationStatus.VALID
+                    )
+                )
             }.collect {
                 _state.value = it
             }
@@ -97,7 +99,7 @@ class AccountDetailsViewModel @Inject constructor(
                 viewName.value = accountDetails.viewName
                 placementLocation1.value = accountDetails.placementLocation1
                 placementLocation2.value = accountDetails.placementLocation2
-            }else {
+            } else {
                 _state.value = UiState(error = RoktDemoErrorTypes.GENERAL)
             }
         }

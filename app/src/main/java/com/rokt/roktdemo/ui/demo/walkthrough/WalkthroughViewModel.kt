@@ -32,8 +32,11 @@ class WalkthroughViewModel @Inject constructor(demoLibraryRepository: DemoLibrar
 
             combine(selectedIndex, demoLibraryRepository.getDemoLibrary()) { index, result ->
                 if (result.succeeded) {
-                    UiState(data = getWalkthroughPage(result.data().defaultPlacementsExamples.screens.count(),
-                        index)
+                    UiState(
+                        data = getWalkthroughPage(
+                            result.data().defaultPlacementsExamples.screens.count(),
+                            index
+                        )
                     )
                 } else {
                     UiState(error = RoktDemoErrorTypes.GENERAL)
@@ -66,7 +69,7 @@ class WalkthroughViewModel @Inject constructor(demoLibraryRepository: DemoLibrar
     internal fun getCounterText(screenCount: Int, index: Int): String {
         return when {
             screenCount < 1 -> ""
-            index == screenCount -> "${index}/$screenCount"
+            index == screenCount -> "$index/$screenCount"
             else -> "${index + 1}/$screenCount"
         }
     }
@@ -92,4 +95,3 @@ data class WalkThroughPageState(
     val screenCounterText: String = "",
     val navButtonText: String = "",
 )
-

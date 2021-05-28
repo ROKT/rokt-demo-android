@@ -50,11 +50,13 @@ fun AccountDetailsScreen(
             // TODO: Loading
         }
         state.value.hasData -> {
-            AccountDetailsSuccess(state.value.data!!,
+            AccountDetailsSuccess(
+                state.value.data!!,
                 scroll,
                 parentViewModel,
                 viewModel,
-                navigateToNextScreen)
+                navigateToNextScreen
+            )
         }
         else -> {
             GeneralError()

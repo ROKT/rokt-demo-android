@@ -22,22 +22,30 @@ import com.rokt.roktdemo.ui.common.XSmallSpace
 
 @Composable
 fun GeneralError() {
-    Box(Modifier
-        .fillMaxSize(),
-        contentAlignment = Alignment.Center) {
+    Box(
+        Modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
         RoktBackground()
-        Column(Modifier
-            .fillMaxWidth()
-            .padding(24.dp),
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center) {
-            Image(painter = painterResource(id = R.drawable.ic_error),
-                contentDescription = stringResource(R.string.content_description_error_icon))
+            verticalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_error),
+                contentDescription = stringResource(R.string.content_description_error_icon)
+            )
             XSmallSpace()
             Title(stringResource(R.string.error_title_text), textAlign = TextAlign.Center)
             XSmallSpace()
-            ContentText(text = stringResource(R.string.error_message_text),
-                textAlign = TextAlign.Center)
+            ContentText(
+                text = stringResource(R.string.error_message_text),
+                textAlign = TextAlign.Center
+            )
         }
     }
 }
