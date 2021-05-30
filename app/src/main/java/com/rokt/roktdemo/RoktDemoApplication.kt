@@ -2,9 +2,8 @@ package com.rokt.roktdemo
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
-import timber.log.Timber.DebugTree
-
 import timber.log.Timber
+import timber.log.Timber.DebugTree
 
 @HiltAndroidApp
 class RoktDemoApplication : Application() {

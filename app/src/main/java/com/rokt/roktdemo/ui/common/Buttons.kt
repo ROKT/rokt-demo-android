@@ -71,7 +71,7 @@ fun ButtonText(text: String) {
 }
 
 @Composable
-fun BackButton(backPressed: () -> Unit, tintColor : Color = Color.White) {
+fun BackButton(backPressed: () -> Unit, tintColor: Color = Color.White) {
     IconButton(onClick = { backPressed.invoke() }) {
         Icon(
             painter = painterResource(id = R.drawable.ic_back),

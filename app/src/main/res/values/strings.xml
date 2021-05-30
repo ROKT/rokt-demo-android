@@ -68,5 +68,8 @@
     <string name="content_description_tick_icon">Tick Icon</string>
     <string name="confirmation_heading_text">Thank you John Smith!</string>
     <string name="text_order_numbr">Order #MH123456</string>
+    <string name="content_description_error_icon">Error Icon</string>
+    <string name="error_title_text">Our systems aren\'t responding right now.</string>
+    <string name="error_message_text">Please close the app and try again. If the issue persists please contact us at www.rokt.com or try again later.</string>
 
 </resources>

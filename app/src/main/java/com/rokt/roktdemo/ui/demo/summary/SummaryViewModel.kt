@@ -1,44 +1,59 @@
 package com.rokt.roktdemo.ui.demo.summary
 
 import androidx.lifecycle.ViewModel
-import com.rokt.roktdemo.data.library.DemoLibraryRepository
+import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.ui.demo.DestinationType
 import com.rokt.roktdemo.ui.demo.DestinationType.CUSTOM_CHECKOUT
 import com.rokt.roktdemo.ui.demo.DestinationType.FEATURE_WALKTHROUGH
 import com.rokt.roktdemo.ui.demo.getDisclaimer
 import com.rokt.roktdemo.ui.demo.getImageResource
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 
-@HiltViewModel
-class SummaryViewModel @Inject constructor(private val demoLibraryRepository: DemoLibraryRepository) :
-    ViewModel() {
+class SummaryViewModel constructor(
+    demoLibrary: DemoLibrary,
+    destinationType: DestinationType,
+) : ViewModel() {
+    val state = getSummaryPageState(destinationType, demoLibrary)
+}
 
-    fun getSummaryPageState(destinationType: DestinationType): SummaryPageState? {
-        return when (destinationType.value) {
-            FEATURE_WALKTHROUGH.value -> {
-                val demoLibraryItem =
-                    demoLibraryRepository.getDemoLibrary().defaultPlacementsExamples
-                SummaryPageState(
-                    demoLibraryItem.title,
-                    demoLibraryItem.longDescription,
-                    destinationType.getDisclaimer(),
-                    destinationType.getImageResource(),
-                    demoLibraryItem.tagId
-                )
-            }
-            CUSTOM_CHECKOUT.value -> {
-                val demoLibraryItem =
-                    demoLibraryRepository.getDemoLibrary().customCustomConfigurationPage
-                SummaryPageState(
-                    demoLibraryItem.title,
-                    demoLibraryItem.longDescription,
-                    destinationType.getDisclaimer(),
-                    destinationType.getImageResource(),
-                    demoLibraryItem.accountDetails.accountId
-                )
-            }
-            else -> null // TODO: Predefined Screens
+private fun getSummaryPageState(
+    destinationType: DestinationType,
+    demoLibrary: DemoLibrary,
+): SummaryPageState {
+
+    return when (destinationType.value) {
+        FEATURE_WALKTHROUGH.value -> {
+            val demoLibraryItem =
+                demoLibrary.defaultPlacementsExamples
+            SummaryPageState(
+                demoLibraryItem.title,
+                demoLibraryItem.longDescription,
+                destinationType.getDisclaimer(),
+                destinationType.getImageResource(),
+                demoLibraryItem.tagId
+            )
+        }
+        CUSTOM_CHECKOUT.value -> {
+            val demoLibraryItem =
+                demoLibrary.customCustomConfigurationPage
+            SummaryPageState(
+                demoLibraryItem.title,
+                demoLibraryItem.longDescription,
+                destinationType.getDisclaimer(),
+                destinationType.getImageResource(),
+                demoLibraryItem.accountDetails.accountId
+            )
+        }
+        else -> {
+            // TODO: Confirmation pages
+            val demoLibraryItem =
+                demoLibrary.defaultPlacementsExamples
+            SummaryPageState(
+                demoLibraryItem.title,
+                demoLibraryItem.longDescription,
+                destinationType.getDisclaimer(),
+                destinationType.getImageResource(),
+                demoLibraryItem.tagId
+            )
         }
     }
 }
@@ -48,5 +63,5 @@ data class SummaryPageState(
     val longDescription: String,
     val disclaimerText: String,
     val drawableResourceId: Int,
-    val selectedTagId: String
+    val selectedTagId: String,
 )

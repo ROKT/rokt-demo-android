@@ -1,5 +1,7 @@
 package com.rokt.roktdemo.data.library
 
+import androidx.annotation.VisibleForTesting
+import com.rokt.roktdemo.data.Result
 import com.rokt.roktdemo.model.AccountDetails
 import com.rokt.roktdemo.model.CustomConfigurationPage
 import com.rokt.roktdemo.model.CustomerDetails
@@ -8,6 +10,8 @@ import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.model.PredefinedScreen
 import com.rokt.roktdemo.model.Screen
 import com.rokt.roktdemo.model.ScreenType
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class DemoLibraryRepositoryMockImpl : DemoLibraryRepository {
     val DEMO_LIB_TITLE = "Demo Library"
@@ -129,7 +133,8 @@ On Android devices, the overlay placements can be configured as a “full-screen
     val PREDEFINED_DESC_SHORT_3 =
         "View a demonstration of how Gumtree has integrated in-app Rokt technology into their post-listing confirmation page. \n"
 
-    override fun getDemoLibrary(): DemoLibrary {
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun getDemoLibraryMocked(): DemoLibrary {
         return DemoLibrary(
             DEMO_LIB_TITLE, DEMO_LIB_DESC,
             defaultPlacementExamples,
@@ -138,5 +143,9 @@ On Android devices, the overlay placements can be configured as a “full-screen
             PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_2, ""),
             PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_3, "")
         )
+    }
+
+    override suspend fun getDemoLibrary(): Flow<Result.Success<DemoLibrary>> = flow {
+        emit(Result.Success(getDemoLibraryMocked()))
     }
 }

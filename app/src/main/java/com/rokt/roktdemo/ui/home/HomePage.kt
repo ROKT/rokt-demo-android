@@ -34,6 +34,7 @@ import com.rokt.roktdemo.ui.common.DEFAULT_SPACE
 import com.rokt.roktdemo.ui.common.DefaultSpace
 import com.rokt.roktdemo.ui.common.LARGE_SPACE
 import com.rokt.roktdemo.ui.common.LargeSpace
+import com.rokt.roktdemo.ui.common.RoktBackground
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
@@ -70,11 +71,7 @@ private fun HomeLogo() {
             .fillMaxWidth()
             .fillMaxHeight(0.6F)
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_home_background),
-            contentDescription = stringResource(R.string.content_description_rokt_bg),
-            contentScale = ContentScale.FillBounds
-        )
+        RoktBackground()
 
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -125,7 +122,10 @@ private fun HomeButtons(viewModel: HomeViewModel, actions: MainActions) {
         DefaultSpace()
         ButtonLight(
             text = stringResource(R.string.menu_button_contact),
-            onClick = { viewModel.contactUsClicked(context) })
+            onClick = {
+                viewModel.contactUsClicked(context)
+            }
+        )
     }
 }
 

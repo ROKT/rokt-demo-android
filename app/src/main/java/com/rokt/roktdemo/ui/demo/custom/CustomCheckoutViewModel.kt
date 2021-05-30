@@ -30,7 +30,8 @@ class CustomCheckoutViewModel @Inject constructor(private val roktExecutor: Rokt
             accountId = accountId,
             viewName = viewName,
             placementLocation1 = placementLocation1,
-            placementLocation2 = placementLocation2)
+            placementLocation2 = placementLocation2
+        )
     }
 
     fun onCustomerDetailsSubmitted(attributes: Map<String, String>) {
@@ -38,7 +39,8 @@ class CustomCheckoutViewModel @Inject constructor(private val roktExecutor: Rokt
     }
 
     fun onEmbeddedWidgetAddedToView(widget: WeakReference<Widget>) {
-        roktExecutor.executeRokt(viewName = state.viewName,
+        roktExecutor.executeRokt(
+            viewName = state.viewName,
             state.attributes,
             hashMapOf(state.placementLocation1 to widget)
         )

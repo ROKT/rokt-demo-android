@@ -28,7 +28,7 @@ class AccountDetailsViewModelTest {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
                 .isEqualTo(true)
         }
     }
@@ -39,7 +39,7 @@ class AccountDetailsViewModelTest {
             val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.INVALID)
 
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
                 .isEqualTo(false)
         }
     }
@@ -49,10 +49,10 @@ class AccountDetailsViewModelTest {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
                 .isEqualTo(true)
             accountDetailsViewModel.onNavigatedAway()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
                 .isEqualTo(false)
         }
     }
@@ -62,10 +62,10 @@ class AccountDetailsViewModelTest {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
                 .isEqualTo(true)
             accountDetailsViewModel.onFieldEdited()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
                 .isEqualTo(false)
         }
     }

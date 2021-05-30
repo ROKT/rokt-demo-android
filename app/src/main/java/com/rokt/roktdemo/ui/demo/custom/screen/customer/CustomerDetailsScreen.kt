@@ -43,6 +43,7 @@ import com.rokt.roktdemo.ui.common.XSmallSpace
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutViewModel
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableFieldSet
+import com.rokt.roktdemo.ui.demo.error.GeneralError
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
@@ -57,17 +58,29 @@ fun CustomerDetailsScreen(
         customCheckoutViewModel.onCustomerDetailsSubmitted(viewModel.getCustomerDetails())
         navigateToNextScreen.invoke()
     }
-    CustomerDetailsScreenContent(
-        scroll,
-        state.value.showAdvancedOptions,
-        state.value.advancedOptions,
-        viewModel::onToggleAdvancedOptions,
-        launchDemoButtonPressed::invoke,
-        state.value.selectedCountry,
-        viewModel::onCountrySelected,
-        state.value.selectedState,
-        state.value.postcode
-    )
+
+    when {
+        state.value.loading -> {
+            // TODO: Loading state
+        }
+        state.value.hasData -> {
+            val data = state.value.data!!
+            CustomerDetailsScreenContent(
+                scroll,
+                data.showAdvancedOptions,
+                data.advancedOptions,
+                viewModel::onToggleAdvancedOptions,
+                launchDemoButtonPressed::invoke,
+                data.selectedCountry,
+                viewModel::onCountrySelected,
+                data.selectedState,
+                data.postcode
+            )
+        }
+        else -> {
+            GeneralError()
+        }
+    }
 }
 
 @Composable
