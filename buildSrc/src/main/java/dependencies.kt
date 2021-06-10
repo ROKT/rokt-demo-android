@@ -5,7 +5,7 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-alpha15"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.1.0-alpha02"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
     const val rokt = "com.rokt:roktsdk:3.5.2-alpha.1153"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
@@ -59,7 +59,7 @@ object Libs {
     }
 
     object Hilt {
-        private const val version = "2.31.2-alpha"
+        private const val version = "2.36"
 
         const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val android = "com.google.dagger:hilt-android:$version"
