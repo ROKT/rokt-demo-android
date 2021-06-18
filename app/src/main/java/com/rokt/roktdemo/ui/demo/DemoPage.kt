@@ -10,7 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutPage
-import com.rokt.roktdemo.ui.demo.error.GeneralError
+import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.demo.summary.SummaryPage
 import com.rokt.roktdemo.ui.demo.walkthrough.WalkthroughPage
 
@@ -38,7 +38,7 @@ fun DemoPage(
             )
         }
         else -> {
-            GeneralError()
+            RoktError(errorType = demoPage.value.error)
         }
     }
 }

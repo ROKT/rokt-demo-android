@@ -11,3 +11,7 @@ val Result<*>.succeeded
 fun <T> Result<T>.data(): T {
     return (this as Result.Success<T>).data
 }
+
+fun <T> Result<T>.exception(): Exception {
+    return (this as Result.Error).exception
+}
