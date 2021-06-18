@@ -19,9 +19,19 @@ import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.RoktBackground
 import com.rokt.roktdemo.ui.common.Title
 import com.rokt.roktdemo.ui.common.XSmallSpace
+import com.rokt.roktdemo.ui.state.RoktDemoErrorTypes
 
 @Composable
-fun GeneralError() {
+fun RoktError(errorType: RoktDemoErrorTypes?) {
+    if (errorType == RoktDemoErrorTypes.NETWORK) {
+        NetworkError()
+    } else {
+        GeneralError()
+    }
+}
+
+@Composable
+private fun GeneralError() {
     Box(
         Modifier
             .fillMaxSize(),
@@ -46,6 +56,31 @@ fun GeneralError() {
                 text = stringResource(R.string.error_message_text),
                 textAlign = TextAlign.Center
             )
+        }
+    }
+}
+
+@Composable
+private fun NetworkError() {
+    Box(
+        Modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        RoktBackground()
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_error),
+                contentDescription = stringResource(R.string.content_description_error_icon)
+            )
+            XSmallSpace()
+            Title(stringResource(R.string.network_error_title_text), textAlign = TextAlign.Center)
         }
     }
 }

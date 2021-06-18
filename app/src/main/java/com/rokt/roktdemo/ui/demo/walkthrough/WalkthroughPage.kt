@@ -23,7 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.HeaderTextButton
 import com.rokt.roktdemo.ui.common.RoktHeader
-import com.rokt.roktdemo.ui.demo.error.GeneralError
+import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.demo.walkthrough.screen.WalkthroughScreen
 
 @Composable
@@ -65,7 +65,7 @@ fun WalkthroughPage(
             )
         }
         else -> {
-            GeneralError()
+            RoktError(errorType = state.error)
         }
     }
 }

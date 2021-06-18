@@ -43,7 +43,7 @@ import com.rokt.roktdemo.ui.common.XSmallSpace
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutViewModel
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableFieldSet
-import com.rokt.roktdemo.ui.demo.error.GeneralError
+import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
@@ -78,7 +78,7 @@ fun CustomerDetailsScreen(
             )
         }
         else -> {
-            GeneralError()
+            RoktError(errorType = state.value.error)
         }
     }
 }

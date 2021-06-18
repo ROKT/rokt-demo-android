@@ -145,7 +145,7 @@ On Android devices, the overlay placements can be configured as a “full-screen
         )
     }
 
-    override suspend fun getDemoLibrary(): Flow<Result.Success<DemoLibrary>> = flow {
+    override suspend fun getDemoLibrary(): Flow<Result<DemoLibrary>> = flow {
         emit(Result.Success(getDemoLibraryMocked()))
     }
 }

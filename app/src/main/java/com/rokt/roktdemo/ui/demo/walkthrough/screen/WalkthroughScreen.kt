@@ -36,7 +36,7 @@ import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
 import com.rokt.roktdemo.ui.common.ScreenHeader
 import com.rokt.roktdemo.ui.common.SmallSpace
 import com.rokt.roktdemo.ui.common.SubHeading
-import com.rokt.roktdemo.ui.demo.error.GeneralError
+import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktsdk.Widget
 import java.lang.ref.WeakReference
 
@@ -65,7 +65,7 @@ fun WalkthroughScreen(
             )
         }
         else -> {
-            GeneralError()
+            RoktError(errorType = state.error)
         }
     }
 }
