@@ -1,8 +1,10 @@
 package com.rokt.roktdemo.ui.demo
 
+import android.accounts.NetworkErrorException
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rokt.roktdemo.data.data
+import com.rokt.roktdemo.data.exception
 import com.rokt.roktdemo.data.library.DemoLibraryRepository
 import com.rokt.roktdemo.data.succeeded
 import com.rokt.roktdemo.model.DemoLibrary
@@ -34,12 +36,19 @@ class DemoViewModel @Inject constructor(private val demoLibraryRepository: DemoL
         _state.value = UiState(loading = true)
         demoLibraryRepository.getDemoLibrary().collect { result ->
             if (result.succeeded) {
-                val library = result.data()
-                _state.value = getSuccessState(library)
+                _state.value = getSuccessState(result.data())
             } else {
-                _state.value = UiState(error = RoktDemoErrorTypes.GENERAL)
+                _state.value = UiState(error = result.exception().getErrorType())
             }
         }
+    }
+}
+
+fun Exception.getErrorType(): RoktDemoErrorTypes {
+    return if (this is NetworkErrorException) {
+        RoktDemoErrorTypes.NETWORK
+    } else {
+        RoktDemoErrorTypes.GENERAL
     }
 }
 

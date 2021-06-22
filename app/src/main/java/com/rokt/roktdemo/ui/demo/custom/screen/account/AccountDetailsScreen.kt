@@ -31,7 +31,7 @@ import com.rokt.roktdemo.ui.common.SmallSpace
 import com.rokt.roktdemo.ui.common.XSmallSpace
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutViewModel
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
-import com.rokt.roktdemo.ui.demo.error.GeneralError
+import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.theme.RoktColors.ErrorColor
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
@@ -59,7 +59,7 @@ fun AccountDetailsScreen(
             )
         }
         else -> {
-            GeneralError()
+            RoktError(errorType = state.value.error)
         }
     }
 }
