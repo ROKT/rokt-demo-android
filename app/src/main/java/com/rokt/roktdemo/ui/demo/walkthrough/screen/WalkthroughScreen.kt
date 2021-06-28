@@ -26,12 +26,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.ButtonText
 import com.rokt.roktdemo.ui.common.ContentText
+import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
 import com.rokt.roktdemo.ui.common.ScreenHeader
 import com.rokt.roktdemo.ui.common.SmallSpace
@@ -43,7 +44,7 @@ import java.lang.ref.WeakReference
 @Composable
 fun WalkthroughScreen(
     screenIndex: Int,
-    viewModel: WalkthroughScreenViewModel = hiltNavGraphViewModel(),
+    viewModel: WalkthroughScreenViewModel = hiltViewModel(),
 ) {
     viewModel.setScreenIndex(screenIndex)
 
@@ -52,7 +53,7 @@ fun WalkthroughScreen(
 
     when {
         state.loading -> {
-            // TODO: Loading
+            LoadingPage()
         }
         state.hasData -> {
             WalkthroughScreenContent(

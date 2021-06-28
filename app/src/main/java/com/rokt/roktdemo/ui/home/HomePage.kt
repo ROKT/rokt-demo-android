@@ -24,7 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.rokt.roktdemo.BuildConfig
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.MainActions
@@ -39,7 +39,7 @@ import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
 fun HomePage(actions: MainActions) {
-    val viewModel: HomeViewModel = hiltNavGraphViewModel()
+    val viewModel: HomeViewModel = hiltViewModel()
 
     Box(
         modifier = Modifier

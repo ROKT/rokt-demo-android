@@ -8,12 +8,11 @@ import java.lang.ref.WeakReference
 object RoktExecutor {
     fun executeRokt(
         viewName: String,
-        attributes: Map<String, String>?,
-        placeholders: Map<String, WeakReference<Widget>>?,
+        attributes: HashMap<String, String>?,
+        placeholders: HashMap<String, WeakReference<Widget>>?,
     ) {
 
         Timber.d("Calling Execute with viewName $viewName, attributes $attributes and placeholders $placeholders")
-
         Rokt.execute(
             viewName,
             attributes,

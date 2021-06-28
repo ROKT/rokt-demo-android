@@ -3,12 +3,13 @@ package com.rokt.roktdemo.ui.demo
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rokt.roktdemo.MainActivityViewModel
+import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutPage
 import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.demo.summary.SummaryPage
@@ -18,27 +19,27 @@ import com.rokt.roktdemo.ui.demo.walkthrough.WalkthroughPage
 fun DemoPage(
     backPressed: () -> Unit,
     mainActivityViewModel: MainActivityViewModel,
-    viewModel: DemoViewModel = hiltNavGraphViewModel(),
+    viewModel: DemoViewModel = hiltViewModel(),
 ) {
-    val demoPage = viewModel.state.collectAsState()
+    val demoPage = viewModel.state.collectAsState().value
     val navController = rememberNavController()
     val actions = remember(navController) { DemoActions(navController) }
 
     when {
-        demoPage.value.loading -> {
-            // TODO: Loading
+        demoPage.loading -> {
+            LoadingPage()
         }
-        demoPage.value.hasData -> {
+        demoPage.hasData -> {
             DemoPageContent(
                 navController,
-                demoPage.value.data!!,
+                demoPage.data!!,
                 actions,
                 backPressed,
                 mainActivityViewModel
             )
         }
         else -> {
-            RoktError(errorType = demoPage.value.error)
+            RoktError(errorType = demoPage.error)
         }
     }
 }

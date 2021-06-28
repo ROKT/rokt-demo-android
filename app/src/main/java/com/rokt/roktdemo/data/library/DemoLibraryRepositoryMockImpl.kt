@@ -7,7 +7,6 @@ import com.rokt.roktdemo.model.CustomConfigurationPage
 import com.rokt.roktdemo.model.CustomerDetails
 import com.rokt.roktdemo.model.DefaultPlacements
 import com.rokt.roktdemo.model.DemoLibrary
-import com.rokt.roktdemo.model.PredefinedScreen
 import com.rokt.roktdemo.model.Screen
 import com.rokt.roktdemo.model.ScreenType
 import kotlinx.coroutines.flow.Flow
@@ -33,13 +32,7 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
         "The below preview shows an embedded placement with brand logos displayed. You can progress through the offers by clicking “Yes Please” or “No Thanks”. \n\nThe Rokt placement powers traffic, email, phone and, app install campaigns. Opting-in to a traffic or app install campaign will direct the customer to a landing page in either an in-app webview, the associated app or app store.\n"
 
     val SCREEN_DESC_3 =
-        """Click “View Example” to preview a Rokt overlay placement. You can progress through the offers by clicking “Yes Please” or “No Thanks”. 
-
-On iOS devices, the overlay placement follows Apple’s best practice automatic presentation style for overlays. 
-
-On Android devices, the overlay placements can be configured as a “full-screen overlay” or a “lightbox overlay” with a transparent background.
-"""
-    val SCREEN_TYPE_NAME_2 = ""
+        "Click “View Example” to preview a Rokt overlay placement. You can progress through the offers by clicking “Yes Please” or “No Thanks”. \n\nOn iOS devices, the overlay placement follows Apple’s best practice automatic presentation style for overlays. \n\nOn Android devices, the overlay placements can be configured as a “full-screen overlay” or a “lightbox overlay” with a transparent background.\n"
 
     val attributes1 = hashMapOf(
         Pair("name", "Roktstar"),
@@ -113,7 +106,7 @@ On Android devices, the overlay placements can be configured as a “full-screen
             CUSTOM_CONFIG_LOC_1,
             CUSTOM_CONFIG_LOC_2
         ),
-        CustomerDetails("Australia", "NSW", "2000"),
+        CustomerDetails("NSW", "2000", country = listOf("AU", "UK", "US")),
         hashMapOf(
             "experience" to "true",
             "majorCat" to "true",
@@ -122,8 +115,7 @@ On Android devices, the overlay placements can be configured as a “full-screen
     )
 
     val PREDEFINED_TITLE_1 = "Confirmation Page"
-    val PREDEFINED_DESC_SHORT_1 =
-        "View a demonstration of how Groupon has integrated in-app Rokt technology into their post-purchase confirmation page. "
+    val PREDEFINED_DESC_SHORT_1 = "View a demonstration of how Groupon has integrated in-app Rokt technology into their post-purchase confirmation page. "
 
     val PREDEFINED_TITLE_2 = "Confirmation Page"
     val PREDEFINED_DESC_SHORT_2 =
@@ -139,9 +131,9 @@ On Android devices, the overlay placements can be configured as a “full-screen
             DEMO_LIB_TITLE, DEMO_LIB_DESC,
             defaultPlacementExamples,
             customConfigurationPage,
-            PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_1, ""),
-            PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_2, ""),
-            PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_3, "")
+//            PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_1, ""),
+//            PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_2, ""),
+//            PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_3, "")
         )
     }
 

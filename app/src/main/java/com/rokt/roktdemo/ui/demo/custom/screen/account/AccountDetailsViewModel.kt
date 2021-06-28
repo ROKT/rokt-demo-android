@@ -94,8 +94,8 @@ class AccountDetailsViewModel @Inject constructor(
     private suspend fun loadDemoLibrary() {
         repository.getDemoLibrary().collect {
             if (it.succeeded) {
-                val accountDetails = it.data().customCustomConfigurationPage.accountDetails
-                accountId.value = accountDetails.accountId
+                val accountDetails = it.data().customConfigurationPage.accountDetails
+                accountId.value = accountDetails.accountID
                 viewName.value = accountDetails.viewName
                 placementLocation1.value = accountDetails.placementLocation1
                 placementLocation2.value = accountDetails.placementLocation2

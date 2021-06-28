@@ -34,7 +34,7 @@ class CustomerDetailsViewModel @Inject constructor(
     private val selectedCountry = MutableStateFlow("")
     private val selectedState = MutableStateFlow("")
     private val selectedPostcode = MutableStateFlow("")
-
+    private var countryList = listOf<String>()
     private val advancedDetailsList: MutableStateFlow<List<Pair<String, String>>> =
         MutableStateFlow(listOf())
 
@@ -47,11 +47,12 @@ class CustomerDetailsViewModel @Inject constructor(
 
             demoLibrary.collect {
                 if (it.succeeded) {
-                    with(it.data().customCustomConfigurationPage) {
-                        selectedCountry.value = this.customerDetails.country
+                    with(it.data().customConfigurationPage) {
+                        selectedCountry.value = Companion.DEFAULT_COUNTRY
                         selectedPostcode.value = this.customerDetails.postcode
                         selectedState.value = this.customerDetails.state
                         advancedDetailsList.value = this.advancedDetails.toList()
+                        countryList = this.customerDetails.country
                     }
                 }
             }
@@ -81,6 +82,7 @@ class CustomerDetailsViewModel @Inject constructor(
                     data = CustomerDetailsScreenState(
                         showAdvanced,
                         country,
+                        countryList,
                         createEditableField(
                             state,
                             {
@@ -137,11 +139,16 @@ class CustomerDetailsViewModel @Inject constructor(
         }
         return hashMapOf()
     }
+
+    companion object {
+        private const val DEFAULT_COUNTRY = "AU"
+    }
 }
 
 data class CustomerDetailsScreenState(
     val showAdvancedOptions: Boolean = false,
     val selectedCountry: String = "",
+    val countryList: List<String> = listOf(),
     val selectedState: EditableField = EditableField(),
     val postcode: EditableField = EditableField(),
     val advancedOptions: List<EditableFieldSet> = listOf(),

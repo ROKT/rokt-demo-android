@@ -78,7 +78,7 @@ data class WalkthroughScreenState(
     val title: String = "",
     val description: String = "",
     val placeholderName: String = "",
-    val attributes: Map<String, String> = hashMapOf(),
+    val attributes: HashMap<String, String> = hashMapOf(),
     val viewName: String = "",
     val isEmbedded: Boolean = false,
 )

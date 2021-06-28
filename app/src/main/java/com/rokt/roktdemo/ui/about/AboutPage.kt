@@ -15,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -25,7 +26,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.google.accompanist.coil.rememberCoilPainter
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.model.AboutContent
 import com.rokt.roktdemo.model.AboutLink
@@ -36,6 +38,8 @@ import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.DefaultSpace
 import com.rokt.roktdemo.ui.common.Heading
 import com.rokt.roktdemo.ui.common.LargeSpace
+import com.rokt.roktdemo.ui.common.LoadingPage
+import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.theme.RoktColors
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
@@ -43,8 +47,8 @@ private const val FIXED_HEADER_HEIGHT = 70 // The non scrolling top bar height
 private const val HEADER_TOP_PADDING = 50 // How far from the top the header items sit
 
 @Composable
-fun AboutPage(backPressed: () -> Unit, viewModel: AboutViewModel = hiltNavGraphViewModel()) {
-    val aboutPageContent = viewModel.getAboutPage()
+fun AboutPage(backPressed: () -> Unit, viewModel: AboutViewModel = hiltViewModel()) {
+    val state = viewModel.state.collectAsState()
     val scroll = rememberScrollState(0)
 
     Box(
@@ -52,8 +56,18 @@ fun AboutPage(backPressed: () -> Unit, viewModel: AboutViewModel = hiltNavGraphV
             .fillMaxSize()
     ) {
 
-        AboutPageContent(scroll, aboutPageContent, viewModel)
-        StickyHeader(backPressed)
+        when {
+            state.value.loading -> {
+                LoadingPage()
+            }
+            state.value.hasData -> {
+                AboutPageContent(scroll, state.value.data!!, viewModel)
+                StickyHeader(backPressed)
+            }
+            else -> {
+                RoktError(errorType = state.value.error)
+            }
+        }
     }
 }
 
@@ -72,7 +86,7 @@ private fun AboutPageContent(
         Header()
 
         Column(Modifier.padding(24.dp)) {
-            Contents(aboutPageContent.content)
+            Contents(aboutPageContent.contents)
             DefaultSpace()
             Links(aboutPageContent.links, viewModel = viewModel)
         }
@@ -85,11 +99,12 @@ private fun AboutPageContent(
 private fun Contents(content: List<AboutContent>) {
     content.forEach {
         Column {
-            it.imageUrl?.let {
-                //  TODO: Get image from server once available
+            it.imageUrl?.let { imageUrl ->
                 Image(
-                    painter = painterResource(id = R.drawable.header_about),
-                    contentDescription = "content image",
+                    painter = rememberCoilPainter(
+                        request = imageUrl
+                    ),
+                    contentDescription = it.title,
                     modifier = Modifier.fillMaxWidth()
                 )
 

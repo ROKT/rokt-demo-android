@@ -1,7 +1,6 @@
 package com.rokt.roktdemo.ui.demo.custom
 
 import androidx.navigation.NavController
-import androidx.navigation.compose.navigate
 
 /**
  * Destinations in the Custom Checkout page.

@@ -77,7 +77,7 @@ class CustomerDetailsViewmodelTest {
             val expectedMap = hashMapOf("country" to "Australia")
 
             repositoryMockImpl.getDemoLibrary().collect {
-                it.data().customCustomConfigurationPage.advancedDetails.toList()
+                it.data().customConfigurationPage.advancedDetails.toList()
                     .forEachIndexed { index, pair ->
                         val newKey = "key$index"
                         val newValue = "value$index"

@@ -15,13 +15,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.HeaderTextButton
+import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.common.RoktHeader
 import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.demo.walkthrough.screen.WalkthroughScreen
@@ -29,14 +30,14 @@ import com.rokt.roktdemo.ui.demo.walkthrough.screen.WalkthroughScreen
 @Composable
 fun WalkthroughPage(
     onBackPressed: () -> Unit,
-    viewModel: WalkthroughViewModel = hiltNavGraphViewModel(),
+    viewModel: WalkthroughViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsState()
     val navController = rememberNavController()
 
     when {
         state.loading -> {
-            // TODO: Loading
+            LoadingPage()
         }
         state.hasData -> {
             val data = state.data!!

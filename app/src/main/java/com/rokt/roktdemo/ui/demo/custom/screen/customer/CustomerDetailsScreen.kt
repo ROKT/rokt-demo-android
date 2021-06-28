@@ -29,13 +29,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.systemBarsPadding
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.ButtonDark
 import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.DropDownList
 import com.rokt.roktdemo.ui.common.HeaderTextButton
+import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.common.RoktTextField
 import com.rokt.roktdemo.ui.common.ScreenHeader
 import com.rokt.roktdemo.ui.common.SmallSpace
@@ -52,7 +53,7 @@ fun CustomerDetailsScreen(
     navigateToNextScreen: () -> Unit,
 ) {
     val scroll = rememberScrollState(0)
-    val viewModel: CustomerDetailsViewModel = hiltNavGraphViewModel()
+    val viewModel: CustomerDetailsViewModel = hiltViewModel()
     val state = viewModel.state.collectAsState()
     val launchDemoButtonPressed = {
         customCheckoutViewModel.onCustomerDetailsSubmitted(viewModel.getCustomerDetails())
@@ -61,7 +62,7 @@ fun CustomerDetailsScreen(
 
     when {
         state.value.loading -> {
-            // TODO: Loading state
+            LoadingPage()
         }
         state.value.hasData -> {
             val data = state.value.data!!
@@ -74,7 +75,8 @@ fun CustomerDetailsScreen(
                 data.selectedCountry,
                 viewModel::onCountrySelected,
                 data.selectedState,
-                data.postcode
+                data.postcode,
+                data.countryList
             )
         }
         else -> {
@@ -94,6 +96,7 @@ private fun CustomerDetailsScreenContent(
     onCountrySelected: (String) -> Unit,
     selectedState: EditableField,
     postcode: EditableField,
+    countryList: List<String>,
 ) {
     Column(
         Modifier
@@ -112,7 +115,7 @@ private fun CustomerDetailsScreenContent(
         SmallSpace()
         ContentText(stringResource(R.string.customer_details_screen_description))
         XSmallSpace()
-        CountrySelection(selectedCountry, onCountrySelected)
+        CountrySelection(countryList, selectedCountry, onCountrySelected)
         RoktTextField(
             stringResource(R.string.textfield_label_state),
             selectedState.text,
@@ -135,12 +138,11 @@ private fun CustomerDetailsScreenContent(
 }
 
 @Composable
-private fun CountrySelection(selectedCountry: String, onCountrySelected: (String) -> Unit) {
-    // TODO: Confirm predefined list
-    val countryList = listOf(
-        "United states",
-        "Australia"
-    )
+private fun CountrySelection(
+    countryList: List<String>,
+    selectedCountry: String,
+    onCountrySelected: (String) -> Unit
+) {
     val isOpen = remember { mutableStateOf(false) } // initial value
     val openCloseOfDropDownList: (Boolean) -> Unit = {
         isOpen.value = it

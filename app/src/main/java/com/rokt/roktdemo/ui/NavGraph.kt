@@ -1,7 +1,6 @@
 package com.rokt.roktdemo.ui
 
 import androidx.navigation.NavController
-import androidx.navigation.compose.navigate
 
 /**
  * Destinations used in RoktDemo app.
