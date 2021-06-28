@@ -26,7 +26,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.coil.rememberCoilPainter
 import com.rokt.roktdemo.R

@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
-public interface RoktDemoService {
+interface RoktDemoService {
     @Headers("accept: text/plain")
     @POST("library")
     suspend fun getDemoLibrary(): DemoLibrary

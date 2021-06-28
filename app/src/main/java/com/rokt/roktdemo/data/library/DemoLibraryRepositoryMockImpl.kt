@@ -7,7 +7,6 @@ import com.rokt.roktdemo.model.CustomConfigurationPage
 import com.rokt.roktdemo.model.CustomerDetails
 import com.rokt.roktdemo.model.DefaultPlacements
 import com.rokt.roktdemo.model.DemoLibrary
-import com.rokt.roktdemo.model.PredefinedScreen
 import com.rokt.roktdemo.model.Screen
 import com.rokt.roktdemo.model.ScreenType
 import kotlinx.coroutines.flow.Flow

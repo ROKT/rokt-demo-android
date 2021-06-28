@@ -19,7 +19,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltNavGraphViewModel
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.systemBarsPadding
 import com.rokt.roktdemo.R
@@ -49,7 +48,7 @@ fun AccountDetailsScreen(
 
     when {
         state.value.loading -> {
-           LoadingPage()
+            LoadingPage()
         }
         state.value.hasData -> {
             AccountDetailsSuccess(

@@ -1,6 +1,5 @@
 package com.rokt.roktdemo.model
 
-import java.util.ArrayList
 import java.util.HashMap
 
 data class DemoLibrary(

@@ -50,5 +50,4 @@ class AboutViewModel @Inject constructor(
     fun linkClicked(context: Context, url: String) {
         url.toUri().openInBrowser(context = context)
     }
-
 }
