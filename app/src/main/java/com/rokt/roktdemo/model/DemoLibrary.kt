@@ -1,30 +1,31 @@
 package com.rokt.roktdemo.model
 
+import java.util.ArrayList
 import java.util.HashMap
 
-class DemoLibrary(
+data class DemoLibrary(
     val demoTitle: String,
     val demoDescription: String,
     val defaultPlacementsExamples: DefaultPlacements,
-    val customCustomConfigurationPage: CustomConfigurationPage,
-    // TODO: Predefined screens
-    val preDefinedScreen1: PredefinedScreen,
-    val preDefinedScreen2: PredefinedScreen,
-    val preDefinedScreen3: PredefinedScreen,
+    val customConfigurationPage: CustomConfigurationPage
+//    // TODO: Predefined screens
+//    val preDefinedScreen1: PredefinedScreen,
+//    val preDefinedScreen2: PredefinedScreen,
+//    val preDefinedScreen3: PredefinedScreen,
 )
 
-class CustomConfigurationPage(
-    title: String,
-    shortDescription: String,
-    iconUrl: String,
+data class CustomConfigurationPage(
+    val title: String,
+    val shortDescription: String,
+    val iconUrl: String,
     val longDescription: String,
     val accountDetails: AccountDetails,
     val customerDetails: CustomerDetails,
     val advancedDetails: HashMap<String, String>,
-) : RoktDemoScreen(title, shortDescription, iconUrl)
+)
 
-class AccountDetails(
-    val accountId: String,
+data class AccountDetails(
+    val accountID: String,
     val viewName: String,
     val placementLocation1: String,
     val placementLocation2: String,
@@ -37,9 +38,9 @@ class CustomerDetails(
 //    val lastName: String,
 //    val dateOfBirth: String,
 //    val mobile: String,
-    val country: String,
     val state: String,
     val postcode: String,
+    val country: List<String>
 )
 
 class DefaultPlacements(
@@ -47,7 +48,7 @@ class DefaultPlacements(
     shortDescription: String,
     val longDescription: String,
     iconUrl: String,
-    val tagId: String,
+    val tagID: String,
     val screens: List<Screen>,
 ) : RoktDemoScreen(title, shortDescription, iconUrl)
 

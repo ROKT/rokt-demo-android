@@ -1,7 +1,6 @@
 package com.rokt.roktdemo.ui.demo.walkthrough
 
 import androidx.navigation.NavController
-import androidx.navigation.compose.navigate
 import com.rokt.roktdemo.ui.demo.walkthrough.WalkthroughDestination.WalkthroughScreen
 
 /**

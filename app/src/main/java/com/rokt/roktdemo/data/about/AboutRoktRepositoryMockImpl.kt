@@ -1,8 +1,11 @@
 package com.rokt.roktdemo.data.about
 
+import com.rokt.roktdemo.data.Result
 import com.rokt.roktdemo.model.AboutContent
 import com.rokt.roktdemo.model.AboutLink
 import com.rokt.roktdemo.model.AboutRokt
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 class AboutRoktRepositoryMockImpl : AboutRoktRepository {
 
@@ -33,7 +36,14 @@ class AboutRoktRepositoryMockImpl : AboutRoktRepository {
         )
     )
 
-    override fun getAboutRokt(): AboutRokt {
-        return AboutRokt(aboutContent, listOf(AboutLink("Learn More", "https://rokt.com/")))
+    override suspend fun getAboutRokt(): Flow<Result<AboutRokt>> = flow {
+        emit(
+            Result.Success(
+                AboutRokt(
+                    aboutContent,
+                    listOf(AboutLink("Learn More", "https://rokt.com/"))
+                )
+            )
+        )
     }
 }

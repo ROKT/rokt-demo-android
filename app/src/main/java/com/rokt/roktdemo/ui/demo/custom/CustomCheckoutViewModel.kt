@@ -34,7 +34,7 @@ class CustomCheckoutViewModel @Inject constructor(private val roktExecutor: Rokt
         )
     }
 
-    fun onCustomerDetailsSubmitted(attributes: Map<String, String>) {
+    fun onCustomerDetailsSubmitted(attributes: HashMap<String, String>) {
         state = state.copy(attributes = attributes)
     }
 
@@ -52,5 +52,5 @@ data class CustomCheckoutPageState(
     val viewName: String = "",
     val placementLocation1: String = "",
     val placementLocation2: String = "",
-    val attributes: Map<String, String> = hashMapOf(),
+    val attributes: HashMap<String, String> = hashMapOf(),
 )

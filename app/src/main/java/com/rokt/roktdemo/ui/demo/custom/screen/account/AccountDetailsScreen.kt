@@ -20,10 +20,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltNavGraphViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.systemBarsPadding
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.ButtonLight
 import com.rokt.roktdemo.ui.common.ContentText
+import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.common.MediumSpace
 import com.rokt.roktdemo.ui.common.RoktTextField
 import com.rokt.roktdemo.ui.common.ScreenHeader
@@ -41,13 +43,13 @@ fun AccountDetailsScreen(
     navigateToNextScreen: () -> Unit,
 ) {
 
-    val viewModel: AccountDetailsViewModel = hiltNavGraphViewModel()
+    val viewModel: AccountDetailsViewModel = hiltViewModel()
     val state = viewModel.state.collectAsState()
     val scroll = rememberScrollState(0)
 
     when {
         state.value.loading -> {
-            // TODO: Loading
+           LoadingPage()
         }
         state.value.hasData -> {
             AccountDetailsSuccess(

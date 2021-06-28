@@ -29,18 +29,18 @@ private fun getSummaryPageState(
                 demoLibraryItem.longDescription,
                 destinationType.getDisclaimer(),
                 destinationType.getImageResource(),
-                demoLibraryItem.tagId
+                demoLibraryItem.tagID
             )
         }
         CUSTOM_CHECKOUT.value -> {
             val demoLibraryItem =
-                demoLibrary.customCustomConfigurationPage
+                demoLibrary.customConfigurationPage
             SummaryPageState(
                 demoLibraryItem.title,
                 demoLibraryItem.longDescription,
                 destinationType.getDisclaimer(),
                 destinationType.getImageResource(),
-                demoLibraryItem.accountDetails.accountId
+                "234R"
             )
         }
         else -> {
@@ -52,7 +52,7 @@ private fun getSummaryPageState(
                 demoLibraryItem.longDescription,
                 destinationType.getDisclaimer(),
                 destinationType.getImageResource(),
-                demoLibraryItem.tagId
+                demoLibraryItem.tagID
             )
         }
     }

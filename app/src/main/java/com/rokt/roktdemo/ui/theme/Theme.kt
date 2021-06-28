@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import com.rokt.roktdemo.R
 
 object RoktColors {
-    private val RoktPink = Color(181, 30, 109)
+    val RoktPink = Color(181, 30, 109)
     private val RoktGrey = Color(24, 24, 24)
     private val TextLight = Color(67, 67, 67)
     private val BackgroundColor = Color(245, 245, 245)
