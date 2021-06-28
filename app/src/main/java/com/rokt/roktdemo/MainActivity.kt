@@ -4,20 +4,15 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.core.view.WindowCompat
-import com.rokt.roktdemo.data.service.RoktDemoService
 import com.rokt.roktdemo.ui.RoktDemoApp
 import com.rokt.roktsdk.BuildConfig
 import com.rokt.roktsdk.Rokt
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : androidx.activity.ComponentActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
-
-    @Inject
-    lateinit var roktDemoService: RoktDemoService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
