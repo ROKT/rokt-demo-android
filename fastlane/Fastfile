@@ -27,4 +27,21 @@ platform :android do
     gradle(task: "assembleDebug")
     gradle(task: "ktlintCheck")
   end
+
+  desc "Deploy a beta version to the Google Play"
+  lane :beta do
+#     gradle(task: "clean bundleRelease")
+    gradle(
+          task: 'assemble',
+          build_type: 'Release'
+        )
+    upload_to_play_store(track: 'beta')
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :production do
+    gradle(task: "clean bundleRelease")
+    upload_to_play_store
+  end
+
 end
