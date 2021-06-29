@@ -1,14 +1,9 @@
 package com.rokt.roktdemo
 
 import com.google.common.truth.Truth.assertThat
-import com.rokt.roktdemo.data.Result
-import com.rokt.roktdemo.data.library.DemoLibraryRepository
 import com.rokt.roktdemo.data.library.DemoLibraryRepositoryMockImpl
 import com.rokt.roktdemo.ui.demo.walkthrough.screen.WalkthroughScreenViewModel
-import io.mockk.coEvery
-import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
@@ -25,36 +20,36 @@ class WalkthroughScreenViewModelTest {
     @Test
     fun `isEmbedded is set to true at first index`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val mockedViewModel = createMockedViewModel()
-            assertThat(mockedViewModel.state.value.data!!.isEmbedded).isEqualTo(true)
+            val mockedViewModel = WalkthroughScreenViewModel()
+            mockedViewModel.initWithLibrary(
+                DemoLibraryRepositoryMockImpl().getDemoLibraryMocked(),
+                0
+            )
+            assertThat(mockedViewModel.state.value.isEmbedded).isEqualTo(true)
         }
     }
 
     @Test
     fun `isEmbedded is set to true at second index`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val mockedViewModel = createMockedViewModel()
-            mockedViewModel.setScreenIndex(1)
-            assertThat(mockedViewModel.state.value.data!!.isEmbedded).isEqualTo(true)
+            val mockedViewModel = WalkthroughScreenViewModel()
+            mockedViewModel.initWithLibrary(
+                DemoLibraryRepositoryMockImpl().getDemoLibraryMocked(),
+                1
+            )
+            assertThat(mockedViewModel.state.value.isEmbedded).isEqualTo(true)
         }
     }
 
     @Test
     fun `isEmbedded is set to false at third index`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val mockedViewModel = createMockedViewModel()
-            mockedViewModel.setScreenIndex(2)
-            assertThat(mockedViewModel.state.value.data!!.isEmbedded).isEqualTo(false)
-        }
-    }
-
-    private fun createMockedViewModel(): WalkthroughScreenViewModel {
-        val mockedRepository = mockk<DemoLibraryRepository>()
-        coEvery { mockedRepository.getDemoLibrary() } returns flowOf(
-            Result.Success(
-                DemoLibraryRepositoryMockImpl().getDemoLibraryMocked()
+            val mockedViewModel = WalkthroughScreenViewModel()
+            mockedViewModel.initWithLibrary(
+                DemoLibraryRepositoryMockImpl().getDemoLibraryMocked(),
+                2
             )
-        )
-        return WalkthroughScreenViewModel(mockedRepository)
+            assertThat(mockedViewModel.state.value.isEmbedded).isEqualTo(false)
+        }
     }
 }

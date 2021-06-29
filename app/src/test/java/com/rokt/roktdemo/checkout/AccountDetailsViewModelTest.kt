@@ -28,7 +28,7 @@ class AccountDetailsViewModelTest {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(true)
         }
     }
@@ -37,9 +37,10 @@ class AccountDetailsViewModelTest {
     fun `validateForm() should set formValidated to false if form is invalid`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.INVALID)
+            accountDetailsViewModel.initWithLibrary(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked())
 
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(false)
         }
     }
@@ -48,11 +49,12 @@ class AccountDetailsViewModelTest {
     fun `onNavigatedAway() should set formValidated to false`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.VALID)
+
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(true)
             accountDetailsViewModel.onNavigatedAway()
-            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(false)
         }
     }
@@ -62,10 +64,10 @@ class AccountDetailsViewModelTest {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(true)
             accountDetailsViewModel.onFieldEdited()
-            Truth.assertThat(accountDetailsViewModel.state.value.data!!.formValidated)
+            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(false)
         }
     }
@@ -74,7 +76,9 @@ class AccountDetailsViewModelTest {
 private fun getViewModelForStatus(validationState: ValidationStatus): AccountDetailsViewModel {
     val validator: ValidatorRepository = mockk()
     val accountDetailsViewModel =
-        AccountDetailsViewModel(DemoLibraryRepositoryMockImpl(), validator)
+        AccountDetailsViewModel(validator)
+    accountDetailsViewModel.initWithLibrary(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked())
+
     val accountId = DemoLibraryRepositoryMockImpl().TAG_ID
     every { validator.validateAccountId(accountId) } returns ValidationState(
         validationState
