@@ -32,11 +32,11 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.systemBarsPadding
 import com.rokt.roktdemo.R
+import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.ui.common.ButtonDark
 import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.DropDownList
 import com.rokt.roktdemo.ui.common.HeaderTextButton
-import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.common.RoktTextField
 import com.rokt.roktdemo.ui.common.ScreenHeader
 import com.rokt.roktdemo.ui.common.SmallSpace
@@ -44,45 +44,36 @@ import com.rokt.roktdemo.ui.common.XSmallSpace
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutViewModel
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableFieldSet
-import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
 fun CustomerDetailsScreen(
     customCheckoutViewModel: CustomCheckoutViewModel,
+    demoLibrary: DemoLibrary,
     navigateToNextScreen: () -> Unit,
 ) {
     val scroll = rememberScrollState(0)
     val viewModel: CustomerDetailsViewModel = hiltViewModel()
+    viewModel.initWithLibrary(demoLibrary)
+
     val state = viewModel.state.collectAsState()
     val launchDemoButtonPressed = {
         customCheckoutViewModel.onCustomerDetailsSubmitted(viewModel.getCustomerDetails())
         navigateToNextScreen.invoke()
     }
 
-    when {
-        state.value.loading -> {
-            LoadingPage()
-        }
-        state.value.hasData -> {
-            val data = state.value.data!!
-            CustomerDetailsScreenContent(
-                scroll,
-                data.showAdvancedOptions,
-                data.advancedOptions,
-                viewModel::onToggleAdvancedOptions,
-                launchDemoButtonPressed::invoke,
-                data.selectedCountry,
-                viewModel::onCountrySelected,
-                data.selectedState,
-                data.postcode,
-                data.countryList
-            )
-        }
-        else -> {
-            RoktError(errorType = state.value.error)
-        }
-    }
+    CustomerDetailsScreenContent(
+        scroll,
+        state.value.showAdvancedOptions,
+        state.value.advancedOptions,
+        viewModel::onToggleAdvancedOptions,
+        launchDemoButtonPressed::invoke,
+        state.value.selectedCountry,
+        viewModel::onCountrySelected,
+        state.value.selectedState,
+        state.value.postcode,
+        state.value.countryList
+    )
 }
 
 @Composable
@@ -141,7 +132,7 @@ private fun CustomerDetailsScreenContent(
 private fun CountrySelection(
     countryList: List<String>,
     selectedCountry: String,
-    onCountrySelected: (String) -> Unit
+    onCountrySelected: (String) -> Unit,
 ) {
     val isOpen = remember { mutableStateOf(false) } // initial value
     val openCloseOfDropDownList: (Boolean) -> Unit = {

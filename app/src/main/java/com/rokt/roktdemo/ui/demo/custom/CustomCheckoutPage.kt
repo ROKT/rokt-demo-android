@@ -13,6 +13,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.HeaderTextButton
 import com.rokt.roktdemo.ui.common.RoktHeader
@@ -21,7 +22,7 @@ import com.rokt.roktdemo.ui.demo.custom.screen.confirmation.CustomCheckoutConfir
 import com.rokt.roktdemo.ui.demo.custom.screen.customer.CustomerDetailsScreen
 
 @Composable
-fun CustomCheckoutPage(exitCheckoutPage: () -> Unit) {
+fun CustomCheckoutPage(exitCheckoutPage: () -> Unit, demoLibrary: DemoLibrary) {
     val navController = rememberNavController()
     val actions = CustomCheckoutActions(navController, exitCheckoutPage)
     val customCheckoutViewModel: CustomCheckoutViewModel = hiltViewModel()
@@ -47,10 +48,18 @@ fun CustomCheckoutPage(exitCheckoutPage: () -> Unit) {
         ) {
 
             composable(CustomCheckoutDestinations.AccountDetails) {
-                AccountDetailsScreen(customCheckoutViewModel, actions.navigateToCustomerDetails)
+                AccountDetailsScreen(
+                    customCheckoutViewModel,
+                    demoLibrary,
+                    actions.navigateToCustomerDetails
+                )
             }
             composable(CustomCheckoutDestinations.CustomerDetails) {
-                CustomerDetailsScreen(customCheckoutViewModel, actions.navigateToConfirmationScreen)
+                CustomerDetailsScreen(
+                    customCheckoutViewModel,
+                    demoLibrary,
+                    actions.navigateToConfirmationScreen
+                )
             }
             composable(CustomCheckoutDestinations.ConfirmationScreen) {
                 CustomCheckoutConfirmationScreen(customCheckoutViewModel)

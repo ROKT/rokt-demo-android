@@ -22,9 +22,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.systemBarsPadding
 import com.rokt.roktdemo.R
+import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.ui.common.ButtonLight
 import com.rokt.roktdemo.ui.common.ContentText
-import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.common.MediumSpace
 import com.rokt.roktdemo.ui.common.RoktTextField
 import com.rokt.roktdemo.ui.common.ScreenHeader
@@ -32,37 +32,28 @@ import com.rokt.roktdemo.ui.common.SmallSpace
 import com.rokt.roktdemo.ui.common.XSmallSpace
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutViewModel
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
-import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.theme.RoktColors.ErrorColor
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
 fun AccountDetailsScreen(
     parentViewModel: CustomCheckoutViewModel,
+    demoLibrary: DemoLibrary,
     navigateToNextScreen: () -> Unit,
 ) {
-
     val viewModel: AccountDetailsViewModel = hiltViewModel()
+    viewModel.initWithLibrary(demoLibrary)
+
     val state = viewModel.state.collectAsState()
     val scroll = rememberScrollState(0)
 
-    when {
-        state.value.loading -> {
-            LoadingPage()
-        }
-        state.value.hasData -> {
-            AccountDetailsSuccess(
-                state.value.data!!,
-                scroll,
-                parentViewModel,
-                viewModel,
-                navigateToNextScreen
-            )
-        }
-        else -> {
-            RoktError(errorType = state.value.error)
-        }
-    }
+    AccountDetailsSuccess(
+        state.value,
+        scroll,
+        parentViewModel,
+        viewModel,
+        navigateToNextScreen
+    )
 }
 
 @Composable

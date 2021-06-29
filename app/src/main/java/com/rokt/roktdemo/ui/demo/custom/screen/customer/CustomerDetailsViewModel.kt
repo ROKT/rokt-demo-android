@@ -3,13 +3,10 @@ package com.rokt.roktdemo.ui.demo.custom.screen.customer
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rokt.roktdemo.data.data
-import com.rokt.roktdemo.data.library.DemoLibraryRepository
-import com.rokt.roktdemo.data.succeeded
+import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableFieldSet
 import com.rokt.roktdemo.ui.demo.custom.screen.common.createEditableField
-import com.rokt.roktdemo.ui.state.UiState
 import com.rokt.roktdemo.utils.updateKeyAtIndex
 import com.rokt.roktdemo.utils.updateValueAtIndex
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,14 +19,9 @@ import java.util.HashMap
 import javax.inject.Inject
 
 @HiltViewModel
-class CustomerDetailsViewModel @Inject constructor(
-    repository: DemoLibraryRepository,
-) : ViewModel() {
+class CustomerDetailsViewModel @Inject constructor() : ViewModel() {
 
-    private val _state: MutableStateFlow<UiState<CustomerDetailsScreenState>> = MutableStateFlow(
-        UiState(loading = true)
-    )
-
+    private val _state = MutableStateFlow(CustomerDetailsScreenState())
     private val showAdvancedOptions = MutableStateFlow(false)
     private val selectedCountry = MutableStateFlow("")
     private val selectedState = MutableStateFlow("")
@@ -38,25 +30,15 @@ class CustomerDetailsViewModel @Inject constructor(
     private val advancedDetailsList: MutableStateFlow<List<Pair<String, String>>> =
         MutableStateFlow(listOf())
 
-    val state: MutableStateFlow<UiState<CustomerDetailsScreenState>>
+    val state: MutableStateFlow<CustomerDetailsScreenState>
         get() = _state
 
-    init {
-        viewModelScope.launch {
-            val demoLibrary = repository.getDemoLibrary()
-
-            demoLibrary.collect {
-                if (it.succeeded) {
-                    with(it.data().customConfigurationPage) {
-                        selectedCountry.value = Companion.DEFAULT_COUNTRY
-                        selectedPostcode.value = this.customerDetails.postcode
-                        selectedState.value = this.customerDetails.state
-                        advancedDetailsList.value = this.advancedDetails.toList()
-                        countryList = this.customerDetails.country
-                    }
-                }
-            }
-        }
+    fun initWithLibrary(demoLibrary: DemoLibrary) {
+        selectedCountry.value = DEFAULT_COUNTRY
+        selectedPostcode.value = demoLibrary.customConfigurationPage.customerDetails.postcode
+        selectedState.value = demoLibrary.customConfigurationPage.customerDetails.state
+        advancedDetailsList.value = demoLibrary.customConfigurationPage.advancedDetails.toList()
+        countryList = demoLibrary.customConfigurationPage.customerDetails.country
 
         viewModelScope.launch {
             combine(
@@ -77,26 +59,23 @@ class CustomerDetailsViewModel @Inject constructor(
                         }
                     )
                 }
-
-                UiState(
-                    data = CustomerDetailsScreenState(
-                        showAdvanced,
-                        country,
-                        countryList,
-                        createEditableField(
-                            state,
-                            {
-                                selectedState.value = it
-                            }
-                        ),
-                        createEditableField(
-                            postcode,
-                            {
-                                selectedPostcode.value = it
-                            }
-                        ),
-                        advancedFields
-                    )
+                CustomerDetailsScreenState(
+                    showAdvanced,
+                    country,
+                    countryList,
+                    createEditableField(
+                        state,
+                        {
+                            selectedState.value = it
+                        }
+                    ),
+                    createEditableField(
+                        postcode,
+                        {
+                            selectedPostcode.value = it
+                        }
+                    ),
+                    advancedFields
                 )
             }.collect {
                 _state.value = it
@@ -125,19 +104,17 @@ class CustomerDetailsViewModel @Inject constructor(
     }
 
     fun getCustomerDetails(): HashMap<String, String> {
-        state.value.data?.let { screenState ->
-            return hashMapOf<String, String>().apply {
-                if (screenState.selectedCountry.isNotBlank()) {
-                    this["country"] = screenState.selectedCountry
-                }
-                screenState.advancedOptions.forEach {
-                    if (it.key.isNotEmpty() && it.value.isNotEmpty()) {
-                        this[it.key] = it.value
-                    }
+        val screenState = state.value
+        return hashMapOf<String, String>().apply {
+            if (screenState.selectedCountry.isNotBlank()) {
+                this["country"] = screenState.selectedCountry
+            }
+            screenState.advancedOptions.forEach {
+                if (it.key.isNotEmpty() && it.value.isNotEmpty()) {
+                    this[it.key] = it.value
                 }
             }
         }
-        return hashMapOf()
     }
 
     companion object {

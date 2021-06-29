@@ -20,55 +20,45 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.HeaderTextButton
-import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.common.RoktHeader
-import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.demo.walkthrough.screen.WalkthroughScreen
 
 @Composable
 fun WalkthroughPage(
     onBackPressed: () -> Unit,
+    demoLibrary: DemoLibrary,
     viewModel: WalkthroughViewModel = hiltViewModel(),
 ) {
+    viewModel.initWithLibrary(demoLibrary)
     val state by viewModel.state.collectAsState()
     val navController = rememberNavController()
-
-    when {
-        state.loading -> {
-            LoadingPage()
-        }
-        state.hasData -> {
-            val data = state.data!!
-            val actions = remember(navController) {
-                WalkthroughActions(
-                    navController,
-                    data.screenCount,
-                    onBackPressed
-                )
-            }
-
-            WalkthroughPageContent(
-                screenCount = data.screenCount,
-                currentIndex = data.currentIndex,
-                screenCounterText = data.screenCounterText,
-                navButtonText = data.navButtonText,
-                backPressed = {
-                    viewModel.backButtonPressed()
-                    actions.backPressed.invoke(it)
-                },
-                onNextPressed = {
-                    viewModel.nextButtonPressed()
-                    actions.forwardPressed.invoke(it)
-                },
-                navController = navController
-            )
-        }
-        else -> {
-            RoktError(errorType = state.error)
-        }
+    val actions = remember(navController) {
+        WalkthroughActions(
+            navController,
+            state.screenCount,
+            onBackPressed
+        )
     }
+
+    WalkthroughPageContent(
+        screenCount = state.screenCount,
+        currentIndex = state.currentIndex,
+        screenCounterText = state.screenCounterText,
+        navButtonText = state.navButtonText,
+        backPressed = {
+            viewModel.backButtonPressed()
+            actions.backPressed.invoke(it)
+        },
+        onNextPressed = {
+            viewModel.nextButtonPressed()
+            actions.forwardPressed.invoke(it)
+        },
+        navController = navController,
+        demoLibrary
+    )
 }
 
 @Composable
@@ -80,6 +70,7 @@ private fun WalkthroughPageContent(
     backPressed: (Int) -> Unit,
     onNextPressed: (index: Int) -> Unit,
     navController: NavHostController,
+    demoLibrary: DemoLibrary,
 ) {
     Column(
         Modifier
@@ -103,7 +94,7 @@ private fun WalkthroughPageContent(
         ) {
             for (index in 0 until screenCount) {
                 composable(WalkthroughDestination.WalkthroughScreen + index) {
-                    WalkthroughScreen(index)
+                    WalkthroughScreen(index, demoLibrary)
                 }
             }
         }
@@ -111,7 +102,7 @@ private fun WalkthroughPageContent(
 }
 
 @Composable
-fun WalkthroughHeader(
+private fun WalkthroughHeader(
     currentIndex: Int,
     counterText: String,
     navButtonText: String,
@@ -130,7 +121,7 @@ fun WalkthroughHeader(
 }
 
 @Composable
-fun RowScope.HeaderContent(
+private fun RowScope.HeaderContent(
     currentIndex: Int,
     counterText: String,
     navButtonText: String,
