@@ -1,37 +1,37 @@
 steps:
-  - name: ':hammer: Build and Unit Test Android Demo'
-    commands:
-      - bundle install
-      - bundle exec fastlane buildAndKtlint
-      - bundle exec fastlane test
-    artifact_paths:
-      - "app/**/*.apk"
-    plugins:
-      - docker-compose#v3.0.0:
-          config: ./docker-compose.yml
-          run: build_android
-      - seek-oss/aws-sm#v2.0.0:
-          env:
-            STORE_PASSWORD:
-              secret-id: 'stage-android-demoapp-buildkite'
-              json-key: '.STORE_PASSWORD'
-              KEY_ALIAS:
-                secret-id: 'stage-android-demoapp-buildkite'
-                json-key: '.KEY_ALIAS'
-              KEY_PASSWORD:
-                secret-id: 'stage-android-demoapp-buildkite'
-                json-key: '.KEY_PASSWORD'
-
-    agents:
-      queue: 'stage-us-west-2-default'
-    timeout_in_minutes: 25
-
-  - wait
-
-  - block: ":whale: Release to Beta to Google play"
-    prompt: "Confirm releasing this Beta version to Google play"
-
-  - wait
+#  - name: ':hammer: Build and Unit Test Android Demo'
+#    commands:
+#      - bundle install
+#      - bundle exec fastlane buildAndKtlint
+#      - bundle exec fastlane test
+#    artifact_paths:
+#      - "app/**/*.apk"
+#    plugins:
+#      - docker-compose#v3.0.0:
+#          config: ./docker-compose.yml
+#          run: build_android
+#      - seek-oss/aws-sm#v2.0.0:
+#          env:
+#            STORE_PASSWORD:
+#              secret-id: 'stage-android-demoapp-buildkite'
+#              json-key: '.STORE_PASSWORD'
+#              KEY_ALIAS:
+#                secret-id: 'stage-android-demoapp-buildkite'
+#                json-key: '.KEY_ALIAS'
+#              KEY_PASSWORD:
+#                secret-id: 'stage-android-demoapp-buildkite'
+#                json-key: '.KEY_PASSWORD'
+#
+#    agents:
+#      queue: 'stage-us-west-2-default'
+#    timeout_in_minutes: 25
+#
+#  - wait
+#
+#  - block: ":whale: Release to Beta to Google play"
+#    prompt: "Confirm releasing this Beta version to Google play"
+#
+#  - wait
 
   - name: ':rocket: Publish Demo app to Google play'
     commands:
@@ -40,11 +40,11 @@ steps:
 #      create keystore
       - echo ${ANDROID_KEYSTORE_FILE} > keystore.jks.b64
       - base64 -d -i keystore.jks.b64 > app/keystore.jks
-##      create google play config
-#      - echo ${System.env.PLAY_CONFIG_JSON} > play_config.json.b64
-#      - base64 -d -i play_config.json.b64 > play_config.json
-##      release beta
-#      - bundle exec fastlane beta
+#      create google play config
+      - echo ${PLAY_CONFIG_JSON} > play_config.json.b64
+      - base64 -d -i play_config.json.b64 > play_config.json
+#      release beta
+      - bundle exec fastlane beta
     artifact_paths:
       - "app/**/*.apk"
     plugins:
