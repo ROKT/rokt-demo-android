@@ -26,8 +26,11 @@ steps:
     timeout_in_minutes: 25
 
   - wait
-    - block: ":whale: Release to Beta to Google play"
+
+  - block: ":whale: Release to Beta to Google play"
       prompt: "Confirm releasing this Beta version to Google play"
+
+  - wait
 
   - name: ':rocket: Publish Demo app to Google play'
     commands:
