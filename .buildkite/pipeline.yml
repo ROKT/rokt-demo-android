@@ -38,13 +38,13 @@ steps:
       - bundle install
       - bundle exec fastlane buildAndKtlint
 #      create keystore
-      - echo ${System.env.ANDROID_KEYSTORE_FILE} > keystore.jks.b64
-      - base64 -d -i keystore.jks.b64 > app/keystore.jks
-#      create google play config
-      - echo ${System.env.PLAY_CONFIG_JSON} > play_config.json.b64
-      - base64 -d -i play_config.json.b64 > play_config.json
-#      release beta
-      - bundle exec fastlane beta
+#      - echo ${System.env.ANDROID_KEYSTORE_FILE} > keystore.jks.b64
+#      - base64 -d -i keystore.jks.b64 > app/keystore.jks
+##      create google play config
+#      - echo ${System.env.PLAY_CONFIG_JSON} > play_config.json.b64
+#      - base64 -d -i play_config.json.b64 > play_config.json
+##      release beta
+#      - bundle exec fastlane beta
     artifact_paths:
       - "app/**/*.apk"
     plugins:
@@ -70,4 +70,4 @@ steps:
               json-key: '.ANDROID_KEYSTORE_FILE'
     agents:
       queue: 'stage-us-west-2-default'
-    timeout_in_minutes: 15
+    timeout_in_minutes: 25
