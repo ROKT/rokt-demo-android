@@ -45,6 +45,7 @@ steps:
       - base64 -d -i play_config.json.b64 > play_config.json
       - echo ${APPCENTER_APP_OWNER}
       - ls
+      - cat README.md
       - echo "$(<README.md)"
       - bundle exec fastlane run validate_play_store_json_key json_key_data:"$(<play_config.json)"
 #      release beta
