@@ -46,7 +46,7 @@ steps:
       - echo ${APPCENTER_APP_OWNER}
       - ls
       - cat README.md
-      - echo "$(<README.md)"
+      - cat play_config.json
       - bundle exec fastlane run validate_play_store_json_key json_key_data:"$(<play_config.json)"
 #      release beta
       - bundle exec fastlane beta
