@@ -49,9 +49,9 @@ steps:
       - echo "--------------"
 #      - cat play_config.json
 #      - bundle exec fastlane run validate_play_store_json_key json_key_data:"$(<play_config.json)"
-      - bundle exec fastlane run validate_play_store_json_key json_key_data:"$(base64 -d <<< ${PLAY_CONFIG_JSON})"
+      - bundle exec fastlane run validate_play_store_json_key json_key_data:"${PLAY_CONFIG_JSON}"
 #      release beta
-      - bundle exec fastlane beta
+#      - bundle exec fastlane beta
     artifact_paths:
       - "app/**/*.apk"
     plugins:
