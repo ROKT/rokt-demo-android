@@ -14,16 +14,18 @@ This project it is implemented based on MVVM pattern and repository pattern.
 
 ## Rokt SDK logic
 
-MainActivityViewModel contains an observable selectedTagId which is set from other pages in the application. The selectedTagId is observed in the MainActivity, where Rokt.Init() is called every time the tagId value is changed.
+**MainActivityViewModel** contains an observable selectedTagId which is set from other pages in the application. The selectedTagId is observed in the MainActivity, where Rokt.Init() is called every time the tagId value is changed.
 This is because our application is a single Activity application, and Rokt.init requires an Activity to be passed in.
-All other Rokt SDK related calls happen in RoktExecutor.
+All other Rokt SDK related calls happen in **RoktExecutor**.
 
 ## CI/CD System
 
 **Buildkite** is used as the CI system https://buildkite.com/rokt/rokt-demo-android.
 Buildkite pipelines are defined in `.buildkite` directory.
 It uses **docker** container for executing the build steps using the **Fastlane** build tool.
-The docker image used for this version installs Java 11, and Android SDK version 30. It can be found here: https://github.com/NedaRobatMeily/docker-image-java-11
+The docker image used for this version installs Java 11, and Android SDK version 30.
+
+It can be found here: https://github.com/NedaRobatMeily/docker-image-java-11
 
 ## FAQ
 
