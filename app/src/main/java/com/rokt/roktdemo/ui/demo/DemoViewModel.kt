@@ -65,7 +65,7 @@ fun getSuccessState(library: DemoLibrary): UiState<DemoScreenState> {
                         library.defaultPlacementsExamples.shortDescription,
                         DestinationType.FEATURE_WALKTHROUGH.getImageResource(),
                         DestinationType.FEATURE_WALKTHROUGH,
-                        SummaryViewModel(library, DestinationType.FEATURE_WALKTHROUGH)
+                        SummaryViewModel(library, DestinationType.FEATURE_WALKTHROUGH),
                     )
                 )
                 add(
@@ -74,7 +74,7 @@ fun getSuccessState(library: DemoLibrary): UiState<DemoScreenState> {
                         library.customConfigurationPage.shortDescription,
                         DestinationType.CUSTOM_CHECKOUT.getImageResource(),
                         DestinationType.CUSTOM_CHECKOUT,
-                        SummaryViewModel(library, DestinationType.CUSTOM_CHECKOUT)
+                        SummaryViewModel(library, DestinationType.CUSTOM_CHECKOUT),
                     )
                 )
 //                add(
@@ -104,7 +104,8 @@ fun getSuccessState(library: DemoLibrary): UiState<DemoScreenState> {
 //                        SummaryViewModel(library, DestinationType.CONFIRMATION_GUMTREE)
 //                    )
 //                )
-            }
+            },
+            library = library
         )
     )
 }
@@ -114,6 +115,7 @@ data class DemoScreenState(
     val description: String = "",
     val items: List<DemoPageListItem> = listOf(),
     val errorString: String? = null,
+    val library: DemoLibrary,
 )
 
 class DemoPageListItem(

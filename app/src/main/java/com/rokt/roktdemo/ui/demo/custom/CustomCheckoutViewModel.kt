@@ -21,13 +21,11 @@ class CustomCheckoutViewModel @Inject constructor(private val roktExecutor: Rokt
         }
 
     fun onAccountDetailsSubmitted(
-        accountId: String,
         viewName: String,
         placementLocation1: String,
         placementLocation2: String,
     ) {
         state = state.copy(
-            accountId = accountId,
             viewName = viewName,
             placementLocation1 = placementLocation1,
             placementLocation2 = placementLocation2
@@ -48,7 +46,6 @@ class CustomCheckoutViewModel @Inject constructor(private val roktExecutor: Rokt
 }
 
 data class CustomCheckoutPageState(
-    val accountId: String = "",
     val viewName: String = "",
     val placementLocation1: String = "",
     val placementLocation2: String = "",

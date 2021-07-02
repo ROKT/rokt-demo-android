@@ -2,16 +2,11 @@ package com.rokt.roktdemo.checkout
 
 import com.google.common.truth.Truth
 import com.rokt.roktdemo.CoroutineTestRule
-import com.rokt.roktdemo.data.Result
 import com.rokt.roktdemo.data.data
-import com.rokt.roktdemo.data.library.DemoLibraryRepository
 import com.rokt.roktdemo.data.library.DemoLibraryRepositoryMockImpl
 import com.rokt.roktdemo.ui.demo.custom.screen.customer.CustomerDetailsViewModel
-import io.mockk.coEvery
-import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
@@ -27,9 +22,9 @@ class CustomerDetailsViewmodelTest {
     @Test
     fun `showAdvancedOptions should be false by default`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val customerDetailsViewModel = CustomerDetailsViewModel(DemoLibraryRepositoryMockImpl())
+            val customerDetailsViewModel = getCustomerDetailsViewModel()
 
-            Truth.assertThat(customerDetailsViewModel.state.value.data!!.showAdvancedOptions)
+            Truth.assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
                 .isEqualTo(false)
         }
     }
@@ -37,14 +32,14 @@ class CustomerDetailsViewmodelTest {
     @Test
     fun `onToggleAdvancedOptions should set showAdvancedOptions to true if its set to false `() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val customerDetailsViewModel = CustomerDetailsViewModel(DemoLibraryRepositoryMockImpl())
+            val customerDetailsViewModel = getCustomerDetailsViewModel()
 
-            Truth.assertThat(customerDetailsViewModel.state.value.data!!.showAdvancedOptions)
+            Truth.assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
                 .isEqualTo(false)
 
             customerDetailsViewModel.onToggleAdvancedOptions()
 
-            Truth.assertThat(customerDetailsViewModel.state.value.data!!.showAdvancedOptions)
+            Truth.assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
                 .isEqualTo(true)
         }
     }
@@ -52,11 +47,11 @@ class CustomerDetailsViewmodelTest {
     @Test
     fun `onCountrySelected should set selectedCountry to the new value `() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val customerDetailsViewModel = CustomerDetailsViewModel(DemoLibraryRepositoryMockImpl())
+            val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             customerDetailsViewModel.onCountrySelected("Australia")
 
-            Truth.assertThat(customerDetailsViewModel.state.value.data!!.selectedCountry)
+            Truth.assertThat(customerDetailsViewModel.state.value.selectedCountry)
                 .isEqualTo("Australia")
         }
     }
@@ -64,21 +59,14 @@ class CustomerDetailsViewmodelTest {
     @Test
     fun `getCustomerDetails should return all user details as a hashmap`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val repositoryMockImpl: DemoLibraryRepository = mockk()
-            coEvery { repositoryMockImpl.getDemoLibrary() } returns flowOf(
-                Result.Success(
-                    DemoLibraryRepositoryMockImpl().getDemoLibraryMocked()
-                )
-            )
-
-            val customerDetailsViewModel = CustomerDetailsViewModel(repositoryMockImpl)
+            val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             customerDetailsViewModel.onCountrySelected("Australia")
             val expectedMap = hashMapOf("country" to "Australia")
 
-            repositoryMockImpl.getDemoLibrary().collect {
+            DemoLibraryRepositoryMockImpl().getDemoLibrary().collect {
                 it.data().customConfigurationPage.advancedDetails.toList()
-                    .forEachIndexed { index, pair ->
+                    .forEachIndexed { index, _ ->
                         val newKey = "key$index"
                         val newValue = "value$index"
                         customerDetailsViewModel.onKeyChanged(newKey, index)
@@ -95,11 +83,10 @@ class CustomerDetailsViewmodelTest {
     @Test
     fun `onKeyChanged should modify the key in advancedOptions to the new key`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val repositoryMockImpl = DemoLibraryRepositoryMockImpl()
-            val customerDetailsViewModel = CustomerDetailsViewModel(repositoryMockImpl)
+            val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             customerDetailsViewModel.onKeyChanged("newKey", 0)
-            Truth.assertThat(customerDetailsViewModel.state.value.data!!.advancedOptions.get(0).key)
+            Truth.assertThat(customerDetailsViewModel.state.value.advancedOptions[0].key)
                 .isEqualTo("newKey")
         }
     }
@@ -107,12 +94,20 @@ class CustomerDetailsViewmodelTest {
     @Test
     fun `onValueChanged should modify the key at the given index with a new value`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val repositoryMockImpl = DemoLibraryRepositoryMockImpl()
-            val customerDetailsViewModel = CustomerDetailsViewModel(repositoryMockImpl)
+            val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             customerDetailsViewModel.onValueChanged("newValue", 0)
-            Truth.assertThat(customerDetailsViewModel.state.value.data!!.advancedOptions.get(0).value)
+            Truth.assertThat(customerDetailsViewModel.state.value.advancedOptions[0].value)
                 .isEqualTo("newValue")
+        }
+    }
+
+    private fun getCustomerDetailsViewModel(): CustomerDetailsViewModel {
+        return CustomerDetailsViewModel().apply {
+            init(
+                DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.customerDetails,
+                DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.advancedDetails
+            )
         }
     }
 }

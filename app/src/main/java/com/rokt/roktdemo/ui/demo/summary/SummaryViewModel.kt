@@ -40,7 +40,7 @@ private fun getSummaryPageState(
                 demoLibraryItem.longDescription,
                 destinationType.getDisclaimer(),
                 destinationType.getImageResource(),
-                "234R"
+                demoLibraryItem.accountDetails.accountID
             )
         }
         else -> {
