@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.systemBarsPadding
+import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.ui.common.ButtonLight
@@ -37,17 +38,19 @@ import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
 fun AccountDetailsScreen(
+    mainActivityViewModel: MainActivityViewModel,
     parentViewModel: CustomCheckoutViewModel,
     demoLibrary: DemoLibrary,
     navigateToNextScreen: () -> Unit,
 ) {
     val viewModel: AccountDetailsViewModel = hiltViewModel()
-    viewModel.initWithLibrary(demoLibrary)
+    viewModel.init(demoLibrary.customConfigurationPage.accountDetails)
 
     val state = viewModel.state.collectAsState()
     val scroll = rememberScrollState(0)
 
     AccountDetailsSuccess(
+        mainActivityViewModel,
         state.value,
         scroll,
         parentViewModel,
@@ -58,6 +61,7 @@ fun AccountDetailsScreen(
 
 @Composable
 private fun AccountDetailsSuccess(
+    mainActivityViewModel: MainActivityViewModel,
     data: AccountDetailsViewState,
     scroll: ScrollState,
     parentViewModel: CustomCheckoutViewModel,
@@ -65,8 +69,8 @@ private fun AccountDetailsSuccess(
     navigateToNextScreen: () -> Unit,
 ) {
     if (data.formValidated) {
+        mainActivityViewModel.updateSelectedTagId(data.accountId.text)
         parentViewModel.onAccountDetailsSubmitted(
-            data.accountId.text,
             data.viewName.text,
             data.placementLocation1.text,
             data.placementLocation2.text

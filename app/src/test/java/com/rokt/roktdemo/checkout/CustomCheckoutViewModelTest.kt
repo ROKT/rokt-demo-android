@@ -29,13 +29,11 @@ class CustomCheckoutViewModelTest {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val customCheckoutViewModel = CustomCheckoutViewModel(mockk())
             customCheckoutViewModel.onAccountDetailsSubmitted(
-                "123",
                 "viewName",
                 "Location1",
                 "Location2"
             )
 
-            Truth.assertThat(customCheckoutViewModel.state.accountId).isEqualTo("123")
             Truth.assertThat(customCheckoutViewModel.state.viewName).isEqualTo("viewName")
             Truth.assertThat(customCheckoutViewModel.state.placementLocation1)
                 .isEqualTo("Location1")
@@ -66,7 +64,6 @@ class CustomCheckoutViewModelTest {
 
             val customCheckoutViewModel = CustomCheckoutViewModel(roktExecutor)
             customCheckoutViewModel.onAccountDetailsSubmitted(
-                "123",
                 "viewName",
                 "Location1",
                 "Location2"

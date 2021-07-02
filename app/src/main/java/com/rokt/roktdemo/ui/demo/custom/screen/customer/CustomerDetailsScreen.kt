@@ -54,7 +54,10 @@ fun CustomerDetailsScreen(
 ) {
     val scroll = rememberScrollState(0)
     val viewModel: CustomerDetailsViewModel = hiltViewModel()
-    viewModel.initWithLibrary(demoLibrary)
+    viewModel.init(
+        demoLibrary.customConfigurationPage.customerDetails,
+        demoLibrary.customConfigurationPage.advancedDetails
+    )
 
     val state = viewModel.state.collectAsState()
     val launchDemoButtonPressed = {

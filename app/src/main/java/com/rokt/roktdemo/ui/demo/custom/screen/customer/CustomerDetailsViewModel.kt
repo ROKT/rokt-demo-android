@@ -3,7 +3,7 @@ package com.rokt.roktdemo.ui.demo.custom.screen.customer
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rokt.roktdemo.model.DemoLibrary
+import com.rokt.roktdemo.model.CustomerDetails
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableFieldSet
 import com.rokt.roktdemo.ui.demo.custom.screen.common.createEditableField
@@ -20,10 +20,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CustomerDetailsViewModel @Inject constructor() : ViewModel() {
-
-    private val _state = MutableStateFlow(CustomerDetailsScreenState())
+    private val _state = MutableStateFlow(CustomerDetailsScreenState(initialized = false))
     private val showAdvancedOptions = MutableStateFlow(false)
-    private val selectedCountry = MutableStateFlow("")
+    private val selectedCountry = MutableStateFlow(DEFAULT_COUNTRY)
     private val selectedState = MutableStateFlow("")
     private val selectedPostcode = MutableStateFlow("")
     private var countryList = listOf<String>()
@@ -33,13 +32,20 @@ class CustomerDetailsViewModel @Inject constructor() : ViewModel() {
     val state: MutableStateFlow<CustomerDetailsScreenState>
         get() = _state
 
-    fun initWithLibrary(demoLibrary: DemoLibrary) {
-        selectedCountry.value = DEFAULT_COUNTRY
-        selectedPostcode.value = demoLibrary.customConfigurationPage.customerDetails.postcode
-        selectedState.value = demoLibrary.customConfigurationPage.customerDetails.state
-        advancedDetailsList.value = demoLibrary.customConfigurationPage.advancedDetails.toList()
-        countryList = demoLibrary.customConfigurationPage.customerDetails.country
+    fun init(customerDetails: CustomerDetails, advancedDetails: HashMap<String, String>) {
+        if (state.value.initialized.not()) {
+            // Set default values
+            selectedPostcode.value = customerDetails.postcode
+            selectedState.value = customerDetails.state
+            advancedDetailsList.value = advancedDetails.toList()
+            countryList = customerDetails.country
 
+            // Observe changes to default values
+            initState()
+        }
+    }
+
+    private fun initState() {
         viewModelScope.launch {
             combine(
                 selectedCountry,
@@ -129,4 +135,5 @@ data class CustomerDetailsScreenState(
     val selectedState: EditableField = EditableField(),
     val postcode: EditableField = EditableField(),
     val advancedOptions: List<EditableFieldSet> = listOf(),
+    val initialized: Boolean = true,
 )

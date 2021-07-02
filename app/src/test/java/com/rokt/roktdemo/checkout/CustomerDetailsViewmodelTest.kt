@@ -104,7 +104,10 @@ class CustomerDetailsViewmodelTest {
 
     private fun getCustomerDetailsViewModel(): CustomerDetailsViewModel {
         return CustomerDetailsViewModel().apply {
-            initWithLibrary(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked())
+            init(
+                DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.customerDetails,
+                DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.advancedDetails
+            )
         }
     }
 }

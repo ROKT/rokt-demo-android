@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.rokt.roktdemo.data.validate.ValidationState
 import com.rokt.roktdemo.data.validate.ValidationStatus
 import com.rokt.roktdemo.data.validate.ValidatorRepository
-import com.rokt.roktdemo.model.DemoLibrary
+import com.rokt.roktdemo.model.AccountDetails
 import com.rokt.roktdemo.ui.demo.custom.screen.common.EditableField
 import com.rokt.roktdemo.ui.demo.custom.screen.common.createEditableField
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class AccountDetailsViewModel @Inject constructor(
     private val validator: ValidatorRepository,
 ) : ViewModel() {
-    private val _state = MutableStateFlow(AccountDetailsViewState())
+    private val _state = MutableStateFlow(AccountDetailsViewState(initialized = false))
     val state: MutableStateFlow<AccountDetailsViewState>
         get() = _state
 
@@ -32,13 +32,20 @@ class AccountDetailsViewModel @Inject constructor(
     private val validationState =
         MutableStateFlow(ValidationState(fieldStatus = ValidationStatus.NONE))
 
-    fun initWithLibrary(demoLibrary: DemoLibrary) {
-        val accountDetails = demoLibrary.customConfigurationPage.accountDetails
-        accountId.value = accountDetails.accountID
-        viewName.value = accountDetails.viewName
-        placementLocation1.value = accountDetails.placementLocation1
-        placementLocation2.value = accountDetails.placementLocation2
+    fun init(accountDetails: AccountDetails) {
+        if (state.value.initialized.not()) {
+            // Set default values
+            accountId.value = accountDetails.accountID
+            viewName.value = accountDetails.viewName
+            placementLocation1.value = accountDetails.placementLocation1
+            placementLocation2.value = accountDetails.placementLocation2
 
+            // Observe changes to default values
+            initState()
+        }
+    }
+
+    private fun initState() {
         viewModelScope.launch {
             combine(
                 accountId,
@@ -106,4 +113,5 @@ data class AccountDetailsViewState(
     val placementLocation1: EditableField = EditableField(),
     val placementLocation2: EditableField = EditableField(),
     val formValidated: Boolean = false,
+    val initialized: Boolean = true,
 )

@@ -60,7 +60,7 @@ fun DemoPageContent(
         demoScreenState.items.forEach { item ->
             composable(DemoDestinations.SUMMARY + item.navAction) {
                 SummaryPage(
-                    backPressed,
+                    actions.backPressed,
                     { actions.navigateToDemoDestination(item.navAction) },
                     mainActivityViewModel,
                     item.summaryViewModel
@@ -73,7 +73,7 @@ fun DemoPageContent(
         }
 
         composable(DemoDestinations.DEMO_DESTINATION + DestinationType.CUSTOM_CHECKOUT.value) {
-            CustomCheckoutPage(actions.backPressed, demoScreenState.library)
+            CustomCheckoutPage(actions.backPressed, demoScreenState.library, mainActivityViewModel)
         }
     }
 }

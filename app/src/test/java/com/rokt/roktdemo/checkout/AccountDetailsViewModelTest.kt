@@ -37,7 +37,7 @@ class AccountDetailsViewModelTest {
     fun `validateForm() should set formValidated to false if form is invalid`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.INVALID)
-            accountDetailsViewModel.initWithLibrary(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked())
+            accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
 
             accountDetailsViewModel.continueButtonPressed()
             Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
@@ -77,7 +77,7 @@ private fun getViewModelForStatus(validationState: ValidationStatus): AccountDet
     val validator: ValidatorRepository = mockk()
     val accountDetailsViewModel =
         AccountDetailsViewModel(validator)
-    accountDetailsViewModel.initWithLibrary(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked())
+    accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
 
     val accountId = DemoLibraryRepositoryMockImpl().TAG_ID
     every { validator.validateAccountId(accountId) } returns ValidationState(
