@@ -3,46 +3,31 @@ package com.rokt.roktdemo.ui.demo.walkthrough
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rokt.roktdemo.data.data
-import com.rokt.roktdemo.data.library.DemoLibraryRepository
-import com.rokt.roktdemo.data.succeeded
-import com.rokt.roktdemo.ui.state.RoktDemoErrorTypes
-import com.rokt.roktdemo.ui.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WalkthroughViewModel @Inject constructor(demoLibraryRepository: DemoLibraryRepository) :
+class WalkthroughViewModel @Inject constructor() :
     ViewModel() {
 
     private var selectedIndex = MutableStateFlow(0)
-
-    private val _state = MutableStateFlow(UiState<WalkThroughPageState>(loading = true))
-    val state: StateFlow<UiState<WalkThroughPageState>>
+    private val _state = MutableStateFlow(WalkThroughPageState(initialzed = false))
+    val state: StateFlow<WalkThroughPageState>
         get() = _state
 
-    init {
-        viewModelScope.launch {
-            _state.value = UiState(loading = true)
-
-            combine(selectedIndex, demoLibraryRepository.getDemoLibrary()) { index, result ->
-                if (result.succeeded) {
-                    UiState(
-                        data = getWalkthroughPage(
-                            result.data().defaultPlacementsExamples.screens.count(),
-                            index
-                        )
+    fun init(screenCount: Int) {
+        if (state.value.initialzed.not()) {
+            viewModelScope.launch {
+                selectedIndex.collect { index ->
+                    _state.value = getWalkthroughPage(
+                        screenCount = screenCount,
+                        index
                     )
-                } else {
-                    UiState(error = RoktDemoErrorTypes.GENERAL)
                 }
-            }.collect {
-                _state.value = it
             }
         }
     }
@@ -75,10 +60,8 @@ class WalkthroughViewModel @Inject constructor(demoLibraryRepository: DemoLibrar
     }
 
     internal fun nextButtonPressed() {
-        state.value.data?.let {
-            if (selectedIndex.value < it.screenCount) {
-                selectedIndex.value = selectedIndex.value + 1
-            }
+        if (selectedIndex.value < state.value.screenCount) {
+            selectedIndex.value = selectedIndex.value + 1
         }
     }
 
@@ -94,4 +77,5 @@ data class WalkThroughPageState(
     val screenCount: Int = 0,
     val screenCounterText: String = "",
     val navButtonText: String = "",
+    val initialzed: Boolean = true,
 )

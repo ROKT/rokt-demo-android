@@ -30,45 +30,35 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import com.rokt.roktdemo.R
+import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.ui.common.ButtonText
 import com.rokt.roktdemo.ui.common.ContentText
-import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
 import com.rokt.roktdemo.ui.common.ScreenHeader
 import com.rokt.roktdemo.ui.common.SmallSpace
 import com.rokt.roktdemo.ui.common.SubHeading
-import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktsdk.Widget
 import java.lang.ref.WeakReference
 
 @Composable
 fun WalkthroughScreen(
     screenIndex: Int,
+    demoLibrary: DemoLibrary,
     viewModel: WalkthroughScreenViewModel = hiltViewModel(),
 ) {
-    viewModel.setScreenIndex(screenIndex)
+    viewModel.initWithLibrary(demoLibrary, screenIndex)
 
     val state by viewModel.state.collectAsState()
     val scroll = rememberScrollState(0)
 
-    when {
-        state.loading -> {
-            LoadingPage()
-        }
-        state.hasData -> {
-            WalkthroughScreenContent(
-                scroll,
-                state.data!!.title,
-                state.data!!.description,
-                state.data!!.isEmbedded,
-                viewModel::onEmbeddedWidgetAddedToView,
-                viewModel::onViewExampleButtonClicked
-            )
-        }
-        else -> {
-            RoktError(errorType = state.error)
-        }
-    }
+    WalkthroughScreenContent(
+        scroll,
+        state.title,
+        state.description,
+        state.isEmbedded,
+        viewModel::onEmbeddedWidgetAddedToView,
+        viewModel::onViewExampleButtonClicked
+    )
 }
 
 @Composable
