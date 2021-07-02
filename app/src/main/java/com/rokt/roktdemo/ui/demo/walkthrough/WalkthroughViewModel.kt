@@ -3,7 +3,6 @@ package com.rokt.roktdemo.ui.demo.walkthrough
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rokt.roktdemo.model.DemoLibrary
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,17 +15,19 @@ class WalkthroughViewModel @Inject constructor() :
     ViewModel() {
 
     private var selectedIndex = MutableStateFlow(0)
-    private val _state = MutableStateFlow(WalkThroughPageState())
+    private val _state = MutableStateFlow(WalkThroughPageState(initialzed = false))
     val state: StateFlow<WalkThroughPageState>
         get() = _state
 
-    fun initWithLibrary(demoLibrary: DemoLibrary) {
-        viewModelScope.launch {
-            selectedIndex.collect { index ->
-                _state.value = getWalkthroughPage(
-                    demoLibrary.defaultPlacementsExamples.screens.count(),
-                    index
-                )
+    fun init(screenCount: Int) {
+        if (state.value.initialzed.not()) {
+            viewModelScope.launch {
+                selectedIndex.collect { index ->
+                    _state.value = getWalkthroughPage(
+                        screenCount = screenCount,
+                        index
+                    )
+                }
             }
         }
     }
@@ -76,4 +77,5 @@ data class WalkThroughPageState(
     val screenCount: Int = 0,
     val screenCounterText: String = "",
     val navButtonText: String = "",
+    val initialzed: Boolean = true,
 )

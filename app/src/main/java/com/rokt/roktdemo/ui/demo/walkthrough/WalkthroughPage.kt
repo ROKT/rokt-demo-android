@@ -32,7 +32,7 @@ fun WalkthroughPage(
     demoLibrary: DemoLibrary,
     viewModel: WalkthroughViewModel = hiltViewModel(),
 ) {
-    viewModel.initWithLibrary(demoLibrary)
+    viewModel.init(demoLibrary.defaultPlacementsExamples.screens.count())
     val state by viewModel.state.collectAsState()
     val navController = rememberNavController()
     val actions = remember(navController) {
