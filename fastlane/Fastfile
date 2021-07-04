@@ -32,7 +32,7 @@ platform :android do
   lane :beta do
 #     gradle(task: "clean bundleRelease")
     gradle(
-          task: 'assemble',
+          task: 'assembleRelease',
           build_type: 'Release'
         )
     upload_to_play_store(track: 'beta')
