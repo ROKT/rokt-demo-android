@@ -8,6 +8,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('keystore.jks')
+            storePassword "${System.env.STORE_PASSWORD}"
+            keyAlias "${System.env.KEY_ALIAS}"
+            keyPassword "${System.env.KEY_PASSWORD}"
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -23,7 +31,8 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
