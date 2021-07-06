@@ -33,25 +33,6 @@ steps:
 
   - wait
 
-  - name: ':speech_balloon: Notify Google play deployment start'
-    command:
-      - echo "Notify gchat"
-    plugins:
-      - seek-oss/aws-sm#v2.0.0:
-          env:
-            NOTIFICATION_ENDPOINT:
-              secret-id: 'stage-android-demoapp-buildkite'
-              json-key: '.NOTIFICATION_ENDPOINT'
-            CHAT_WEBHOOK:
-              secret-id: 'stage-android-demoapp-buildkite'
-              json-key: '.CHAT_WEBHOOK'
-      - ROKT/hangouts-notify#v0.6:
-          chat-endpoint: $$NOTIFICATION_ENDPOINT
-          webhook-url: $$CHAT_WEBHOOK
-          message: '*Mobile-Android* publishing _Rokt Demo app_ to Google Play for internal tester\n${BUILDKITE_BUILD_URL}\n_by ${BUILDKITE_BUILD_CREATOR}_'
-    agents:
-      queue: "eng-default"
-
   - name: ':rocket: Publish Demo app to internal Google play user'
     commands:
       - bundle install
@@ -96,52 +77,11 @@ steps:
 
   - wait
 
-  - name: ':speech_balloon: Notify Google play deployment complete'
-    command:
-      - echo "Notify gchat Done"
-    plugins:
-      - seek-oss/aws-sm#v2.0.0:
-          env:
-            NOTIFICATION_ENDPOINT:
-              secret-id: 'stage-android-demoapp-buildkite'
-              json-key: '.NOTIFICATION_ENDPOINT'
-            CHAT_WEBHOOK:
-              secret-id: 'stage-android-demoapp-buildkite'
-              json-key: '.CHAT_WEBHOOK'
-      - ROKT/hangouts-notify#v0.6:
-          chat-endpoint: $$NOTIFICATION_ENDPOINT
-          webhook-url: $$CHAT_WEBHOOK
-          message: '*Mobile-Android* publishing _Rokt Demo app_ for internal tester  _Done_'
-    agents:
-      queue: "eng-default"
-
-  - wait
-
   - block: ":whale: Release to Google play"
     prompt: "Confirm releasing to Google play"
     branches: "release-*"
 
   - wait
-
-  - name: ':speech_balloon: Notify Google play deployment start'
-    command:
-      - echo "Notify gchat"
-    plugins:
-      - seek-oss/aws-sm#v2.0.0:
-          env:
-            NOTIFICATION_ENDPOINT:
-              secret-id: 'stage-android-demoapp-buildkite'
-              json-key: '.NOTIFICATION_ENDPOINT'
-            CHAT_WEBHOOK:
-              secret-id: 'stage-android-demoapp-buildkite'
-              json-key: '.CHAT_WEBHOOK'
-      - ROKT/hangouts-notify#v0.6:
-          chat-endpoint: ${NOTIFICATION_ENDPOINT}
-          webhook-url: ${CHAT_WEBHOOK}
-          message: '*Mobile-Android* publishing _Rokt Demo app_ to Google Play\n${BUILDKITE_BUILD_URL}\n_by ${BUILDKITE_BUILD_CREATOR}_'
-    agents:
-      queue: "eng-default"
-    branches: "release-*"
 
   - name: ':rocket: Publish Demo app to Google play'
     commands:
@@ -185,25 +125,3 @@ steps:
       queue: 'stage-us-west-2-default'
     branches: "release-*"
     timeout_in_minutes: 25
-
-  - wait
-
-  - name: ':speech_balloon: Notify Google play deployment complete'
-    command:
-      - echo "Notify gchat Done"
-    plugins:
-      - seek-oss/aws-sm#v2.0.0:
-          env:
-            NOTIFICATION_ENDPOINT:
-              secret-id: 'stage-android-demoapp-buildkite'
-              json-key: '.NOTIFICATION_ENDPOINT'
-            CHAT_WEBHOOK:
-              secret-id: 'stage-android-demoapp-buildkite'
-              json-key: '.CHAT_WEBHOOK'
-      - ROKT/hangouts-notify#v0.6:
-          chat-endpoint: $$NOTIFICATION_ENDPOINT
-          webhook-url: $$CHAT_WEBHOOK
-          message: '*Mobile-Android* publishing _Rokt Demo app_ Done'
-    agents:
-      queue: "eng-default"
-    branches: "release-*"
