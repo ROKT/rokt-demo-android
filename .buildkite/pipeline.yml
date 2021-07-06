@@ -1,80 +1,147 @@
 steps:
-#  - name: ':hammer: Build and Unit Test Android Demo'
-#    commands:
-#      - bundle install
-#      - bundle exec fastlane buildAndKtlint
-#      - bundle exec fastlane test
-#    artifact_paths:
-#      - "app/**/*.apk"
-#    plugins:
-#      - docker-compose#v3.0.0:
-#          config: ./docker-compose.yml
-#          run: build_android
-#      - seek-oss/aws-sm#v2.0.0:
-#          env:
-#            STORE_PASSWORD:
-#              secret-id: 'stage-android-demoapp-buildkite'
-#              json-key: '.STORE_PASSWORD'
-#              KEY_ALIAS:
-#                secret-id: 'stage-android-demoapp-buildkite'
-#                json-key: '.KEY_ALIAS'
-#              KEY_PASSWORD:
-#                secret-id: 'stage-android-demoapp-buildkite'
-#                json-key: '.KEY_PASSWORD'
-#
-#    agents:
-#      queue: 'stage-us-west-2-default'
-#    timeout_in_minutes: 25
-#
-#  - wait
-#
-#  - block: ":whale: Release to Beta to Google play"
-#    prompt: "Confirm releasing this Beta version to Google play"
-#
-#  - wait
+  - name: ':hammer: Build and Unit Test Android Demo'
+    commands:
+      - bundle install
+      - bundle exec fastlane buildAndKtlint
+      - bundle exec fastlane test
+    artifact_paths:
+      - "app/**/*.apk"
+    plugins:
+      - docker-compose#v3.0.0:
+          config: ./docker-compose.yml
+          run: build_android
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            STORE_PASSWORD:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.STORE_PASSWORD'
+              KEY_ALIAS:
+                secret-id: 'stage-android-demoapp-buildkite'
+                json-key: '.KEY_ALIAS'
+              KEY_PASSWORD:
+                secret-id: 'stage-android-demoapp-buildkite'
+                json-key: '.KEY_PASSWORD'
 
-#  - name: ':rocket: Publish Demo app to internal Google play user'
-#    commands:
-#      - bundle install
-##      create keystore
-#      - echo $$ANDROID_KEYSTORE_FILE > keystore.jks.b64
-#      - base64 -d -i keystore.jks.b64 > app/keystore.jks
-##      create google play config
-#      - echo $$PLAY_CONFIG_JSON > play_config.json.b64
-#      - base64 -d -i play_config.json.b64 > play_config.json
-#
-##      release internal
-#      - bundle exec fastlane internal
-#    artifact_paths:
-#      - "app/**/*.apk"
-#    plugins:
-#      - docker-compose#v3.0.0:
-#          config: ./docker-compose.yml
-#          run: build_android
-#      - seek-oss/aws-sm#v2.0.0:
-#          env:
-#            STORE_PASSWORD:
-#              secret-id: 'stage-android-demoapp-buildkite'
-#              json-key: '.STORE_PASSWORD'
-#            KEY_ALIAS:
-#              secret-id: 'stage-android-demoapp-buildkite'
-#              json-key: '.KEY_ALIAS'
-#            KEY_PASSWORD:
-#              secret-id: 'stage-android-demoapp-buildkite'
-#              json-key: '.KEY_PASSWORD'
-#            PLAY_CONFIG_JSON:
-#              secret-id: 'stage-android-demoapp-buildkite'
-#              json-key: '.PLAY_CONFIG_JSON'
-#            ANDROID_KEYSTORE_FILE:
-#              secret-id: 'stage-android-demoapp-buildkite'
-#              json-key: '.ANDROID_KEYSTORE_FILE'
-#            APPCENTER_APP_OWNER:
-#              secret-id: 'stage-android-demoapp-buildkite'
-#              json-key: '.APPCENTER_APP_OWNER'
-#    agents:
-#      queue: 'stage-us-west-2-default'
-#    timeout_in_minutes: 25
-#
+    agents:
+      queue: 'stage-us-west-2-default'
+    timeout_in_minutes: 25
+
+  - wait
+
+  - block: ":whale: Release to Google play for internal tester"
+    prompt: "Confirm releasing this internal version to Google play"
+
+  - wait
+
+  - name: ':speech_balloon: Notify Google play deployment start'
+    command:
+      - echo "Notify gchat"
+    plugins:
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            NOTIFICATION_ENDPOINT:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.NOTIFICATION_ENDPOINT'
+            CHAT_WEBHOOK:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.CHAT_WEBHOOK'
+      - ROKT/hangouts-notify#v0.6:
+          chat-endpoint: ${NOTIFICATION_ENDPOINT}
+          webhook-url: ${CHAT_WEBHOOK}
+          message: '*Mobile-Android* publishing _Rokt Demo app_ to Google Play for internal tester\n${BUILDKITE_BUILD_URL}\n_by ${BUILDKITE_BUILD_CREATOR}_'
+    agents:
+      queue: "eng-default"
+
+  - name: ':rocket: Publish Demo app to internal Google play user'
+    commands:
+      - bundle install
+#      create keystore
+      - echo $$ANDROID_KEYSTORE_FILE > keystore.jks.b64
+      - base64 -d -i keystore.jks.b64 > app/keystore.jks
+#      create google play config
+      - echo $$PLAY_CONFIG_JSON > play_config.json.b64
+      - base64 -d -i play_config.json.b64 > play_config.json
+
+#      release internal
+      - bundle exec fastlane internal
+    artifact_paths:
+      - "app/**/*.apk"
+    plugins:
+      - docker-compose#v3.0.0:
+          config: ./docker-compose.yml
+          run: build_android
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            STORE_PASSWORD:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.STORE_PASSWORD'
+            KEY_ALIAS:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.KEY_ALIAS'
+            KEY_PASSWORD:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.KEY_PASSWORD'
+            PLAY_CONFIG_JSON:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.PLAY_CONFIG_JSON'
+            ANDROID_KEYSTORE_FILE:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.ANDROID_KEYSTORE_FILE'
+            APPCENTER_APP_OWNER:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.APPCENTER_APP_OWNER'
+    agents:
+      queue: 'stage-us-west-2-default'
+    timeout_in_minutes: 25
+
+  - wait
+
+  - name: ':speech_balloon: Notify Google play deployment complete'
+    command:
+      - echo "Notify gchat Done"
+    plugins:
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            NOTIFICATION_ENDPOINT:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.NOTIFICATION_ENDPOINT'
+            CHAT_WEBHOOK:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.CHAT_WEBHOOK'
+      - ROKT/hangouts-notify#v0.6:
+          chat-endpoint: ${NOTIFICATION_ENDPOINT}
+          webhook-url: ${CHAT_WEBHOOK}
+          message: '*Mobile-Android* publishing _Rokt Demo app_ for internal tester  _Done_'
+    agents:
+      queue: "eng-default"
+
+  - wait
+
+  - block: ":whale: Release to Google play"
+    prompt: "Confirm releasing to Google play"
+    branches: "release-*"
+
+  - wait
+
+  - name: ':speech_balloon: Notify Google play deployment start'
+    command:
+      - echo "Notify gchat"
+    plugins:
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            NOTIFICATION_ENDPOINT:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.NOTIFICATION_ENDPOINT'
+            CHAT_WEBHOOK:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.CHAT_WEBHOOK'
+      - ROKT/hangouts-notify#v0.6:
+          chat-endpoint: ${NOTIFICATION_ENDPOINT}
+          webhook-url: ${CHAT_WEBHOOK}
+          message: '*Mobile-Android* publishing _Rokt Demo app_ to Google Play\n${BUILDKITE_BUILD_URL}\n_by ${BUILDKITE_BUILD_CREATOR}_'
+    agents:
+      queue: "eng-default"
+    branches: "release-*"
 
   - name: ':rocket: Publish Demo app to Google play'
     commands:
@@ -116,4 +183,27 @@ steps:
               json-key: '.APPCENTER_APP_OWNER'
     agents:
       queue: 'stage-us-west-2-default'
+    branches: "release-*"
     timeout_in_minutes: 25
+
+  - wait
+
+  - name: ':speech_balloon: Notify Google play deployment complete'
+    command:
+      - echo "Notify gchat Done"
+    plugins:
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            NOTIFICATION_ENDPOINT:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.NOTIFICATION_ENDPOINT'
+            CHAT_WEBHOOK:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.CHAT_WEBHOOK'
+      - ROKT/hangouts-notify#v0.6:
+          chat-endpoint: ${NOTIFICATION_ENDPOINT}
+          webhook-url: ${CHAT_WEBHOOK}
+          message: '*Mobile-Android* publishing _Rokt Demo app_ Done'
+    agents:
+      queue: "eng-default"
+    branches: "release-*"
