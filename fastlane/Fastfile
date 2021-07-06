@@ -27,4 +27,30 @@ platform :android do
     gradle(task: "assembleDebug")
     gradle(task: "ktlintCheck")
   end
+
+  desc "Deploy a internal version to the Google Play"
+  lane :internal do
+    gradle(
+          task: 'assemble',
+          build_type: 'Release'
+        )
+    upload_to_play_store(track: 'internal',
+                         release_status: 'draft')
+  end
+
+    desc "Deploy a release version to the Google Play"
+    lane :release do
+      gradle(
+            task: 'assemble',
+            build_type: 'Release'
+          )
+      upload_to_play_store()
+    end
+
+  desc "Deploy a new version to the Google Play"
+  lane :production do
+    gradle(task: "clean bundleRelease")
+    upload_to_play_store
+  end
+
 end

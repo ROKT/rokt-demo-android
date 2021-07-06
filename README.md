@@ -27,6 +27,12 @@ The docker image used for this version installs Java 11, and Android SDK version
 
 It can be found here: https://github.com/NedaRobatMeily/docker-image-java-11
 
+## How to release the app
+- Update build `versionCode` and `versionNumber` in build.gradle file
+- Commit & push
+- Unblock the release step on **Buildkite**
+- On google play console, under releases section, add release note and publish the version
+
 ## FAQ
 
 ### How can I use mock data?
