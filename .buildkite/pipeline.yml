@@ -1,3 +1,7 @@
+env:
+  NOTIFICATION_ENDPOINT: ${NOTIFICATION_ENDPOINT}
+  CHAT_WEBHOOK: ${CHAT_WEBHOOK}
+
 steps:
   - name: ':hammer: Build and Unit Test Android Demo'
     commands:
