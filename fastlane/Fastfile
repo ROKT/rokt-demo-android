@@ -28,9 +28,8 @@ platform :android do
     gradle(task: "ktlintCheck")
   end
 
-  desc "Deploy a beta version to the Google Play"
-  lane :beta do
-#     gradle(task: "clean bundleRelease")
+  desc "Deploy a internal version to the Google Play"
+  lane :internal do
     gradle(
           task: 'assemble',
           build_type: 'Release'
@@ -38,6 +37,15 @@ platform :android do
     upload_to_play_store(track: 'internal',
                          release_status: 'draft')
   end
+
+    desc "Deploy a release version to the Google Play"
+    lane :release do
+      gradle(
+            task: 'assemble',
+            build_type: 'Release'
+          )
+      upload_to_play_store(release_status: 'draft')
+    end
 
   desc "Deploy a new version to the Google Play"
   lane :production do
