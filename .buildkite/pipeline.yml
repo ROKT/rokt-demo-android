@@ -1,7 +1,3 @@
-env:
-  NOTIFICATION_ENDPOINT: ${NOTIFICATION_ENDPOINT}
-  CHAT_WEBHOOK: ${CHAT_WEBHOOK}
-
 steps:
   - name: ':hammer: Build and Unit Test Android Demo'
     commands:
@@ -50,8 +46,8 @@ steps:
               secret-id: 'stage-android-demoapp-buildkite'
               json-key: '.CHAT_WEBHOOK'
       - ROKT/hangouts-notify#v0.6:
-          chat-endpoint: ${NOTIFICATION_ENDPOINT}
-          webhook-url: ${CHAT_WEBHOOK}
+          chat-endpoint: $$NOTIFICATION_ENDPOINT
+          webhook-url: $$CHAT_WEBHOOK
           message: '*Mobile-Android* publishing _Rokt Demo app_ to Google Play for internal tester\n${BUILDKITE_BUILD_URL}\n_by ${BUILDKITE_BUILD_CREATOR}_'
     agents:
       queue: "eng-default"
@@ -113,8 +109,8 @@ steps:
               secret-id: 'stage-android-demoapp-buildkite'
               json-key: '.CHAT_WEBHOOK'
       - ROKT/hangouts-notify#v0.6:
-          chat-endpoint: ${NOTIFICATION_ENDPOINT}
-          webhook-url: ${CHAT_WEBHOOK}
+          chat-endpoint: $$NOTIFICATION_ENDPOINT
+          webhook-url: $$CHAT_WEBHOOK
           message: '*Mobile-Android* publishing _Rokt Demo app_ for internal tester  _Done_'
     agents:
       queue: "eng-default"
@@ -205,8 +201,8 @@ steps:
               secret-id: 'stage-android-demoapp-buildkite'
               json-key: '.CHAT_WEBHOOK'
       - ROKT/hangouts-notify#v0.6:
-          chat-endpoint: ${NOTIFICATION_ENDPOINT}
-          webhook-url: ${CHAT_WEBHOOK}
+          chat-endpoint: $$NOTIFICATION_ENDPOINT
+          webhook-url: $$CHAT_WEBHOOK
           message: '*Mobile-Android* publishing _Rokt Demo app_ Done'
     agents:
       queue: "eng-default"
