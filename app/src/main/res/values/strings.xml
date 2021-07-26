@@ -19,8 +19,8 @@
     <string name="content_description_walkrough_icon">Feature Walkthrough Icon</string>
     <string name="summary_page_button_text">Let\'s Begin</string>
     <string name="text_disclaimer">Disclaimer</string>
-    <string name="summary_dialog_btn_negative">No Thanks</string>
-    <string name="summary_dialog_btn_positive">Yes Please</string>
+    <string name="summary_dialog_btn_negative">No thanks</string>
+    <string name="summary_dialog_btn_positive">Yes please</string>
     <string name="text_preview">Preview</string>
     <string name="button_view_example_text">View Example</string>
     <string name="button_view_example_icon">Icon eye</string>
