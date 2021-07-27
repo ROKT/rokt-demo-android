@@ -36,7 +36,7 @@
     <string name="drop_down_content_description">Arrow</string>
     <string name="label_country">Country</string>
     <string name="advanced_options_toggle_text">Advanced Options</string>
-    <string name="advanced_options_description">Brief sentence explaining this step lorem ipsum the quick brown fox jumps over the lazy dog.</string>
+    <string name="advanced_options_description">Add in your required custom attributes to show placements for your account. Attributes not already set up by your account manager will not be used.</string>
     <string name="label_attribute_name">Attribute Name</string>
     <string name="label_attribute_value">Value</string>
     <string name="customer_details_screen_description">Please enter your customer details to be used in the offer selection process.</string>
