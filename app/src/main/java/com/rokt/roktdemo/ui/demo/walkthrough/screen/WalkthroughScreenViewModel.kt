@@ -55,7 +55,7 @@ class WalkthroughScreenViewModel @Inject constructor() : ViewModel() {
 
     private fun getAttributes(): HashMap<String, String> {
         val attributes = state.value.attributes
-        attributes.put("email",randomiseEmail(attributes.get("email")))
+        attributes.put("email", randomiseEmail(attributes.get("email")))
         return attributes
     }
 

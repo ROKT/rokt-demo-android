@@ -55,7 +55,7 @@
     <string name="text_total">Total</string>
     <string name="text_customer_details">Customer Details</string>
     <string name="text_email">Email</string>
-    <string name="text_email_value">demo@rokt.com</string>
+    <string name="text_email_value">john.smith@example.com</string>
     <string name="text_shipping_address">Shipping address</string>
     <string name="text_shipping_address_value"> Rokt\n175 Varick Street\nNew York NY 10014\nUnited States\n(646) 693–7411</string>
     <string name="text_billing_address">Billing address</string>
