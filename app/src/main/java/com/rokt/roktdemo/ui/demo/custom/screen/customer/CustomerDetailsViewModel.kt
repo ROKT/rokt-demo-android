@@ -124,7 +124,7 @@ class CustomerDetailsViewModel @Inject constructor() : ViewModel() {
     }
 
     companion object {
-        private const val DEFAULT_COUNTRY = "AU"
+        private const val DEFAULT_COUNTRY = "US"
     }
 }
 
