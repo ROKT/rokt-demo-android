@@ -67,21 +67,6 @@ fun SummaryDisclaimerDialog(
                         ) {
                             SmallButtonText(text = stringResource(R.string.summary_dialog_btn_positive))
                         }
-
-                        Button(
-                            onClick = onDismiss,
-                            modifier = Modifier
-                                .height(44.dp)
-                                .padding(start = X_SMALL_SPACE.dp)
-                                .weight(1F),
-                            colors = ButtonDefaults.textButtonColors(
-                                backgroundColor = Color(240, 240, 240),
-                                contentColor = MaterialTheme.colors.primaryVariant
-                            ),
-                            shape = RectangleShape
-                        ) {
-                            SmallButtonText(text = stringResource(R.string.summary_dialog_btn_negative))
-                        }
                     }
                 }
             }
