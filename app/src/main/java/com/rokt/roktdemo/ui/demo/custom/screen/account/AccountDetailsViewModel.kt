@@ -1,6 +1,5 @@
 package com.rokt.roktdemo.ui.demo.custom.screen.account
 
-import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -54,7 +53,7 @@ class AccountDetailsViewModel @Inject constructor(
                 account,
                 accountValidationState,
                 passwordValidationState
-            ) {  accountDetail, accountValidation, passwordValidation  ->
+            ) { accountDetail, accountValidation, passwordValidation ->
                 AccountDetailsViewState(
                     accountId = createEditableField(
                         text = accountDetail.accountId,
@@ -91,7 +90,7 @@ class AccountDetailsViewModel @Inject constructor(
                         passwordValidation.fieldErrorMessage
                     ),
                     formValidated = accountValidationState.value.fieldStatus == ValidationStatus.VALID &&
-                            passwordValidationState.value.fieldStatus == ValidationStatus.VALID
+                        passwordValidationState.value.fieldStatus == ValidationStatus.VALID
                 )
             }.collect {
                 _state.value = it

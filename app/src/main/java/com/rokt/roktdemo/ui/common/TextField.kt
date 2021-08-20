@@ -37,8 +37,9 @@ fun RoktTextField(
         onValueChange = { onValueChange(it) },
         singleLine = true,
         keyboardOptions = KeyboardOptions(
-            keyboardType = if (isPassword) KeyboardType.Password else KeyboardType.Text ,
-            imeAction = ImeAction.Next),
+            keyboardType = if (isPassword) KeyboardType.Password else KeyboardType.Text,
+            imeAction = ImeAction.Next
+        ),
         label = {
             Text(
                 label,

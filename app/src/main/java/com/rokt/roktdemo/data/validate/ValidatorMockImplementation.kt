@@ -19,8 +19,10 @@ class ValidatorMockImplementation : ValidatorRepository {
                 "Password can't be empty"
             )
         } else if (input != password) {
-            ValidationState(ValidationStatus.INVALID,
-            "Incorrect password!")
+            ValidationState(
+                fieldStatus = ValidationStatus.INVALID,
+                "Incorrect password!"
+            )
         } else {
             ValidationState(fieldStatus = ValidationStatus.VALID)
         }
