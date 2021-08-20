@@ -12,6 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.rokt.roktdemo.ui.theme.RoktColors
@@ -23,7 +26,8 @@ fun RoktTextField(
     text: String,
     onValueChange: (String) -> Unit,
     errorText: String = "",
-    modifier: Modifier = Modifier.fillMaxWidth(),
+    isPassword: Boolean = false,
+    modifier: Modifier = Modifier.fillMaxWidth()
 ) {
     val borderColor =
         if (errorText.isBlank()) MaterialTheme.colors.onSurface else RoktColors.ErrorColor
@@ -32,7 +36,9 @@ fun RoktTextField(
         value = text,
         onValueChange = { onValueChange(it) },
         singleLine = true,
-        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+        keyboardOptions = KeyboardOptions(
+            keyboardType = if (isPassword) KeyboardType.Password else KeyboardType.Text ,
+            imeAction = ImeAction.Next),
         label = {
             Text(
                 label,
@@ -46,6 +52,7 @@ fun RoktTextField(
             fontSize = 16.sp,
             fontFamily = RoktFonts.DefaultFontFamily
         ),
+        visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
         modifier = modifier
             .padding(top = 20.dp)
             .background(Color.White)
