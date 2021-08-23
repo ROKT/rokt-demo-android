@@ -2,6 +2,7 @@ package com.rokt.roktdemo.ui.about
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -54,6 +57,7 @@ fun AboutPage(backPressed: () -> Unit, viewModel: AboutViewModel = hiltViewModel
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .background(Color.White, RectangleShape)
     ) {
 
         when {
