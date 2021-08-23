@@ -92,6 +92,7 @@ private fun AccountDetailsSuccess(
         data.viewName,
         data.placementLocation1,
         data.placementLocation2,
+        data.password
     )
 }
 
@@ -103,6 +104,7 @@ private fun AccountDetailsScreenContent(
     viewName: EditableField,
     placementLocation1: EditableField,
     placementLocation2: EditableField,
+    password: EditableField
 ) {
     Column(
         Modifier
@@ -142,6 +144,13 @@ private fun AccountDetailsScreenContent(
             placementLocation2.text,
             placementLocation2.onValueChanged
         )
+        ErrorTextField(
+            stringResource(R.string.label_password),
+            password.text,
+            password.onValueChanged,
+            password.errorText,
+            true
+        )
         MediumSpace()
         ButtonLight(text = stringResource(R.string.button_continue)) {
             continueButtonPressed.invoke()
@@ -155,13 +164,15 @@ private fun ErrorTextField(
     text: String,
     onValueChange: (String) -> Unit,
     errorText: String,
+    isPassword: Boolean = false
 ) {
     Column(Modifier.fillMaxWidth()) {
         RoktTextField(
             label,
             text,
             onValueChange,
-            errorText
+            errorText,
+            isPassword
         )
 
         if (errorText.isNotEmpty()) {

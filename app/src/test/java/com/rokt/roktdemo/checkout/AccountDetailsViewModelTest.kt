@@ -26,7 +26,8 @@ class AccountDetailsViewModelTest {
     @Test
     fun `validateForm() should set formValidated to true if form is valid`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.VALID)
+            val accountDetailsViewModel =
+                getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
             Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(true)
@@ -36,7 +37,34 @@ class AccountDetailsViewModelTest {
     @Test
     fun `validateForm() should set formValidated to false if form is invalid`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.INVALID)
+            val accountDetailsViewModel =
+                getViewModelForStatus(ValidationStatus.INVALID, ValidationStatus.INVALID)
+            accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
+
+            accountDetailsViewModel.continueButtonPressed()
+            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+                .isEqualTo(false)
+        }
+    }
+
+    @Test
+    fun `validateForm() should set formValidated to false if account is invalid`() {
+        coroutineTestRule.testDispatcher.runBlockingTest {
+            val accountDetailsViewModel =
+                getViewModelForStatus(ValidationStatus.INVALID, ValidationStatus.VALID)
+            accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
+
+            accountDetailsViewModel.continueButtonPressed()
+            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+                .isEqualTo(false)
+        }
+    }
+
+    @Test
+    fun `validateForm() should set formValidated to false if password is invalid`() {
+        coroutineTestRule.testDispatcher.runBlockingTest {
+            val accountDetailsViewModel =
+                getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.INVALID)
             accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
 
             accountDetailsViewModel.continueButtonPressed()
@@ -48,7 +76,8 @@ class AccountDetailsViewModelTest {
     @Test
     fun `onNavigatedAway() should set formValidated to false`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.VALID)
+            val accountDetailsViewModel =
+                getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.VALID)
 
             accountDetailsViewModel.continueButtonPressed()
             Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
@@ -62,18 +91,22 @@ class AccountDetailsViewModelTest {
     @Test
     fun `onFieldEdited() should set formValidated to false`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
-            val accountDetailsViewModel = getViewModelForStatus(ValidationStatus.VALID)
+            val accountDetailsViewModel =
+                getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
             Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(true)
-            accountDetailsViewModel.onFieldEdited()
+            accountDetailsViewModel.onAccountFieldEdited()
             Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(false)
         }
     }
 }
 
-private fun getViewModelForStatus(validationState: ValidationStatus): AccountDetailsViewModel {
+private fun getViewModelForStatus(
+    accountValidationState: ValidationStatus,
+    passwordValidationState: ValidationStatus
+): AccountDetailsViewModel {
     val validator: ValidatorRepository = mockk()
     val accountDetailsViewModel =
         AccountDetailsViewModel(validator)
@@ -81,7 +114,11 @@ private fun getViewModelForStatus(validationState: ValidationStatus): AccountDet
 
     val accountId = DemoLibraryRepositoryMockImpl().TAG_ID
     every { validator.validateAccountId(accountId) } returns ValidationState(
-        validationState
+        accountValidationState
+    )
+    val password = DemoLibraryRepositoryMockImpl().PASSWORD
+    every { validator.validatePassword(password, "") } returns ValidationState(
+        passwordValidationState
     )
     return accountDetailsViewModel
 }

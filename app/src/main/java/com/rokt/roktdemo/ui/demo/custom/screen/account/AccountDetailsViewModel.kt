@@ -24,22 +24,24 @@ class AccountDetailsViewModel @Inject constructor(
     val state: MutableStateFlow<AccountDetailsViewState>
         get() = _state
 
-    private val accountId = MutableStateFlow("")
-    private val viewName = MutableStateFlow("")
-    private val placementLocation1 = MutableStateFlow("")
-    private val placementLocation2 = MutableStateFlow("")
+    private val account = MutableStateFlow(
+        AccountDetailsViewData("", "", "", "", "")
+    )
+    private var password = ""
 
-    private val validationState =
+    private val accountValidationState =
+        MutableStateFlow(ValidationState(fieldStatus = ValidationStatus.NONE))
+    private val passwordValidationState =
         MutableStateFlow(ValidationState(fieldStatus = ValidationStatus.NONE))
 
     fun init(accountDetails: AccountDetails) {
         if (state.value.initialized.not()) {
             // Set default values
-            accountId.value = accountDetails.accountID
-            viewName.value = accountDetails.viewName
-            placementLocation1.value = accountDetails.placementLocation1
-            placementLocation2.value = accountDetails.placementLocation2
-
+            account.value.accountId = accountDetails.accountID
+            account.value.viewName = accountDetails.viewName
+            account.value.placementLocation1 = accountDetails.placementLocation1
+            account.value.placementLocation2 = accountDetails.placementLocation2
+            password = accountDetails.password
             // Observe changes to default values
             initState()
         }
@@ -48,43 +50,47 @@ class AccountDetailsViewModel @Inject constructor(
     private fun initState() {
         viewModelScope.launch {
             combine(
-                accountId,
-                viewName,
-                placementLocation1,
-                placementLocation2,
-                validationState
-            ) { id, name, placement1, placement2, validation ->
+                account,
+                accountValidationState,
+                passwordValidationState
+            ) { accountDetail, accountValidation, passwordValidation ->
                 AccountDetailsViewState(
                     accountId = createEditableField(
-                        text = id,
+                        text = accountDetail.accountId,
                         onFieldEdited = {
-                            accountId.value = it
-                            onFieldEdited()
+                            account.value = account.value.copy(accountId = it)
+                            onAccountFieldEdited()
                         },
-                        validation.fieldErrorMessage
+                        accountValidation.fieldErrorMessage
                     ),
                     viewName = createEditableField(
-                        text = name,
+                        text = accountDetail.viewName,
                         onFieldEdited = {
-                            viewName.value = it
-                            onFieldEdited()
+                            account.value = account.value.copy(viewName = it)
                         }
                     ),
                     placementLocation1 = createEditableField(
-                        text = placement1,
+                        text = accountDetail.placementLocation1,
                         onFieldEdited = {
-                            placementLocation1.value = it
-                            onFieldEdited()
+                            account.value = account.value.copy(placementLocation1 = it)
                         }
                     ),
                     placementLocation2 = createEditableField(
-                        text = placement2,
+                        text = accountDetail.placementLocation2,
                         onFieldEdited = {
-                            placementLocation2.value = it
-                            onFieldEdited()
+                            account.value = account.value.copy(placementLocation2 = it)
                         }
                     ),
-                    formValidated = validationState.value.fieldStatus == ValidationStatus.VALID
+                    password = createEditableField(
+                        text = accountDetail.password,
+                        onFieldEdited = {
+                            account.value = account.value.copy(password = it)
+                            onPasswordFieldEdited()
+                        },
+                        passwordValidation.fieldErrorMessage
+                    ),
+                    formValidated = accountValidationState.value.fieldStatus == ValidationStatus.VALID &&
+                        passwordValidationState.value.fieldStatus == ValidationStatus.VALID
                 )
             }.collect {
                 _state.value = it
@@ -93,17 +99,24 @@ class AccountDetailsViewModel @Inject constructor(
     }
 
     fun continueButtonPressed() {
-        validationState.value = validator.validateAccountId(accountId.value)
+        accountValidationState.value = validator.validateAccountId(account.value.accountId)
+        passwordValidationState.value = validator.validatePassword(password, account.value.password)
     }
 
     fun onNavigatedAway() {
         // Reset validationState, so when we return the fields can be modified
-        validationState.value = ValidationState(ValidationStatus.NONE)
+        accountValidationState.value = ValidationState(ValidationStatus.NONE)
+        passwordValidationState.value = ValidationState(ValidationStatus.NONE)
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    internal fun onFieldEdited() {
-        validationState.value = ValidationState(ValidationStatus.NONE)
+    internal fun onAccountFieldEdited() {
+        accountValidationState.value = ValidationState(ValidationStatus.NONE)
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    internal fun onPasswordFieldEdited() {
+        passwordValidationState.value = ValidationState(ValidationStatus.NONE)
     }
 }
 
@@ -112,6 +125,15 @@ data class AccountDetailsViewState(
     val viewName: EditableField = EditableField(),
     val placementLocation1: EditableField = EditableField(),
     val placementLocation2: EditableField = EditableField(),
+    val password: EditableField = EditableField(),
     val formValidated: Boolean = false,
     val initialized: Boolean = true,
+)
+
+data class AccountDetailsViewData(
+    var accountId: String,
+    var viewName: String,
+    var placementLocation1: String,
+    var placementLocation2: String,
+    var password: String
 )

@@ -28,6 +28,7 @@ data class AccountDetails(
     val viewName: String,
     val placementLocation1: String,
     val placementLocation2: String,
+    val password: String
 )
 
 class CustomerDetails(

@@ -31,6 +31,7 @@
     <string name="label_view_name">View Name</string>
     <string name="label_location_1">Placement Location 1</string>
     <string name="label_location_2">Placement Location 2</string>
+    <string name="label_password">Password</string>
     <string name="button_continue">Continue</string>
     <string name="content_description_exclamation">Exclamation mark</string>
     <string name="drop_down_content_description">Arrow</string>

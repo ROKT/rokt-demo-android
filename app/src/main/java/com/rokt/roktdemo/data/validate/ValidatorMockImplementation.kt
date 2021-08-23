@@ -11,4 +11,20 @@ class ValidatorMockImplementation : ValidatorRepository {
             ValidationState(fieldStatus = ValidationStatus.VALID)
         }
     }
+
+    override fun validatePassword(password: String, input: String): ValidationState {
+        return if (input.isEmpty()) {
+            ValidationState(
+                fieldStatus = ValidationStatus.INVALID,
+                "Password can't be empty"
+            )
+        } else if (input != password) {
+            ValidationState(
+                fieldStatus = ValidationStatus.INVALID,
+                "Incorrect password!"
+            )
+        } else {
+            ValidationState(fieldStatus = ValidationStatus.VALID)
+        }
+    }
 }

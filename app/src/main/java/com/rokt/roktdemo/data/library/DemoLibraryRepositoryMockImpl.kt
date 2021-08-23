@@ -92,6 +92,7 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
     val CUSTOM_CONFIG_VIEW_NAME = "testAndroid"
     val CUSTOM_CONFIG_LOC_1 = "Location1"
     val CUSTOM_CONFIG_LOC_2 = "Location2"
+    val PASSWORD = "password"
     val CUSTOM_CONFIG_LONG_DESC =
         "The Custom Checkout Flow allows you to preview a specific placement from a specific account in an unbranded confirmation page. This allows you to preview the specific UI of this placement and experience the in-app behaviour of the Rokt placement.\n\nNote: In order to preview a specific placement, you will require details about your Rokt account and placement configuration. If you do not have these, please reach out to your Rokt Account Manager.\n"
 
@@ -104,7 +105,8 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
             CUSTOM_CONFIG_ACCOUNT_ID,
             "testTwoEmbedded",
             CUSTOM_CONFIG_LOC_1,
-            CUSTOM_CONFIG_LOC_2
+            CUSTOM_CONFIG_LOC_2,
+            PASSWORD
         ),
         CustomerDetails("NSW", "2000", country = listOf("AU", "UK", "US")),
         hashMapOf(
