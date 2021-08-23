@@ -48,6 +48,7 @@ fun HomePage(actions: MainActions) {
         modifier = Modifier
             .fillMaxWidth()
             .fillMaxHeight()
+            .background(Color.White, RectangleShape)
     ) {
         HomeLogo()
 
