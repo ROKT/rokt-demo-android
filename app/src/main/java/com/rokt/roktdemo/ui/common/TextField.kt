@@ -4,12 +4,17 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusOrder
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -31,14 +36,18 @@ fun RoktTextField(
 ) {
     val borderColor =
         if (errorText.isBlank()) MaterialTheme.colors.onSurface else RoktColors.ErrorColor
-
+    val focusManager = LocalFocusManager.current
+    val focusRequester = remember { FocusRequester() }
     androidx.compose.material.TextField(
         value = text,
         onValueChange = { onValueChange(it) },
         singleLine = true,
         keyboardOptions = KeyboardOptions(
             keyboardType = if (isPassword) KeyboardType.Password else KeyboardType.Text,
-            imeAction = ImeAction.Next
+            imeAction = ImeAction.Done
+        ),
+        keyboardActions = KeyboardActions(
+            onDone = { focusManager.clearFocus() }
         ),
         label = {
             Text(
@@ -58,5 +67,6 @@ fun RoktTextField(
             .padding(top = 20.dp)
             .background(Color.White)
             .border(2.dp, borderColor)
+            .focusOrder(focusRequester)
     )
 }

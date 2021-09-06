@@ -39,7 +39,7 @@ fun CustomCheckoutPage(exitCheckoutPage: () -> Unit, demoLibrary: DemoLibrary, m
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 BackButton(backPressed = actions.backPressed)
-                HeaderTextButton("Quit Demo", { exitCheckoutPage() })
+                HeaderTextButton("EXIT DEMO", { exitCheckoutPage() })
             }
         }
 
