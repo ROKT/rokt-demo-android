@@ -19,7 +19,7 @@ class WalkthroughViewModelTest {
     @Test
     fun `getNextButtonText should return 'Next' if index is not the last element in the list`() {
         val text = walkthroughViewModel.getNextButtonText(3, 1)
-        assertThat(text).isEqualTo("Next")
+        assertThat(text).isEqualTo("NEXT")
     }
 
     @Test
