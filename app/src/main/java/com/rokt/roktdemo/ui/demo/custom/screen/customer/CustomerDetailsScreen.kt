@@ -35,6 +35,7 @@ import com.rokt.roktdemo.R
 import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.ui.common.ButtonDark
 import com.rokt.roktdemo.ui.common.ContentText
+import com.rokt.roktdemo.ui.common.DefaultSpace
 import com.rokt.roktdemo.ui.common.DropDownList
 import com.rokt.roktdemo.ui.common.HeaderTextButton
 import com.rokt.roktdemo.ui.common.RoktTextField
@@ -121,7 +122,7 @@ private fun CustomerDetailsScreenContent(
             postcode.onValueChanged
         )
         AdvancedOptionsToggle(onToggleAdvancedOptions)
-
+        DefaultSpace()
         if (showAdvancedOptions) {
             AdvancedOptionsContent(advancedOptions)
         }

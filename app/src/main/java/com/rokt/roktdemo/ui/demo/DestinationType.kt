@@ -32,16 +32,14 @@ fun DestinationType.getImageResource(): Int {
 }
 
 private const val WALKTHROUGH_DISCLAIMER =
-    """This is a Rokt demo used to show Rokt’s in-app capabilities. This demo does not capture or store any personal or device data.
+    """As you progress, try interacting with the Rokt placements by tapping "Yes please" or "No thanks". To progress to the next placement type, tap "NEXT" at the top right hand corner of the screen.
 
-As you progress, try interacting with the Rokt placements by clicking “Yes please” or "No thanks".
-
-Click ‘NEXT’ to progress through different placement types."""
+No personal and device data will be captured or stored."""
 
 private const val DISCLAIMER_DEFAULT =
-    """This is a Rokt demo used to show Rokt’s in-app capabilities. This demo does not capture or store any personal or device data.
+    """As you progress, try interacting with the Rokt placements by tapping "Yes please" or "No thanks".
 
-As you progress, try interacting with the Rokt placements by clicking “Yes please” or "No thanks"."""
+No personal and device data will be captured or stored."""
 
 fun DestinationType.getDisclaimer(): String {
     return when (DestinationType.FEATURE_WALKTHROUGH) {

@@ -19,7 +19,7 @@ object Libs {
     }
 
     object Kotlin {
-        private const val version = "1.5.10"
+        private const val version = "1.5.21"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin =
             "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
@@ -46,7 +46,7 @@ object Libs {
         const val lifeCycle = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
         object Compose {
-            private const val version = "1.0.0-beta09"
+            private const val version = "1.0.2"
 
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val layout = "androidx.compose.foundation:foundation-layout:$version"
