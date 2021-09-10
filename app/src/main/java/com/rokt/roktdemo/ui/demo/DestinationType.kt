@@ -39,7 +39,7 @@ No personal and device data will be captured or stored."""
 private const val DISCLAIMER_DEFAULT =
     """As you progress, try interacting with the Rokt placements by tapping "Yes please" or "No thanks".
 
-No personal and device data will be captured or stored."""
+No personal, account, or device data will be captured or stored."""
 
 fun DestinationType.getDisclaimer(): String {
     return when (DestinationType.FEATURE_WALKTHROUGH) {

@@ -79,7 +79,13 @@ fun SummaryPageSuccessPage(
         Column(
             Modifier
                 .fillMaxWidth()
-                .padding(PaddingValues(start = 3.dp, bottom = 61.dp)),
+                .padding(
+                    PaddingValues(
+                        start = MEDIUM_SPACE.dp,
+                        end = MEDIUM_SPACE.dp,
+                        bottom = 61.dp
+                    )
+                ),
         ) {
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
