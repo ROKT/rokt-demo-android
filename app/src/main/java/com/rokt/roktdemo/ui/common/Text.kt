@@ -43,25 +43,36 @@ fun Title(
 }
 
 @Composable
-fun SubHeading(text: String, fontSize: Int = 20) {
+fun SubHeading(
+    text: String,
+    fontSize: Int = 20,
+    lineHeight: Int = 20
+) {
     Text(
         text = text,
         fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = fontSize.sp,
-        color = MaterialTheme.colors.primaryVariant
+        color = MaterialTheme.colors.primaryVariant,
+        lineHeight = lineHeight.sp
     )
 }
 
 @Composable
-fun ContentText(text: String, fontSize: Int = 16, textAlign: TextAlign = TextAlign.Start) {
+fun ContentText(
+    text: String,
+    fontSize: Int = 16,
+    textAlign: TextAlign = TextAlign.Start,
+    lineHeight: Int = 22
+) {
     Text(
         text = text,
         fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Normal,
         fontSize = fontSize.sp,
         color = MaterialTheme.colors.primaryVariant,
-        textAlign = textAlign
+        textAlign = textAlign,
+        lineHeight = lineHeight.sp
     )
 }
 
