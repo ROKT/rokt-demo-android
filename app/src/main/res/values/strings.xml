@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Rokt Demo</string>
-    <string name="menu_button_demo">Demo library</string>
+    <string name="app_name">Rokt</string>
+    <string name="menu_button_demo">Placement library</string>
     <string name="menu_button_about">About this app</string>
     <string name="menu_button_contact">Contact us</string>
     <string name="footer_copyright">© Rokt 2021 - All rights reserved</string>
@@ -20,7 +20,7 @@
     <string name="summary_page_button_text">Let\'s begin</string>
     <string name="text_disclaimer">Disclaimer</string>
     <string name="summary_dialog_btn_negative">No thanks</string>
-    <string name="summary_dialog_btn_positive">Start demo</string>
+    <string name="summary_dialog_btn_positive">Continue</string>
     <string name="text_preview">Preview</string>
     <string name="button_view_example_text">View example</string>
     <string name="button_view_example_icon">Icon eye</string>
@@ -45,7 +45,7 @@
     <string name="textfield_label_state">State</string>
     <string name="textfield_label_postcode">Postcode</string>
     <string name="customer_screen_step_label">Step 2/2</string>
-    <string name="launch_demo_button_text">Launch Demo</string>
+    <string name="launch_demo_button_text">Continue</string>
     <string name="text_order_summary">Order summary</string>
     <string name="text_basic_tshirt">Basic T-Shirt (3)</string>
     <string name="text_basic_tshirt_price">$59.95</string>

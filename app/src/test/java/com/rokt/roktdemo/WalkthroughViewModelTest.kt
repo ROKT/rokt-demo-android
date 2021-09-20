@@ -23,9 +23,9 @@ class WalkthroughViewModelTest {
     }
 
     @Test
-    fun `getNextButtonText should return 'EXIT DEMO' if index is last element in the list`() {
+    fun `getNextButtonText should return 'EXIT' if index is last element in the list`() {
         val text = walkthroughViewModel.getNextButtonText(2, 1)
-        assertThat(text).isEqualTo("EXIT DEMO")
+        assertThat(text).isEqualTo("EXIT")
     }
 
     @Test
