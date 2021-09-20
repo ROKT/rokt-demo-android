@@ -45,7 +45,7 @@ class WalkthroughViewModel @Inject constructor() :
     internal fun getNextButtonText(screenCount: Int, index: Int): String {
         return when {
             screenCount < 1 -> ""
-            index == screenCount - 1 -> "EXIT DEMO"
+            index == screenCount - 1 -> "EXIT"
             else -> "NEXT"
         }
     }
