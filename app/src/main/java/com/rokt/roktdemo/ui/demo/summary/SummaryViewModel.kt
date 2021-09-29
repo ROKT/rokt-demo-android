@@ -4,11 +4,11 @@ import androidx.lifecycle.ViewModel
 import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.model.DescriptionItem
 import com.rokt.roktdemo.ui.demo.DestinationType
-import com.rokt.roktdemo.ui.demo.DestinationType.CUSTOM_CHECKOUT
-import com.rokt.roktdemo.ui.demo.DestinationType.FEATURE_WALKTHROUGH
 import com.rokt.roktdemo.ui.demo.DestinationType.CONFIRMATION_GROUPON
 import com.rokt.roktdemo.ui.demo.DestinationType.CONFIRMATION_GUMTREE
 import com.rokt.roktdemo.ui.demo.DestinationType.CONFIRMATION_STUBHUB
+import com.rokt.roktdemo.ui.demo.DestinationType.CUSTOM_CHECKOUT
+import com.rokt.roktdemo.ui.demo.DestinationType.FEATURE_WALKTHROUGH
 import com.rokt.roktdemo.ui.demo.getDisclaimer
 
 class SummaryViewModel constructor(
