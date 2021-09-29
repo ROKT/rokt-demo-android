@@ -63,7 +63,7 @@ fun getSuccessState(library: DemoLibrary): UiState<DemoScreenState> {
                     DemoPageListItem(
                         library.defaultPlacementsExamples.title,
                         library.defaultPlacementsExamples.shortDescription,
-                        DestinationType.FEATURE_WALKTHROUGH.getImageResource(),
+                        library.defaultPlacementsExamples.iconResource,
                         DestinationType.FEATURE_WALKTHROUGH,
                         SummaryViewModel(library, DestinationType.FEATURE_WALKTHROUGH),
                     )
@@ -72,38 +72,38 @@ fun getSuccessState(library: DemoLibrary): UiState<DemoScreenState> {
                     DemoPageListItem(
                         library.customConfigurationPage.title,
                         library.customConfigurationPage.shortDescription,
-                        DestinationType.CUSTOM_CHECKOUT.getImageResource(),
+                        library.customConfigurationPage.iconResource,
                         DestinationType.CUSTOM_CHECKOUT,
                         SummaryViewModel(library, DestinationType.CUSTOM_CHECKOUT),
                     )
                 )
-//                add(
-//                    DemoPageListItem(
-//                        library.preDefinedScreen1.title,
-//                        library.preDefinedScreen1.shortDescription,
-//                        DestinationType.CONFIRMATION_GROUPON.getImageResource(),
-//                        DestinationType.CONFIRMATION_GROUPON,
-//                        SummaryViewModel(library, DestinationType.CONFIRMATION_GROUPON)
-//                    )
-//                )
-//                add(
-//                    DemoPageListItem(
-//                        library.preDefinedScreen2.title,
-//                        library.preDefinedScreen2.shortDescription,
-//                        DestinationType.CONFIRMATION_STUBHUB.getImageResource(),
-//                        DestinationType.CONFIRMATION_STUBHUB,
-//                        SummaryViewModel(library, DestinationType.CONFIRMATION_STUBHUB)
-//                    )
-//                )
-//                add(
-//                    DemoPageListItem(
-//                        library.preDefinedScreen3.title,
-//                        library.preDefinedScreen3.shortDescription,
-//                        DestinationType.CONFIRMATION_GUMTREE.getImageResource(),
-//                        DestinationType.CONFIRMATION_GUMTREE,
-//                        SummaryViewModel(library, DestinationType.CONFIRMATION_GUMTREE)
-//                    )
-//                )
+                add(
+                    DemoPageListItem(
+                        library.preDefinedScreen1.title,
+                        library.preDefinedScreen1.shortDescription,
+                        library.preDefinedScreen1.iconResource,
+                        DestinationType.CONFIRMATION_GROUPON,
+                        SummaryViewModel(library, DestinationType.CONFIRMATION_GROUPON)
+                    )
+                )
+                add(
+                    DemoPageListItem(
+                        library.preDefinedScreen2.title,
+                        library.preDefinedScreen2.shortDescription,
+                        library.preDefinedScreen2.iconResource,
+                        DestinationType.CONFIRMATION_STUBHUB,
+                        SummaryViewModel(library, DestinationType.CONFIRMATION_STUBHUB)
+                    )
+                )
+                add(
+                    DemoPageListItem(
+                        library.preDefinedScreen3.title,
+                        library.preDefinedScreen3.shortDescription,
+                        library.preDefinedScreen3.iconResource,
+                        DestinationType.CONFIRMATION_GUMTREE,
+                        SummaryViewModel(library, DestinationType.CONFIRMATION_GUMTREE)
+                    )
+                )
             },
             library = library
         )
