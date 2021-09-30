@@ -7,10 +7,15 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
@@ -28,12 +33,15 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.insets.systemBarsPadding
 import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.R
+import com.rokt.roktdemo.model.DescriptionItem
 import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.ButtonDark
 import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.LargeSpace
 import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
 import com.rokt.roktdemo.ui.common.MediumSpace
+import com.rokt.roktdemo.ui.common.SmallSpace
+import com.rokt.roktdemo.ui.common.SubHeading
 import com.rokt.roktdemo.ui.common.Title
 
 @Composable
@@ -90,7 +98,9 @@ fun SummaryPageSuccessPage(
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(
-                    modifier = Modifier.size(width = 136.dp, height = 64.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(64.dp),
                     painter = painterResource(id = summaryPageState.drawableResourceId),
                     contentDescription = stringResource(
                         R.string.content_description_walkrough_icon
@@ -116,7 +126,16 @@ fun SummaryPageSuccessPage(
                     .fillMaxHeight(),
                 Alignment.TopCenter
             ) {
-                ContentText(text = summaryPageState.longDescription)
+                Column {
+                    if (summaryPageState.longDescription.isNotEmpty()) {
+                        ContentText(text = summaryPageState.longDescription)
+                    }
+                    summaryPageState.descriptions?.let { descriptionsItems ->
+                        for (descriptionItem in descriptionsItems) {
+                            SummaryDescriptionItem(descriptionItem)
+                        }
+                    }
+                }
             }
 
             Box(
@@ -128,6 +147,30 @@ fun SummaryPageSuccessPage(
                     openDialog.value = true
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun SummaryDescriptionItem(item: DescriptionItem) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+    ) {
+        Image(
+            modifier = Modifier.size(width = 30.dp, height = 30.dp),
+            painter = painterResource(id = item.iconResource),
+            contentDescription = stringResource(
+                R.string.content_description_walkrough_icon
+            ),
+        )
+
+        Spacer(modifier = Modifier.width(16.dp))
+        Column {
+            SubHeading(item.title, 14)
+            ContentText(item.text)
+            SmallSpace()
         }
     }
 }

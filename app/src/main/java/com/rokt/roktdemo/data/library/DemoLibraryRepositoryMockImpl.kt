@@ -7,6 +7,8 @@ import com.rokt.roktdemo.model.CustomConfigurationPage
 import com.rokt.roktdemo.model.CustomerDetails
 import com.rokt.roktdemo.model.DefaultPlacements
 import com.rokt.roktdemo.model.DemoLibrary
+import com.rokt.roktdemo.model.DescriptionItem
+import com.rokt.roktdemo.model.PredefinedScreen
 import com.rokt.roktdemo.model.Screen
 import com.rokt.roktdemo.model.ScreenType
 import kotlinx.coroutines.flow.Flow
@@ -127,15 +129,54 @@ Explore how our award-winning Machine Learning algorithms power stronger revenue
     val PREDEFINED_DESC_SHORT_3 =
         "View a demonstration of how Gumtree has integrated in-app Rokt technology into their post-listing confirmation page. \n"
 
+    val PREDEFINED_DESCRIPTIONS = listOf(
+        DescriptionItem(
+            "Vertical", "Retail - Deals and Group Buying", "VerticalIcon"
+        )
+    )
+
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun getDemoLibraryMocked(): DemoLibrary {
         return DemoLibrary(
             DEMO_LIB_TITLE, DEMO_LIB_DESC,
             defaultPlacementExamples,
             customConfigurationPage,
-//            PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_1, ""),
-//            PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_2, ""),
-//            PredefinedScreen(PREDEFINED_TITLE_1, PREDEFINED_DESC_SHORT_3, "")
+            PredefinedScreen(
+                PREDEFINED_TITLE_1,
+                PREDEFINED_DESC_SHORT_1,
+                "",
+                PREDEFINED_DESCRIPTIONS,
+                "",
+                "",
+                "",
+                "",
+                attributes1,
+                false
+            ),
+            PredefinedScreen(
+                PREDEFINED_TITLE_2,
+                PREDEFINED_DESC_SHORT_2,
+                "",
+                PREDEFINED_DESCRIPTIONS,
+                "",
+                "",
+                "",
+                "",
+                attributes1,
+                false
+            ),
+            PredefinedScreen(
+                PREDEFINED_TITLE_3,
+                PREDEFINED_DESC_SHORT_3,
+                "",
+                PREDEFINED_DESCRIPTIONS,
+                "",
+                "",
+                "",
+                "",
+                attributes1,
+                false
+            )
         )
     }
 
