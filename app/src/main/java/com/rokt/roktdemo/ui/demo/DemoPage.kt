@@ -12,6 +12,7 @@ import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutPage
 import com.rokt.roktdemo.ui.demo.error.RoktError
+import com.rokt.roktdemo.ui.demo.predefined.predefined1.PreDefined1Page
 import com.rokt.roktdemo.ui.demo.summary.SummaryPage
 import com.rokt.roktdemo.ui.demo.walkthrough.WalkthroughPage
 
@@ -74,6 +75,10 @@ fun DemoPageContent(
 
         composable(DemoDestinations.DEMO_DESTINATION + DestinationType.CUSTOM_CHECKOUT.value) {
             CustomCheckoutPage(actions.backPressed, demoScreenState.library, mainActivityViewModel)
+        }
+
+        composable(DemoDestinations.DEMO_DESTINATION + DestinationType.CONFIRMATION_PREDEFINED1.value) {
+            PreDefined1Page(actions.backPressed, demoScreenState.library.preDefinedScreen1)
         }
     }
 }

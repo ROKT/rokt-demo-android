@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.model.DescriptionItem
 import com.rokt.roktdemo.ui.demo.DestinationType
-import com.rokt.roktdemo.ui.demo.DestinationType.CONFIRMATION_GROUPON
-import com.rokt.roktdemo.ui.demo.DestinationType.CONFIRMATION_GUMTREE
-import com.rokt.roktdemo.ui.demo.DestinationType.CONFIRMATION_STUBHUB
+import com.rokt.roktdemo.ui.demo.DestinationType.CONFIRMATION_PREDEFINED1
+import com.rokt.roktdemo.ui.demo.DestinationType.CONFIRMATION_PREDEFINED2
+import com.rokt.roktdemo.ui.demo.DestinationType.CONFIRMATION_PREDEFINED3
 import com.rokt.roktdemo.ui.demo.DestinationType.CUSTOM_CHECKOUT
 import com.rokt.roktdemo.ui.demo.DestinationType.FEATURE_WALKTHROUGH
 import com.rokt.roktdemo.ui.demo.getDisclaimer
@@ -48,7 +48,7 @@ private fun getSummaryPageState(
                 null
             )
         }
-        CONFIRMATION_GROUPON.value -> {
+        CONFIRMATION_PREDEFINED1.value -> {
             val demoLibraryItem =
                 demoLibrary.preDefinedScreen1
             SummaryPageState(
@@ -60,7 +60,7 @@ private fun getSummaryPageState(
                 demoLibraryItem.descriptions
             )
         }
-        CONFIRMATION_STUBHUB.value -> {
+        CONFIRMATION_PREDEFINED2.value -> {
             val demoLibraryItem =
                 demoLibrary.preDefinedScreen2
             SummaryPageState(
@@ -72,7 +72,7 @@ private fun getSummaryPageState(
                 demoLibraryItem.descriptions
             )
         }
-        CONFIRMATION_GUMTREE.value -> {
+        CONFIRMATION_PREDEFINED3.value -> {
             val demoLibraryItem =
                 demoLibrary.preDefinedScreen3
             SummaryPageState(

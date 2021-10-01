@@ -47,12 +47,16 @@
     <string name="customer_screen_step_label">Step 2/2</string>
     <string name="launch_demo_button_text">Continue</string>
     <string name="text_order_summary">Order summary</string>
+    <string name="text_amazing_deal">You just got an amazing deal!</string>
     <string name="text_basic_tshirt">Basic T-Shirt (3)</string>
     <string name="text_basic_tshirt_price">$59.95</string>
+    <string name="text_done">Done</string>
     <string name="text_medium">Medium</string>
     <string name="text_subtotal">Subtotal</string>
+    <string name="text_share">Share</string>
     <string name="text_shipping">Shipping</string>
     <string name="text_shipping_price">FREE</string>
+    <string name="text_thank_you">Thank You</string>
     <string name="text_total">Total</string>
     <string name="text_customer_details">Customer Details</string>
     <string name="text_email">Email</string>
@@ -62,6 +66,7 @@
     <string name="text_billing_address">Billing address</string>
     <string name="text_payment_method">Payment method</string>
     <string name="content_description_apple_logo">Apple Logo</string>
+    <string name="text_receipt">We sent a receipt to\nyour email</string>
     <string name="text_shipping_method">Shipping method</string>
     <string name="text_shipping_duration">Economy (4-6 Business Days)</string>
     <string name="content_description_map_image">Map Image</string>

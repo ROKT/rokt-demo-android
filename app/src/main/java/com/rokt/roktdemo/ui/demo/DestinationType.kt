@@ -3,9 +3,9 @@ package com.rokt.roktdemo.ui.demo
 enum class DestinationType(val value: String) {
     FEATURE_WALKTHROUGH("walkthrough"),
     CUSTOM_CHECKOUT("custom_check"),
-    CONFIRMATION_GROUPON("groupon"),
-    CONFIRMATION_STUBHUB("stubhub"),
-    CONFIRMATION_GUMTREE("gumtree")
+    CONFIRMATION_PREDEFINED1("predefined1"),
+    CONFIRMATION_PREDEFINED2("predefined2"),
+    CONFIRMATION_PREDEFINED3("predefined3")
 }
 
 private const val WALKTHROUGH_DISCLAIMER =

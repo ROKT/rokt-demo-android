@@ -82,8 +82,8 @@ fun getSuccessState(library: DemoLibrary): UiState<DemoScreenState> {
                         library.preDefinedScreen1.title,
                         library.preDefinedScreen1.shortDescription,
                         library.preDefinedScreen1.iconResource,
-                        DestinationType.CONFIRMATION_GROUPON,
-                        SummaryViewModel(library, DestinationType.CONFIRMATION_GROUPON)
+                        DestinationType.CONFIRMATION_PREDEFINED1,
+                        SummaryViewModel(library, DestinationType.CONFIRMATION_PREDEFINED1)
                     )
                 )
                 add(
@@ -91,8 +91,8 @@ fun getSuccessState(library: DemoLibrary): UiState<DemoScreenState> {
                         library.preDefinedScreen2.title,
                         library.preDefinedScreen2.shortDescription,
                         library.preDefinedScreen2.iconResource,
-                        DestinationType.CONFIRMATION_STUBHUB,
-                        SummaryViewModel(library, DestinationType.CONFIRMATION_STUBHUB)
+                        DestinationType.CONFIRMATION_PREDEFINED2,
+                        SummaryViewModel(library, DestinationType.CONFIRMATION_PREDEFINED2)
                     )
                 )
                 add(
@@ -100,8 +100,8 @@ fun getSuccessState(library: DemoLibrary): UiState<DemoScreenState> {
                         library.preDefinedScreen3.title,
                         library.preDefinedScreen3.shortDescription,
                         library.preDefinedScreen3.iconResource,
-                        DestinationType.CONFIRMATION_GUMTREE,
-                        SummaryViewModel(library, DestinationType.CONFIRMATION_GUMTREE)
+                        DestinationType.CONFIRMATION_PREDEFINED3,
+                        SummaryViewModel(library, DestinationType.CONFIRMATION_PREDEFINED3)
                     )
                 )
             },

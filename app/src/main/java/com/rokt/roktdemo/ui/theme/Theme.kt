@@ -36,6 +36,11 @@ object RoktFonts {
     // Balto
     private val heading = Font(R.font.balto_bold, FontWeight.Bold)
 
+    // Lato
+    private val latoNormal = Font(R.font.lato_regular, FontWeight.Normal)
+    private val latoBold = Font(R.font.lato_bold, FontWeight.Bold)
+
     val DefaultFontFamily = FontFamily(light, regular, bold)
     val HeadingsFontFamily = FontFamily(heading)
+    val Lato = FontFamily(latoNormal, latoBold)
 }
