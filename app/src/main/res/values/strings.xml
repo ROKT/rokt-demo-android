@@ -78,5 +78,10 @@
     <string name="error_title_text">Our systems aren\'t responding right now.</string>
     <string name="network_error_title_text">No network connection. Please try again later once connected.</string>
     <string name="error_message_text">Please close the app and try again. If the issue persists please contact us at www.rokt.com or try again later.</string>
+    <string name="text_order_details">Order Details</string>
+    <string name="text_total_0">Total: $0</string>
+    <string name="text_arrow_up">arrow up</string>
+    <string name="text_two_month">Two-Month Subscription to Adventure Academy - Adventure Academy</string>
+    <string name="text_view_your">View your Groupons</string>
 
 </resources>

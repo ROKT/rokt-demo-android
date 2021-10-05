@@ -17,6 +17,12 @@ object RoktColors {
     val HintTextColor = Color(140, 140, 140)
     val ErrorColor = Color(212, 56, 13)
 
+    val PreDefined1Black = Color(54, 48, 46)
+    val PreDefined1Green = Color(83, 163, 23)
+    val PreDefined1Gray1 = Color(235, 236, 237)
+    val PreDefined1Gray2 = Color(117, 120, 123)
+    val PreDefined1Gray3 = Color(209, 212, 215)
+
     val LightColors = lightColors(
         primary = Color.White,
         secondary = RoktPink,

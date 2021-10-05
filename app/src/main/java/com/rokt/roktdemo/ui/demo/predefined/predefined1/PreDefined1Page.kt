@@ -17,6 +17,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -57,6 +58,9 @@ fun PreDefined1Page(
         Header(onBackPressed)
         ThankYouView()
         ConfirmationView()
+        if (viewModel.state.value.isBranded) {
+            OrderSummaryView()
+        }
         RoktEmbeddedWidget {
             viewModel.onEmbeddedWidgetAddedToView(it)
         }
@@ -94,7 +98,7 @@ private fun ThankYouView() {
             Modifier.align(Alignment.CenterEnd)
         )
     }
-    Divider(1)
+    Divider()
 }
 
 @Composable
@@ -128,6 +132,63 @@ private fun ConfirmationView() {
 }
 
 @Composable
+private fun OrderSummaryView() {
+    XSmallSpace()
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .background(color = MaterialTheme.colors.onPrimary)
+            .padding(SMALL_SPACE.dp)
+    ) {
+        Box(
+            Modifier
+                .padding(bottom = SMALL_SPACE.dp)
+
+        ) {
+            TextLato(
+                stringResource(R.string.text_order_details), 16,
+                Modifier.fillMaxWidth(), false, TextAlign.Start
+            )
+
+            TextLato(
+                stringResource(id = R.string.text_total_0), 16,
+                Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(end = SMALL_SPACE.dp),
+                false, TextAlign.End
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.ic_arrow_up_gray),
+                contentDescription = stringResource(R.string.text_arrow_up),
+                Modifier.align(Alignment.CenterEnd)
+            )
+        }
+        Divider(RoktColors.PreDefined1Gray1)
+
+        TextLato(
+            text = stringResource(R.string.text_two_month),
+            textSize = 14,
+            Modifier
+                .fillMaxWidth()
+                .padding(top = SMALL_SPACE.dp),
+            false, TextAlign.Start, RoktColors.PreDefined1Gray2
+        )
+    }
+    Divider()
+    TextLato(
+        text = stringResource(R.string.text_view_your),
+        textSize = 16,
+        Modifier
+            .fillMaxWidth()
+            .background(color = MaterialTheme.colors.onPrimary)
+            .padding(SMALL_SPACE.dp),
+        true,
+        TextAlign.Center, RoktColors.PreDefined1Green
+    )
+}
+
+@Composable
 private fun RoktEmbeddedWidget(onWidgetAdded: (WeakReference<Widget>) -> Unit) {
     XSmallSpace()
     AndroidView(
@@ -142,12 +203,12 @@ private fun RoktEmbeddedWidget(onWidgetAdded: (WeakReference<Widget>) -> Unit) {
 }
 
 @Composable
-private fun Divider(size: Int) {
+private fun Divider(color: Color = RoktColors.PreDefined1Gray3) {
     Box(
         Modifier
             .fillMaxWidth()
-            .height(size.dp)
-            .background(color = RoktColors.BorderColor)
+            .height(1.dp)
+            .background(color = color)
     )
 }
 
@@ -157,11 +218,13 @@ private fun TextLato(
     textSize: Int,
     modifier: Modifier = Modifier,
     isBold: Boolean = false,
-    textAlign: TextAlign = TextAlign.Center
+    textAlign: TextAlign = TextAlign.Center,
+    color: Color = RoktColors.PreDefined1Black
 ) {
     Text(
         text,
         modifier,
+        color,
         fontSize = textSize.sp,
         fontFamily = RoktFonts.Lato,
         fontWeight = if (isBold) FontWeight.Bold else FontWeight.Normal,
