@@ -78,10 +78,10 @@ open class PredefinedScreen(
 class DescriptionItem(
     val title: String,
     val text: String,
-    private val iconUrl: String
+    private val iconURL: String
 ) {
     val iconResource: Int
-        get() = ImageSource.getIcon(iconUrl)
+        get() = ImageSource.getIcon(iconURL)
 }
 
 open class RoktDemoScreen(

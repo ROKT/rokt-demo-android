@@ -17,6 +17,12 @@ object RoktColors {
     val HintTextColor = Color(140, 140, 140)
     val ErrorColor = Color(212, 56, 13)
 
+    val PreDefined1Black = Color(54, 48, 46)
+    val PreDefined1Green = Color(83, 163, 23)
+    val PreDefined1Gray1 = Color(235, 236, 237)
+    val PreDefined1Gray2 = Color(117, 120, 123)
+    val PreDefined1Gray3 = Color(209, 212, 215)
+
     val LightColors = lightColors(
         primary = Color.White,
         secondary = RoktPink,
@@ -36,6 +42,11 @@ object RoktFonts {
     // Balto
     private val heading = Font(R.font.balto_bold, FontWeight.Bold)
 
+    // Lato
+    private val latoNormal = Font(R.font.lato_regular, FontWeight.Normal)
+    private val latoBold = Font(R.font.lato_bold, FontWeight.Bold)
+
     val DefaultFontFamily = FontFamily(light, regular, bold)
     val HeadingsFontFamily = FontFamily(heading)
+    val Lato = FontFamily(latoNormal, latoBold)
 }

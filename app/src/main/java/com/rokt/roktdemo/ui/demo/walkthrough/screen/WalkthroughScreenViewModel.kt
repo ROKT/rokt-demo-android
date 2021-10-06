@@ -1,19 +1,17 @@
 package com.rokt.roktdemo.ui.demo.walkthrough.screen
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rokt.roktdemo.model.DemoLibrary
 import com.rokt.roktdemo.model.ScreenType
 import com.rokt.roktdemo.ui.demo.RoktExecutor
+import com.rokt.roktdemo.utils.randomiseEmail
 import com.rokt.roktsdk.Widget
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
-import java.text.SimpleDateFormat
-import java.util.Date
 import javax.inject.Inject
 import kotlin.collections.HashMap
 import kotlin.random.Random
@@ -55,28 +53,8 @@ class WalkthroughScreenViewModel @Inject constructor() : ViewModel() {
 
     private fun getAttributes(): HashMap<String, String> {
         val attributes = state.value.attributes
-        attributes.put("email", randomiseEmail(attributes.get("email")))
+        attributes.put("email", Random.randomiseEmail(attributes.get("email")))
         return attributes
-    }
-
-    private fun randomiseEmail(email: String?): String {
-        var randomisedEmail = email ?: "john.smith@example.com"
-        if (randomisedEmail.contains("@")) {
-            val domain = randomisedEmail.substringAfterLast("@")
-            val emailId = randomisedEmail.substringBeforeLast("@")
-            randomisedEmail = emailId + getFormattedDate() + getRandomNumber() + "@" + domain
-        }
-        return randomisedEmail
-    }
-
-    private fun getRandomNumber(): String {
-        return Random.nextInt(10000).toString()
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    private fun getFormattedDate(): String {
-        val formatter = SimpleDateFormat("yyyyMMDDHHmmSS")
-        return formatter.format(Date())
     }
 
     private fun executeRokt(placeholders: HashMap<String, WeakReference<Widget>>? = null) {
