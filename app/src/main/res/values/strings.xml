@@ -83,5 +83,17 @@
     <string name="text_arrow_up">arrow up</string>
     <string name="text_two_month">Two-Month Subscription to Adventure Academy - Adventure Academy</string>
     <string name="text_view_your">View your Groupons</string>
+    <string name="text_order_number">Order number</string>
+    <string name="text_numbers">123456789</string>
+    <string name="text_find_more_events">Find more events</string>
+    <string name="text_view_order">View order</string>
+    <string name="text_whats_next">Whats next?</string>
+    <string name="text_have_great_time">Have a great time!</string>
+    <string name="text_event_info">Event info</string>
+    <string name="text_parking_info">PARKING PASSES ONLY Gardner-Webb at Floria State Seminoles Basketball Tickets</string>
+    <string name="text_event_time">Mon, Dec 21, 2020 - 08:01 pm - Donald L. Tucket Center Parking Lots - Tallahassee, FL</string>
+    <string name="text_add_to_calender">Add to calender</string>
+    <string name="text_predefined2_unbranded">Just scan your phone and you’re in. Your tickets will be ready for you in the app and your account in a few minutes.</string>
+    <string name="text_predefined2_branded">Just scan your phone and you’re in. Your tickets will be ready for you in the Stubhub app and your StubHub account in a few minutes.</string>
 
 </resources>
