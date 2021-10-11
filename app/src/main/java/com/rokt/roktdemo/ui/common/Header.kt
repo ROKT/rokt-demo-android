@@ -1,10 +1,12 @@
 package com.rokt.roktdemo.ui.common
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,6 +36,22 @@ fun RoktHeader(content: @Composable RowScope.() -> Unit) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             content()
+        }
+    }
+}
+
+@Composable
+fun PreDefinedHeader(
+    onBackPressed: () -> Unit,
+) {
+    RoktHeader {
+        Row(
+            modifier = Modifier.fillMaxSize(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            BackButton(backPressed = onBackPressed)
+            HeaderTextButton("EXIT", { onBackPressed.invoke() })
         }
     }
 }

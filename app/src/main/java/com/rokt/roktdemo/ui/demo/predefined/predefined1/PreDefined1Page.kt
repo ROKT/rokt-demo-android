@@ -2,10 +2,8 @@ package com.rokt.roktdemo.ui.demo.predefined.predefined1
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -24,21 +22,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.viewinterop.AndroidView
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.model.PredefinedScreen
-import com.rokt.roktdemo.ui.common.BackButton
-import com.rokt.roktdemo.ui.common.HeaderTextButton
-import com.rokt.roktdemo.ui.common.RoktHeader
+import com.rokt.roktdemo.ui.common.PreDefinedHeader
+import com.rokt.roktdemo.ui.common.RoktEmbeddedWidget
 import com.rokt.roktdemo.ui.common.SMALL_SPACE
 import com.rokt.roktdemo.ui.common.SmallSpace
 import com.rokt.roktdemo.ui.common.XSmallSpace
 import com.rokt.roktdemo.ui.demo.predefined.PreDefinedViewModel
 import com.rokt.roktdemo.ui.theme.RoktColors
 import com.rokt.roktdemo.ui.theme.RoktFonts
-import com.rokt.roktsdk.Widget
-import java.lang.ref.WeakReference
 
 @Composable
 fun PreDefined1Page(
@@ -55,30 +49,15 @@ fun PreDefined1Page(
             .verticalScroll(scrollState)
             .background(color = MaterialTheme.colors.surface)
     ) {
-        Header(onBackPressed)
+        PreDefinedHeader(onBackPressed)
         ThankYouView()
         ConfirmationView()
         if (viewModel.state.value.isBranded) {
             OrderSummaryView()
         }
+        XSmallSpace()
         RoktEmbeddedWidget {
             viewModel.onEmbeddedWidgetAddedToView(it)
-        }
-    }
-}
-
-@Composable
-private fun Header(
-    onBackPressed: () -> Unit,
-) {
-    RoktHeader {
-        Row(
-            modifier = Modifier.fillMaxSize(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            BackButton(backPressed = onBackPressed)
-            HeaderTextButton("EXIT", { onBackPressed.invoke() })
         }
     }
 }
@@ -185,20 +164,6 @@ private fun OrderSummaryView() {
             .padding(SMALL_SPACE.dp),
         true,
         TextAlign.Center, RoktColors.PreDefined1Green
-    )
-}
-
-@Composable
-private fun RoktEmbeddedWidget(onWidgetAdded: (WeakReference<Widget>) -> Unit) {
-    XSmallSpace()
-    AndroidView(
-        modifier = Modifier
-            .fillMaxWidth(),
-        factory = { context ->
-            Widget(context).apply {
-                onWidgetAdded(WeakReference(this))
-            }
-        }
     )
 }
 
