@@ -29,6 +29,15 @@ object RoktColors {
     val PreDefined2Gray2 = Color(192, 194, 196)
     val PreDefined2Purple = Color(218, 64, 134)
 
+    val PreDefined3White = Color(255, 255, 255)
+    val PreDefined3Black1 = Color(32, 32, 34)
+    val PreDefined3Black2 = Color(68, 69, 70)
+    val PreDefined3Gray1 = Color(223, 224, 225)
+    val PreDefined3Gray2 = Color(68, 69, 70)
+    val PreDefined3Gray3 = Color(157, 162, 163)
+    val PreDefined3Green = Color(55, 171, 50)
+    val PreDefined3Blue = Color(14, 39, 125)
+
     val LightColors = lightColors(
         primary = Color.White,
         secondary = RoktPink,
@@ -41,6 +50,7 @@ object RoktColors {
 }
 
 object RoktFonts {
+    // Soleil
     private val light = Font(R.font.font_soleil_light, FontWeight.Light)
     private val regular = Font(R.font.font_soleil_regular, FontWeight.Medium)
     private val bold = Font(R.font.font_soleil_bold, FontWeight.Bold)
@@ -56,6 +66,7 @@ object RoktFonts {
     private val arialNormal = Font(R.font.arial, FontWeight.Normal)
     private val arialBold = Font(R.font.arial_bold, FontWeight.Bold)
 
+    // Font Families
     val DefaultFontFamily = FontFamily(light, regular, bold)
     val HeadingsFontFamily = FontFamily(heading)
     val Lato = FontFamily(latoNormal, latoBold)
