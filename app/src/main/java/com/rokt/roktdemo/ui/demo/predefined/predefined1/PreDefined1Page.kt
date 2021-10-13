@@ -46,19 +46,29 @@ fun PreDefined1Page(
     Column(
         Modifier
             .fillMaxSize()
-            .verticalScroll(scrollState)
             .background(color = MaterialTheme.colors.surface)
     ) {
         PreDefinedHeader(onBackPressed)
-        ThankYouView()
-        ConfirmationView()
-        if (viewModel.state.value.isBranded) {
-            OrderSummaryView()
+        Column(
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState)
+        ) {
+            Content(viewModel = viewModel)
         }
-        XSmallSpace()
-        RoktEmbeddedWidget {
-            viewModel.onEmbeddedWidgetAddedToView(it)
-        }
+    }
+}
+
+@Composable
+private fun Content(viewModel: PreDefinedViewModel) {
+    ThankYouView()
+    ConfirmationView()
+    if (viewModel.state.value.isBranded) {
+        OrderSummaryView()
+    }
+    XSmallSpace()
+    RoktEmbeddedWidget {
+        viewModel.onEmbeddedWidgetAddedToView(it)
     }
 }
 

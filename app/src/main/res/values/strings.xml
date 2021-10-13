@@ -95,5 +95,11 @@
     <string name="text_add_to_calender">Add to calender</string>
     <string name="text_predefined2_unbranded">Just scan your phone and you’re in. Your tickets will be ready for you in the app and your account in a few minutes.</string>
     <string name="text_predefined2_branded">Just scan your phone and you’re in. Your tickets will be ready for you in the Stubhub app and your StubHub account in a few minutes.</string>
+    <string name="text_congratulations">Congratulations!</string>
+    <string name="text_your_ad_created">Your ad has been created! Please note, ads and features may take a moment to go to live. Any payment confirmation and invoices will be sent to you by email.</string>
+    <string name="text_post_your_ad">Post your ad on eBay for FREE</string>
+    <string name="text_increase_your_changes">Increase your changes of selling with access to up to 11 million Aussies each month.</string>
+    <string name="text_limited_items"><![CDATA[*Limited to 2 items per month. T&C’s Apply.]]></string>
+    <string name="text_ebay">ebay logo</string>
 
 </resources>

@@ -14,6 +14,7 @@ import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutPage
 import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktdemo.ui.demo.predefined.predefined1.PreDefined1Page
 import com.rokt.roktdemo.ui.demo.predefined.predefined2.PreDefined2Page
+import com.rokt.roktdemo.ui.demo.predefined.predefined3.PreDefined3Page
 import com.rokt.roktdemo.ui.demo.summary.SummaryPage
 import com.rokt.roktdemo.ui.demo.walkthrough.WalkthroughPage
 
@@ -84,6 +85,10 @@ fun DemoPageContent(
 
         composable(DemoDestinations.DEMO_DESTINATION + DestinationType.CONFIRMATION_PREDEFINED2.value) {
             PreDefined2Page(actions.backPressed, demoScreenState.library.preDefinedScreen2)
+        }
+
+        composable(DemoDestinations.DEMO_DESTINATION + DestinationType.CONFIRMATION_PREDEFINED3.value) {
+            PreDefined3Page(actions.backPressed, demoScreenState.library.preDefinedScreen3)
         }
     }
 }
