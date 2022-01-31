@@ -3,6 +3,7 @@ package com.rokt.roktdemo.ui.common
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
@@ -13,7 +14,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -24,6 +24,7 @@ import com.rokt.roktdemo.ui.theme.RoktFonts
 
 const val BUTTON_HEIGHT = 64
 const val BUTTON_FONT_SIZE = 20
+const val BUTTON_CORNER_RADIUS = 100
 
 @Composable
 fun ButtonDark(text: String, onClick: () -> Unit) {
@@ -36,7 +37,7 @@ fun ButtonDark(text: String, onClick: () -> Unit) {
             backgroundColor = MaterialTheme.colors.secondary,
             contentColor = MaterialTheme.colors.primary
         ),
-        shape = RectangleShape
+        shape = RoundedCornerShape(BUTTON_CORNER_RADIUS.dp)
     ) {
         ButtonText(text = text)
     }
@@ -53,7 +54,7 @@ fun ButtonLight(text: String, onClick: () -> Unit) {
             backgroundColor = MaterialTheme.colors.primary,
             contentColor = MaterialTheme.colors.secondary
         ),
-        shape = RectangleShape,
+        shape = RoundedCornerShape(BUTTON_CORNER_RADIUS.dp),
         border = BorderStroke(2.dp, MaterialTheme.colors.secondary)
     ) {
         ButtonText(text = text)

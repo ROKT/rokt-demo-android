@@ -3,35 +3,24 @@ package com.rokt.roktdemo.ui.about
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.google.accompanist.coil.rememberCoilPainter
-import com.rokt.roktdemo.R
 import com.rokt.roktdemo.model.AboutContent
 import com.rokt.roktdemo.model.AboutLink
 import com.rokt.roktdemo.model.AboutRokt
@@ -42,11 +31,9 @@ import com.rokt.roktdemo.ui.common.DefaultSpace
 import com.rokt.roktdemo.ui.common.Heading
 import com.rokt.roktdemo.ui.common.LargeSpace
 import com.rokt.roktdemo.ui.common.LoadingPage
+import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
 import com.rokt.roktdemo.ui.demo.error.RoktError
-import com.rokt.roktdemo.ui.theme.RoktColors
-import com.rokt.roktdemo.ui.theme.RoktFonts
 
-private const val FIXED_HEADER_HEIGHT = 70 // The non scrolling top bar height
 private const val HEADER_TOP_PADDING = 50 // How far from the top the header items sit
 
 @Composable
@@ -65,8 +52,7 @@ fun AboutPage(backPressed: () -> Unit, viewModel: AboutViewModel = hiltViewModel
                 LoadingPage()
             }
             state.value.hasData -> {
-                AboutPageContent(scroll, state.value.data!!, viewModel)
-                StickyHeader(backPressed)
+                AboutPageContent(scroll, state.value.data!!, viewModel, backPressed)
             }
             else -> {
                 RoktError(errorType = state.value.error)
@@ -80,22 +66,27 @@ private fun AboutPageContent(
     scroll: ScrollState,
     aboutPageContent: AboutRokt,
     viewModel: AboutViewModel,
+    backPressed: () -> Unit
 ) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .verticalScroll(scroll)
     ) {
 
-        Header()
+        Box(Modifier.padding(PaddingValues(start = 3.dp, top = HEADER_TOP_PADDING.dp))) {
+            BackButton(backPressed, MaterialTheme.colors.primaryVariant)
+        }
 
-        Column(Modifier.padding(24.dp)) {
+        Column(
+            Modifier
+                .verticalScroll(scroll)
+                .padding(PaddingValues(MEDIUM_SPACE.dp, 10.dp))
+        ) {
             Contents(aboutPageContent.contents)
             DefaultSpace()
             Links(aboutPageContent.links, viewModel = viewModel)
+            LargeSpace()
         }
-
-        LargeSpace()
     }
 }
 
@@ -103,7 +94,7 @@ private fun AboutPageContent(
 private fun Contents(content: List<AboutContent>) {
     content.forEach {
         Column {
-            it.imageUrl?.let { imageUrl ->
+            it.imageUrl.takeIf { it?.isNotEmpty() == true }?.let { imageUrl ->
                 Image(
                     painter = rememberCoilPainter(
                         request = imageUrl
@@ -132,80 +123,5 @@ private fun Links(links: List<AboutLink>, viewModel: AboutViewModel) {
             }
         )
         DefaultSpace()
-    }
-}
-
-@Composable
-private fun StickyHeader(backPressed: () -> Unit) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(FIXED_HEADER_HEIGHT.dp),
-        contentAlignment = Alignment.CenterStart
-    ) {
-
-        Image(
-            painter = painterResource(id = R.drawable.header_about),
-            contentDescription = stringResource(R.string.content_description_top_bar_background),
-            modifier = Modifier
-                .fillMaxWidth(),
-            contentScale = ContentScale.Crop,
-            alignment = Alignment.TopCenter
-        )
-
-        Image(
-            painter = painterResource(id = R.drawable.ic_bg_grad),
-            contentDescription = stringResource(R.string.content_description_gradient),
-            modifier = Modifier
-                .fillMaxWidth(),
-            contentScale = ContentScale.FillWidth
-        )
-
-        BackButton(backPressed)
-    }
-}
-
-@Composable
-private fun Header() {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight()
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.header_about),
-            contentDescription = stringResource(R.string.content_description_about_header),
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxHeight()
-        )
-
-        Column {
-            Spacer(modifier = Modifier.height(HEADER_TOP_PADDING.dp))
-            Image(
-                painter = painterResource(id = R.drawable.ic_rokt_connector),
-                contentDescription = stringResource(R.string.content_description_connector),
-                alignment = Alignment.BottomEnd,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
-            )
-        }
-
-        Column(
-            Modifier.matchParentSize(), verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Spacer(modifier = Modifier.height(HEADER_TOP_PADDING.dp))
-
-            Text(
-                text = stringResource(R.string.content_description_header_about_text),
-                fontFamily = RoktFonts.HeadingsFontFamily,
-                fontWeight = FontWeight.Bold,
-                fontSize = 28.sp,
-                textAlign = TextAlign.Center,
-                color = RoktColors.LightColors.primary
-            )
-        }
     }
 }

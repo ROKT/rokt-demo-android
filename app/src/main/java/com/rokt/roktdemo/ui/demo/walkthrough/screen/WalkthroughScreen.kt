@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -31,6 +32,7 @@ import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.model.DemoLibrary
+import com.rokt.roktdemo.ui.common.BUTTON_CORNER_RADIUS
 import com.rokt.roktdemo.ui.common.ButtonText
 import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.MEDIUM_SPACE
@@ -125,7 +127,8 @@ private fun ColumnScope.RoktFullscreenWidget(onViewExampleButtonClicked: () -> U
                 backgroundColor = MaterialTheme.colors.secondary,
                 contentColor = MaterialTheme.colors.primary
             ),
-            onClick = onViewExampleButtonClicked
+            onClick = onViewExampleButtonClicked,
+            shape = RoundedCornerShape(BUTTON_CORNER_RADIUS.dp)
         ) {
             Row(
                 Modifier

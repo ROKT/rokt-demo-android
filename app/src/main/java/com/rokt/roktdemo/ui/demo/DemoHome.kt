@@ -13,11 +13,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -95,7 +97,13 @@ private fun DemoListItemView(item: DemoPageListItem, actions: DemoActions) {
         Row(
             Modifier
                 .fillMaxWidth()
-                .padding(PaddingValues(start = MEDIUM_SPACE.dp, top = MEDIUM_SPACE.dp))
+                .padding(
+                    PaddingValues(
+                        start = MEDIUM_SPACE.dp,
+                        top = MEDIUM_SPACE.dp,
+                        end = MEDIUM_SPACE.dp
+                    )
+                )
         ) {
             Image(
                 painter = painterResource(id = item.drawableResource),
@@ -106,7 +114,8 @@ private fun DemoListItemView(item: DemoPageListItem, actions: DemoActions) {
 
             Image(
                 painter = painterResource(id = R.drawable.ic_primary_button),
-                contentDescription = stringResource(R.string.content_description_arrow_go)
+                contentDescription = stringResource(R.string.content_description_arrow_go),
+                modifier = Modifier.clip(CircleShape)
             )
         }
 
