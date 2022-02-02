@@ -3,6 +3,7 @@ package com.rokt.roktdemo
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import com.rokt.roktdemo.ui.RoktDemoApp
 import com.rokt.roktsdk.BuildConfig
@@ -24,6 +25,10 @@ class MainActivity : androidx.activity.ComponentActivity() {
 
         // Draw behind status bar
         WindowCompat.setDecorFitsSystemWindows(window, false)
+        if (savedInstanceState != null) {
+            installSplashScreen()
+        }
+        setTheme(R.style.Theme_RoktDemo)
         setContent { RoktDemoApp(viewModel) }
     }
 }

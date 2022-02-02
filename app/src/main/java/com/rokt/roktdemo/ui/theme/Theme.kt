@@ -50,13 +50,9 @@ object RoktColors {
 }
 
 object RoktFonts {
-    // Soleil
-    private val light = Font(R.font.font_soleil_light, FontWeight.Light)
-    private val regular = Font(R.font.font_soleil_regular, FontWeight.Medium)
-    private val bold = Font(R.font.font_soleil_bold, FontWeight.Bold)
-
-    // Balto
-    private val heading = Font(R.font.balto_bold, FontWeight.Bold)
+    // Archievo
+    private val regular = Font(R.font.font_archivo_regular, FontWeight.Normal)
+    private val bold = Font(R.font.font_archivo_semibold, FontWeight.Bold)
 
     // Lato
     private val latoNormal = Font(R.font.lato_regular, FontWeight.Normal)
@@ -67,8 +63,7 @@ object RoktFonts {
     private val arialBold = Font(R.font.arial_bold, FontWeight.Bold)
 
     // Font Families
-    val DefaultFontFamily = FontFamily(light, regular, bold)
-    val HeadingsFontFamily = FontFamily(heading)
+    val DefaultFontFamily = FontFamily(regular, bold)
     val Lato = FontFamily(latoNormal, latoBold)
     val Arial = FontFamily(arialNormal, arialBold)
 }

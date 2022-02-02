@@ -34,7 +34,7 @@ fun Title(
 ) {
     Text(
         text = text,
-        fontFamily = RoktFonts.HeadingsFontFamily,
+        fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
         color = color,
@@ -95,7 +95,7 @@ fun ScreenHeader(text: String) {
     Text(
         text,
         fontSize = 28.sp,
-        fontFamily = RoktFonts.HeadingsFontFamily,
+        fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Bold,
         color = MaterialTheme.colors.primaryVariant
     )

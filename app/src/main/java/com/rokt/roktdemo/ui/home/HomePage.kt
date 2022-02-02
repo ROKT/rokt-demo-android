@@ -6,12 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -37,7 +34,6 @@ import com.rokt.roktdemo.ui.common.DEFAULT_SPACE
 import com.rokt.roktdemo.ui.common.DefaultSpace
 import com.rokt.roktdemo.ui.common.LARGE_SPACE
 import com.rokt.roktdemo.ui.common.LargeSpace
-import com.rokt.roktdemo.ui.common.X_SMALL_SPACE
 import com.rokt.roktdemo.ui.theme.RoktFonts
 
 @Composable
@@ -82,25 +78,11 @@ private fun HomeLogo() {
                 .fillMaxWidth()
                 .fillMaxHeight()
         ) {
-            Row(
-                Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.ic_rokt_connector_filled),
-                    contentDescription = stringResource(R.string.content_description_connector),
-                    contentScale = ContentScale.FillBounds
-                )
-                Spacer(
-                    Modifier
-                        .width(X_SMALL_SPACE.dp)
-                )
-                Image(
-                    painter = painterResource(id = R.drawable.ic_rokt_logo),
-                    contentDescription = stringResource(R.string.content_description_rokt_logo),
-                    contentScale = ContentScale.FillBounds
-                )
-            }
+            Image(
+                painter = painterResource(id = R.drawable.ic_rokt_logo),
+                contentDescription = stringResource(R.string.content_description_rokt_logo),
+                contentScale = ContentScale.FillBounds
+            )
 
             Text(
                 modifier = Modifier
@@ -109,7 +91,7 @@ private fun HomeLogo() {
                 text = stringResource(R.string.content_description_rokt_title),
                 fontFamily = RoktFonts.DefaultFontFamily,
                 fontWeight = FontWeight.Normal,
-                fontSize = 24.sp,
+                fontSize = 18.sp,
                 textAlign = TextAlign.Center
             )
         }

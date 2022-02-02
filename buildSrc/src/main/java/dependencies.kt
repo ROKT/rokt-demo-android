@@ -7,7 +7,7 @@ object Versions {
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.1.0-alpha13"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
-    const val rokt = "com.rokt:roktsdk:3.5.2-alpha.1153"
+    const val rokt = "com.rokt:roktsdk:3.6.1"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
     const val coil = "io.coil-kt:coil:1.2.2"
@@ -44,6 +44,7 @@ object Libs {
         const val navigation = "androidx.navigation:navigation-ui-ktx:2.3.4"
         const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
         const val lifeCycle = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
+        const val splashScreen = "androidx.core:core-splashscreen:1.0.0-beta01"
 
         object Compose {
             private const val version = "1.0.2"

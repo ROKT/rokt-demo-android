@@ -16,15 +16,15 @@ android {
             keyPassword "${System.env.KEY_PASSWORD}"
         }
     }
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.rokt.roktdemo"
         minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 10
-        versionName "1.1.0"
+        targetSdkVersion 31
+        versionCode 11
+        versionName "1.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -62,6 +62,7 @@ dependencies {
     implementation Libs.Kotlin.stdlib
     implementation Libs.AndroidX.coreKtx
     implementation Libs.AndroidX.appcompat
+    implementation Libs.AndroidX.splashScreen
 
     implementation Libs.googleMaterial
     implementation Libs.Accompanist.coil
