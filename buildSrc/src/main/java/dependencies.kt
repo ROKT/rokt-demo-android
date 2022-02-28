@@ -7,7 +7,7 @@ object Versions {
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.1.0-alpha13"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
-    const val rokt = "com.rokt:roktsdk:3.6.1"
+    const val rokt = "com.rokt:roktsdk:3.6.2"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
     const val coil = "io.coil-kt:coil:1.2.2"
