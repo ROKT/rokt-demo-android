@@ -11,7 +11,9 @@ import kotlin.random.Random
 
 fun Uri.openInBrowser(context: Context) {
     val browserIntent = Intent(Intent.ACTION_VIEW, this)
-    androidx.core.content.ContextCompat.startActivity(context, browserIntent, null)
+    if (browserIntent.resolveActivity(context.packageManager) != null) {
+        androidx.core.content.ContextCompat.startActivity(context, browserIntent, null)
+    }
 }
 
 fun ArrayList<Pair<String, String>>.updateKeyAtIndex(
