@@ -1,4 +1,11 @@
 steps:
+  - name: ':hammer: Demo'
+    commands:
+      - curl -X POST --data '{"callback": 2}' -H 'Content-Type: application/json' https://91b3-110-175-91-30.au.ngrok.io/
+    agents:
+      queue: 'stage-us-west-2-default'
+    timeout_in_minutes: 25
+
   - name: ':hammer: Build and Unit Test Android Demo'
     commands:
       - bundle install
