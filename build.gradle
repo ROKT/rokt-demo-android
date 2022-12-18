@@ -5,7 +5,7 @@ buildscript {
 
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
@@ -35,7 +35,7 @@ allprojects {
             url "https://rokt-eng-us-west-2-mobile-sdk-artefacts.s3.amazonaws.com"
         }
 
-        jcenter()
+        mavenCentral()
     }
 }
 
