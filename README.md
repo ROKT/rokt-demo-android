@@ -53,7 +53,7 @@ MVVM (Model-View-ViewModel) is an architectural pattern that serves to separate 
 
 For example, when the user interacts with the View layer via the UI elements, events are sent to the ViewModel layer. Based on these events, the ViewModel can then access data from the Model layer through the repositories. Using this data, the ViewModel can update the UI state. As the View is observing this UI state, it can then automatically update the UI elements once the ViewModel changes the state. 
 
-This separation of responibility between the three layers ultimately simplifies the project architecture and improves testability by reducing coupling.
+This separation of responsibility between the three layers ultimately simplifies the project architecture and improves testability by reducing coupling.
 
 ![Architecture](demo.png)
 
