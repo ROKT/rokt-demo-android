@@ -44,7 +44,16 @@ It can be found here: https://github.com/NedaRobatMeily/docker-image-java-11
 
 ## Project architecture
 
-This project it is implemented based on MVVM pattern and repository pattern.
+This project is implemented based on the MVVM and repository patterns. 
+
+MVVM (Model-View-ViewModel) is an architectural pattern that serves to separate user interface logic from business/program logic.  
+- The Model layer provides the business logic of the application. In this case, it consists of multiple repositories that expose data sources to the ViewModel.
+- The View layer consists of the UI elements that the user interacts with, which are represented by composable elements in this project.  
+- The ViewModel layer connects the Model and View layers. It transforms data from the Model layer and stores the UI state that is accessed by the View layer.  
+
+For example, when the user interacts with the View layer via the UI elements, events are sent to the ViewModel layer. Based on these events, the ViewModel can then access data from the Model layer through the repositories. Using this data, the ViewModel can update the UI state. As the View is observing this UI state, it can then automatically update the UI elements once the ViewModel changes the state. 
+
+This separation of responibility between the three layers ultimately simplifies the project architecture and improves testability by reducing coupling.
 
 ![Architecture](demo.png)
 
