@@ -57,6 +57,16 @@ This separation of responibility between the three layers ultimately simplifies 
 
 ![Architecture](demo.png)
 
+### Project structure
+
+This project contains data, di, model, ui, and utils packages.  
+
+data: contains repositories that expose data from network operations performed by RoktDemoService.  
+di: for dependency injection.  
+model: contains data classes that model data.  
+ui: contains the View and ViewModels  
+utils: contains shared utility functions used throughout the application
+
 ## Rokt SDK logic
 
 **MainActivityViewModel** contains an observable selectedTagId which is set from other pages in the application. The selectedTagId is observed in the MainActivity, where Rokt.Init() is called every time the tagId value is changed.
