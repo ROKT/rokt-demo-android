@@ -6,6 +6,11 @@ Rokt Demo application is a sample app built to showcase Rokt mobile SDK function
 - Sahil Suri - sahil.suri@rokt.com
 - Danial Motahari - danial.motahari@rokt.com
 
+
+| Environment | Build |
+| ----------- | :----- |
+| release |  [![Build status](https://badge.buildkite.com/111a1dcb03ee2f11b85cf6ba25ebf4c0cf5ffe2cce22cb1f48.svg)](https://buildkite.com/rokt/rokt-demo-android)
+
 ## Requirements
 
 The latest version of Android Studio is required. Follow [these instructions](https://developer.android.com/studio/install) to install or alternatively on Mac using [brew](https://brew.sh/):  
