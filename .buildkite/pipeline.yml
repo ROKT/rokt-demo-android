@@ -64,9 +64,9 @@ steps:
             APPCENTER_APP_DESTINATION:
               secret-id: 'stage-android-demoapp-buildkite'
               json-key: '.APPCENTER_APP_DESTINATION'
-      agents:
-        queue: 'stage-us-west-2-default'
-      timeout_in_minutes: 25
+    agents:
+      queue: 'stage-us-west-2-default'
+    timeout_in_minutes: 25
 
   - wait
 
