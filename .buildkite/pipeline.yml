@@ -64,6 +64,9 @@ steps:
             APPCENTER_APP_NAME:
               secret-id: 'stage-android-demoapp-buildkite'
               json-key: '.APPCENTER_APP_NAME'
+            ANDROID_KEYSTORE_FILE:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.ANDROID_KEYSTORE_FILE'
             APPCENTER_APP_DESTINATION:
               secret-id: 'stage-android-demoapp-buildkite'
               json-key: '.APPCENTER_APP_DESTINATION'
