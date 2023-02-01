@@ -38,6 +38,22 @@ platform :android do
                          release_status: 'draft')
   end
 
+  desc "Publish to App Center"
+  lane :publishToAppCenter do
+    gradle(
+        task: 'assemble',
+        build_type: 'Release'
+        )
+    appcenter_upload(
+          api_token: ENV['APPCENTER_API_TOKEN'],
+          owner_name: ENV['APPCENTER_APP_OWNER'],
+          app_name: ENV['APPCENTER_APP_NAME'],
+          destinations: ENV['APPCENTER_APP_DESTINATION'],
+          file: "app/build/outputs/apk/release/app-release.apk",
+          release_notes: "Android Demo app version #{ENV['BUILDKITE_BUILD_NUMBER']}.\nBranch: #{ENV['BUILDKITE_BRANCH']}\n#{ENV['BUILDKITE_MESSAGE']}",
+          notify_testers: true
+        )
+
     desc "Deploy a release version to the Google Play"
     lane :release do
       gradle(

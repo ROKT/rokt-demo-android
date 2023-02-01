@@ -28,6 +28,48 @@ steps:
 
   - wait
 
+  - block: ':whale: Publish to App Center'
+    prompt: 'Confirm publishing to App Center?'
+
+  - name: ':rocket: Publish demo app to App Center'
+    commands:
+      - bundle install
+      - bundle exec fastlane publishToAppCenter
+    artifact_paths:
+      - "app/**/*.apk"
+    plugins:
+      - docker-compose#v3.0.0:
+          config: ./docker-compose.yml
+          run: build_android
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            STORE_PASSWORD:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.STORE_PASSWORD'
+            KEY_ALIAS:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.KEY_ALIAS'
+            KEY_PASSWORD:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.KEY_PASSWORD'
+            APPCENTER_API_TOKEN:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.APPCENTER_API_TOKEN'
+            APPCENTER_APP_OWNER:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.APPCENTER_APP_OWNER'
+            APPCENTER_APP_NAME:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.APPCENTER_APP_NAME'
+            APPCENTER_APP_DESTINATION:
+              secret-id: 'stage-android-demoapp-buildkite'
+              json-key: '.APPCENTER_APP_DESTINATION'
+      agents:
+        queue: 'stage-us-west-2-default'
+      timeout_in_minutes: 25
+
+  - wait
+
   - block: ":whale: Release to Google play for internal tester"
     prompt: "Confirm releasing this internal version to Google play"
 
