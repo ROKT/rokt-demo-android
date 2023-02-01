@@ -53,6 +53,7 @@ platform :android do
           release_notes: "Android Demo app version #{ENV['BUILDKITE_BUILD_NUMBER']}.\nBranch: #{ENV['BUILDKITE_BRANCH']}\n#{ENV['BUILDKITE_MESSAGE']}",
           notify_testers: true
         )
+  end
 
     desc "Deploy a release version to the Google Play"
     lane :release do
