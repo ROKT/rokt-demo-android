@@ -34,6 +34,9 @@ steps:
   - name: ':rocket: Publish demo app to App Center'
     commands:
       - bundle install
+#      create keystore
+      - echo $$ANDROID_KEYSTORE_FILE > keystore.jks.b64
+      - base64 -d -i keystore.jks.b64 > app/keystore.jks
       - bundle exec fastlane publishToAppCenter
     artifact_paths:
       - "app/**/*.apk"
