@@ -40,9 +40,18 @@ platform :android do
 
   desc "Publish to App Center"
   lane :publishToAppCenter do
+    build_number = if ENV['BUILDKITE_BUILD_NUMBER'].nil?
+                    "11"
+                   else
+                    ENV['BUILDKITE_BUILD_NUMBER']
+                   end
     gradle(
         task: 'assemble',
-        build_type: 'Release'
+        build_type: 'Release',
+        properties: {
+            "android.injected.version.code" => build_number,
+            "android.injected.version.name" => "BUILD_#{build_number}",
+          }
         )
     appcenter_upload(
           api_token: ENV['APPCENTER_API_TOKEN'],
@@ -50,8 +59,8 @@ platform :android do
           app_name: ENV['APPCENTER_APP_NAME'],
           destinations: ENV['APPCENTER_APP_DESTINATION'],
           file: "app/build/outputs/apk/release/app-release.apk",
-          release_notes: "Android Demo app version #{ENV['BUILDKITE_BUILD_NUMBER']}.\nBranch: #{ENV['BUILDKITE_BRANCH']}\n#{ENV['BUILDKITE_MESSAGE']}",
-          notify_testers: true
+          release_notes: "Android Demo app version #{build_number}.\nBranch: #{ENV['BUILDKITE_BRANCH']}\n#{ENV['BUILDKITE_MESSAGE']}",
+          notify_testers: false
         )
   end
 
