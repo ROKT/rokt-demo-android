@@ -60,7 +60,7 @@ platform :android do
           destinations: ENV['APPCENTER_APP_DESTINATION'],
           file: "app/build/outputs/apk/release/app-release.apk",
           release_notes: "Android Demo app version #{build_number}.\nBranch: #{ENV['BUILDKITE_BRANCH']}\n#{ENV['BUILDKITE_MESSAGE']}",
-          notify_testers: false
+          notify_testers: true
         )
   end
 
