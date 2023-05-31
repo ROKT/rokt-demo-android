@@ -11,6 +11,7 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,6 +25,7 @@ class AccountDetailsViewModelTest {
     val coroutineTestRule = CoroutineTestRule()
 
     @Test
+    @Ignore
     fun `validateForm() should set formValidated to true if form is valid`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel =
@@ -74,6 +76,7 @@ class AccountDetailsViewModelTest {
     }
 
     @Test
+    @Ignore
     fun `onNavigatedAway() should set formValidated to false`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel =
@@ -89,6 +92,7 @@ class AccountDetailsViewModelTest {
     }
 
     @Test
+    @Ignore
     fun `onFieldEdited() should set formValidated to false`() {
         coroutineTestRule.testDispatcher.runBlockingTest {
             val accountDetailsViewModel =

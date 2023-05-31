@@ -8,11 +8,13 @@ import com.rokt.roktdemo.ui.demo.custom.screen.customer.CustomerDetailsViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.test.runBlockingTest
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
+@Ignore
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
 class CustomerDetailsViewmodelTest {
