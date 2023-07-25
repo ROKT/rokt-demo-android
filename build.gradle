@@ -1,5 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 import com.rokt.roktdemo.buildsrc.Libs
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
 
@@ -36,6 +37,12 @@ allprojects {
         }
 
         mavenCentral()
+    }
+
+    tasks.withType(KotlinCompile.class).configureEach {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
     }
 }
 

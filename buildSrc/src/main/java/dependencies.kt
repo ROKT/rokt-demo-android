@@ -5,9 +5,9 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:8.0.2"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
-    const val rokt = "com.rokt:roktsdk:3.15.0"
+    const val rokt = "com.rokt:roktsdk:4.0.0-alpha.1"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
     const val coil = "io.coil-kt:coil:1.2.2"
@@ -19,7 +19,7 @@ object Libs {
     }
 
     object Kotlin {
-        private const val version = "1.5.21"
+        private const val version = "1.8.21"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin =
             "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
@@ -42,21 +42,21 @@ object Libs {
         const val coreKtx = "androidx.core:core-ktx:1.5.0-beta03"
         const val appcompat = "androidx.appcompat:appcompat:1.2.0-rc01"
         const val navigation = "androidx.navigation:navigation-ui-ktx:2.3.4"
-        const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0-alpha03"
+        const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0"
         const val lifeCycle = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
         const val splashScreen = "androidx.core:core-splashscreen:1.0.0-beta01"
 
         object Compose {
-            private const val version = "1.0.2"
+            private const val version = "1.4.7"
 
-            const val foundation = "androidx.compose.foundation:foundation:$version"
-            const val layout = "androidx.compose.foundation:foundation-layout:$version"
-            const val ui = "androidx.compose.ui:ui:$version"
-            const val uiUtil = "androidx.compose.ui:ui-util:$version"
+            const val foundation = "androidx.compose.foundation:foundation:1.4.3"
+            const val layout = "androidx.compose.foundation:foundation-layout:1.4.3"
+            const val ui = "androidx.compose.ui:ui:1.4.3"
+            const val uiUtil = "androidx.compose.ui:ui-util:1.4.3"
             const val runtime = "androidx.compose.runtime:runtime:$version"
-            const val material = "androidx.compose.material:material:$version"
+            const val material = "androidx.compose.material:material:1.4.3"
             const val animation = "androidx.compose.animation:animation:$version"
-            const val tooling = "androidx.compose.ui:ui-tooling:$version"
+            const val tooling = "androidx.compose.ui:ui-tooling:1.4.3"
             const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha08"
         }
 
@@ -71,7 +71,7 @@ object Libs {
     }
 
     object Hilt {
-        private const val version = "2.38.1"
+        private const val version = "2.44.2"
 
         const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val android = "com.google.dagger:hilt-android:$version"

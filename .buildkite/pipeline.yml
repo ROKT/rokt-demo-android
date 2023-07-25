@@ -1,3 +1,6 @@
+env:
+  STAGE_BK_AGENT: rokt-stage-us-west-2-intel-linux-build-large
+
 steps:
   - name: ':hammer: Build and Unit Test Android Demo'
     commands:
@@ -23,7 +26,7 @@ steps:
                 json-key: '.KEY_PASSWORD'
 
     agents:
-      queue: 'stage-us-west-2-default'
+      queue: ${STAGE_BK_AGENT}
     timeout_in_minutes: 25
 
   - wait
@@ -63,7 +66,7 @@ steps:
               json-key: '.APPCENTER_APP_OWNER'
             APPCENTER_APP_NAME:
               secret-id: 'stage-android-demoapp-buildkite'
-              json-key: '.APPCENTER_APP_NAME'
+              json-key: '.APPCENTER_DCUI_APP_NAME'
             ANDROID_KEYSTORE_FILE:
               secret-id: 'stage-android-demoapp-buildkite'
               json-key: '.ANDROID_KEYSTORE_FILE'
@@ -71,7 +74,7 @@ steps:
               secret-id: 'stage-android-demoapp-buildkite'
               json-key: '.APPCENTER_APP_DESTINATION'
     agents:
-      queue: 'stage-us-west-2-default'
+      queue: ${STAGE_BK_AGENT}
     timeout_in_minutes: 25
 
   - wait
@@ -120,7 +123,7 @@ steps:
               secret-id: 'stage-android-demoapp-buildkite'
               json-key: '.APPCENTER_APP_OWNER'
     agents:
-      queue: 'stage-us-west-2-default'
+      queue: ${STAGE_BK_AGENT}
     timeout_in_minutes: 25
 
   - wait
@@ -170,6 +173,6 @@ steps:
               secret-id: 'stage-android-demoapp-buildkite'
               json-key: '.APPCENTER_APP_OWNER'
     agents:
-      queue: 'stage-us-west-2-default'
+      queue: ${STAGE_BK_AGENT}
     branches: "release-*"
     timeout_in_minutes: 25
