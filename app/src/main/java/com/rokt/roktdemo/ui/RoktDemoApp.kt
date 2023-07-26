@@ -11,6 +11,7 @@ import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.ui.about.AboutPage
 import com.rokt.roktdemo.ui.demo.DemoPage
 import com.rokt.roktdemo.ui.home.HomePage
+import com.rokt.roktdemo.ui.layouts.DemoLayoutsPage
 import com.rokt.roktdemo.ui.theme.RoktColors.LightColors
 
 @Composable
@@ -27,6 +28,10 @@ fun RoktDemoApp(viewModel: MainActivityViewModel) {
 
                 composable(MainDestinations.DEMO) {
                     DemoPage(actions.backPressed, viewModel)
+                }
+
+                composable(MainDestinations.LAYOUTS) {
+                    DemoLayoutsPage(actions.backPressed, viewModel)
                 }
 
                 composable(MainDestinations.ABOUT_ROKT) {

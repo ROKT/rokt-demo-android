@@ -23,10 +23,10 @@ import com.rokt.roktdemo.ui.state.RoktDemoErrorTypes
 
 @Composable
 fun RoktError(errorType: RoktDemoErrorTypes?) {
-    if (errorType == RoktDemoErrorTypes.NETWORK) {
-        NetworkError()
-    } else {
-        GeneralError()
+    when (errorType) {
+        RoktDemoErrorTypes.NETWORK -> NetworkError()
+        RoktDemoErrorTypes.QRCODE -> QrCodeError()
+        else -> GeneralError()
     }
 }
 
@@ -81,6 +81,36 @@ private fun NetworkError() {
             )
             XSmallSpace()
             Title(stringResource(R.string.network_error_title_text), textAlign = TextAlign.Center)
+        }
+    }
+}
+
+@Composable
+private fun QrCodeError() {
+    Box(
+        Modifier
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        RoktBackground()
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.ic_error),
+                contentDescription = stringResource(R.string.content_description_error_icon)
+            )
+            XSmallSpace()
+            Title(stringResource(R.string.error_qr_code_title), textAlign = TextAlign.Center)
+            XSmallSpace()
+            ContentText(
+                text = stringResource(R.string.error_qr_code_message),
+                textAlign = TextAlign.Center
+            )
         }
     }
 }
