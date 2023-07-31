@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Rokt</string>
     <string name="menu_button_demo">Placement library</string>
+    <string name="menu_button_layouts_demo">Layout library</string>
     <string name="menu_button_about">About this app</string>
     <string name="menu_button_contact">Contact us</string>
     <string name="footer_copyright">© Rokt 2023 - All rights reserved</string>
@@ -101,5 +102,11 @@
     <string name="text_increase_your_changes">Increase your changes of selling with access to up to 11 million Aussies each month.</string>
     <string name="text_limited_items"><![CDATA[*Limited to 2 items per month. T&C’s Apply.]]></string>
     <string name="text_ebay">ebay logo</string>
+    <string name="button_scan">Scan new Layout</string>
+    <string name="text_scan_description">Scan the QR code shown on the OnePlatform Layouts editor</string>
+    <string name="text_scan_prompt">Scan Rokt preview QR code</string>
+    <string name="button_execute">Refresh preview</string>
+    <string name="error_qr_code_title">Invalid QR code data.</string>
+    <string name="error_qr_code_message">Please scan the correct QR code from the One Platform layouts preview page. If the issue persists please contact us at www.rokt.com or try again later.</string>
 
 </resources>

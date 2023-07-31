@@ -113,6 +113,11 @@ private fun HomeButtons(viewModel: HomeViewModel, actions: MainActions) {
             onClick = actions.demoLibraryClicked
         )
         DefaultSpace()
+        ButtonDark(
+            text = stringResource(id = R.string.menu_button_layouts_demo),
+            onClick = actions.demoLayoutsClicked
+        )
+        DefaultSpace()
         ButtonLight(
             text = stringResource(R.string.menu_button_about),
             onClick = actions.aboutRoktClicked

@@ -13,5 +13,5 @@ data class UiState<T>(
 }
 
 enum class RoktDemoErrorTypes {
-    GENERAL, NETWORK
+    GENERAL, NETWORK, QRCODE
 }

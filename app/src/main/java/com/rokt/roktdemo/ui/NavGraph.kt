@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 object MainDestinations {
     const val HOME = "home"
     const val DEMO = "demo"
+    const val LAYOUTS = "layouts"
     const val ABOUT_ROKT = "about"
 }
 
@@ -18,6 +19,10 @@ object MainDestinations {
 class MainActions constructor(navController: NavController) {
     val demoLibraryClicked: () -> Unit = {
         navController.navigate(MainDestinations.DEMO)
+    }
+
+    val demoLayoutsClicked: () -> Unit = {
+        navController.navigate(MainDestinations.LAYOUTS)
     }
 
     val aboutRoktClicked: () -> Unit = {

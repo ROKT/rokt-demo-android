@@ -44,11 +44,13 @@ fun ButtonDark(text: String, onClick: () -> Unit) {
 }
 
 @Composable
-fun ButtonLight(text: String, onClick: () -> Unit) {
+fun ButtonLight(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
     OutlinedButton(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(BUTTON_HEIGHT.dp),
+        modifier = modifier.then(
+            Modifier
+                .fillMaxWidth()
+                .height(BUTTON_HEIGHT.dp)
+        ),
         onClick = onClick,
         colors = ButtonDefaults.textButtonColors(
             backgroundColor = MaterialTheme.colors.primary,
