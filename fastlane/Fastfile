@@ -49,8 +49,8 @@ platform :android do
         task: 'assemble',
         build_type: 'Release',
         properties: {
-            "android.injected.version.code" => build_number,
-            "android.injected.version.name" => "BUILD_#{build_number}",
+            "version_code" => build_number,
+            "version_name" => "BUILD_#{build_number}",
           }
         )
     appcenter_upload(
