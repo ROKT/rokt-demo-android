@@ -6,7 +6,7 @@ steps:
       - ./.buildkite/bin/update_versions.sh $(buildkite-agent meta-data get VERSION_CODE) $(buildkite-agent meta-data get VERSION) $(buildkite-agent meta-data get ANDROID_VERSION) app/build.gradle buildSrc/src/main/java/dependencies.kt
       - ./.buildkite/bin/create_tag.sh $(buildkite-agent meta-data get VERSION)
     agents:
-      queue: ${ENG_BK_AGENT}
+      queue: "eng-default"
 
   - name: ":hammer: Build and Unit Test Android Demo"
     key: "test"
@@ -37,7 +37,7 @@ steps:
                 secret-id: "stage-android-demoapp-buildkite"
                 json-key: ".KEY_PASSWORD"
     agents:
-      queue: "eng-default"
+      queue: "stage-us-west-2-default"
     timeout_in_minutes: 25
 
   - block: ':whale: Publish to App Center'
