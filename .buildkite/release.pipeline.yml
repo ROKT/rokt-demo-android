@@ -40,14 +40,9 @@ steps:
       queue: "stage-us-west-2-default"
     timeout_in_minutes: 25
 
-  - block: ':whale: Publish to App Center'
-    prompt: 'Confirm publishing to App Center?'
-    key: "temp"
-
   - name: ":rocket: Publish demo app to App Center"
     depends_on:  
       - "test"
-      - "temp"
     commands:
       - git fetch --all --tags --force
       - git checkout "v$(buildkite-agent meta-data get VERSION)"
