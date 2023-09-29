@@ -47,6 +47,9 @@ It can be found here: https://github.com/NedaRobatMeily/docker-image-java-11
 - Unblock the release step on **Buildkite**
 - On google play console, under releases section, add release note and publish the version
 
+## Automated Publishing
+The SDK can be released via the [Mobile Release Pipeline](https://github.com/ROKT/mobile-release-pipeline). Follow the instructions in the Mobile Release Pipeline repo to release. You can still release the SDK manually by following the steps in the previous section.  
+
 ## Project architecture
 
 This project is implemented based on the MVVM and repository patterns. 
