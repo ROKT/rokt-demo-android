@@ -10,7 +10,7 @@ set -eu
 
 # This will break if the indentation changes in build.gradle
 
-perl -pi -e "s/(?<=versionCode )(.*)(?=\n)/$1/g" "$4"
-perl -pi -e "s/(?<=versionName \")(.*)(?=\")/$2/g" "$4"
+perl -pi -e "s/(?<=versionCode findProperty\(\"version_code\"\) as Integer \?: )(.*)(?=\n)/$1/g" "$4"
+perl -pi -e "s/(?<=versionName findProperty\(\"version_name\"\) \?: \")(.*)(?=\")/$2/g" "$4"
 
 perl -pi -e "s/(?<=com.rokt:roktsdk:)(.*)(?=\")/$3/g" "$5"
