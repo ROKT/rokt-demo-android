@@ -23,8 +23,8 @@ android {
         applicationId "com.rokt.roktdemo"
         minSdkVersion 21
         targetSdkVersion 31
-        versionCode 29
-        versionName "1.2.9"
+        versionCode 33
+        versionName "1.2.12"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
