@@ -1,0 +1,93 @@
+env:
+  STAGE_BK_AGENT: rokt-stage-us-west-2-intel-linux-build-large
+
+steps:
+
+  - name: ":git: Create git tag"
+    key: "tag"
+    commands:
+      - ./.buildkite/bin/update_versions.sh $(buildkite-agent meta-data get VERSION_CODE) $(buildkite-agent meta-data get VERSION) $(buildkite-agent meta-data get ANDROID_VERSION) app/build.gradle buildSrc/src/main/java/dependencies.kt
+      - ./.buildkite/bin/create_tag.sh $(buildkite-agent meta-data get VERSION)
+    agents:
+      queue: ${STAGE_BK_AGENT}
+
+  - name: ":hammer: Build and Unit Test Android Demo"
+    key: "test"
+    commands:
+      - git fetch --all --tags --force
+      - git checkout "v$(buildkite-agent meta-data get VERSION)"
+      - bundle install
+      - bundle exec fastlane buildAndKtlint
+      - bundle exec fastlane test
+    artifact_paths:
+      - "app/**/*.apk"
+    depends_on: "tag"
+    plugins:
+      - docker-compose#v4.14.0:
+          config: ./docker-compose.yml
+          run: build_android
+          mount-ssh-agent: true
+          mount-buildkite-agent: true
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            STORE_PASSWORD:
+              secret-id: "stage-android-demoapp-buildkite"
+              json-key: ".STORE_PASSWORD"
+              KEY_ALIAS:
+                secret-id: "stage-android-demoapp-buildkite"
+                json-key: ".KEY_ALIAS"
+              KEY_PASSWORD:
+                secret-id: "stage-android-demoapp-buildkite"
+                json-key: ".KEY_PASSWORD"
+    agents:
+      queue: ${STAGE_BK_AGENT}
+    timeout_in_minutes: 25
+
+  - name: ":rocket: Publish demo app to App Center"
+    depends_on:  
+      - "test"
+    commands:
+      - git fetch --all --tags --force
+      - git checkout "v$(buildkite-agent meta-data get VERSION)"
+      - bundle install
+#      create keystore
+      - echo $$ANDROID_KEYSTORE_FILE > keystore.jks.b64
+      - base64 -d -i keystore.jks.b64 > app/keystore.jks
+      - bundle exec fastlane publishToAppCenter
+    artifact_paths:
+      - "app/**/*.apk"
+    plugins:
+      - docker-compose#v4.14.0:
+          config: ./docker-compose.yml
+          run: build_android
+          mount-ssh-agent: true
+          mount-buildkite-agent: true
+      - seek-oss/aws-sm#v2.0.0:
+          env:
+            STORE_PASSWORD:
+              secret-id: "stage-android-demoapp-buildkite"
+              json-key: ".STORE_PASSWORD"
+            KEY_ALIAS:
+              secret-id: "stage-android-demoapp-buildkite"
+              json-key: ".KEY_ALIAS"
+            KEY_PASSWORD:
+              secret-id: "stage-android-demoapp-buildkite"
+              json-key: ".KEY_PASSWORD"
+            APPCENTER_API_TOKEN:
+              secret-id: "stage-android-demoapp-buildkite"
+              json-key: ".APPCENTER_API_TOKEN"
+            APPCENTER_APP_OWNER:
+              secret-id: "stage-android-demoapp-buildkite"
+              json-key: ".APPCENTER_APP_OWNER"
+            APPCENTER_APP_NAME:
+              secret-id: "stage-android-demoapp-buildkite"
+              json-key: ".APPCENTER_DCUI_APP_NAME"
+            ANDROID_KEYSTORE_FILE:
+              secret-id: "stage-android-demoapp-buildkite"
+              json-key: ".ANDROID_KEYSTORE_FILE"
+            APPCENTER_APP_DESTINATION:
+              secret-id: "stage-android-demoapp-buildkite"
+              json-key: ".APPCENTER_APP_DESTINATION"
+    agents:
+      queue: ${STAGE_BK_AGENT}
+    timeout_in_minutes: 25
