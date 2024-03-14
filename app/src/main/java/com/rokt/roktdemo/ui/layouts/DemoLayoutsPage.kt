@@ -87,7 +87,6 @@ private fun ScannerContent(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .verticalScroll(rememberScrollState())
     ) {
         Box(Modifier.padding(PaddingValues(start = 3.dp, top = HEADER_TOP_PADDING.dp))) {
             BackButton(backPressed, MaterialTheme.colors.primaryVariant)
@@ -95,6 +94,7 @@ private fun ScannerContent(
         Column(
             modifier = Modifier
                 .padding(30.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             Heading(text = stringResource(id = R.string.menu_button_layouts_demo))
             ScannerView(viewModel = viewModel)
