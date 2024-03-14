@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -92,6 +94,7 @@ private fun ScannerContent(
         Column(
             modifier = Modifier
                 .padding(30.dp)
+                .verticalScroll(rememberScrollState())
         ) {
             Heading(text = stringResource(id = R.string.menu_button_layouts_demo))
             ScannerView(viewModel = viewModel)
