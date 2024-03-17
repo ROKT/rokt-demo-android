@@ -19,3 +19,7 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-dontwarn coil.request.ImageResult$Metadata
+-keep class com.rokt.roktdemo.model.* {
+     <fields>;
+ }

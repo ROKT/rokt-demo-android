@@ -7,14 +7,14 @@ object Versions {
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:8.0.2"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
-    const val rokt = "com.rokt:roktsdk:4.1.0-beta.1"
+    const val rokt = "com.rokt:roktsdk:4.2.0"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
     const val coil = "io.coil-kt:coil:1.2.2"
     const val zxing = "com.journeyapps:zxing-android-embedded:4.3.0"
 
     object Retrofit {
-        const val retrofit = "com.squareup.retrofit2:retrofit:1.6.0"
+        const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
         const val gsonConverter = "com.squareup.retrofit2:converter-gson:2.9.0"
 
     }
