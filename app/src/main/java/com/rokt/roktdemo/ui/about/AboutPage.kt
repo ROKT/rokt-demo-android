@@ -1,6 +1,5 @@
 package com.rokt.roktdemo.ui.about
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -20,7 +19,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.google.accompanist.coil.rememberCoilPainter
+import coil.compose.AsyncImage
 import com.rokt.roktdemo.model.AboutContent
 import com.rokt.roktdemo.model.AboutLink
 import com.rokt.roktdemo.model.AboutRokt
@@ -95,10 +94,8 @@ private fun Contents(content: List<AboutContent>) {
     content.forEach {
         Column {
             it.imageUrl.takeIf { it?.isNotEmpty() == true }?.let { imageUrl ->
-                Image(
-                    painter = rememberCoilPainter(
-                        request = imageUrl
-                    ),
+                AsyncImage(
+                    model = imageUrl,
                     contentDescription = it.title,
                     modifier = Modifier.fillMaxWidth()
                 )
