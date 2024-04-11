@@ -58,6 +58,7 @@ class ScanQrViewModel @Inject constructor(
             val attributes = hashMapOf(
                 ATTRIBUTE_IS_DEMO to true.toString(),
                 ATTRIBUTE_LAYOUT_ID to data.previewId,
+                ATTRIBUTE_VERSION_ID to data.versionId,
                 ATTRIBUTE_CREATIVE_ID to data.creativeIds.joinToString(separator = ",")
             )
             val placeholders = embeddedWidget?.let { hashMapOf(PREVIEW_PLACEHOLDER to it) }
@@ -73,6 +74,7 @@ data class ScanQrState(
 
 private const val ATTRIBUTE_IS_DEMO = "isDemo"
 private const val ATTRIBUTE_LAYOUT_ID = "layoutId"
+private const val ATTRIBUTE_VERSION_ID = "versionId"
 private const val ATTRIBUTE_CREATIVE_ID = "creativeId"
 private const val PREVIEW_PLACEHOLDER = "#rokt-placeholder"
 private const val EXECUTE_DELAY_SECONDS = 3L
