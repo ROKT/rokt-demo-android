@@ -26,8 +26,8 @@ android {
         applicationId "com.rokt.roktdemo"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode findProperty("version_code") as Integer ?: 28
-        versionName findProperty("version_name") ?: "4.0.0"
+        versionCode findProperty("version_code") as Integer ?: 46
+        versionName findProperty("version_name") ?: "1.2.26"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
