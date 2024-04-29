@@ -10,6 +10,7 @@ object MainDestinations {
     const val DEMO = "demo"
     const val LAYOUTS = "layouts"
     const val ABOUT_ROKT = "about"
+    const val SETTINGS = "settings"
 }
 
 /**
@@ -27,6 +28,10 @@ class MainActions constructor(navController: NavController) {
 
     val aboutRoktClicked: () -> Unit = {
         navController.navigate(MainDestinations.ABOUT_ROKT)
+    }
+
+    val settingsClicked: () -> Unit = {
+        navController.navigate(MainDestinations.SETTINGS)
     }
 
     val backPressed: () -> Unit = {
