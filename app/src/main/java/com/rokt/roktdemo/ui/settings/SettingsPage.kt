@@ -28,7 +28,6 @@ import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.ButtonText
 import com.rokt.roktdemo.ui.common.Heading
 
-
 private const val HEADER_TOP_PADDING = 50
 
 @Composable
