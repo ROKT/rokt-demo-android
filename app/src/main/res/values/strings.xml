@@ -4,6 +4,7 @@
     <string name="menu_button_layouts_demo">Layout library</string>
     <string name="menu_button_about">About this app</string>
     <string name="menu_button_contact">Contact us</string>
+    <string name="header_settings">Settings</string>
     <string name="footer_copyright">© Rokt 2023 - All rights reserved</string>
     <string name="footer_text_version">App Version </string>
     <string name="content_description_rokt_bg">Rokt Background</string>
@@ -108,5 +109,6 @@
     <string name="button_execute">Refresh preview</string>
     <string name="error_qr_code_title">Invalid QR code data.</string>
     <string name="error_qr_code_message">Please scan the correct QR code from the One Platform layouts preview page. If the issue persists please contact us at www.rokt.com or try again later.</string>
-
+    <string name="settings_stage_env">Stage environment</string>
+    <string name="settings_debug_logs">Enable debug logs</string>
 </resources>

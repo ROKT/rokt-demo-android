@@ -11,6 +11,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -61,6 +64,13 @@ fun HomePage(actions: MainActions) {
             Footer()
             LargeSpace()
         }
+
+        SettingsCog(
+            modifier = Modifier
+                .padding(top = 35.dp)
+                .align(Alignment.TopEnd),
+            actions = actions,
+        )
     }
 }
 
@@ -151,4 +161,17 @@ private fun FooterText(text: String) {
         fontWeight = FontWeight.Normal,
         lineHeight = 16.sp
     )
+}
+
+@Composable
+private fun SettingsCog(modifier: Modifier, actions: MainActions) {
+    TextButton(
+        modifier = modifier.then(Modifier.padding(10.dp)),
+        onClick = actions.settingsClicked
+    ) {
+        Image(
+            imageVector = Icons.Default.Settings,
+            contentDescription = stringResource(id = R.string.header_settings)
+        )
+    }
 }
