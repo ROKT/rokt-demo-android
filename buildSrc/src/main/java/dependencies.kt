@@ -10,7 +10,7 @@ object Libs {
     const val rokt = "com.rokt:roktsdk:4.3.1"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
-    const val coil = "io.coil-kt:coil-compose:2.6.0"
+    const val coil = "io.coil-kt:coil-compose:2.2.0"
     const val zxing = "com.journeyapps:zxing-android-embedded:4.3.0"
 
     object Retrofit {
