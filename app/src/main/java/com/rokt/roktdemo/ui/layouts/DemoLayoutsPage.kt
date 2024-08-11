@@ -1,6 +1,6 @@
 package com.rokt.roktdemo.ui.layouts
 
-import androidx.activity.compose.rememberLauncherForActivityResult
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,11 +19,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.journeyapps.barcodescanner.ScanContract
-import com.journeyapps.barcodescanner.ScanOptions
+import com.google.mlkit.vision.barcode.common.Barcode
+import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
+import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.BackButton
@@ -113,13 +115,6 @@ private fun ScannerContent(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ScannerView(viewModel: ScanQrViewModel) {
-    val qrCodeIntentLauncher = rememberLauncherForActivityResult(
-        contract = ScanContract(),
-        onResult = { success ->
-            viewModel.qrCodeScanned(success, embeddedWidget)
-        }
-    )
-    val scanPrompt = stringResource(id = R.string.text_scan_prompt)
     PlainTooltipBox(
         tooltip = {
             Text(
@@ -128,17 +123,27 @@ private fun ScannerView(viewModel: ScanQrViewModel) {
             )
         }
     ) {
+        val context = LocalContext.current
         ButtonLight(
             modifier = Modifier.tooltipAnchor(),
             text = stringResource(id = R.string.button_scan)
         ) {
-            qrCodeIntentLauncher.launch(
-                ScanOptions().apply {
-                    setPrompt(scanPrompt)
-                    setBeepEnabled(true)
-                    setOrientationLocked(true)
+            val options = GmsBarcodeScannerOptions.Builder()
+                .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+                .enableAutoZoom()
+                .allowManualInput()
+                .build()
+            val scanner = GmsBarcodeScanning.getClient(context, options)
+            scanner.startScan()
+                .addOnSuccessListener { barcode ->
+                    viewModel.qrCodeScanned(barcode.rawValue, embeddedWidget)
                 }
-            )
+                .addOnCanceledListener {
+                    // Do nothing
+                }
+                .addOnFailureListener { e ->
+                    Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
+                }
         }
     }
 }
