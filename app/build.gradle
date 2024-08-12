@@ -74,7 +74,7 @@ dependencies {
     implementation Libs.Retrofit.retrofit
     implementation Libs.okhttp
     implementation Libs.coil
-    implementation Libs.zxing
+    implementation Libs.mlkitQRScanner
 
     // Compose
     implementation Libs.AndroidX.Compose.material

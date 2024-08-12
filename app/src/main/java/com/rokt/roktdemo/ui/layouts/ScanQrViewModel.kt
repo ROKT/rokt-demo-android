@@ -2,7 +2,6 @@ package com.rokt.roktdemo.ui.layouts
 
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
-import com.journeyapps.barcodescanner.ScanIntentResult
 import com.rokt.roktdemo.ui.demo.RoktExecutor
 import com.rokt.roktdemo.ui.layouts.model.PreviewData
 import com.rokt.roktdemo.ui.state.RoktDemoErrorTypes
@@ -33,13 +32,13 @@ class ScanQrViewModel @Inject constructor(
         _state.value = UiState(data = ScanQrState(true))
     }
 
-    fun qrCodeScanned(success: ScanIntentResult?, embeddedWidget: WeakReference<Widget>?) {
-        if (success == null) {
+    fun qrCodeScanned(rawData: String?, embeddedWidget: WeakReference<Widget>?) {
+        if (rawData == null) {
             _state.update { UiState(data = ScanQrState(false)) }
         } else {
             try {
-                val qrData = Gson().fromJson(success.contents, PreviewData::class.java)
-                Timber.d(success.contents)
+                val qrData = Gson().fromJson(rawData, PreviewData::class.java)
+                Timber.d(rawData)
                 _state.update { UiState(data = ScanQrState(scannedData = qrData)) }
                 Timer().schedule(
                     timerTask { executePreview(embeddedWidget) },
