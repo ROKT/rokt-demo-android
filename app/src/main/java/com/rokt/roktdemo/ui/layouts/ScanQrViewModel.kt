@@ -60,7 +60,6 @@ class ScanQrViewModel @Inject constructor(
         scannedData?.let { data ->
             val attributes = buildMap {
                 this[ATTRIBUTE_IS_DEMO] = true.toString()
-                this[ATTRIBUTE_CREATIVE_ID] = data.creativeIds.joinToString(separator = ",")
                 data.language?.let { this[ATTRIBUTE_LANGUAGE] = it }
                 getDemoConfig(data)?.let { this[ATTRIBUTE_DEMO_CONFIG] = it }
             }
@@ -101,7 +100,6 @@ data class ScanQrState(
 )
 
 private const val ATTRIBUTE_IS_DEMO = "isDemo"
-private const val ATTRIBUTE_CREATIVE_ID = "creativeId"
 private const val ATTRIBUTE_LANGUAGE = "rokt.language"
 private const val ATTRIBUTE_DEMO_CONFIG = "demoConfig"
 private const val PREVIEW_PLACEHOLDER = "#rokt-placeholder"
