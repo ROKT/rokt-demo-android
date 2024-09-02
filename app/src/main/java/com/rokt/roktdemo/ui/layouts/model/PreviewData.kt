@@ -5,4 +5,6 @@ data class PreviewData(
     val previewId: String,
     val versionId: String,
     val creativeIds: List<String>,
+    val language: String?,
+    val layoutVariantIds: List<String>?,
 )

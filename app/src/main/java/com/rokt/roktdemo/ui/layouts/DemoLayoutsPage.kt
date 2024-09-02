@@ -29,7 +29,6 @@ import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.BackButton
-import com.rokt.roktdemo.ui.common.ButtonDark
 import com.rokt.roktdemo.ui.common.ButtonLight
 import com.rokt.roktdemo.ui.common.Heading
 import com.rokt.roktdemo.ui.common.LoadingPage
@@ -100,14 +99,15 @@ private fun ScannerContent(
         ) {
             Heading(text = stringResource(id = R.string.menu_button_layouts_demo))
             ScannerView(viewModel = viewModel)
-            if (state.scannedData != null) {
+            // TODO: Disable refresh button until version issue is solved
+            /*if (state.scannedData != null) {
                 SmallSpace()
                 ButtonDark(text = stringResource(id = R.string.button_execute)) {
                     viewModel.executePreview(embeddedWidget)
                 }
-                SmallSpace()
-                RoktEmbeddedWidget(onWidgetAdded = { embeddedWidget = it })
-            }
+            }*/
+            SmallSpace()
+            RoktEmbeddedWidget(onWidgetAdded = { embeddedWidget = it })
         }
     }
 }
