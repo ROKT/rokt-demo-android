@@ -3,6 +3,9 @@ package com.rokt.roktdemo.ui.layouts
 import androidx.lifecycle.ViewModel
 import com.google.gson.Gson
 import com.rokt.roktdemo.ui.demo.RoktExecutor
+import com.rokt.roktdemo.ui.layouts.model.DemoLayoutConfig
+import com.rokt.roktdemo.ui.layouts.model.DemoLayoutSlotConfig
+import com.rokt.roktdemo.ui.layouts.model.DemoModeConfig
 import com.rokt.roktdemo.ui.layouts.model.PreviewData
 import com.rokt.roktdemo.ui.state.RoktDemoErrorTypes
 import com.rokt.roktdemo.ui.state.UiState
@@ -13,6 +16,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import timber.log.Timber
 import java.lang.ref.WeakReference
+import java.util.HashMap
 import java.util.Timer
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
@@ -54,16 +58,41 @@ class ScanQrViewModel @Inject constructor(
     fun executePreview(embeddedWidget: WeakReference<Widget>?) {
         val scannedData = _state.value.data?.scannedData
         scannedData?.let { data ->
-            val attributes = hashMapOf(
-                ATTRIBUTE_IS_DEMO to true.toString(),
-                ATTRIBUTE_LAYOUT_ID to data.previewId,
-                ATTRIBUTE_VERSION_ID to data.versionId,
-                ATTRIBUTE_CREATIVE_ID to data.creativeIds.joinToString(separator = ",")
-            )
+            val attributes = buildMap {
+                this[ATTRIBUTE_IS_DEMO] = true.toString()
+                this[ATTRIBUTE_CREATIVE_ID] = data.creativeIds.joinToString(separator = ",")
+                data.language?.let { this[ATTRIBUTE_LANGUAGE] = it }
+                getDemoConfig(data)?.let { this[ATTRIBUTE_DEMO_CONFIG] = it }
+            }
             val placeholders = embeddedWidget?.let { hashMapOf(PREVIEW_PLACEHOLDER to it) }
-            roktExecutor.executeRokt("", attributes, placeholders)
+            roktExecutor.executeRokt("", HashMap(attributes), placeholders)
         }
     }
+}
+
+private fun getDemoConfig(previewData: PreviewData): String? {
+    previewData.layoutVariantIds?.let { layoutVariantIds ->
+        val slots = mutableListOf<DemoLayoutSlotConfig>()
+        previewData.creativeIds.forEachIndexed { index, creativeId ->
+            val slot = DemoLayoutSlotConfig(
+                layoutVariantId = layoutVariantIds[index % layoutVariantIds.count()],
+                creativeId = creativeId
+            )
+            slots.add(slot)
+        }
+        val demoConfig = DemoModeConfig(
+            layouts = listOf(
+                DemoLayoutConfig(
+                    layoutId = previewData.previewId,
+                    versionId = previewData.versionId,
+                    targetElementSelector = PREVIEW_PLACEHOLDER,
+                    slots = slots,
+                )
+            )
+        )
+        return Gson().toJson(demoConfig)
+    }
+    return null
 }
 
 data class ScanQrState(
@@ -72,8 +101,8 @@ data class ScanQrState(
 )
 
 private const val ATTRIBUTE_IS_DEMO = "isDemo"
-private const val ATTRIBUTE_LAYOUT_ID = "layoutId"
-private const val ATTRIBUTE_VERSION_ID = "versionId"
 private const val ATTRIBUTE_CREATIVE_ID = "creativeId"
+private const val ATTRIBUTE_LANGUAGE = "rokt.language"
+private const val ATTRIBUTE_DEMO_CONFIG = "demoConfig"
 private const val PREVIEW_PLACEHOLDER = "#rokt-placeholder"
 private const val EXECUTE_DELAY_SECONDS = 3L
