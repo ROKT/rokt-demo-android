@@ -11,12 +11,18 @@ import com.rokt.roktsdk.Rokt
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+private const val PREVIEW_PARAM_EXTRA = "preview"
+private const val URI_QUERY_PARAM = "config"
+
 @AndroidEntryPoint
 class MainActivity : androidx.activity.ComponentActivity() {
     private val viewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        intent.getStringExtra(PREVIEW_PARAM_EXTRA)?.let(viewModel::updatePreviewParameter)
+        intent.data?.getQueryParameter(URI_QUERY_PARAM)?.let(viewModel::updatePreviewParameter)
 
         viewModel.selectedTagId.observe(this) {
             Timber.d("Calling Rokt.Init with new tag Id: $it")
