@@ -1,5 +1,6 @@
 package com.rokt.roktdemo
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.distinctUntilChanged
@@ -15,6 +16,8 @@ class MainActivityViewModel @Inject constructor(settingsRepository: SettingsRepo
     private val _selectedTagId = MutableLiveData<String>()
     val selectedTagId = _selectedTagId.distinctUntilChanged()
 
+    val previewParameterString = mutableStateOf<String?>(null)
+
     init {
         if (settingsRepository.getBooleanSettingsValue(STAGE_ENV_ENABLED)) {
             Rokt.setEnvironment(Rokt.Environment.Stage)
@@ -26,5 +29,9 @@ class MainActivityViewModel @Inject constructor(settingsRepository: SettingsRepo
 
     fun updateSelectedTagId(tagId: String) {
         _selectedTagId.value = tagId
+    }
+
+    fun updatePreviewParameter(intentData: String) {
+        previewParameterString.value = intentData
     }
 }

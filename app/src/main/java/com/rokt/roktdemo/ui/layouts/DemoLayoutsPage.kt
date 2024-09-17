@@ -50,6 +50,10 @@ fun DemoLayoutsPage(
 ) {
     val state = viewModel.state.collectAsState()
 
+    fun handleQRCodeData(data: String?) {
+        viewModel.qrCodeScanned(data, embeddedWidget)
+    }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -64,8 +68,13 @@ fun DemoLayoutsPage(
             state.value.hasData -> {
                 ScannerContent(
                     backPressed = backPressed,
-                    viewModel = viewModel,
-                    state = requireNotNull(state.value.data)
+                    onWidgetAdded = { widget ->
+                        embeddedWidget = widget
+                        mainActivityViewModel.previewParameterString.value.let { handleQRCodeData(it) }
+                    },
+                    onQrCodeScanned = {
+                        handleQRCodeData(it)
+                    }
                 )
                 state.value.data?.scannedData?.tagId?.let {
                     mainActivityViewModel.updateSelectedTagId(it)
@@ -82,8 +91,8 @@ fun DemoLayoutsPage(
 @Composable
 private fun ScannerContent(
     backPressed: () -> Unit,
-    viewModel: ScanQrViewModel,
-    state: ScanQrState,
+    onWidgetAdded: (WeakReference<Widget>) -> Unit,
+    onQrCodeScanned: (data: String?) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -98,23 +107,18 @@ private fun ScannerContent(
                 .verticalScroll(rememberScrollState())
         ) {
             Heading(text = stringResource(id = R.string.menu_button_layouts_demo))
-            ScannerView(viewModel = viewModel)
-            // TODO: Disable refresh button until version issue is solved
-            /*if (state.scannedData != null) {
-                SmallSpace()
-                ButtonDark(text = stringResource(id = R.string.button_execute)) {
-                    viewModel.executePreview(embeddedWidget)
-                }
-            }*/
+            ScannerView(onQrCodeScanned)
             SmallSpace()
-            RoktEmbeddedWidget(onWidgetAdded = { embeddedWidget = it })
+            RoktEmbeddedWidget(
+                onWidgetAdded = onWidgetAdded,
+            )
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun ScannerView(viewModel: ScanQrViewModel) {
+private fun ScannerView(onQrCodeScanned: (data: String?) -> Unit) {
     PlainTooltipBox(
         tooltip = {
             Text(
@@ -136,7 +140,7 @@ private fun ScannerView(viewModel: ScanQrViewModel) {
             val scanner = GmsBarcodeScanning.getClient(context, options)
             scanner.startScan()
                 .addOnSuccessListener { barcode ->
-                    viewModel.qrCodeScanned(barcode.rawValue, embeddedWidget)
+                    onQrCodeScanned(barcode.rawValue)
                 }
                 .addOnCanceledListener {
                     // Do nothing

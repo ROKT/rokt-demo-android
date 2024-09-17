@@ -43,6 +43,9 @@ fun RoktDemoApp(viewModel: MainActivityViewModel) {
                     SettingsPage(actions.backPressed)
                 }
             }
+            viewModel.previewParameterString.value?.let {
+                actions.demoLayoutsClicked()
+            }
         }
     }
 }
