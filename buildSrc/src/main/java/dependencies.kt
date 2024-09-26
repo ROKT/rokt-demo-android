@@ -7,7 +7,7 @@ object Versions {
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:8.0.2"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
-    const val rokt = "com.rokt:roktsdk:4.5.1"
+    const val rokt = "com.rokt:roktsdk:4.6.0-alpha.3"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
     const val coil = "io.coil-kt:coil-compose:2.2.0"
@@ -54,7 +54,7 @@ object Libs {
             const val uiUtil = "androidx.compose.ui:ui-util:1.4.3"
             const val runtime = "androidx.compose.runtime:runtime:$version"
             const val material = "androidx.compose.material:material:1.4.3"
-            const val material3 = "androidx.compose.material3:material3:1.1.1"
+            const val material3 = "androidx.compose.material3:material3:1.1.2"
             const val animation = "androidx.compose.animation:animation:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:1.4.3"
             const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha08"
