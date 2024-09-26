@@ -13,7 +13,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.PlainTooltipBox
+import androidx.compose.material3.PlainTooltip
+import androidx.compose.material3.TooltipBox
+import androidx.compose.material3.TooltipDefaults
+import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -119,17 +122,20 @@ private fun ScannerContent(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun ScannerView(onQrCodeScanned: (data: String?) -> Unit) {
-    PlainTooltipBox(
+    TooltipBox(
+        positionProvider = TooltipDefaults.rememberPlainTooltipPositionProvider(),
         tooltip = {
-            Text(
-                text = stringResource(id = R.string.text_scan_description),
-                color = MaterialTheme.colors.surface
-            )
-        }
+            PlainTooltip {
+                Text(
+                    text = stringResource(id = R.string.text_scan_description),
+                    color = MaterialTheme.colors.surface,
+                )
+            }
+        },
+        state = rememberTooltipState(),
     ) {
         val context = LocalContext.current
         ButtonLight(
-            modifier = Modifier.tooltipAnchor(),
             text = stringResource(id = R.string.button_scan)
         ) {
             val options = GmsBarcodeScannerOptions.Builder()
