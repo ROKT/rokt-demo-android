@@ -31,6 +31,8 @@ allprojects {
     repositories {
         google()
 
+        mavenLocal()
+
         // Rokt SDK artifacts
         maven {
             url "https://apps.rokt.com/msdk"

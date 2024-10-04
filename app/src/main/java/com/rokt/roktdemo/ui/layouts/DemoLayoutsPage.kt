@@ -12,6 +12,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.PlainTooltip
 import androidx.compose.material3.TooltipBox
@@ -33,12 +34,17 @@ import com.rokt.roktdemo.MainActivityViewModel
 import com.rokt.roktdemo.R
 import com.rokt.roktdemo.ui.common.BackButton
 import com.rokt.roktdemo.ui.common.ButtonLight
+import com.rokt.roktdemo.ui.common.ContentText
 import com.rokt.roktdemo.ui.common.Heading
 import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.common.RoktEmbeddedWidget
 import com.rokt.roktdemo.ui.common.SmallSpace
+import com.rokt.roktdemo.ui.common.SubHeading
 import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktsdk.Widget
+import com.rokt.roktux.FontMap
+import com.rokt.roktux.RoktLayout
+
 import java.lang.ref.WeakReference
 
 private const val HEADER_TOP_PADDING = 50 // How far from the top the header items sit
@@ -54,7 +60,7 @@ fun DemoLayoutsPage(
     val state = viewModel.state.collectAsState()
 
     fun handleQRCodeData(data: String?) {
-        viewModel.qrCodeScanned(data, embeddedWidget)
+        viewModel.qrCodeScanned(data)
     }
 
     Box(
@@ -70,6 +76,7 @@ fun DemoLayoutsPage(
 
             state.value.hasData -> {
                 ScannerContent(
+                    data = state.value.data,
                     backPressed = backPressed,
                     onWidgetAdded = { widget ->
                         embeddedWidget = widget
@@ -79,8 +86,19 @@ fun DemoLayoutsPage(
                         handleQRCodeData(it)
                     }
                 )
-                state.value.data?.scannedData?.tagId?.let {
-                    mainActivityViewModel.updateSelectedTagId(it)
+
+                if (state.value.data?.previewState is PreviewState.ScannedState) {
+                    val context = LocalContext.current
+                    ShowSdkSelectionPopup { legacySdk ->
+                        if (legacySdk) {
+                            viewModel.legacySdkSelected(embeddedWidget = embeddedWidget)
+                            state.value.data?.scannedData?.tagId?.let {
+                                mainActivityViewModel.updateSelectedTagId(it)
+                            }
+                        } else {
+                            viewModel.uxHelperSdkSelected(context)
+                        }
+                    }
                 }
             }
 
@@ -96,6 +114,7 @@ private fun ScannerContent(
     backPressed: () -> Unit,
     onWidgetAdded: (WeakReference<Widget>) -> Unit,
     onQrCodeScanned: (data: String?) -> Unit,
+    data: ScanQrState?,
 ) {
     Column(
         modifier = Modifier
@@ -115,6 +134,9 @@ private fun ScannerContent(
             RoktEmbeddedWidget(
                 onWidgetAdded = onWidgetAdded,
             )
+            if (data?.previewState is PreviewState.UxHelperSdkData) {
+                RoktUxPlaceHolder(data.previewState.response)
+            }
         }
     }
 }
@@ -155,5 +177,40 @@ private fun ScannerView(onQrCodeScanned: (data: String?) -> Unit) {
                     Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                 }
         }
+    }
+}
+
+@Composable
+private fun ShowSdkSelectionPopup(dismissListener: (legacySDK: Boolean) -> Unit) {
+    AlertDialog(
+        onDismissRequest = { dismissListener(true) },
+        title = { SubHeading(text = stringResource(R.string.text_select_sdk_title)) },
+        text = { ContentText(text = stringResource(R.string.text_select_sdk_description)) },
+        confirmButton = {
+            ButtonLight(text = stringResource(R.string.button_uxhelper), onClick = {
+                dismissListener(false)
+            })
+        },
+        dismissButton = {
+            ButtonLight(text = stringResource(R.string.button_legacysdk), onClick = {
+                dismissListener(true)
+            })
+        }
+    )
+}
+
+@Composable
+private fun RoktUxPlaceHolder(data: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        RoktLayout(
+            experienceResponse = data,
+            onUxEvent = { println("UxEvent Received $it") },
+            onPlatformEvent = { println("onPlatformEvent received $it") },
+            fontMap = FontMap(),
+            imageHandlingStrategy = null,
+        )
     }
 }
