@@ -44,6 +44,7 @@ import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktsdk.Widget
 import com.rokt.roktux.FontMap
 import com.rokt.roktux.RoktLayout
+import com.rokt.roktux.imagehandler.NetworkStrategy
 
 import java.lang.ref.WeakReference
 
@@ -210,7 +211,7 @@ private fun RoktUxPlaceHolder(data: String) {
             onUxEvent = { println("UxEvent Received $it") },
             onPlatformEvent = { println("onPlatformEvent received $it") },
             fontMap = FontMap(),
-            imageHandlingStrategy = null,
+            imageHandlingStrategy = NetworkStrategy(),
         )
     }
 }
