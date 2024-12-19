@@ -111,4 +111,8 @@
     <string name="error_qr_code_message">Please scan the correct QR code from the One Platform layouts preview page. If the issue persists please contact us at www.rokt.com or try again later.</string>
     <string name="settings_stage_env">Stage environment</string>
     <string name="settings_debug_logs">Enable debug logs</string>
+    <string name="button_uxhelper">UX Helper SDK</string>
+    <string name="button_legacysdk">Legacy SDK</string>
+    <string name="text_select_sdk_title">Select SDK</string>
+    <string name="text_select_sdk_description">Select which SDK to be used for rendering the preview</string>
 </resources>

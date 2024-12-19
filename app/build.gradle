@@ -95,6 +95,8 @@ dependencies {
     // Rokt
     implementation Libs.rokt
     implementation Libs.timber
+    implementation Libs.roktUx
+    implementation Libs.roktNetworkHelper
 
     // Hilt
     implementation Libs.Hilt.android
