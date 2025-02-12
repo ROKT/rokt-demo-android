@@ -96,5 +96,6 @@ object Libs {
     object Google {
         const val googleSerives = "com.google.gms:google-services:4.4.2"
         const val firebaseBom = "com.google.firebase:firebase-bom:33.9.0"
+        const val firebaseAppDistribution = "com.google.firebase:firebase-appdistribution-gradle:5.1.1"
     }
 }
