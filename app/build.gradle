@@ -5,6 +5,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -75,6 +76,8 @@ dependencies {
     implementation Libs.okhttp
     implementation Libs.coil
     implementation Libs.mlkitQRScanner
+
+    implementation platform(Libs.Google.firebaseBom)
 
     // Compose
     implementation Libs.AndroidX.Compose.material
