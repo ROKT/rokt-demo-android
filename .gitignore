@@ -97,3 +97,5 @@ app/.idea/*
 .idea/deploymentTargetDropDown.xml
 .idea/codeStyles/codeStyleConfig.xml
 .idea/codeStyles/Project.xml
+
+google-services.json
