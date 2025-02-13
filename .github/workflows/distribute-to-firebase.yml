@@ -21,6 +21,14 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
       - name: Configure Google Services File
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
@@ -53,4 +61,7 @@ jobs:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Distribute to Firebase
-        run: ./gradlew appDistributionUploadRelease
+        run: |
+          firebase appdistribution:distribute \
+            --app '${{ secrets.FIREBASE_APP_ID }}' \
+            app/build/outputs/apk/release/app-release.apk
