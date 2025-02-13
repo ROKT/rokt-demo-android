@@ -15,12 +15,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Authenticate with Google Cloud
-        uses: google-github-actions/auth@v2
-        with:
-          service_account: ${{ secrets.SERVICE_ACCOUNT }}
-          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
@@ -49,3 +43,12 @@ jobs:
         with:
           name: release-apk
           path: app/build/outputs/apk/release/app-release.apk
+
+      - name: Authenticate with Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+
+      - name: Distribute to Firebase
+        run: ./gradlew appDistributionUploadRelease
