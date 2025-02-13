@@ -47,8 +47,12 @@ jobs:
       - name: Authenticate with Google Cloud
         uses: google-github-actions/auth@v2
         with:
+          create_credentials_file: true
+          export_environment_variables: true
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Distribute to Firebase
+        env:
+          FIREBASE_SERVICE_CREDS_PATH: ${{ env.GOOGLE_GHA_CREDS_PATH }}
         run: ./gradlew appDistributionUploadRelease

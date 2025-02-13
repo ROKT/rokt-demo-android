@@ -41,6 +41,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             firebaseAppDistribution {
                 artifactType="APK"
+                serviceCredentialsFile="${System.env.FIREBASE_SERVICE_CREDS_PATH}"
             }
         }
     }
