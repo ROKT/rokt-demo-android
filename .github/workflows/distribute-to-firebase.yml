@@ -53,6 +53,4 @@ jobs:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
 
       - name: Distribute to Firebase
-        env:
-          FIREBASE_SERVICE_CREDS_PATH: ${{ env.GOOGLE_GHA_CREDS_PATH }}
         run: ./gradlew appDistributionUploadRelease
