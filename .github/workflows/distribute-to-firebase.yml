@@ -64,4 +64,5 @@ jobs:
         run: |
           firebase appdistribution:distribute \
             --app '${{ secrets.FIREBASE_APP_ID }}' \
-            app/build/outputs/apk/release/app-release.apk
+            app/build/outputs/apk/release/app-release.apk \
+            --groups '${{ secrets.TESTING_GROUPS }}'
