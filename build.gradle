@@ -1,0 +1,52 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+import com.rokt.roktdemo.buildsrc.Libs
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+buildscript {
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath Libs.androidGradlePlugin
+        classpath Libs.Kotlin.gradlePlugin
+        classpath Libs.Hilt.gradlePlugin
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+plugins {
+    id "org.jlleitschuh.gradle.ktlint" version "10.0.0"
+}
+
+subprojects {
+    apply plugin: "org.jlleitschuh.gradle.ktlint" // Version should be inherited from parent
+}
+
+allprojects {
+    repositories {
+        google()
+
+        // Rokt SDK artifacts
+        maven {
+            url "https://apps.rokt.com/msdk"
+        }
+
+        mavenCentral()
+    }
+
+    tasks.withType(KotlinCompile.class).configureEach {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+

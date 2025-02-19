@@ -12,6 +12,7 @@
 
 # Generated files
 bin/
+!.buildkite/bin
 gen/
 out/
 #  Uncomment the following line in case you need and you don't have the release build type files in your app
@@ -36,6 +37,8 @@ proguard/
 # Android Studio captures folder
 captures/
 
+buildSrc/.idea/*
+
 # IntelliJ
 *.iml
 .idea/workspace.xml
@@ -44,6 +47,7 @@ captures/
 .idea/assetWizardSettings.xml
 .idea/dictionaries
 .idea/libraries
+.idea/inspectionProfiles
 # Android Studio 3 in .gitignore file.
 .idea/caches
 .idea/modules.xml
@@ -83,3 +87,13 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+.idea/compiler.xml
+.idea/.name
+.idea/misc.xml
+.idea/jarRepositories.xml
+app/.idea/jarRepositories.xml
+app/.idea/libraries/Gradle__androidx_activity_activity_1_0_0_aar.xml
+app/.idea/*
+.idea/deploymentTargetDropDown.xml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
