@@ -15,11 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'microsoft'
+      - name: Setup JDK
+        uses: ./.github/actions/setup-java
 
       - name: Set up Node
         uses: actions/setup-node@v4
