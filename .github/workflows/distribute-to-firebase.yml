@@ -26,15 +26,15 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Configure Keystore
-        env:
-          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
-        run: echo $ANDROID_KEYSTORE_FILE | base64 -di > app/keystore.jks
-
       - name: Configure Google Services File
         env:
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
         run: echo $GOOGLE_SERVICES_JSON | base64 -di > app/google-services.json
+
+      - name: Configure Keystore
+        env:
+          ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+        run: echo $ANDROID_KEYSTORE_FILE | base64 -di > app/keystore.jks
 
       - name: Assemble Release
         env:
