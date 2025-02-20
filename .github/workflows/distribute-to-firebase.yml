@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Workspace
-        uses: ./.github/actions/setup-workspace
+      - name: Setup JDK
+        uses: ./.github/actions/setup-java
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -30,6 +30,11 @@ jobs:
         env:
           ANDROID_KEYSTORE_FILE: ${{ secrets.ANDROID_KEYSTORE_FILE }}
         run: echo $ANDROID_KEYSTORE_FILE | base64 -di > app/keystore.jks
+
+      - name: Configure Google Services File
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $GOOGLE_SERVICES_JSON | base64 -di > app/google-services.json
 
       - name: Assemble Release
         env:
