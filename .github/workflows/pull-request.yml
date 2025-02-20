@@ -16,14 +16,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup JDK
-        uses: ./.github/actions/setup-java
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+      - name: Setup Workspace
+        uses: ./.github/actions/setup-workspace
 
       - name: Run lint
         run: ./gradlew ktlintCheck
@@ -31,19 +25,8 @@ jobs:
   unit-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup JDK
-        uses: ./.github/actions/setup-java
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-
-      - name: Configure Google Services File
-        env:
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: echo $GOOGLE_SERVICES_JSON | base64 -di > app/google-services.json
+      - name: Setup Workspace
+        uses: ./.github/actions/setup-workspace
 
       - name: Run tests
         run: ./gradlew test
@@ -51,19 +34,8 @@ jobs:
   assemble-debug:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup JDK
-        uses: ./.github/actions/setup-java
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-
-      - name: Configure Google Services File
-        env:
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: echo $GOOGLE_SERVICES_JSON | base64 -di > app/google-services.json
+      - name: Setup Workspace
+        uses: ./.github/actions/setup-workspace
 
       - name: Assemble Debug
         run: ./gradlew --no-daemon assembleDebug
