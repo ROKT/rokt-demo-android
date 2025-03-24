@@ -1,0 +1,64 @@
+name: Run tests and lint
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup JDK
+        uses: ./.github/actions/setup-java
+
+      - name: Run lint
+        run: ./gradlew ktlintCheck
+
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup JDK
+        uses: ./.github/actions/setup-java
+
+      - name: Configure Google Services File
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $GOOGLE_SERVICES_JSON | base64 -di > app/google-services.json
+
+      - name: Run tests
+        run: ./gradlew test
+
+  assemble-debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup JDK
+        uses: ./.github/actions/setup-java
+        
+      - name: Configure Google Services File
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: echo $GOOGLE_SERVICES_JSON | base64 -di > app/google-services.json
+
+      - name: Assemble Debug
+        run: ./gradlew --no-daemon assembleDebug
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
