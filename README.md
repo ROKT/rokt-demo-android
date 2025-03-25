@@ -9,7 +9,7 @@ Rokt Demo application is a sample app built to showcase Rokt mobile SDK function
 
 | Environment | Build |
 | ----------- | :----- |
-| release |  [![Build status](https://badge.buildkite.com/111a1dcb03ee2f11b85cf6ba25ebf4c0cf5ffe2cce22cb1f48.svg)](https://buildkite.com/rokt/rokt-demo-android)
+| release |  ![Build status](https://github.com/ROKT/rokt-demo-android/actions/workflows/pull-request.yml/badge.svg)
 
 ## Requirements
 
@@ -34,21 +34,13 @@ If you can't find this configuration then you can run all the tests via the comm
 
 ## CI/CD System
 
-**Buildkite** is used as the CI system https://buildkite.com/rokt/rokt-demo-android.
-Buildkite pipelines are defined in `.buildkite` directory.
-It uses **docker** container for executing the build steps using the **Fastlane** build tool.
-The docker image used for this version installs Java 11, and Android SDK version 30.
-
-It can be found here: https://github.com/NedaRobatMeily/docker-image-java-11
+**GitHub Actions** is used as the CI system.
+Workflows and actions are defined in the `.github` directory.
 
 ## How to release the app
 - Update build `versionCode` and `versionNumber` in build.gradle file
 - Commit & push
-- Unblock the release step on **Buildkite**
-- On google play console, under releases section, add release note and publish the version
-
-## Automated Publishing
-The SDK can be released via the [Mobile Release Pipeline](https://github.com/ROKT/mobile-release-pipeline). Follow the instructions in the Mobile Release Pipeline repo to release. You can still release the SDK manually by following the steps in the previous section.  
+- Dispatch the workflow `Distribute to Firebase` from the Actions tab on GitHub
 
 ## Project architecture
 
