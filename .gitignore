@@ -12,7 +12,6 @@
 
 # Generated files
 bin/
-!.buildkite/bin
 gen/
 out/
 #  Uncomment the following line in case you need and you don't have the release build type files in your app
@@ -70,13 +69,6 @@ buildSrc/.idea/*
 freeline.py
 freeline/
 freeline_project_description.json
-
-# fastlane
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-fastlane/test_output
-fastlane/readme.md
 
 # Version control
 vcs.xml
