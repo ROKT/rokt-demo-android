@@ -3,8 +3,8 @@
 Rokt Demo application is a sample app built to showcase Rokt mobile SDK functionality. The purpose of this app is to showcase the functionality that Rokt provides in-app. The app features multiple pages with different placement examples to demonstrate the functionality of the Rokt mobile SDK.
 
 ## Resident Experts
-- Sahil Suri - sahil.suri@rokt.com
-- Danial Motahari - danial.motahari@rokt.com
+- Thomson Thomas - thomson.thomas@rokt.com
+- James Newman - james.newman@rokt.com
 
 
 | Environment | Build |
@@ -31,6 +31,25 @@ To run all tests, select the `rokt-demo-android [test]` run configuration and cl
 If you can't find this configuration then you can run all the tests via the command line using  
 
 `./gradlew test`.
+
+## How to preview layouts on emulator
+
+To preview Rokt layouts on an Android emulator:
+
+1. In OnePlatform, use the layout preview option for mobile layouts to generate a QR code
+2. The demo app can process this QR code data through a deeplink
+3. To trigger the preview, use the following adb command format:
+   ```bash
+   adb shell am start -a android.intent.action.VIEW -d "rokt://demo/preview?config=<URL_ENCODED_JSON>"
+   ```
+   Where `<URL_ENCODED_JSON>` is the URL-encoded JSON data from the QR code
+
+Example command:
+```bash
+adb shell am start -a android.intent.action.VIEW -d "rokt://demo/preview?config=%7B%22tagId%22%3A%222754655826098840951%22%2C%22previewId%22%3A%223435870199391584257%22%2C%22versionId%22%3A%221746660670465%22%2C%22creativeIds%22%3A%5B%223335250570341581807%22%2C%223341268103002062853%22%2C%223334226469759813591%22%2C%223334285963646863068%22%5D%2C%22language%22%3A%22en%22%2C%22layoutVariantIds%22%3A%5B%223435870199391584258%22%5D%7D"
+```
+
+Note: The deeplink URL is constructed by combining the prefix `rokt://demo/preview?config=` with the URL-encoded JSON data from the QR code. Ref: https://github.com/ROKT/rokt-demo-android/pull/82
 
 ## CI/CD System
 
