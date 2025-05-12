@@ -42,7 +42,13 @@ To preview Rokt layouts on an Android emulator:
    ```bash
    adb shell am start -a android.intent.action.VIEW -d "rokt://demo/preview?config=<URL_ENCODED_JSON>"
    ```
-   Where `<URL_ENCODED_JSON>` is the URL-encoded JSON data from the QR code
+   Where `<URL_ENCODED_JSON>` is a placeholder that should be replaced with the actual URL-encoded JSON data extracted from the QR code. The JSON data typically includes the following fields:
+   - `tagId`: A unique identifier for the tag.
+   - `previewId`: The ID of the preview layout.
+   - `versionId`: The version of the layout.
+   - `creativeIds`: A list of creative IDs associated with the layout.
+   - `language`: The language code (e.g., "en").
+   - `layoutVariantIds`: A list of layout variant IDs.
 
 Example command:
 ```bash
