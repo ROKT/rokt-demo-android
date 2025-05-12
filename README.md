@@ -3,8 +3,8 @@
 Rokt Demo application is a sample app built to showcase Rokt mobile SDK functionality. The purpose of this app is to showcase the functionality that Rokt provides in-app. The app features multiple pages with different placement examples to demonstrate the functionality of the Rokt mobile SDK.
 
 ## Resident Experts
-- Sahil Suri - sahil.suri@rokt.com
-- Danial Motahari - danial.motahari@rokt.com
+- Thomson Thomas - thomson.thomas@rokt.com
+- James Newman - james.newman@rokt.com
 
 
 | Environment | Build |
