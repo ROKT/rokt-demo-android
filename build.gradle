@@ -37,6 +37,14 @@ allprojects {
             url "https://apps.rokt.com/msdk"
         }
 
+        maven {
+            name = "Central Portal Snapshots"
+            url = uri("https://central.sonatype.com/repository/maven-snapshots/")
+            mavenContent {
+                snapshotsOnly()
+            }
+        }
+
         mavenCentral()
     }
 
