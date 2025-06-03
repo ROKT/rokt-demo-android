@@ -32,6 +32,31 @@ If you can't find this configuration then you can run all the tests via the comm
 
 `./gradlew test`.
 
+## How to preview layouts on emulator
+
+To preview Rokt layouts on an Android emulator:
+
+1. In OnePlatform, use the layout preview option for mobile layouts to generate a QR code
+2. The demo app can process this QR code data through a deeplink
+3. To trigger the preview, use the following adb command format:
+   ```bash
+   adb shell am start -a android.intent.action.VIEW -d "rokt://demo/preview?config=<URL_ENCODED_JSON>"
+   ```
+   Where `<URL_ENCODED_JSON>` is a placeholder that should be replaced with the actual URL-encoded JSON data extracted from the QR code. The JSON data typically includes the following fields:
+   - `tagId`: A unique identifier for the tag.
+   - `previewId`: The ID of the preview layout.
+   - `versionId`: The version of the layout.
+   - `creativeIds`: A list of creative IDs associated with the layout.
+   - `language`: The language code (e.g., "en").
+   - `layoutVariantIds`: A list of layout variant IDs.
+
+Example command:
+```bash
+adb shell am start -a android.intent.action.VIEW -d "rokt://demo/preview?config=%7B%22tagId%22%3A%222754655826098840951%22%2C%22previewId%22%3A%223435870199391584257%22%2C%22versionId%22%3A%221746660670465%22%2C%22creativeIds%22%3A%5B%223335250570341581807%22%2C%223341268103002062853%22%2C%223334226469759813591%22%2C%223334285963646863068%22%5D%2C%22language%22%3A%22en%22%2C%22layoutVariantIds%22%3A%5B%223435870199391584258%22%5D%7D"
+```
+
+Note: The deeplink URL is constructed by combining the prefix `rokt://demo/preview?config=` with the URL-encoded JSON data from the QR code. Ref: https://github.com/ROKT/rokt-demo-android/pull/82
+
 ## CI/CD System
 
 **GitHub Actions** is used as the CI system.
