@@ -11,6 +11,7 @@
 *.class
 
 # Generated files
+*.DS_Store
 bin/
 gen/
 out/
@@ -40,22 +41,11 @@ buildSrc/.idea/*
 
 # IntelliJ
 *.iml
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/gradle.xml
-.idea/assetWizardSettings.xml
-.idea/dictionaries
-.idea/libraries
-.idea/inspectionProfiles
-# Android Studio 3 in .gitignore file.
-.idea/caches
-.idea/modules.xml
-# Comment next line if keeping position of elements in Navigation Editor is relevant for you
-.idea/navEditor.xml
+.idea/*
 
 # Keystore files
 # Uncomment the following lines if you do not want to check your keystore files in.
-#*.jks
+*.jks
 #*.keystore
 
 # External native build folder generated in Android Studio 2.2 and later
@@ -63,7 +53,7 @@ buildSrc/.idea/*
 .cxx/
 
 # Google Services (e.g. APIs or Firebase)
-# google-services.json
+google-services.json
 
 # Freeline
 freeline.py
@@ -78,16 +68,4 @@ lint/intermediates/
 lint/generated/
 lint/outputs/
 lint/tmp/
-# lint/reports/
-.idea/compiler.xml
-.idea/.name
-.idea/misc.xml
-.idea/jarRepositories.xml
-app/.idea/jarRepositories.xml
-app/.idea/libraries/Gradle__androidx_activity_activity_1_0_0_aar.xml
-app/.idea/*
-.idea/deploymentTargetDropDown.xml
-.idea/codeStyles/codeStyleConfig.xml
-.idea/codeStyles/Project.xml
-
-google-services.json
+lint/reports/
