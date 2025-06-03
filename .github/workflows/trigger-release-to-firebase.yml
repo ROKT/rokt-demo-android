@@ -1,0 +1,56 @@
+name: Trigger release build to Firebase
+
+on:
+  repository_dispatch:
+    types:
+      - release-build
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  VERSION_NAME: ${{ github.event.client_payload.version_name }}
+  RELEASE_NOTES: ${{ github.event.client_payload.release_notes }}
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Update version
+        run: |
+          echo "Updating version name to $VERSION_NAME"
+          sed -i "s/version_name=.*/version_name=$VERSION_NAME/" gradle.properties
+          echo "Incrementing version code"
+          VERSION_CODE=$(grep "version_code" gradle.properties | cut -d'=' -f2)
+          NEW_VERSION_CODE=$((VERSION_CODE + 1))
+          sed -i "s/version_code=.*/version_code=$NEW_VERSION_CODE/" gradle.properties
+          cat gradle.properties
+          echo "Updating ROKT SDK version"
+          sed -i "s/rokt = .*/rokt = \"com.rokt:roktsdk:${VERSION_NAME}\"/" buildSrc/src/main/java/dependencies.kt
+          cat buildSrc/src/main/java/dependencies.kt
+
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@3ff1caaa28b64c9cc276ce0a02e2ff584f3900c5 # v2.0.2
+        with:
+          app-id: ${{ secrets.SDK_RELEASE_GITHUB_APP_ID }}
+          private-key: ${{ secrets.SDK_RELEASE_GITHUB_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: |
+            rokt-demo-android
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@271a8d0340265f705b14b6d32b9829c1cb33d45e # v7.0.8
+        with:
+            token: ${{ steps.generate-token.outputs.token }}
+            branch: release/${{ env.VERSION_NAME }}
+            commit-message: Update ROKT SDK version to ${{ env.VERSION_NAME }}
+            title: Update ROKT SDK version to ${{ env.VERSION_NAME }}
+            body: |
+                ${{ env.RELEASE_NOTES }}
+            base: main
