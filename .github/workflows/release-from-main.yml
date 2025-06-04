@@ -53,7 +53,7 @@ jobs:
           is_snapshot=$(echo "$version_name" | grep -q "SNAPSHOT" && echo "true" || echo "false")
           echo "is_snapshot=$is_snapshot" >> $GITHUB_OUTPUT
 
-      - name: Get release rotes
+      - name: Get release notes
         id: release-notes
         run: |
           # Get the commit message of the last merge
