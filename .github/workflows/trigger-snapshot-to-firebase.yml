@@ -1,11 +1,17 @@
-name: Distribute to Firebase
+name: Trigger Snapshot build to Firebase
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
+    types:
+      - snapshot-build
 
 permissions:
   id-token: write
   contents: read
+
+env:
+  VERSION_NAME: ${{ github.event.client_payload.version_name }}
+  RELEASE_NOTES: ${{ github.event.client_payload.release_notes }}
 
 jobs:
   build-apk:
@@ -14,6 +20,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Update version
+        run: |
+          echo "Updating version name to $VERSION_NAME"
+          sed -i "s/version_name=.*/version_name=$VERSION_NAME/" gradle.properties
+          cat gradle.properties
+          echo "Updating ROKT SDK version"
+          sed -i "s/rokt = .*/rokt = \"com.rokt:roktsdk:${VERSION_NAME}\"/" buildSrc/src/main/java/dependencies.kt
+          cat buildSrc/src/main/java/dependencies.kt
 
       - name: Build APK
         uses: ./.github/actions/build-apk
@@ -24,7 +39,7 @@ jobs:
           google_services_json: ${{ secrets.GOOGLE_SERVICES_JSON }}
           keystore_file: ${{ secrets.ANDROID_KEYSTORE_FILE }}
 
-      - name: Upload APK Artifact
+      - name: Upload APK artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: release-apk
@@ -51,4 +66,5 @@ jobs:
           service_account: ${{ secrets.SERVICE_ACCOUNT }}
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           firebase_app_id: ${{ secrets.FIREBASE_APP_ID }}
-          testing_groups: ${{ secrets.TESTING_GROUPS }}
+          testing_groups: ${{ secrets.SNAPSHOT_TESTING_GROUPS }}
+          release_notes: ${{ env.RELEASE_NOTES }}

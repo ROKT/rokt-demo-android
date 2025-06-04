@@ -1,0 +1,45 @@
+name: Build APK
+description: Builds the APK for the project
+
+inputs:
+  store_password:
+    description: The password for the keystore
+    required: true
+  key_alias:
+    description: The alias for the keystore
+    required: true
+  key_password:
+    description: The password for the keystore
+    required: true
+  google_services_json:
+    description: The Google Services JSON file
+    required: true
+  keystore_file:
+    description: The keystore file
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Setup JDK
+      uses: ./.github/actions/setup-java
+
+    - name: Configure Google Services File
+      shell: bash
+      env:
+        GOOGLE_SERVICES_JSON: ${{ inputs.google_services_json }}
+      run: echo $GOOGLE_SERVICES_JSON | base64 -di > app/google-services.json
+
+    - name: Configure Keystore
+      shell: bash
+      env:
+        ANDROID_KEYSTORE_FILE: ${{ inputs.keystore_file }}
+      run: echo $ANDROID_KEYSTORE_FILE | base64 -di > app/keystore.jks
+
+    - name: Build APK
+      shell: bash
+      run: ./gradlew assembleRelease
+      env:
+        STORE_PASSWORD: ${{ inputs.store_password }}
+        KEY_ALIAS: ${{ inputs.key_alias }}
+        KEY_PASSWORD: ${{ inputs.key_password }}
