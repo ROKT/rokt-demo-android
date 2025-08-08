@@ -29,25 +29,6 @@ subprojects {
 }
 
 allprojects {
-    repositories {
-        google()
-
-        // Rokt SDK artifacts
-        maven {
-            url "https://apps.rokt.com/msdk"
-        }
-
-        maven {
-            name = "Central Portal Snapshots"
-            url = uri("https://central.sonatype.com/repository/maven-snapshots/")
-            mavenContent {
-                snapshotsOnly()
-            }
-        }
-
-        mavenCentral()
-    }
-
     tasks.withType(KotlinCompile.class).configureEach {
         kotlinOptions {
             jvmTarget = "11"
