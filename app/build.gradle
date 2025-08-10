@@ -112,8 +112,3 @@ dependencies {
     testImplementation Libs.Test.coroutines
 
 }
-
-repositories {
-    google()
-    mavenCentral()
-}
