@@ -5,13 +5,14 @@ object Versions {
 }
 
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:8.0.2"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:8.6.0"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
-    const val rokt = "com.rokt:roktsdk:4.11.0"
+    const val rokt = "com.rokt:roktsdk:4.11.2"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
     const val coil = "io.coil-kt:coil-compose:2.2.0"
     const val mlkitQRScanner = "com.google.android.gms:play-services-code-scanner:16.1.0"
+    const val desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.1.5"
 
     object Retrofit {
         const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
@@ -38,8 +39,8 @@ object Libs {
     }
 
     object AndroidX {
-        const val coreKtx = "androidx.core:core-ktx:1.5.0-beta03"
-        const val appcompat = "androidx.appcompat:appcompat:1.2.0-rc01"
+        const val coreKtx = "androidx.core:core-ktx:1.16.0"
+        const val appcompat = "androidx.appcompat:appcompat:1.7.1"
         const val navigation = "androidx.navigation:navigation-ui-ktx:2.3.4"
         const val hiltNavigation = "androidx.hilt:hilt-navigation-compose:1.0.0"
         const val lifeCycle = "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
