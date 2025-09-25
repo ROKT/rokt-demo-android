@@ -21,12 +21,12 @@ android {
             keyPassword "${System.env.KEY_PASSWORD}"
         }
     }
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
         applicationId "com.rokt.roktdemo"
         minSdkVersion 21
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode findProperty("version_code") as Integer ?: 47
         versionName findProperty("version_name") ?: "1.2.27"
 
@@ -49,6 +49,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
+        coreLibraryDesugaringEnabled = true
     }
     buildFeatures {
         compose true
@@ -62,6 +63,7 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring Libs.desugarJdkLibs
 
     implementation Libs.Kotlin.stdlib
     implementation Libs.AndroidX.coreKtx
