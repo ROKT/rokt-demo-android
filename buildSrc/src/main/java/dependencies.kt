@@ -7,12 +7,11 @@ object Versions {
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:8.6.0"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
-    const val rokt = "com.rokt:roktsdk:4.12.0"
+    const val rokt = "com.rokt:roktsdk:4.12.1"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
     const val coil = "io.coil-kt:coil-compose:2.2.0"
     const val mlkitQRScanner = "com.google.android.gms:play-services-code-scanner:16.1.0"
-    const val desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.1.5"
 
     object Retrofit {
         const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
