@@ -8,6 +8,7 @@ import com.rokt.roktdemo.data.settings.DEBUG_LOGS_ENABLED
 import com.rokt.roktdemo.data.settings.STAGE_ENV_ENABLED
 import com.rokt.roktdemo.data.settings.SettingsRepository
 import com.rokt.roktsdk.Rokt
+import com.rokt.roktsdk.logging.RoktLogLevel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -23,7 +24,7 @@ class MainActivityViewModel @Inject constructor(settingsRepository: SettingsRepo
             Rokt.setEnvironment(Rokt.Environment.Stage)
         }
         if (settingsRepository.getBooleanSettingsValue(DEBUG_LOGS_ENABLED)) {
-            Rokt.setLoggingEnabled(true)
+            Rokt.setLogLevel(RoktLogLevel.DEBUG)
         }
     }
 

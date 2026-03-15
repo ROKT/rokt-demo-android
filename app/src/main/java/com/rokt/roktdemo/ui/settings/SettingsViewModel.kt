@@ -6,6 +6,7 @@ import com.rokt.roktdemo.data.settings.STAGE_ENV_ENABLED
 import com.rokt.roktdemo.data.settings.SettingsRepository
 import com.rokt.roktdemo.ui.state.UiState
 import com.rokt.roktsdk.Rokt
+import com.rokt.roktsdk.logging.RoktLogLevel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -43,9 +44,9 @@ class SettingsViewModel @Inject constructor(
 
     fun onDebugLogsChange(value: Boolean) {
         if (value) {
-            Rokt.setLoggingEnabled(true)
+            Rokt.setLogLevel(RoktLogLevel.DEBUG)
         } else {
-            Rokt.setLoggingEnabled(false)
+            Rokt.setLogLevel(RoktLogLevel.NONE)
         }
         settingsRepository.setBooleanSettingsValue(DEBUG_LOGS_ENABLED, value)
         _state.update { it.copy(data = it.data?.copy(debugLogsEnabled = value)) }
