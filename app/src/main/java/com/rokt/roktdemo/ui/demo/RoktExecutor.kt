@@ -2,6 +2,8 @@ package com.rokt.roktdemo.ui.demo
 
 import com.rokt.roktsdk.Rokt
 import com.rokt.roktsdk.Widget
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.lang.ref.WeakReference
 
@@ -10,32 +12,18 @@ object RoktExecutor {
         viewName: String,
         attributes: HashMap<String, String>?,
         placeholders: HashMap<String, WeakReference<Widget>>?,
+        scope: CoroutineScope,
     ) {
-
-        Timber.d("Calling Execute with viewName $viewName, attributes $attributes and placeholders $placeholders")
-        Rokt.execute(
-            viewName,
-            attributes,
-            placeholders = placeholders,
-            callback = object : Rokt.RoktCallback {
-                override fun onLoad() {
-                    Timber.d(
-                        "%s%s",
-                        "Widget loaded for viewName $viewName with attributes ",
-                        attributes.toString()
-                    )
+        Timber.d("Calling Execute with identifier $viewName, attributes $attributes and placeholders $placeholders")
+        scope.launch {
+            Rokt
+                .selectPlacements(
+                    identifier = viewName,
+                    attributes = attributes ?: emptyMap(),
+                    placeholders = placeholders,
+                ).collect { event ->
+                    Timber.d("Rokt event: $event for identifier $viewName")
                 }
-
-                override fun onShouldHideLoadingIndicator() {
-                }
-
-                override fun onShouldShowLoadingIndicator() {
-                }
-
-                override fun onUnload(reason: Rokt.UnloadReasons) {
-                    Timber.d("Could not load widget. Reason %s", reason)
-                }
-            }
-        )
+        }
     }
 }

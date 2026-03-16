@@ -35,7 +35,8 @@ class PreDefinedViewModel @Inject constructor(private val roktExecutor: RoktExec
         roktExecutor.executeRokt(
             viewName = state.value.viewName,
             getAttributes(),
-            hashMapOf(state.value.placeholderName to widget)
+            hashMapOf(state.value.placeholderName to widget),
+            viewModelScope
         )
     }
 

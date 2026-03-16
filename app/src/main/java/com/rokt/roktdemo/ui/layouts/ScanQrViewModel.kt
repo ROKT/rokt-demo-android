@@ -1,6 +1,7 @@
 package com.rokt.roktdemo.ui.layouts
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.rokt.roktdemo.ui.demo.RoktExecutor
 import com.rokt.roktdemo.ui.layouts.model.DemoLayoutConfig
@@ -64,7 +65,7 @@ class ScanQrViewModel @Inject constructor(
                 getDemoConfig(data)?.let { this[ATTRIBUTE_DEMO_CONFIG] = it }
             }
             val placeholders = embeddedWidget?.let { hashMapOf(PREVIEW_PLACEHOLDER to it) }
-            roktExecutor.executeRokt("", HashMap(attributes), placeholders)
+            roktExecutor.executeRokt("", HashMap(attributes), placeholders, viewModelScope)
         }
     }
 }

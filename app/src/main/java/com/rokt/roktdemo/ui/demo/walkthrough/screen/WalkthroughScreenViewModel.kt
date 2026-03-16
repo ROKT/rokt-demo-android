@@ -58,7 +58,7 @@ class WalkthroughScreenViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun executeRokt(placeholders: HashMap<String, WeakReference<Widget>>? = null) {
-        RoktExecutor.executeRokt(state.value.viewName, getAttributes(), placeholders)
+        RoktExecutor.executeRokt(state.value.viewName, getAttributes(), placeholders, viewModelScope)
     }
 }
 

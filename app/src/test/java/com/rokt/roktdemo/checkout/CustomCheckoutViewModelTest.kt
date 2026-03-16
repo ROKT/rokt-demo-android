@@ -75,7 +75,8 @@ class CustomCheckoutViewModelTest {
                 roktExecutor.executeRokt(
                     viewName,
                     attributes,
-                    placeholders
+                    placeholders,
+                    any()
                 )
             } returns Unit
 
@@ -87,7 +88,8 @@ class CustomCheckoutViewModelTest {
                 roktExecutor.executeRokt(
                     viewName,
                     attributes,
-                    placeholders
+                    placeholders,
+                    any()
                 )
             }
         }
