@@ -2,6 +2,7 @@ package com.rokt.roktdemo.ui.demo.custom
 
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.rokt.roktdemo.ui.demo.RoktExecutor
 import com.rokt.roktsdk.Widget
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,7 +41,8 @@ class CustomCheckoutViewModel @Inject constructor(private val roktExecutor: Rokt
         roktExecutor.executeRokt(
             viewName = state.viewName,
             state.attributes,
-            hashMapOf(state.placementLocation1 to widget)
+            hashMapOf(state.placementLocation1 to widget),
+            viewModelScope
         )
     }
 }
