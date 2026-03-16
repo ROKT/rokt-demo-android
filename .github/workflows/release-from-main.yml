@@ -56,11 +56,11 @@ jobs:
       - name: Get release notes
         id: release-notes
         run: |
-          # Get the commit message of the last merge
-          RELEASE_NOTES=$(git log -1 --pretty=%B)
-          # Escape newlines and quotes for JSON
-          RELEASE_NOTES=$(echo "$RELEASE_NOTES" | sed ':a;N;$!ba;s/\n/\\n/g' | sed 's/"/\\"/g')
-          echo "release_notes=$RELEASE_NOTES" >> $GITHUB_OUTPUT
+          {
+            echo "release_notes<<EOF"
+            git log -1 --pretty=%B
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Upload APK
         uses: ./.github/actions/upload-apk
@@ -70,7 +70,10 @@ jobs:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           firebase_app_id: ${{ secrets.FIREBASE_APP_ID }}
           testing_groups: ${{ secrets.TESTING_GROUPS }}
-          release_notes: SDK Version ${{ steps.version-name.outputs.version_name }} \n ${{ steps.release-notes.outputs.release_notes }}
+          release_notes: |
+            SDK Version ${{ steps.version-name.outputs.version_name }}
+
+            ${{ steps.release-notes.outputs.release_notes }}
 
       - name: Create Github release
         uses: ncipollo/release-action@440c8c1cb0ed28b9f43e4d1d670870f059653174 # v1.16.0
