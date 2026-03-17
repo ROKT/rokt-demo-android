@@ -41,22 +41,28 @@ runs:
         service_account: ${{ inputs.service_account }}
         workload_identity_provider: ${{ inputs.workload_identity_provider }}
 
-    - name: Set release notes
+    - name: Write release notes file
       id: release-notes
       shell: bash
+      env:
+        INPUT_RELEASE_NOTES: ${{ inputs.release_notes }}
       run: |
-        if [ -n "${{ inputs.release_notes }}" ]; then
-          echo "release_text=${{ inputs.release_notes }}" >> $GITHUB_OUTPUT
+        release_notes_file=$(mktemp)
+
+        if [ -n "$INPUT_RELEASE_NOTES" ]; then
+          printf '%s\n' "$INPUT_RELEASE_NOTES" > "$release_notes_file"
         else
           version_name=$(grep "version_name=" gradle.properties | cut -d'=' -f2)
-          echo "release_text=Version $version_name" >> $GITHUB_OUTPUT
+          printf 'Version %s\n' "$version_name" > "$release_notes_file"
         fi
+
+        echo "release_notes_file=$release_notes_file" >> "$GITHUB_OUTPUT"
 
     - name: Upload APK
       shell: bash
       run: |
         firebase appdistribution:distribute \
-          --app '${{ inputs.firebase_app_id }}' \
-          ${{ inputs.apk_path }} \
-          --groups '${{ inputs.testing_groups }}' \
-          --release-notes '${{ steps.release-notes.outputs.release_text }}'
+          --app "${{ inputs.firebase_app_id }}" \
+          "${{ inputs.apk_path }}" \
+          --groups "${{ inputs.testing_groups }}" \
+          --release-notes-file "${{ steps.release-notes.outputs.release_notes_file }}"
