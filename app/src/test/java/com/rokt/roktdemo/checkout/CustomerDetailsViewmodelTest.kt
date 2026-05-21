@@ -2,9 +2,9 @@ package com.rokt.roktdemo.checkout
 
 import com.google.common.truth.Truth
 import com.rokt.roktdemo.CoroutineTestRule
-import com.rokt.roktdemo.runBlockingTest
 import com.rokt.roktdemo.data.data
 import com.rokt.roktdemo.data.library.DemoLibraryRepositoryMockImpl
+import com.rokt.roktdemo.runBlockingTest
 import com.rokt.roktdemo.ui.demo.custom.screen.customer.CustomerDetailsViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect

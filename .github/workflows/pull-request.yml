@@ -68,3 +68,26 @@ jobs:
         with:
           name: debug-apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+  assemble-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Build APK
+        uses: ./.github/actions/build-apk
+        with:
+          store_password: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          key_alias: ${{ secrets.ANDROID_KEY_ALIAS }}
+          key_password: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          google_services_json: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          keystore_file: ${{ secrets.ANDROID_KEYSTORE_FILE }}
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: release-apk
+          path: app/build/outputs/apk/release/app-release.apk

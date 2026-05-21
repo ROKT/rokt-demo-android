@@ -2,11 +2,11 @@ package com.rokt.roktdemo.checkout
 
 import com.google.common.truth.Truth
 import com.rokt.roktdemo.CoroutineTestRule
-import com.rokt.roktdemo.runBlockingTest
 import com.rokt.roktdemo.data.library.DemoLibraryRepositoryMockImpl
 import com.rokt.roktdemo.data.validate.ValidationState
 import com.rokt.roktdemo.data.validate.ValidationStatus
 import com.rokt.roktdemo.data.validate.ValidatorRepository
+import com.rokt.roktdemo.runBlockingTest
 import com.rokt.roktdemo.ui.demo.custom.screen.account.AccountDetailsViewModel
 import io.mockk.every
 import io.mockk.mockk
