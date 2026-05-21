@@ -78,6 +78,7 @@ dependencies {
 
     // Compose
     implementation Libs.AndroidX.Compose.material
+    implementation Libs.AndroidX.Compose.materialIconsExtended
     implementation Libs.AndroidX.Compose.material3
     implementation Libs.AndroidX.Activity.activityCompose
     implementation Libs.AndroidX.Compose.foundation

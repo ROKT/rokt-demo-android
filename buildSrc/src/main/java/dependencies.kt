@@ -55,6 +55,7 @@ object Libs {
             const val uiUtil = "androidx.compose.ui:ui-util:1.4.3"
             const val runtime = "androidx.compose.runtime:runtime:$version"
             const val material = "androidx.compose.material:material:1.4.3"
+            const val materialIconsExtended = "androidx.compose.material:material-icons-extended:1.7.8"
             const val material3 = "androidx.compose.material3:material3:1.1.2"
             const val animation = "androidx.compose.animation:animation:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:1.4.3"
@@ -72,7 +73,7 @@ object Libs {
     }
 
     object Hilt {
-        private const val version = "2.44.2"
+        private const val version = "2.57.2"
 
         const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val android = "com.google.dagger:hilt-android:$version"

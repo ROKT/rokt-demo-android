@@ -2,6 +2,7 @@ package com.rokt.roktdemo.checkout
 
 import com.google.common.truth.Truth
 import com.rokt.roktdemo.CoroutineTestRule
+import com.rokt.roktdemo.runBlockingTest
 import com.rokt.roktdemo.data.library.DemoLibraryRepositoryMockImpl
 import com.rokt.roktdemo.data.validate.ValidationState
 import com.rokt.roktdemo.data.validate.ValidationStatus
@@ -10,7 +11,6 @@ import com.rokt.roktdemo.ui.demo.custom.screen.account.AccountDetailsViewModel
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
