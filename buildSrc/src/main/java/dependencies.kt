@@ -7,7 +7,7 @@ object Versions {
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:8.6.0"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
-    const val rokt = "com.rokt:roktsdk:5.0.0"
+    const val rokt = "com.rokt:roktsdk:6.0.0-rc.1"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val okhttp = "com.squareup.okhttp3:okhttp:4.9.0"
     const val coil = "io.coil-kt:coil-compose:2.2.0"
@@ -19,10 +19,12 @@ object Libs {
     }
 
     object Kotlin {
-        private const val version = "1.8.21"
+        private const val version = "2.1.20"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin =
             "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+        const val composeCompilerGradlePlugin =
+            "org.jetbrains.kotlin:compose-compiler-gradle-plugin:$version"
     }
 
     object Coroutines {

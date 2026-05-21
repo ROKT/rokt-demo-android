@@ -17,7 +17,7 @@ The latest version of Android Studio is required. Follow [these instructions](ht
 
 `brew install --cask android-studio`  
 
-The project is configured to run on Android API 21 and above and compiled against API 31.
+The project is configured to run on Android API 23 and above and compiled against API 35.
 
 ## How to build and run Locally?
 1. Open Android Studio
