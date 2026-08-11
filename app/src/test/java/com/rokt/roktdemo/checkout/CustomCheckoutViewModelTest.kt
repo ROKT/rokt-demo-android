@@ -9,13 +9,13 @@ import com.rokt.roktsdk.Widget
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import java.lang.ref.WeakReference
-import java.util.HashMap
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import java.lang.ref.WeakReference
+import java.util.HashMap
 
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
