@@ -7,7 +7,7 @@ import com.rokt.roktdemo.data.library.DemoLibraryRepositoryMockImpl
 import com.rokt.roktdemo.ui.demo.custom.screen.customer.CustomerDetailsViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.test.runBlockingTest
+import com.rokt.roktdemo.runBlockingTest
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
@@ -23,7 +23,7 @@ class CustomerDetailsViewmodelTest {
 
     @Test
     fun `showAdvancedOptions should be false by default`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             Truth.assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
@@ -33,7 +33,7 @@ class CustomerDetailsViewmodelTest {
 
     @Test
     fun `onToggleAdvancedOptions should set showAdvancedOptions to true if its set to false `() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             Truth.assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
@@ -48,7 +48,7 @@ class CustomerDetailsViewmodelTest {
 
     @Test
     fun `onCountrySelected should set selectedCountry to the new value `() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             customerDetailsViewModel.onCountrySelected("Australia")
@@ -60,7 +60,7 @@ class CustomerDetailsViewmodelTest {
 
     @Test
     fun `getCustomerDetails should return all user details as a hashmap`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             customerDetailsViewModel.onCountrySelected("Australia")
@@ -84,7 +84,7 @@ class CustomerDetailsViewmodelTest {
 
     @Test
     fun `onKeyChanged should modify the key in advancedOptions to the new key`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             customerDetailsViewModel.onKeyChanged("newKey", 0)
@@ -95,7 +95,7 @@ class CustomerDetailsViewmodelTest {
 
     @Test
     fun `onValueChanged should modify the key at the given index with a new value`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             customerDetailsViewModel.onValueChanged("newValue", 0)

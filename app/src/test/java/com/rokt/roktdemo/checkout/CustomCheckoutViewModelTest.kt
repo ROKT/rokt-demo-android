@@ -9,7 +9,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import com.rokt.roktdemo.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -26,7 +26,7 @@ class CustomCheckoutViewModelTest {
 
     @Test
     fun `onAccountDetailsSubmitted should set account details to the state`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val customCheckoutViewModel = CustomCheckoutViewModel(mockk())
             customCheckoutViewModel.onAccountDetailsSubmitted(
                 "viewName",
@@ -44,7 +44,7 @@ class CustomCheckoutViewModelTest {
 
     @Test
     fun `onCustomerDetailsSubmitted should set customer details to the state`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val customCheckoutViewModel = CustomCheckoutViewModel(mockk())
             customCheckoutViewModel.onCustomerDetailsSubmitted(
                 hashMapOf("country" to "Australia", "postcode" to "2323")
@@ -58,7 +58,7 @@ class CustomCheckoutViewModelTest {
 
     @Test
     fun `onEmbeddedWidgetAddedToView should call the execute in the RoktExecutor`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val roktExecutor: RoktExecutor = mockk()
             val widget = WeakReference(mockk<Widget>(relaxed = true))
 

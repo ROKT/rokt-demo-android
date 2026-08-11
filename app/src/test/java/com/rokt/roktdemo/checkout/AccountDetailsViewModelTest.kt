@@ -10,7 +10,7 @@ import com.rokt.roktdemo.ui.demo.custom.screen.account.AccountDetailsViewModel
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import com.rokt.roktdemo.runBlockingTest
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
@@ -27,7 +27,7 @@ class AccountDetailsViewModelTest {
     @Test
     @Ignore
     fun `validateForm() should set formValidated to true if form is valid`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
                 getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
@@ -38,7 +38,7 @@ class AccountDetailsViewModelTest {
 
     @Test
     fun `validateForm() should set formValidated to false if form is invalid`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
                 getViewModelForStatus(ValidationStatus.INVALID, ValidationStatus.INVALID)
             accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
@@ -51,7 +51,7 @@ class AccountDetailsViewModelTest {
 
     @Test
     fun `validateForm() should set formValidated to false if account is invalid`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
                 getViewModelForStatus(ValidationStatus.INVALID, ValidationStatus.VALID)
             accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
@@ -64,7 +64,7 @@ class AccountDetailsViewModelTest {
 
     @Test
     fun `validateForm() should set formValidated to false if password is invalid`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
                 getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.INVALID)
             accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
@@ -78,7 +78,7 @@ class AccountDetailsViewModelTest {
     @Test
     @Ignore
     fun `onNavigatedAway() should set formValidated to false`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
                 getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.VALID)
 
@@ -94,7 +94,7 @@ class AccountDetailsViewModelTest {
     @Test
     @Ignore
     fun `onFieldEdited() should set formValidated to false`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
                 getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
