@@ -2,20 +2,20 @@ package com.rokt.roktdemo.checkout
 
 import com.google.common.truth.Truth
 import com.rokt.roktdemo.CoroutineTestRule
+import com.rokt.roktdemo.runBlockingTest
 import com.rokt.roktdemo.ui.demo.RoktExecutor
 import com.rokt.roktdemo.ui.demo.custom.CustomCheckoutViewModel
 import com.rokt.roktsdk.Widget
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import java.lang.ref.WeakReference
+import java.util.HashMap
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import com.rokt.roktdemo.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import java.lang.ref.WeakReference
-import java.util.HashMap
 
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
