@@ -3,6 +3,7 @@ import com.rokt.roktdemo.buildsrc.Libs
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'org.jetbrains.kotlin.plugin.compose'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
@@ -52,9 +53,6 @@ android {
     }
     buildFeatures {
         compose true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion Libs.AndroidX.Compose.version
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11

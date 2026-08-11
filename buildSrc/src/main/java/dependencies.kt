@@ -19,10 +19,12 @@ object Libs {
     }
 
     object Kotlin {
-        private const val version = "1.8.21"
+        private const val version = "2.1.20"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin =
             "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+        const val composeCompilerGradlePlugin =
+            "org.jetbrains.kotlin:compose-compiler-gradle-plugin:$version"
     }
 
     object Coroutines {
@@ -70,7 +72,7 @@ object Libs {
     }
 
     object Hilt {
-        private const val version = "2.44.2"
+        private const val version = "2.55"
 
         const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
         const val android = "com.google.dagger:hilt-android:$version"

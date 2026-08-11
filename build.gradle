@@ -12,6 +12,7 @@ buildscript {
     dependencies {
         classpath Libs.androidGradlePlugin
         classpath Libs.Kotlin.gradlePlugin
+        classpath Libs.Kotlin.composeCompilerGradlePlugin
         classpath Libs.Hilt.gradlePlugin
         classpath Libs.Google.googleSerives
 
