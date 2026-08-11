@@ -25,7 +25,7 @@ android {
 
     defaultConfig {
         applicationId "com.rokt.roktdemo"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 35
         versionCode findProperty("version_code") as Integer ?: 47
         versionName findProperty("version_name") ?: "1.2.27"
