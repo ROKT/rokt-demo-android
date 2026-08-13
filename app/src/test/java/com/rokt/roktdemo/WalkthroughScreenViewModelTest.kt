@@ -4,7 +4,6 @@ import com.google.common.truth.Truth.assertThat
 import com.rokt.roktdemo.data.library.DemoLibraryRepositoryMockImpl
 import com.rokt.roktdemo.ui.demo.walkthrough.screen.WalkthroughScreenViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,7 +18,7 @@ class WalkthroughScreenViewModelTest {
 
     @Test
     fun `isEmbedded is set to true at first index`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val mockedViewModel = WalkthroughScreenViewModel()
             mockedViewModel.initWithLibrary(
                 DemoLibraryRepositoryMockImpl().getDemoLibraryMocked(),
@@ -31,7 +30,7 @@ class WalkthroughScreenViewModelTest {
 
     @Test
     fun `isEmbedded is set to true at second index`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val mockedViewModel = WalkthroughScreenViewModel()
             mockedViewModel.initWithLibrary(
                 DemoLibraryRepositoryMockImpl().getDemoLibraryMocked(),
@@ -43,7 +42,7 @@ class WalkthroughScreenViewModelTest {
 
     @Test
     fun `isEmbedded is set to false at third index`() {
-        coroutineTestRule.testDispatcher.runBlockingTest {
+        coroutineTestRule.runBlockingTest {
             val mockedViewModel = WalkthroughScreenViewModel()
             mockedViewModel.initWithLibrary(
                 DemoLibraryRepositoryMockImpl().getDemoLibraryMocked(),

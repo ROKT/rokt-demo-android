@@ -102,6 +102,6 @@ data class ScanQrState(
 
 private const val ATTRIBUTE_IS_DEMO = "isDemo"
 private const val ATTRIBUTE_LANGUAGE = "rokt.language"
-private const val ATTRIBUTE_DEMO_CONFIG = "demoConfig"
+private const val ATTRIBUTE_DEMO_CONFIG = "demo_config"
 private const val PREVIEW_PLACEHOLDER = "#rokt-placeholder"
 private const val EXECUTE_DELAY_SECONDS = 3L

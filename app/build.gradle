@@ -3,6 +3,7 @@ import com.rokt.roktdemo.buildsrc.Libs
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'org.jetbrains.kotlin.plugin.compose'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
@@ -25,7 +26,7 @@ android {
 
     defaultConfig {
         applicationId "com.rokt.roktdemo"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 35
         versionCode findProperty("version_code") as Integer ?: 47
         versionName findProperty("version_name") ?: "1.2.27"
@@ -53,9 +54,6 @@ android {
     buildFeatures {
         compose true
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion Libs.AndroidX.Compose.version
-    }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11
     }
@@ -80,6 +78,7 @@ dependencies {
 
     // Compose
     implementation Libs.AndroidX.Compose.material
+    implementation Libs.AndroidX.Compose.materialIconsCore
     implementation Libs.AndroidX.Compose.material3
     implementation Libs.AndroidX.Activity.activityCompose
     implementation Libs.AndroidX.Compose.foundation
