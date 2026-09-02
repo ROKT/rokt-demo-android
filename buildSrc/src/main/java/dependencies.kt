@@ -54,7 +54,7 @@ object Libs {
             const val ui = "androidx.compose.ui:ui:1.4.3"
             const val uiUtil = "androidx.compose.ui:ui-util:1.4.3"
             const val runtime = "androidx.compose.runtime:runtime:$version"
-            const val material = "androidx.compose.material:material:1.4.3"
+            const val material = "androidx.compose.material:material:1.11.2"
             const val materialIconsCore = "androidx.compose.material:material-icons-core:1.7.8"
             const val material3 = "androidx.compose.material3:material3:1.1.2"
             const val animation = "androidx.compose.animation:animation:$version"
