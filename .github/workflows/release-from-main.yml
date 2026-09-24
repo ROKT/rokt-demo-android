@@ -85,6 +85,7 @@ jobs:
         with:
           artifacts: app-release.apk
           makeLatest: true
+          skipIfReleaseExists: true
           tag: ${{ steps.version-name.outputs.version_name }}
           body: |
             ## Release notes:
