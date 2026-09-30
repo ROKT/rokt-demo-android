@@ -59,7 +59,7 @@ object Libs {
             const val material3 = "androidx.compose.material3:material3:1.1.2"
             const val animation = "androidx.compose.animation:animation:$version"
             const val tooling = "androidx.compose.ui:ui-tooling:1.4.3"
-            const val navigation = "androidx.navigation:navigation-compose:1.0.0-alpha08"
+            const val navigation = "androidx.navigation:navigation-compose:2.8.9"
         }
 
         object Activity {
