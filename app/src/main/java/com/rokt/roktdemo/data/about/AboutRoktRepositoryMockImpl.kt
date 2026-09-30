@@ -25,7 +25,7 @@ class AboutRoktRepositoryMockImpl : AboutRoktRepository {
         AboutContent(
             "Who we are",
             """
-                Rokt is the global leader in e-commerce technology, powering the Transaction Moment™ of best-in-class companies including Live Nation, Groupon, Staples, Lands' End, Fanatics, GoDaddy, Vistaprint, and HelloFresh. Rokt's mission: To make e-commerce smarter, faster, and better.
+                Rokt is the global leader in e-commerce technology, powering the Transaction Moment™ of best-in-class companies. Rokt's mission: To make e-commerce smarter, faster, and better.
                 
                 Through its proprietary technology, Rokt enables its e-commerce clients to increase brand engagement and unlock new revenues in the Transaction Moment™, allowing them to stay ahead of their competition while delivering a superior and individualized experience for each customer.
                 

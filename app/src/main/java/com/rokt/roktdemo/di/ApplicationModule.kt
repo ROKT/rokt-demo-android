@@ -5,6 +5,7 @@ import com.rokt.roktdemo.data.about.AboutRoktRepository
 import com.rokt.roktdemo.data.about.AboutRoktRepositoryImpl
 import com.rokt.roktdemo.data.library.DemoLibraryRepository
 import com.rokt.roktdemo.data.library.DemoLibraryRepositoryImpl
+import com.rokt.roktdemo.data.service.LocalRoktDemoService
 import com.rokt.roktdemo.data.service.RoktDemoService
 import com.rokt.roktdemo.data.settings.SettingsRepository
 import com.rokt.roktdemo.data.settings.SettingsRepositoryImpl
@@ -16,8 +17,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 private const val PREFERENCE_NAME = "RoktDemo"
@@ -51,17 +50,8 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://rokt-demo-app-server.rokt.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
-    @Singleton
-    @Provides
-    fun provideRoktDemoService(retrofit: Retrofit): RoktDemoService {
-        return retrofit.create(RoktDemoService::class.java)
+    fun provideRoktDemoService(@ApplicationContext appContext: Context): RoktDemoService {
+        return LocalRoktDemoService(appContext)
     }
 
     @Singleton

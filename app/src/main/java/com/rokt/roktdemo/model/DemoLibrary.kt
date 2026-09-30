@@ -30,8 +30,7 @@ data class AccountDetails(
     val accountID: String,
     val viewName: String,
     val placementLocation1: String,
-    val placementLocation2: String,
-    val password: String
+    val placementLocation2: String
 )
 
 class CustomerDetails(

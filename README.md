@@ -86,7 +86,7 @@ This separation of responsibility between the three layers ultimately simplifies
 
 This project contains data, di, model, ui, and utils packages.  
 
-data: contains repositories that expose data from network operations performed by RoktDemoService.  
+data: contains repositories that expose data read by RoktDemoService from the JSON files bundled under `app/src/main/assets`.  
 di: for dependency injection.  
 model: contains data classes that model data.  
 ui: contains the View and ViewModels  

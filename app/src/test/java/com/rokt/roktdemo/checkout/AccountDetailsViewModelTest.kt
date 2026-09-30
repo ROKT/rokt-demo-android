@@ -29,7 +29,7 @@ class AccountDetailsViewModelTest {
     fun `validateForm() should set formValidated to true if form is valid`() {
         coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
-                getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.VALID)
+                getViewModelForStatus(ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
             Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(true)
@@ -40,7 +40,7 @@ class AccountDetailsViewModelTest {
     fun `validateForm() should set formValidated to false if form is invalid`() {
         coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
-                getViewModelForStatus(ValidationStatus.INVALID, ValidationStatus.INVALID)
+                getViewModelForStatus(ValidationStatus.INVALID)
             accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
 
             accountDetailsViewModel.continueButtonPressed()
@@ -53,20 +53,7 @@ class AccountDetailsViewModelTest {
     fun `validateForm() should set formValidated to false if account is invalid`() {
         coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
-                getViewModelForStatus(ValidationStatus.INVALID, ValidationStatus.VALID)
-            accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
-
-            accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
-                .isEqualTo(false)
-        }
-    }
-
-    @Test
-    fun `validateForm() should set formValidated to false if password is invalid`() {
-        coroutineTestRule.runBlockingTest {
-            val accountDetailsViewModel =
-                getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.INVALID)
+                getViewModelForStatus(ValidationStatus.INVALID)
             accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
 
             accountDetailsViewModel.continueButtonPressed()
@@ -80,7 +67,7 @@ class AccountDetailsViewModelTest {
     fun `onNavigatedAway() should set formValidated to false`() {
         coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
-                getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.VALID)
+                getViewModelForStatus(ValidationStatus.VALID)
 
             accountDetailsViewModel.continueButtonPressed()
             Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
@@ -96,7 +83,7 @@ class AccountDetailsViewModelTest {
     fun `onFieldEdited() should set formValidated to false`() {
         coroutineTestRule.runBlockingTest {
             val accountDetailsViewModel =
-                getViewModelForStatus(ValidationStatus.VALID, ValidationStatus.VALID)
+                getViewModelForStatus(ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
             Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(true)
@@ -108,8 +95,7 @@ class AccountDetailsViewModelTest {
 }
 
 private fun getViewModelForStatus(
-    accountValidationState: ValidationStatus,
-    passwordValidationState: ValidationStatus
+    accountValidationState: ValidationStatus
 ): AccountDetailsViewModel {
     val validator: ValidatorRepository = mockk()
     val accountDetailsViewModel =
@@ -119,10 +105,6 @@ private fun getViewModelForStatus(
     val accountId = DemoLibraryRepositoryMockImpl().TAG_ID
     every { validator.validateAccountId(accountId) } returns ValidationState(
         accountValidationState
-    )
-    val password = DemoLibraryRepositoryMockImpl().PASSWORD
-    every { validator.validatePassword(password, "") } returns ValidationState(
-        passwordValidationState
     )
     return accountDetailsViewModel
 }
