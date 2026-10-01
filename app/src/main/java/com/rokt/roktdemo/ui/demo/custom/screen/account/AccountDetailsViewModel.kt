@@ -25,13 +25,10 @@ class AccountDetailsViewModel @Inject constructor(
         get() = _state
 
     private val account = MutableStateFlow(
-        AccountDetailsViewData("", "", "", "", "")
+        AccountDetailsViewData("", "", "", "")
     )
-    private var password = ""
 
     private val accountValidationState =
-        MutableStateFlow(ValidationState(fieldStatus = ValidationStatus.NONE))
-    private val passwordValidationState =
         MutableStateFlow(ValidationState(fieldStatus = ValidationStatus.NONE))
 
     fun init(accountDetails: AccountDetails) {
@@ -41,7 +38,6 @@ class AccountDetailsViewModel @Inject constructor(
             account.value.viewName = accountDetails.viewName
             account.value.placementLocation1 = accountDetails.placementLocation1
             account.value.placementLocation2 = accountDetails.placementLocation2
-            password = accountDetails.password
             // Observe changes to default values
             initState()
         }
@@ -51,9 +47,8 @@ class AccountDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             combine(
                 account,
-                accountValidationState,
-                passwordValidationState
-            ) { accountDetail, accountValidation, passwordValidation ->
+                accountValidationState
+            ) { accountDetail, accountValidation ->
                 AccountDetailsViewState(
                     accountId = createEditableField(
                         text = accountDetail.accountId,
@@ -81,16 +76,7 @@ class AccountDetailsViewModel @Inject constructor(
                             account.value = account.value.copy(placementLocation2 = it)
                         }
                     ),
-                    password = createEditableField(
-                        text = accountDetail.password,
-                        onFieldEdited = {
-                            account.value = account.value.copy(password = it)
-                            onPasswordFieldEdited()
-                        },
-                        passwordValidation.fieldErrorMessage
-                    ),
-                    formValidated = accountValidationState.value.fieldStatus == ValidationStatus.VALID &&
-                        passwordValidationState.value.fieldStatus == ValidationStatus.VALID
+                    formValidated = accountValidationState.value.fieldStatus == ValidationStatus.VALID
                 )
             }.collect {
                 _state.value = it
@@ -100,23 +86,16 @@ class AccountDetailsViewModel @Inject constructor(
 
     fun continueButtonPressed() {
         accountValidationState.value = validator.validateAccountId(account.value.accountId)
-        passwordValidationState.value = validator.validatePassword(password, account.value.password)
     }
 
     fun onNavigatedAway() {
         // Reset validationState, so when we return the fields can be modified
         accountValidationState.value = ValidationState(ValidationStatus.NONE)
-        passwordValidationState.value = ValidationState(ValidationStatus.NONE)
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     internal fun onAccountFieldEdited() {
         accountValidationState.value = ValidationState(ValidationStatus.NONE)
-    }
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    internal fun onPasswordFieldEdited() {
-        passwordValidationState.value = ValidationState(ValidationStatus.NONE)
     }
 }
 
@@ -125,7 +104,6 @@ data class AccountDetailsViewState(
     val viewName: EditableField = EditableField(),
     val placementLocation1: EditableField = EditableField(),
     val placementLocation2: EditableField = EditableField(),
-    val password: EditableField = EditableField(),
     val formValidated: Boolean = false,
     val initialized: Boolean = true,
 )
@@ -134,6 +112,5 @@ data class AccountDetailsViewData(
     var accountId: String,
     var viewName: String,
     var placementLocation1: String,
-    var placementLocation2: String,
-    var password: String
+    var placementLocation2: String
 )
