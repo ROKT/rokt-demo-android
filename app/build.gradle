@@ -68,9 +68,7 @@ dependencies {
     implementation Libs.googleMaterial
     implementation Libs.Coroutines.core
     implementation Libs.Coroutines.android
-    implementation Libs.Retrofit.gsonConverter
-    implementation Libs.Retrofit.retrofit
-    implementation Libs.okhttp
+    implementation Libs.gson
     implementation Libs.coil
     implementation Libs.mlkitQRScanner
 
