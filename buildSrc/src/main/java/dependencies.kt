@@ -9,7 +9,7 @@ object Libs {
     const val googleMaterial = "com.google.android.material:material:1.3.0"
     const val rokt = "com.rokt:roktsdk:6.1.5"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
-    const val gson = "com.google.code.gson:gson:2.8.5"
+    const val gson = "com.google.code.gson:gson:2.14.0"
     const val coil = "io.coil-kt:coil-compose:2.2.0"
     const val mlkitQRScanner = "com.google.android.gms:play-services-code-scanner:16.1.0"
 
