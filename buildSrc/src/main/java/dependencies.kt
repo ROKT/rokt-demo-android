@@ -7,7 +7,7 @@ object Versions {
 object Libs {
     const val androidGradlePlugin = "com.android.tools.build:gradle:8.6.0"
     const val googleMaterial = "com.google.android.material:material:1.3.0"
-    const val rokt = "com.rokt:roktsdk:6.2.0"
+    const val rokt = "com.rokt:roktsdk:6.2.1"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
     const val gson = "com.google.code.gson:gson:2.8.5"
     const val coil = "io.coil-kt:coil-compose:2.2.0"
