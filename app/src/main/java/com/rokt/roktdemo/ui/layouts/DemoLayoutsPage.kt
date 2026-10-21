@@ -37,6 +37,7 @@ import com.rokt.roktdemo.ui.common.Heading
 import com.rokt.roktdemo.ui.common.LoadingPage
 import com.rokt.roktdemo.ui.common.RoktEmbeddedWidget
 import com.rokt.roktdemo.ui.common.SmallSpace
+import com.rokt.roktdemo.ui.common.Title
 import com.rokt.roktdemo.ui.demo.error.RoktError
 import com.rokt.roktsdk.Widget
 import java.lang.ref.WeakReference
@@ -71,6 +72,7 @@ fun DemoLayoutsPage(
             state.value.hasData -> {
                 ScannerContent(
                     backPressed = backPressed,
+                    previewFailed = state.value.data?.previewFailed == true,
                     onWidgetAdded = { widget ->
                         embeddedWidget = widget
                         mainActivityViewModel.previewParameterString.value.let { handleQRCodeData(it) }
@@ -94,6 +96,7 @@ fun DemoLayoutsPage(
 @Composable
 private fun ScannerContent(
     backPressed: () -> Unit,
+    previewFailed: Boolean,
     onWidgetAdded: (WeakReference<Widget>) -> Unit,
     onQrCodeScanned: (data: String?) -> Unit,
 ) {
@@ -115,6 +118,10 @@ private fun ScannerContent(
             RoktEmbeddedWidget(
                 onWidgetAdded = onWidgetAdded,
             )
+            if (previewFailed) {
+                SmallSpace()
+                Title(stringResource(R.string.error_title_text))
+            }
         }
     }
 }

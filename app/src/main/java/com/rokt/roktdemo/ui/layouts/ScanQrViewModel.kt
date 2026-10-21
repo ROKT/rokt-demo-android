@@ -37,7 +37,11 @@ class ScanQrViewModel @Inject constructor(
         _state.value = UiState(data = ScanQrState(true))
     }
 
+    @Volatile
+    private var scanCount = 0
+
     fun qrCodeScanned(rawData: String?, embeddedWidget: WeakReference<Widget>?) {
+        scanCount++
         if (rawData == null) {
             _state.update { UiState(data = ScanQrState(false)) }
         } else {
@@ -58,6 +62,7 @@ class ScanQrViewModel @Inject constructor(
 
     fun executePreview(embeddedWidget: WeakReference<Widget>?) {
         val scannedData = _state.value.data?.scannedData
+        val scanId = scanCount
         scannedData?.let { data ->
             val attributes = buildMap {
                 this[ATTRIBUTE_IS_DEMO] = true.toString()
@@ -70,8 +75,16 @@ class ScanQrViewModel @Inject constructor(
                 HashMap(attributes),
                 placeholders,
                 viewModelScope,
-                onPlacementFailure = { _state.update { UiState(error = RoktDemoErrorTypes.GENERAL) } }
+                onPlacementFailure = { onPlacementFailed(scanId) }
             )
+        }
+    }
+
+    private fun onPlacementFailed(scanId: Int) {
+        // Ignore a failure from a scan that a newer scan has already replaced.
+        if (scanId != scanCount) return
+        _state.update { current ->
+            current.data?.let { UiState(data = it.copy(previewFailed = true)) } ?: current
         }
     }
 }
@@ -103,7 +116,8 @@ private fun getDemoConfig(previewData: PreviewData): String? {
 
 data class ScanQrState(
     val scanning: Boolean = true,
-    val scannedData: PreviewData? = null
+    val scannedData: PreviewData? = null,
+    val previewFailed: Boolean = false
 )
 
 private const val ATTRIBUTE_IS_DEMO = "isDemo"
