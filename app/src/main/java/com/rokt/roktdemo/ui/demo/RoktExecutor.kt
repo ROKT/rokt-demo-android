@@ -1,6 +1,7 @@
 package com.rokt.roktdemo.ui.demo
 
 import com.rokt.roktsdk.Rokt
+import com.rokt.roktsdk.RoktEvent
 import com.rokt.roktsdk.Widget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -13,6 +14,7 @@ object RoktExecutor {
         attributes: HashMap<String, String>?,
         placeholders: HashMap<String, WeakReference<Widget>>?,
         scope: CoroutineScope,
+        onPlacementFailure: () -> Unit = {},
     ) {
         Timber.d("Calling Execute with identifier $viewName, attributes $attributes and placeholders $placeholders")
         scope.launch {
@@ -23,6 +25,9 @@ object RoktExecutor {
                     placeholders = placeholders,
                 ).collect { event ->
                     Timber.d("Rokt event: $event for identifier $viewName")
+                    if (event is RoktEvent.PlacementFailure) {
+                        onPlacementFailure()
+                    }
                 }
         }
     }
