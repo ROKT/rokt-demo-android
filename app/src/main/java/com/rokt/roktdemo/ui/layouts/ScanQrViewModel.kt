@@ -65,7 +65,13 @@ class ScanQrViewModel @Inject constructor(
                 getDemoConfig(data)?.let { this[ATTRIBUTE_DEMO_CONFIG] = it }
             }
             val placeholders = embeddedWidget?.let { hashMapOf(PREVIEW_PLACEHOLDER to it) }
-            roktExecutor.executeRokt("", HashMap(attributes), placeholders, viewModelScope)
+            roktExecutor.executeRokt(
+                "",
+                HashMap(attributes),
+                placeholders,
+                viewModelScope,
+                onPlacementFailure = { _state.update { UiState(error = RoktDemoErrorTypes.GENERAL) } }
+            )
         }
     }
 }
