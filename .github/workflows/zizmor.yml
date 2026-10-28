@@ -33,7 +33,7 @@ jobs:
           fetch-depth: 1
       # TODO: Remove continue-on-error once pre-existing findings are triaged.
       - name: Run zizmor
-        uses: zizmorcore/zizmor-action@71321a20a9ded102f6e9ce5718a2fcec2c4f70d8 # v0.5.2
+        uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
         continue-on-error: true
         with:
           advanced-security: false
