@@ -16,17 +16,17 @@ import org.junit.runners.JUnit4
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
 class ScanQrViewModelTest {
-
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
 
     private val failureCallbacks = mutableListOf<() -> Unit>()
 
-    private val roktExecutor: RoktExecutor = mockk {
-        every { executeRokt(any(), any(), any(), any(), any()) } answers {
-            failureCallbacks.add(arg(4))
+    private val roktExecutor: RoktExecutor =
+        mockk {
+            every { executeRokt(any(), any(), any(), any(), any()) } answers {
+                failureCallbacks.add(arg(4))
+            }
         }
-    }
 
     private val previewData =
         """{"tagId":"tag","previewId":"preview","versionId":"version","creativeIds":["creative"],""" +
@@ -42,8 +42,16 @@ class ScanQrViewModelTest {
             failureCallbacks.last().invoke()
 
             Truth.assertThat(viewModel.state.value.hasError).isFalse()
-            Truth.assertThat(viewModel.state.value.data?.previewFailed).isTrue()
-            Truth.assertThat(viewModel.state.value.data?.scannedData).isNotNull()
+            Truth
+                .assertThat(
+                    viewModel.state.value.data
+                        ?.previewFailed,
+                ).isTrue()
+            Truth
+                .assertThat(
+                    viewModel.state.value.data
+                        ?.scannedData,
+                ).isNotNull()
         }
     }
 
@@ -58,7 +66,11 @@ class ScanQrViewModelTest {
             viewModel.qrCodeScanned(previewData, null)
             staleFailure.invoke()
 
-            Truth.assertThat(viewModel.state.value.data?.previewFailed).isFalse()
+            Truth
+                .assertThat(
+                    viewModel.state.value.data
+                        ?.previewFailed,
+                ).isFalse()
         }
     }
 }

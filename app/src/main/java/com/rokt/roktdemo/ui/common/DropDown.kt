@@ -24,7 +24,7 @@ fun DropDownList(
                 onClick = {
                     request(false)
                     selectedString(it)
-                }
+                },
             ) {
                 ContentText(it)
             }

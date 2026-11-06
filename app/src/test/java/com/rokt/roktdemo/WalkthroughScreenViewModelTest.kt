@@ -12,7 +12,6 @@ import org.junit.runners.JUnit4
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
 class WalkthroughScreenViewModelTest {
-
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
 
@@ -22,7 +21,7 @@ class WalkthroughScreenViewModelTest {
             val mockedViewModel = WalkthroughScreenViewModel()
             mockedViewModel.initWithLibrary(
                 DemoLibraryRepositoryMockImpl().getDemoLibraryMocked(),
-                0
+                0,
             )
             assertThat(mockedViewModel.state.value.isEmbedded).isEqualTo(true)
         }
@@ -34,7 +33,7 @@ class WalkthroughScreenViewModelTest {
             val mockedViewModel = WalkthroughScreenViewModel()
             mockedViewModel.initWithLibrary(
                 DemoLibraryRepositoryMockImpl().getDemoLibraryMocked(),
-                1
+                1,
             )
             assertThat(mockedViewModel.state.value.isEmbedded).isEqualTo(true)
         }
@@ -46,7 +45,7 @@ class WalkthroughScreenViewModelTest {
             val mockedViewModel = WalkthroughScreenViewModel()
             mockedViewModel.initWithLibrary(
                 DemoLibraryRepositoryMockImpl().getDemoLibraryMocked(),
-                2
+                2,
             )
             assertThat(mockedViewModel.state.value.isEmbedded).isEqualTo(false)
         }

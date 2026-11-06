@@ -11,9 +11,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class WalkthroughViewModel @Inject constructor() :
-    ViewModel() {
-
+class WalkthroughViewModel
+@Inject
+constructor() : ViewModel() {
     private var selectedIndex = MutableStateFlow(0)
     private val _state = MutableStateFlow(WalkThroughPageState(initialzed = false))
     val state: StateFlow<WalkThroughPageState>
@@ -23,40 +23,44 @@ class WalkthroughViewModel @Inject constructor() :
         if (state.value.initialzed.not()) {
             viewModelScope.launch {
                 selectedIndex.collect { index ->
-                    _state.value = getWalkthroughPage(
-                        screenCount = screenCount,
-                        index
-                    )
+                    _state.value =
+                        getWalkthroughPage(
+                            screenCount = screenCount,
+                            index,
+                        )
                 }
             }
         }
     }
 
-    private fun getWalkthroughPage(screenCount: Int, index: Int): WalkThroughPageState {
-        return WalkThroughPageState(
-            index,
-            screenCount,
-            getCounterText(screenCount, index),
-            getNextButtonText(screenCount, index)
-        )
+    private fun getWalkthroughPage(
+        screenCount: Int,
+        index: Int,
+    ): WalkThroughPageState = WalkThroughPageState(
+        index,
+        screenCount,
+        getCounterText(screenCount, index),
+        getNextButtonText(screenCount, index),
+    )
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    internal fun getNextButtonText(
+        screenCount: Int,
+        index: Int,
+    ): String = when {
+        screenCount < 1 -> ""
+        index == screenCount - 1 -> "EXIT"
+        else -> "NEXT"
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    internal fun getNextButtonText(screenCount: Int, index: Int): String {
-        return when {
-            screenCount < 1 -> ""
-            index == screenCount - 1 -> "EXIT"
-            else -> "NEXT"
-        }
-    }
-
-    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    internal fun getCounterText(screenCount: Int, index: Int): String {
-        return when {
-            screenCount < 1 -> ""
-            index == screenCount -> "$index/$screenCount"
-            else -> "${index + 1}/$screenCount"
-        }
+    internal fun getCounterText(
+        screenCount: Int,
+        index: Int,
+    ): String = when {
+        screenCount < 1 -> ""
+        index == screenCount -> "$index/$screenCount"
+        else -> "${index + 1}/$screenCount"
     }
 
     internal fun nextButtonPressed() {

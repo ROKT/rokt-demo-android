@@ -42,20 +42,20 @@ import com.rokt.roktdemo.ui.theme.RoktFonts
 fun PreDefined3Page(
     onBackPressed: () -> Unit,
     preDefinedScreenModel: PredefinedScreen,
-    viewModel: PreDefinedViewModel = hiltViewModel()
+    viewModel: PreDefinedViewModel = hiltViewModel(),
 ) {
     viewModel.initWithModel(preDefinedScreenModel)
     val scrollState = rememberScrollState(0)
     Column(
         Modifier
             .fillMaxSize()
-            .background(color = RoktColors.PreDefined3White)
+            .background(color = RoktColors.PreDefined3White),
     ) {
         PreDefinedHeader(onBackPressed)
         Column(
             Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState)
+                .verticalScroll(scrollState),
         ) {
             Content(viewModel)
         }
@@ -84,7 +84,7 @@ private fun Congratulation(isBranded: Boolean) {
                 Modifier
                     .fillMaxWidth()
                     .align(Alignment.End),
-                alignment = Alignment.CenterEnd
+                alignment = Alignment.CenterEnd,
             )
         }
         LargeSpace()
@@ -94,12 +94,13 @@ private fun Congratulation(isBranded: Boolean) {
             Modifier.fillMaxWidth(),
             isBold = true,
             isItalic = true,
-            color = if (isBranded) RoktColors.PreDefined3Green else RoktColors.PreDefined3Blue
+            color = if (isBranded) RoktColors.PreDefined3Green else RoktColors.PreDefined3Blue,
         )
         MediumSpace()
         TextLato(
             text = stringResource(R.string.text_your_ad_created),
-            textSize = 16, color = RoktColors.PreDefined3Black1
+            textSize = 16,
+            color = RoktColors.PreDefined3Black1,
         )
         MediumSpace()
         Divider()
@@ -113,7 +114,7 @@ private fun PostConfirmation() {
         text = stringResource(R.string.text_post_your_ad),
         textSize = 16,
         Modifier.fillMaxWidth(),
-        isBold = true
+        isBold = true,
     )
     XSmallSpace()
     TextLato(
@@ -121,7 +122,7 @@ private fun PostConfirmation() {
         textSize = 12,
         Modifier.fillMaxWidth(),
         color = RoktColors.PreDefined3Gray2,
-        lineHeight = 15
+        lineHeight = 15,
     )
     SmallSpace()
     Box(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
@@ -132,7 +133,7 @@ private fun PostConfirmation() {
                 .border(2.dp, RoktColors.PreDefined3Blue, RoundedCornerShape(4.dp))
                 .padding(horizontal = 32.dp, vertical = 10.dp),
             isBold = true,
-            color = RoktColors.PreDefined3Blue
+            color = RoktColors.PreDefined3Blue,
         )
     }
     SmallSpace()
@@ -140,7 +141,7 @@ private fun PostConfirmation() {
         text = stringResource(R.string.text_limited_items),
         textSize = 9,
         Modifier.fillMaxWidth(),
-        color = RoktColors.PreDefined3Gray3
+        color = RoktColors.PreDefined3Gray3,
     )
     SmallSpace()
     Divider()
@@ -152,7 +153,7 @@ private fun Divider() {
         Modifier
             .fillMaxWidth()
             .height(1.dp)
-            .background(color = RoktColors.PreDefined3Gray1)
+            .background(color = RoktColors.PreDefined3Gray1),
     )
 }
 
@@ -165,7 +166,7 @@ private fun TextLato(
     isItalic: Boolean = false,
     textAlign: TextAlign = TextAlign.Center,
     color: Color = RoktColors.PreDefined3Black2,
-    lineHeight: Int = 20
+    lineHeight: Int = 20,
 ) {
     Text(
         text,
@@ -176,6 +177,6 @@ private fun TextLato(
         fontFamily = RoktFonts.Lato,
         fontWeight = if (isBold) FontWeight.Bold else FontWeight.Normal,
         textAlign = textAlign,
-        lineHeight = lineHeight.sp
+        lineHeight = lineHeight.sp,
     )
 }

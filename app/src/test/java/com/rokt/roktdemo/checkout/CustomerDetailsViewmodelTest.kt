@@ -26,7 +26,8 @@ class CustomerDetailsViewmodelTest {
         coroutineTestRule.runBlockingTest {
             val customerDetailsViewModel = getCustomerDetailsViewModel()
 
-            Truth.assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
+            Truth
+                .assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
                 .isEqualTo(false)
         }
     }
@@ -36,12 +37,14 @@ class CustomerDetailsViewmodelTest {
         coroutineTestRule.runBlockingTest {
             val customerDetailsViewModel = getCustomerDetailsViewModel()
 
-            Truth.assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
+            Truth
+                .assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
                 .isEqualTo(false)
 
             customerDetailsViewModel.onToggleAdvancedOptions()
 
-            Truth.assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
+            Truth
+                .assertThat(customerDetailsViewModel.state.value.showAdvancedOptions)
                 .isEqualTo(true)
         }
     }
@@ -53,7 +56,8 @@ class CustomerDetailsViewmodelTest {
 
             customerDetailsViewModel.onCountrySelected("Australia")
 
-            Truth.assertThat(customerDetailsViewModel.state.value.selectedCountry)
+            Truth
+                .assertThat(customerDetailsViewModel.state.value.selectedCountry)
                 .isEqualTo("Australia")
         }
     }
@@ -67,7 +71,10 @@ class CustomerDetailsViewmodelTest {
             val expectedMap = hashMapOf("country" to "Australia")
 
             DemoLibraryRepositoryMockImpl().getDemoLibrary().collect {
-                it.data().customConfigurationPage.advancedDetails.toList()
+                it
+                    .data()
+                    .customConfigurationPage.advancedDetails
+                    .toList()
                     .forEachIndexed { index, _ ->
                         val newKey = "key$index"
                         val newValue = "value$index"
@@ -77,7 +84,8 @@ class CustomerDetailsViewmodelTest {
                     }
             }
 
-            Truth.assertThat(customerDetailsViewModel.getCustomerDetails())
+            Truth
+                .assertThat(customerDetailsViewModel.getCustomerDetails())
                 .isEqualTo(expectedMap)
         }
     }
@@ -88,8 +96,11 @@ class CustomerDetailsViewmodelTest {
             val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             customerDetailsViewModel.onKeyChanged("newKey", 0)
-            Truth.assertThat(customerDetailsViewModel.state.value.advancedOptions[0].key)
-                .isEqualTo("newKey")
+            Truth
+                .assertThat(
+                    customerDetailsViewModel.state.value.advancedOptions[0]
+                        .key,
+                ).isEqualTo("newKey")
         }
     }
 
@@ -99,17 +110,18 @@ class CustomerDetailsViewmodelTest {
             val customerDetailsViewModel = getCustomerDetailsViewModel()
 
             customerDetailsViewModel.onValueChanged("newValue", 0)
-            Truth.assertThat(customerDetailsViewModel.state.value.advancedOptions[0].value)
-                .isEqualTo("newValue")
+            Truth
+                .assertThat(
+                    customerDetailsViewModel.state.value.advancedOptions[0]
+                        .value,
+                ).isEqualTo("newValue")
         }
     }
 
-    private fun getCustomerDetailsViewModel(): CustomerDetailsViewModel {
-        return CustomerDetailsViewModel().apply {
-            init(
-                DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.customerDetails,
-                DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.advancedDetails
-            )
-        }
+    private fun getCustomerDetailsViewModel(): CustomerDetailsViewModel = CustomerDetailsViewModel().apply {
+        init(
+            DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.customerDetails,
+            DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.advancedDetails,
+        )
     }
 }

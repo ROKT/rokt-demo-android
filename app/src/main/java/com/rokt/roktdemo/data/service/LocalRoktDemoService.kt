@@ -13,19 +13,20 @@ import kotlinx.coroutines.withContext
  */
 class LocalRoktDemoService(
     private val context: Context,
-    private val gson: Gson = Gson()
+    private val gson: Gson = Gson(),
 ) : RoktDemoService {
-
     override suspend fun getDemoLibrary(): DemoLibrary = readAsset(LIBRARY_ASSET, DemoLibrary::class.java)
 
     override suspend fun getAboutPage(): AboutRokt = readAsset(ABOUT_ASSET, AboutRokt::class.java)
 
-    private suspend fun <T> readAsset(fileName: String, type: Class<T>): T =
-        withContext(Dispatchers.IO) {
-            context.assets.open(fileName).bufferedReader().use { reader ->
-                gson.fromJson(reader, type)
-            }
+    private suspend fun <T> readAsset(
+        fileName: String,
+        type: Class<T>,
+    ): T = withContext(Dispatchers.IO) {
+        context.assets.open(fileName).bufferedReader().use { reader ->
+            gson.fromJson(reader, type)
         }
+    }
 
     companion object {
         const val ABOUT_ASSET = "about.json"

@@ -10,5 +10,7 @@ data class ValidationState(
 )
 
 enum class ValidationStatus {
-    NONE, VALID, INVALID
+    NONE,
+    VALID,
+    INVALID,
 }

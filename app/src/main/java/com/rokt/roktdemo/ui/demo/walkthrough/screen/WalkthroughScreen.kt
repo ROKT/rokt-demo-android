@@ -59,7 +59,7 @@ fun WalkthroughScreen(
         state.description,
         state.isEmbedded,
         viewModel::onEmbeddedWidgetAddedToView,
-        viewModel::onViewExampleButtonClicked
+        viewModel::onViewExampleButtonClicked,
     )
 }
 
@@ -79,12 +79,11 @@ private fun WalkthroughScreenContent(
                 PaddingValues(
                     start = MEDIUM_SPACE.dp,
                     end = MEDIUM_SPACE.dp,
-                    bottom = MEDIUM_SPACE.dp
-                )
-            )
-            .statusBarsPadding()
+                    bottom = MEDIUM_SPACE.dp,
+                ),
+            ).statusBarsPadding()
             .navigationBarsPadding()
-            .verticalScroll(scroll)
+            .verticalScroll(scroll),
     ) {
         ScreenHeader(title)
         SmallSpace()
@@ -107,7 +106,7 @@ private fun RoktEmbeddedWidget(onWidgetAdded: (WeakReference<Widget>) -> Unit) {
             Widget(context).apply {
                 onWidgetAdded(WeakReference(this))
             }
-        }
+        },
     )
 }
 
@@ -117,31 +116,33 @@ private fun ColumnScope.RoktFullscreenWidget(onViewExampleButtonClicked: () -> U
         Modifier
             .fillMaxSize()
             .weight(1f),
-        verticalArrangement = Arrangement.Bottom
+        verticalArrangement = Arrangement.Bottom,
     ) {
         Button(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .height(64.dp),
-            colors = ButtonDefaults.textButtonColors(
+            colors =
+            ButtonDefaults.textButtonColors(
                 backgroundColor = MaterialTheme.colors.secondary,
-                contentColor = MaterialTheme.colors.primary
+                contentColor = MaterialTheme.colors.primary,
             ),
             onClick = onViewExampleButtonClicked,
-            shape = RoundedCornerShape(BUTTON_CORNER_RADIUS.dp)
+            shape = RoundedCornerShape(BUTTON_CORNER_RADIUS.dp),
         ) {
             Row(
                 Modifier
                     .background(MaterialTheme.colors.secondary)
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 ButtonText(stringResource(R.string.button_view_example_text))
                 Icon(
                     painterResource(id = R.drawable.ic_eye),
                     stringResource(R.string.button_view_example_icon),
-                    Modifier.padding(start = 10.dp)
+                    Modifier.padding(start = 10.dp),
                 )
             }
         }

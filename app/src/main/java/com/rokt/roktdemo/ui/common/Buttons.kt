@@ -27,37 +27,48 @@ const val BUTTON_FONT_SIZE = 20
 const val BUTTON_CORNER_RADIUS = 100
 
 @Composable
-fun ButtonDark(text: String, onClick: () -> Unit) {
+fun ButtonDark(
+    text: String,
+    onClick: () -> Unit,
+) {
     Button(
         onClick = onClick,
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .height(BUTTON_HEIGHT.dp),
-        colors = ButtonDefaults.textButtonColors(
+        colors =
+        ButtonDefaults.textButtonColors(
             backgroundColor = MaterialTheme.colors.secondary,
-            contentColor = MaterialTheme.colors.primary
+            contentColor = MaterialTheme.colors.primary,
         ),
-        shape = RoundedCornerShape(BUTTON_CORNER_RADIUS.dp)
+        shape = RoundedCornerShape(BUTTON_CORNER_RADIUS.dp),
     ) {
         ButtonText(text = text)
     }
 }
 
 @Composable
-fun ButtonLight(modifier: Modifier = Modifier, text: String, onClick: () -> Unit) {
+fun ButtonLight(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit,
+) {
     OutlinedButton(
-        modifier = modifier.then(
+        modifier =
+        modifier.then(
             Modifier
                 .fillMaxWidth()
-                .height(BUTTON_HEIGHT.dp)
+                .height(BUTTON_HEIGHT.dp),
         ),
         onClick = onClick,
-        colors = ButtonDefaults.textButtonColors(
+        colors =
+        ButtonDefaults.textButtonColors(
             backgroundColor = MaterialTheme.colors.primary,
-            contentColor = MaterialTheme.colors.secondary
+            contentColor = MaterialTheme.colors.secondary,
         ),
         shape = RoundedCornerShape(BUTTON_CORNER_RADIUS.dp),
-        border = BorderStroke(2.dp, MaterialTheme.colors.secondary)
+        border = BorderStroke(2.dp, MaterialTheme.colors.secondary),
     ) {
         ButtonText(text = text)
     }
@@ -69,17 +80,20 @@ fun ButtonText(text: String) {
         text,
         fontSize = BUTTON_FONT_SIZE.sp,
         fontFamily = RoktFonts.DefaultFontFamily,
-        fontWeight = FontWeight.Bold
+        fontWeight = FontWeight.Bold,
     )
 }
 
 @Composable
-fun BackButton(backPressed: () -> Unit, tintColor: Color = Color.White) {
+fun BackButton(
+    backPressed: () -> Unit,
+    tintColor: Color = Color.White,
+) {
     IconButton(onClick = { backPressed.invoke() }) {
         Icon(
             painter = painterResource(id = R.drawable.ic_back),
             contentDescription = stringResource(R.string.content_description_back),
-            tint = tintColor
+            tint = tintColor,
         )
     }
 }

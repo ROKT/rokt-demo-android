@@ -13,7 +13,6 @@ import java.io.File
  * Runs on the JVM with no Android runtime; the module directory is the working directory.
  */
 class LocalAssetsDecodeTest {
-
     private fun asset(name: String): String = File("src/main/assets/$name").readText()
 
     @Test

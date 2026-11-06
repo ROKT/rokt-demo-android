@@ -17,16 +17,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AccountDetailsViewModel @Inject constructor(
+class AccountDetailsViewModel
+@Inject
+constructor(
     private val validator: ValidatorRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow(AccountDetailsViewState(initialized = false))
     val state: MutableStateFlow<AccountDetailsViewState>
         get() = _state
 
-    private val account = MutableStateFlow(
-        AccountDetailsViewData("", "", "", "")
-    )
+    private val account =
+        MutableStateFlow(
+            AccountDetailsViewData("", "", "", ""),
+        )
 
     private val accountValidationState =
         MutableStateFlow(ValidationState(fieldStatus = ValidationStatus.NONE))
@@ -47,36 +50,40 @@ class AccountDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             combine(
                 account,
-                accountValidationState
+                accountValidationState,
             ) { accountDetail, accountValidation ->
                 AccountDetailsViewState(
-                    accountId = createEditableField(
+                    accountId =
+                    createEditableField(
                         text = accountDetail.accountId,
                         onFieldEdited = {
                             account.value = account.value.copy(accountId = it)
                             onAccountFieldEdited()
                         },
-                        accountValidation.fieldErrorMessage
+                        accountValidation.fieldErrorMessage,
                     ),
-                    viewName = createEditableField(
+                    viewName =
+                    createEditableField(
                         text = accountDetail.viewName,
                         onFieldEdited = {
                             account.value = account.value.copy(viewName = it)
-                        }
+                        },
                     ),
-                    placementLocation1 = createEditableField(
+                    placementLocation1 =
+                    createEditableField(
                         text = accountDetail.placementLocation1,
                         onFieldEdited = {
                             account.value = account.value.copy(placementLocation1 = it)
-                        }
+                        },
                     ),
-                    placementLocation2 = createEditableField(
+                    placementLocation2 =
+                    createEditableField(
                         text = accountDetail.placementLocation2,
                         onFieldEdited = {
                             account.value = account.value.copy(placementLocation2 = it)
-                        }
+                        },
                     ),
-                    formValidated = accountValidationState.value.fieldStatus == ValidationStatus.VALID
+                    formValidated = accountValidationState.value.fieldStatus == ValidationStatus.VALID,
                 )
             }.collect {
                 _state.value = it
@@ -112,5 +119,5 @@ data class AccountDetailsViewData(
     var accountId: String,
     var viewName: String,
     var placementLocation1: String,
-    var placementLocation2: String
+    var placementLocation2: String,
 )

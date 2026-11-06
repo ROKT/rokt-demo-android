@@ -17,14 +17,19 @@ import kotlin.collections.HashMap
 import kotlin.random.Random
 
 @HiltViewModel
-class WalkthroughScreenViewModel @Inject constructor() : ViewModel() {
+class WalkthroughScreenViewModel
+@Inject
+constructor() : ViewModel() {
     private val _state = MutableStateFlow(WalkthroughScreenState())
     val state: MutableStateFlow<WalkthroughScreenState>
         get() = _state
 
     private val screenIndex: MutableStateFlow<Int> = MutableStateFlow(0)
 
-    fun initWithLibrary(demoLibrary: DemoLibrary, index: Int) {
+    fun initWithLibrary(
+        demoLibrary: DemoLibrary,
+        index: Int,
+    ) {
         screenIndex.value = index
 
         viewModelScope.launch {
@@ -32,14 +37,15 @@ class WalkthroughScreenViewModel @Inject constructor() : ViewModel() {
                 val screens = demoLibrary.defaultPlacementsExamples.screens
                 screens[screenIndex].let { screen ->
 
-                    _state.value = WalkthroughScreenState(
-                        screen.title,
-                        screen.description,
-                        screen.placeholderName,
-                        screen.attributes,
-                        screen.viewName,
-                        screen.type == ScreenType.Embedded
-                    )
+                    _state.value =
+                        WalkthroughScreenState(
+                            screen.title,
+                            screen.description,
+                            screen.placeholderName,
+                            screen.attributes,
+                            screen.viewName,
+                            screen.type == ScreenType.Embedded,
+                        )
                 }
             }
         }

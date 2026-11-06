@@ -7,18 +7,18 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
-class AboutRoktRepositoryImpl(private val roktDemoService: RoktDemoService) : AboutRoktRepository {
-    override suspend fun getAboutRokt(): Flow<Result<AboutRokt>> {
-        return try {
-            val aboutPage = roktDemoService.getAboutPage()
-            flow {
-                emit(Result.Success(aboutPage))
-            }
-        } catch (e: Exception) {
-            Timber.d(e)
-            flow {
-                emit(Result.Error(e))
-            }
+class AboutRoktRepositoryImpl(
+    private val roktDemoService: RoktDemoService,
+) : AboutRoktRepository {
+    override suspend fun getAboutRokt(): Flow<Result<AboutRokt>> = try {
+        val aboutPage = roktDemoService.getAboutPage()
+        flow {
+            emit(Result.Success(aboutPage))
+        }
+    } catch (e: Exception) {
+        Timber.d(e)
+        flow {
+            emit(Result.Error(e))
         }
     }
 }

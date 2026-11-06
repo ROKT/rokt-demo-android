@@ -40,17 +40,17 @@ fun SummaryDisclaimerDialog(
     openDialog: MutableState<Boolean>,
     text: String,
     onDismiss: () -> Unit,
-    onPositive: () -> Unit
+    onPositive: () -> Unit,
 ) {
     if (openDialog.value) {
         Dialog(onDismissRequest = onDismiss) {
             Surface(
                 shape = RoundedCornerShape(DIALOG_CORNER_RADIUS.dp),
-                color = Color.White
+                color = Color.White,
             ) {
                 Column(
                     modifier = Modifier.padding(MEDIUM_SPACE.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     SubHeading(text = stringResource(R.string.text_disclaimer))
                     SmallSpace()
@@ -59,15 +59,17 @@ fun SummaryDisclaimerDialog(
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
                         Button(
                             onClick = onPositive,
-                            modifier = Modifier
+                            modifier =
+                            Modifier
                                 .height(44.dp)
                                 .padding(end = X_SMALL_SPACE.dp)
                                 .weight(1F),
-                            colors = ButtonDefaults.textButtonColors(
+                            colors =
+                            ButtonDefaults.textButtonColors(
                                 backgroundColor = MaterialTheme.colors.secondary,
-                                contentColor = MaterialTheme.colors.primary
+                                contentColor = MaterialTheme.colors.primary,
                             ),
-                            shape = RoundedCornerShape(BUTTON_CORNER_RADIUS.dp)
+                            shape = RoundedCornerShape(BUTTON_CORNER_RADIUS.dp),
                         ) {
                             SmallButtonText(text = stringResource(R.string.summary_dialog_btn_positive))
                         }
@@ -81,7 +83,9 @@ fun SummaryDisclaimerDialog(
 @Composable
 fun SmallButtonText(text: String) {
     Text(
-        text, fontSize = SMALL_SPACE.sp, fontFamily = RoktFonts.DefaultFontFamily,
-        fontWeight = FontWeight.Bold
+        text,
+        fontSize = SMALL_SPACE.sp,
+        fontFamily = RoktFonts.DefaultFontFamily,
+        fontWeight = FontWeight.Bold,
     )
 }

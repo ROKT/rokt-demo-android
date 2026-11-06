@@ -14,20 +14,24 @@ import javax.inject.Inject
 import kotlin.random.Random
 
 @HiltViewModel
-class PreDefinedViewModel @Inject constructor(private val roktExecutor: RoktExecutor) :
-    ViewModel() {
+class PreDefinedViewModel
+@Inject
+constructor(
+    private val roktExecutor: RoktExecutor,
+) : ViewModel() {
     private val _state = MutableStateFlow(PreDefinedState())
     val state: MutableStateFlow<PreDefinedState>
         get() = _state
 
     fun initWithModel(preDefinedScreenModel: PredefinedScreen) {
         viewModelScope.launch {
-            _state.value = PreDefinedState(
-                preDefinedScreenModel.attributes,
-                preDefinedScreenModel.viewName,
-                preDefinedScreenModel.placeholderName,
-                preDefinedScreenModel.isBranded
-            )
+            _state.value =
+                PreDefinedState(
+                    preDefinedScreenModel.attributes,
+                    preDefinedScreenModel.viewName,
+                    preDefinedScreenModel.placeholderName,
+                    preDefinedScreenModel.isBranded,
+                )
         }
     }
 
@@ -36,7 +40,7 @@ class PreDefinedViewModel @Inject constructor(private val roktExecutor: RoktExec
             viewName = state.value.viewName,
             getAttributes(),
             hashMapOf(state.value.placeholderName to widget),
-            viewModelScope
+            viewModelScope,
         )
     }
 
@@ -51,5 +55,5 @@ data class PreDefinedState(
     val attributes: HashMap<String, String> = hashMapOf(),
     val viewName: String = "",
     val placeholderName: String = "",
-    val isBranded: Boolean = false
+    val isBranded: Boolean = false,
 )

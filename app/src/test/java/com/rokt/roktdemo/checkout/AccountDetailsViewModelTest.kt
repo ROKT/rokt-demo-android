@@ -20,7 +20,6 @@ import org.junit.runners.JUnit4
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
 class AccountDetailsViewModelTest {
-
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
 
@@ -31,7 +30,8 @@ class AccountDetailsViewModelTest {
             val accountDetailsViewModel =
                 getViewModelForStatus(ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth
+                .assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(true)
         }
     }
@@ -44,7 +44,8 @@ class AccountDetailsViewModelTest {
             accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
 
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth
+                .assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(false)
         }
     }
@@ -57,7 +58,8 @@ class AccountDetailsViewModelTest {
             accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
 
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth
+                .assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(false)
         }
     }
@@ -70,10 +72,12 @@ class AccountDetailsViewModelTest {
                 getViewModelForStatus(ValidationStatus.VALID)
 
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth
+                .assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(true)
             accountDetailsViewModel.onNavigatedAway()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth
+                .assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(false)
         }
     }
@@ -85,26 +89,27 @@ class AccountDetailsViewModelTest {
             val accountDetailsViewModel =
                 getViewModelForStatus(ValidationStatus.VALID)
             accountDetailsViewModel.continueButtonPressed()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth
+                .assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(true)
             accountDetailsViewModel.onAccountFieldEdited()
-            Truth.assertThat(accountDetailsViewModel.state.value.formValidated)
+            Truth
+                .assertThat(accountDetailsViewModel.state.value.formValidated)
                 .isEqualTo(false)
         }
     }
 }
 
-private fun getViewModelForStatus(
-    accountValidationState: ValidationStatus
-): AccountDetailsViewModel {
+private fun getViewModelForStatus(accountValidationState: ValidationStatus): AccountDetailsViewModel {
     val validator: ValidatorRepository = mockk()
     val accountDetailsViewModel =
         AccountDetailsViewModel(validator)
     accountDetailsViewModel.init(DemoLibraryRepositoryMockImpl().getDemoLibraryMocked().customConfigurationPage.accountDetails)
 
-    val accountId = DemoLibraryRepositoryMockImpl().TAG_ID
-    every { validator.validateAccountId(accountId) } returns ValidationState(
-        accountValidationState
-    )
+    val accountId = DemoLibraryRepositoryMockImpl().tagId
+    every { validator.validateAccountId(accountId) } returns
+        ValidationState(
+            accountValidationState,
+        )
     return accountDetailsViewModel
 }

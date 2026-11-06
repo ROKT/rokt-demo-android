@@ -26,37 +26,31 @@ private const val PREFERENCE_NAME = "RoktDemo"
 class ApplicationModule {
     @Singleton
     @Provides
-    fun provideAboutRoktRepository(roktDemoService: RoktDemoService): AboutRoktRepository {
-        return AboutRoktRepositoryImpl(roktDemoService)
-    }
+    fun provideAboutRoktRepository(roktDemoService: RoktDemoService): AboutRoktRepository = AboutRoktRepositoryImpl(roktDemoService)
 
     @Singleton
     @Provides
-    fun provideDemoRepository(roktDemoService: RoktDemoService): DemoLibraryRepository {
-        return DemoLibraryRepositoryImpl(roktDemoService)
-    }
+    fun provideDemoRepository(roktDemoService: RoktDemoService): DemoLibraryRepository = DemoLibraryRepositoryImpl(roktDemoService)
 
     @Singleton
     @Provides
-    fun provideValidator(): ValidatorRepository {
-        return ValidatorMockImplementation()
-    }
+    fun provideValidator(): ValidatorRepository = ValidatorMockImplementation()
 
     @Singleton
     @Provides
-    fun provideRoktExecutor(): RoktExecutor {
-        return RoktExecutor
-    }
+    fun provideRoktExecutor(): RoktExecutor = RoktExecutor
 
     @Singleton
     @Provides
-    fun provideRoktDemoService(@ApplicationContext appContext: Context): RoktDemoService {
-        return LocalRoktDemoService(appContext)
-    }
+    fun provideRoktDemoService(
+        @ApplicationContext appContext: Context,
+    ): RoktDemoService = LocalRoktDemoService(appContext)
 
     @Singleton
     @Provides
-    fun provideSettingsRepository(@ApplicationContext appContext: Context): SettingsRepository {
+    fun provideSettingsRepository(
+        @ApplicationContext appContext: Context,
+    ): SettingsRepository {
         val preferences = appContext.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
         return SettingsRepositoryImpl(preferences)
     }

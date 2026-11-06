@@ -35,7 +35,7 @@ private fun GeneralError() {
     Box(
         Modifier
             .fillMaxSize(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         RoktBackground()
         Column(
@@ -43,18 +43,18 @@ private fun GeneralError() {
                 .fillMaxWidth()
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_error),
-                contentDescription = stringResource(R.string.content_description_error_icon)
+                contentDescription = stringResource(R.string.content_description_error_icon),
             )
             XSmallSpace()
             Title(stringResource(R.string.error_title_text), textAlign = TextAlign.Center)
             XSmallSpace()
             ContentText(
                 text = stringResource(R.string.error_message_text),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
         }
     }
@@ -65,7 +65,7 @@ private fun NetworkError() {
     Box(
         Modifier
             .fillMaxSize(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         RoktBackground()
         Column(
@@ -73,11 +73,11 @@ private fun NetworkError() {
                 .fillMaxWidth()
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_error),
-                contentDescription = stringResource(R.string.content_description_error_icon)
+                contentDescription = stringResource(R.string.content_description_error_icon),
             )
             XSmallSpace()
             Title(stringResource(R.string.network_error_title_text), textAlign = TextAlign.Center)
@@ -90,7 +90,7 @@ private fun QrCodeError() {
     Box(
         Modifier
             .fillMaxSize(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         RoktBackground()
         Column(
@@ -98,18 +98,18 @@ private fun QrCodeError() {
                 .fillMaxWidth()
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Center,
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_error),
-                contentDescription = stringResource(R.string.content_description_error_icon)
+                contentDescription = stringResource(R.string.content_description_error_icon),
             )
             XSmallSpace()
             Title(stringResource(R.string.error_qr_code_title), textAlign = TextAlign.Center)
             XSmallSpace()
             ContentText(
                 text = stringResource(R.string.error_qr_code_message),
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
         }
     }

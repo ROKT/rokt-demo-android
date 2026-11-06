@@ -13,14 +13,15 @@ import com.rokt.roktdemo.ui.theme.RoktColors
 @Composable
 fun LoadingPage() {
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
-            .fillMaxHeight()
+            .fillMaxHeight(),
     ) {
         CircularProgressIndicator(
             modifier = Modifier.align(Alignment.Center),
             strokeWidth = 3.dp,
-            color = RoktColors.RoktPink
+            color = RoktColors.RoktPink,
         )
     }
 }

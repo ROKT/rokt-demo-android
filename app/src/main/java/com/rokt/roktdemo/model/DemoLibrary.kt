@@ -10,7 +10,7 @@ data class DemoLibrary(
     val customConfigurationPage: CustomConfigurationPage,
     val preDefinedScreen1: PredefinedScreen,
     val preDefinedScreen2: PredefinedScreen,
-    val preDefinedScreen3: PredefinedScreen
+    val preDefinedScreen3: PredefinedScreen,
 )
 
 data class CustomConfigurationPage(
@@ -20,7 +20,7 @@ data class CustomConfigurationPage(
     val longDescription: String,
     val accountDetails: AccountDetails,
     val customerDetails: CustomerDetails,
-    val advancedDetails: HashMap<String, String>
+    val advancedDetails: HashMap<String, String>,
 ) {
     val iconResource: Int
         get() = ImageSource.getLogo(iconURL)
@@ -30,13 +30,13 @@ data class AccountDetails(
     val accountID: String,
     val viewName: String,
     val placementLocation1: String,
-    val placementLocation2: String
+    val placementLocation2: String,
 )
 
 class CustomerDetails(
     val state: String,
     val postcode: String,
-    val country: List<String>
+    val country: List<String>,
 )
 
 class DefaultPlacements(
@@ -58,7 +58,8 @@ class Screen(
 )
 
 enum class ScreenType {
-    Overlay, Embedded
+    Overlay,
+    Embedded,
 }
 
 open class PredefinedScreen(
@@ -77,7 +78,7 @@ open class PredefinedScreen(
 class DescriptionItem(
     val title: String,
     val text: String,
-    private val iconURL: String
+    private val iconURL: String,
 ) {
     val iconResource: Int
         get() = ImageSource.getIcon(iconURL)
@@ -86,7 +87,7 @@ class DescriptionItem(
 open class RoktDemoScreen(
     val title: String,
     val shortDescription: String,
-    private val iconURL: String
+    private val iconURL: String,
 ) {
     val iconResource: Int
         get() = ImageSource.getLogo(iconURL)
