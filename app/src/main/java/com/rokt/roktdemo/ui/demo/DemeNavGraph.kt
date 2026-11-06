@@ -17,7 +17,9 @@ object DemoDestinations {
  * Models the navigation actions in the Demo Page.
  */
 
-class DemoActions constructor(navController: NavController) {
+class DemoActions constructor(
+    navController: NavController,
+) {
     val navigateToDemoDestination: (destination: DestinationType) -> Unit = {
         navController.navigate("$DEMO_DESTINATION${it.value}")
     }

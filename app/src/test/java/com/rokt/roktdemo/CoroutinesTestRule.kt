@@ -16,13 +16,13 @@ import org.junit.runner.Description
 class CoroutineTestRule(
     val testDispatcher: TestDispatcher = UnconfinedTestDispatcher(),
 ) : TestWatcher() {
-
-    val testDispatcherProvider = object : DispatcherProvider {
-        override val io: CoroutineDispatcher = testDispatcher
-        override val ui: CoroutineDispatcher = testDispatcher
-        override val default: CoroutineDispatcher = testDispatcher
-        override val unconfined: CoroutineDispatcher = testDispatcher
-    }
+    val testDispatcherProvider =
+        object : DispatcherProvider {
+            override val io: CoroutineDispatcher = testDispatcher
+            override val ui: CoroutineDispatcher = testDispatcher
+            override val default: CoroutineDispatcher = testDispatcher
+            override val unconfined: CoroutineDispatcher = testDispatcher
+        }
 
     override fun starting(description: Description?) {
         super.starting(description)

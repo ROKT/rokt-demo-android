@@ -45,7 +45,7 @@ fun DemoHome(
         demoPage = demoScreenState,
         backPressed = backPressed,
         scroll = scroll,
-        actions = actions
+        actions = actions,
     )
 }
 
@@ -59,16 +59,17 @@ private fun DemoPageSuccess(
     Column(
         Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colors.surface)
+            .background(MaterialTheme.colors.surface),
     ) {
         Box(Modifier.padding(PaddingValues(start = 3.dp, top = 54.dp))) {
             BackButton(backPressed, MaterialTheme.colors.primaryVariant)
         }
 
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .verticalScroll(scroll)
-                .padding(PaddingValues(MEDIUM_SPACE.dp, 10.dp))
+                .padding(PaddingValues(MEDIUM_SPACE.dp, 10.dp)),
         ) {
             Heading(demoPage.title)
             ContentText(demoPage.description)
@@ -84,7 +85,10 @@ private fun DemoPageSuccess(
 }
 
 @Composable
-private fun DemoListItemView(item: DemoPageListItem, actions: DemoActions) {
+private fun DemoListItemView(
+    item: DemoPageListItem,
+    actions: DemoActions,
+) {
     Column(
         Modifier
             .fillMaxWidth()
@@ -92,7 +96,7 @@ private fun DemoListItemView(item: DemoPageListItem, actions: DemoActions) {
             .border(2.dp, MaterialTheme.colors.onSurface)
             .clickable {
                 actions.navigateToSummary(item.navAction)
-            }
+            },
     ) {
         Row(
             Modifier
@@ -101,21 +105,21 @@ private fun DemoListItemView(item: DemoPageListItem, actions: DemoActions) {
                     PaddingValues(
                         start = MEDIUM_SPACE.dp,
                         top = MEDIUM_SPACE.dp,
-                        end = MEDIUM_SPACE.dp
-                    )
-                )
+                        end = MEDIUM_SPACE.dp,
+                    ),
+                ),
         ) {
             Image(
                 painter = painterResource(id = item.drawableResource),
                 contentDescription = "${item.title} icon",
                 modifier = Modifier.weight(1F, fill = true),
-                alignment = Alignment.BottomStart
+                alignment = Alignment.BottomStart,
             )
 
             Image(
                 painter = painterResource(id = R.drawable.ic_primary_button),
                 contentDescription = stringResource(R.string.content_description_arrow_go),
-                modifier = Modifier.clip(CircleShape)
+                modifier = Modifier.clip(CircleShape),
             )
         }
 
@@ -125,9 +129,9 @@ private fun DemoListItemView(item: DemoPageListItem, actions: DemoActions) {
                     start = MEDIUM_SPACE.dp,
                     end = MEDIUM_SPACE.dp,
                     top = 16.dp,
-                    bottom = MEDIUM_SPACE.dp
-                )
-            )
+                    bottom = MEDIUM_SPACE.dp,
+                ),
+            ),
         ) {
             SubHeading(item.title)
             XSmallSpace()

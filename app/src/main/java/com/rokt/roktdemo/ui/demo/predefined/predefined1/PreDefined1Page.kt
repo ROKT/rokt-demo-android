@@ -38,7 +38,7 @@ import com.rokt.roktdemo.ui.theme.RoktFonts
 fun PreDefined1Page(
     onBackPressed: () -> Unit,
     preDefinedScreenModel: PredefinedScreen,
-    viewModel: PreDefinedViewModel = hiltViewModel()
+    viewModel: PreDefinedViewModel = hiltViewModel(),
 ) {
     viewModel.initWithModel(preDefinedScreenModel)
     val scrollState = rememberScrollState(0)
@@ -46,13 +46,13 @@ fun PreDefined1Page(
     Column(
         Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colors.surface)
+            .background(color = MaterialTheme.colors.surface),
     ) {
         PreDefinedHeader(onBackPressed)
         Column(
             Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState)
+                .verticalScroll(scrollState),
         ) {
             Content(viewModel = viewModel)
         }
@@ -78,13 +78,13 @@ private fun ThankYouView() {
         Modifier
             .fillMaxWidth()
             .background(color = MaterialTheme.colors.onPrimary)
-            .padding(SMALL_SPACE.dp)
+            .padding(SMALL_SPACE.dp),
     ) {
         TextLato(stringResource(id = R.string.text_thank_you), 20, Modifier.align(Alignment.Center))
         Image(
             painter = painterResource(id = R.drawable.ic_share),
             contentDescription = stringResource(R.string.text_share),
-            Modifier.align(Alignment.CenterEnd)
+            Modifier.align(Alignment.CenterEnd),
         )
     }
     Divider()
@@ -97,24 +97,24 @@ private fun ConfirmationView() {
             .fillMaxWidth()
             .background(color = MaterialTheme.colors.onPrimary)
             .padding(SMALL_SPACE.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         SmallSpace()
         Image(
             painter = painterResource(id = R.drawable.ic_done),
-            contentDescription = stringResource(R.string.text_done)
+            contentDescription = stringResource(R.string.text_done),
         )
         XSmallSpace()
         TextLato(
             text = stringResource(id = R.string.text_amazing_deal),
             textSize = 22,
             modifier = Modifier.fillMaxWidth(),
-            true
+            true,
         )
         XSmallSpace()
         TextLato(
             text = stringResource(id = R.string.text_receipt),
-            textSize = 16
+            textSize = 16,
         )
         SmallSpace()
     }
@@ -127,30 +127,34 @@ private fun OrderSummaryView() {
         Modifier
             .fillMaxWidth()
             .background(color = MaterialTheme.colors.onPrimary)
-            .padding(SMALL_SPACE.dp)
+            .padding(SMALL_SPACE.dp),
     ) {
         Box(
             Modifier
-                .padding(bottom = SMALL_SPACE.dp)
-
+                .padding(bottom = SMALL_SPACE.dp),
         ) {
             TextLato(
-                stringResource(R.string.text_order_details), 16,
-                Modifier.fillMaxWidth(), false, TextAlign.Start
+                stringResource(R.string.text_order_details),
+                16,
+                Modifier.fillMaxWidth(),
+                false,
+                TextAlign.Start,
             )
 
             TextLato(
-                stringResource(id = R.string.text_total_0), 16,
+                stringResource(id = R.string.text_total_0),
+                16,
                 Modifier
                     .align(Alignment.CenterEnd)
                     .padding(end = SMALL_SPACE.dp),
-                false, TextAlign.End
+                false,
+                TextAlign.End,
             )
 
             Image(
                 painter = painterResource(id = R.drawable.ic_arrow_up_gray),
                 contentDescription = stringResource(R.string.text_arrow_up),
-                Modifier.align(Alignment.CenterEnd)
+                Modifier.align(Alignment.CenterEnd),
             )
         }
         Divider(RoktColors.PreDefined1Gray1)
@@ -161,7 +165,9 @@ private fun OrderSummaryView() {
             Modifier
                 .fillMaxWidth()
                 .padding(top = SMALL_SPACE.dp),
-            false, TextAlign.Start, RoktColors.PreDefined1Gray2
+            false,
+            TextAlign.Start,
+            RoktColors.PreDefined1Gray2,
         )
     }
     Divider()
@@ -173,7 +179,8 @@ private fun OrderSummaryView() {
             .background(color = MaterialTheme.colors.onPrimary)
             .padding(SMALL_SPACE.dp),
         true,
-        TextAlign.Center, RoktColors.PreDefined1Green
+        TextAlign.Center,
+        RoktColors.PreDefined1Green,
     )
 }
 
@@ -183,7 +190,7 @@ private fun Divider(color: Color = RoktColors.PreDefined1Gray3) {
         Modifier
             .fillMaxWidth()
             .height(1.dp)
-            .background(color = color)
+            .background(color = color),
     )
 }
 
@@ -194,7 +201,7 @@ private fun TextLato(
     modifier: Modifier = Modifier,
     isBold: Boolean = false,
     textAlign: TextAlign = TextAlign.Center,
-    color: Color = RoktColors.PreDefined1Black
+    color: Color = RoktColors.PreDefined1Black,
 ) {
     Text(
         text,
@@ -203,6 +210,6 @@ private fun TextLato(
         fontSize = textSize.sp,
         fontFamily = RoktFonts.Lato,
         fontWeight = if (isBold) FontWeight.Bold else FontWeight.Normal,
-        textAlign = textAlign
+        textAlign = textAlign,
     )
 }

@@ -19,7 +19,9 @@ import java.util.HashMap
 import javax.inject.Inject
 
 @HiltViewModel
-class CustomerDetailsViewModel @Inject constructor() : ViewModel() {
+class CustomerDetailsViewModel
+@Inject
+constructor() : ViewModel() {
     private val _state = MutableStateFlow(CustomerDetailsScreenState(initialized = false))
     private val showAdvancedOptions = MutableStateFlow(false)
     private val selectedCountry = MutableStateFlow(DEFAULT_COUNTRY)
@@ -32,7 +34,10 @@ class CustomerDetailsViewModel @Inject constructor() : ViewModel() {
     val state: MutableStateFlow<CustomerDetailsScreenState>
         get() = _state
 
-    fun init(customerDetails: CustomerDetails, advancedDetails: HashMap<String, String>) {
+    fun init(
+        customerDetails: CustomerDetails,
+        advancedDetails: HashMap<String, String>,
+    ) {
         if (state.value.initialized.not()) {
             // Set default values
             selectedPostcode.value = customerDetails.postcode
@@ -52,19 +57,22 @@ class CustomerDetailsViewModel @Inject constructor() : ViewModel() {
                 advancedDetailsList,
                 selectedState,
                 selectedPostcode,
-                showAdvancedOptions
+                showAdvancedOptions,
             ) { country, advanced, state, postcode, showAdvanced ->
-                val advancedFields = advanced.mapIndexed { index, item ->
-                    EditableFieldSet(
-                        index, key = item.first, value = item.second,
-                        onKeyChanged = { newKey ->
-                            onKeyChanged(newKey, index)
-                        },
-                        onValueChanged = { newValue ->
-                            onValueChanged(newValue, index)
-                        }
-                    )
-                }
+                val advancedFields =
+                    advanced.mapIndexed { index, item ->
+                        EditableFieldSet(
+                            index,
+                            key = item.first,
+                            value = item.second,
+                            onKeyChanged = { newKey ->
+                                onKeyChanged(newKey, index)
+                            },
+                            onValueChanged = { newValue ->
+                                onValueChanged(newValue, index)
+                            },
+                        )
+                    }
                 CustomerDetailsScreenState(
                     showAdvanced,
                     country,
@@ -73,15 +81,15 @@ class CustomerDetailsViewModel @Inject constructor() : ViewModel() {
                         state,
                         {
                             selectedState.value = it
-                        }
+                        },
                     ),
                     createEditableField(
                         postcode,
                         {
                             selectedPostcode.value = it
-                        }
+                        },
                     ),
-                    advancedFields
+                    advancedFields,
                 )
             }.collect {
                 _state.value = it
@@ -90,13 +98,19 @@ class CustomerDetailsViewModel @Inject constructor() : ViewModel() {
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun onKeyChanged(newKey: String, index: Int) {
+    fun onKeyChanged(
+        newKey: String,
+        index: Int,
+    ) {
         advancedDetailsList.value =
             ArrayList(advancedDetailsList.value).updateKeyAtIndex(index, newKey)
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-    fun onValueChanged(newValue: String, index: Int) {
+    fun onValueChanged(
+        newValue: String,
+        index: Int,
+    ) {
         advancedDetailsList.value =
             ArrayList(advancedDetailsList.value).updateValueAtIndex(index, newValue)
     }

@@ -20,7 +20,6 @@ import java.util.HashMap
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
 class CustomCheckoutViewModelTest {
-
     @get:Rule
     val coroutineTestRule = CoroutineTestRule()
 
@@ -31,13 +30,15 @@ class CustomCheckoutViewModelTest {
             customCheckoutViewModel.onAccountDetailsSubmitted(
                 "viewName",
                 "Location1",
-                "Location2"
+                "Location2",
             )
 
             Truth.assertThat(customCheckoutViewModel.state.viewName).isEqualTo("viewName")
-            Truth.assertThat(customCheckoutViewModel.state.placementLocation1)
+            Truth
+                .assertThat(customCheckoutViewModel.state.placementLocation1)
                 .isEqualTo("Location1")
-            Truth.assertThat(customCheckoutViewModel.state.placementLocation2)
+            Truth
+                .assertThat(customCheckoutViewModel.state.placementLocation2)
                 .isEqualTo("Location2")
         }
     }
@@ -47,11 +48,13 @@ class CustomCheckoutViewModelTest {
         coroutineTestRule.runBlockingTest {
             val customCheckoutViewModel = CustomCheckoutViewModel(mockk())
             customCheckoutViewModel.onCustomerDetailsSubmitted(
-                hashMapOf("country" to "Australia", "postcode" to "2323")
+                hashMapOf("country" to "Australia", "postcode" to "2323"),
             )
-            Truth.assertThat(customCheckoutViewModel.state.attributes)
+            Truth
+                .assertThat(customCheckoutViewModel.state.attributes)
                 .containsEntry("country", "Australia")
-            Truth.assertThat(customCheckoutViewModel.state.attributes)
+            Truth
+                .assertThat(customCheckoutViewModel.state.attributes)
                 .containsEntry("postcode", "2323")
         }
     }
@@ -66,7 +69,7 @@ class CustomCheckoutViewModelTest {
             customCheckoutViewModel.onAccountDetailsSubmitted(
                 "viewName",
                 "Location1",
-                "Location2"
+                "Location2",
             )
             val viewName = "viewName"
             val attributes: HashMap<String, String> = hashMapOf()
@@ -76,7 +79,7 @@ class CustomCheckoutViewModelTest {
                     viewName,
                     attributes,
                     placeholders,
-                    any()
+                    any(),
                 )
             } returns Unit
 
@@ -89,7 +92,7 @@ class CustomCheckoutViewModelTest {
                     viewName,
                     attributes,
                     placeholders,
-                    any()
+                    any(),
                 )
             }
         }

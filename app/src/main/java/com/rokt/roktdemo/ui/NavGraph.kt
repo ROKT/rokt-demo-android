@@ -17,7 +17,9 @@ object MainDestinations {
  * Models the navigation actions in the app.
  */
 
-class MainActions constructor(navController: NavController) {
+class MainActions constructor(
+    navController: NavController,
+) {
     val demoLibraryClicked: () -> Unit = {
         navController.navigate(MainDestinations.DEMO)
     }

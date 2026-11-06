@@ -35,13 +35,14 @@ fun WalkthroughPage(
     viewModel.init(demoLibrary.defaultPlacementsExamples.screens.count())
     val state by viewModel.state.collectAsState()
     val navController = rememberNavController()
-    val actions = remember(navController) {
-        WalkthroughActions(
-            navController,
-            state.screenCount,
-            onBackPressed
-        )
-    }
+    val actions =
+        remember(navController) {
+            WalkthroughActions(
+                navController,
+                state.screenCount,
+                onBackPressed,
+            )
+        }
 
     WalkthroughPageContent(
         screenCount = state.screenCount,
@@ -57,7 +58,7 @@ fun WalkthroughPage(
             actions.forwardPressed.invoke(it)
         },
         navController = navController,
-        demoLibrary
+        demoLibrary,
     )
 }
 
@@ -75,7 +76,7 @@ private fun WalkthroughPageContent(
     Column(
         Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colors.surface)
+            .background(color = MaterialTheme.colors.surface),
     ) {
         WalkthroughHeader(
             currentIndex,
@@ -86,14 +87,14 @@ private fun WalkthroughPageContent(
             },
             onNextPressed = {
                 onNextPressed(it)
-            }
+            },
         )
         NavHost(
             navController = navController,
-            startDestination = WalkthroughDestination.WalkthroughScreen + 0
+            startDestination = WalkthroughDestination.WALKTHROUGH_SCREEN + 0,
         ) {
             for (index in 0 until screenCount) {
-                composable(WalkthroughDestination.WalkthroughScreen + index) {
+                composable(WalkthroughDestination.WALKTHROUGH_SCREEN + index) {
                     WalkthroughScreen(index, demoLibrary)
                 }
             }
@@ -115,7 +116,7 @@ private fun WalkthroughHeader(
             counterText = counterText,
             navButtonText = navButtonText,
             onBackPressed = onBackPressed,
-            onNextPressed = onNextPressed
+            onNextPressed = onNextPressed,
         )
     }
 }
@@ -128,11 +129,10 @@ private fun RowScope.HeaderContent(
     onBackPressed: (index: Int) -> Unit,
     onNextPressed: (index: Int) -> Unit,
 ) {
-
     Box(
         Modifier
             .weight(1f)
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         BackButton(backPressed = { onBackPressed(currentIndex) })
     }
@@ -140,21 +140,21 @@ private fun RowScope.HeaderContent(
         Modifier
             .weight(1f)
             .fillMaxWidth(),
-        contentAlignment = Alignment.Center
+        contentAlignment = Alignment.Center,
     ) {
         Text(
             text = counterText,
             color = androidx.compose.ui.graphics.Color.White,
             fontFamily = com.rokt.roktdemo.ui.theme.RoktFonts.DefaultFontFamily,
             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
-            fontSize = 16.sp
+            fontSize = 16.sp,
         )
     }
     Box(
         Modifier
             .weight(1f)
             .fillMaxWidth(),
-        contentAlignment = Alignment.CenterEnd
+        contentAlignment = Alignment.CenterEnd,
     ) {
         HeaderTextButton(navButtonText, { onNextPressed(currentIndex) })
     }

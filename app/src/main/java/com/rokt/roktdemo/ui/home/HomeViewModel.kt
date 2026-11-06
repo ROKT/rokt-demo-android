@@ -9,8 +9,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
-
+class HomeViewModel
+@Inject
+constructor() : ViewModel() {
     fun contactUsClicked(context: Context) {
         context.getString(R.string.link_contact_us).toUri().openInBrowser(context = context)
     }

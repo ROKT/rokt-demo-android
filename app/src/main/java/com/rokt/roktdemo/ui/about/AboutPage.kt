@@ -36,23 +36,28 @@ import com.rokt.roktdemo.ui.demo.error.RoktError
 private const val HEADER_TOP_PADDING = 50 // How far from the top the header items sit
 
 @Composable
-fun AboutPage(backPressed: () -> Unit, viewModel: AboutViewModel = hiltViewModel()) {
+fun AboutPage(
+    backPressed: () -> Unit,
+    viewModel: AboutViewModel = hiltViewModel(),
+) {
     val state = viewModel.state.collectAsState()
     val scroll = rememberScrollState(0)
 
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxSize()
-            .background(Color.White, RectangleShape)
+            .background(Color.White, RectangleShape),
     ) {
-
         when {
             state.value.loading -> {
                 LoadingPage()
             }
+
             state.value.hasData -> {
                 AboutPageContent(scroll, state.value.data!!, viewModel, backPressed)
             }
+
             else -> {
                 RoktError(errorType = state.value.error)
             }
@@ -65,13 +70,13 @@ private fun AboutPageContent(
     scroll: ScrollState,
     aboutPageContent: AboutRokt,
     viewModel: AboutViewModel,
-    backPressed: () -> Unit
+    backPressed: () -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier =
+        Modifier
+            .fillMaxWidth(),
     ) {
-
         Box(Modifier.padding(PaddingValues(start = 3.dp, top = HEADER_TOP_PADDING.dp))) {
             BackButton(backPressed, MaterialTheme.colors.primaryVariant)
         }
@@ -79,7 +84,7 @@ private fun AboutPageContent(
         Column(
             Modifier
                 .verticalScroll(scroll)
-                .padding(PaddingValues(MEDIUM_SPACE.dp, 10.dp))
+                .padding(PaddingValues(MEDIUM_SPACE.dp, 10.dp)),
         ) {
             Contents(aboutPageContent.contents)
             DefaultSpace()
@@ -97,7 +102,7 @@ private fun Contents(content: List<AboutContent>) {
                 AsyncImage(
                     model = imageUrl,
                     contentDescription = it.title,
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth(),
                 )
 
                 DefaultSpace()
@@ -110,14 +115,17 @@ private fun Contents(content: List<AboutContent>) {
 }
 
 @Composable
-private fun Links(links: List<AboutLink>, viewModel: AboutViewModel) {
+private fun Links(
+    links: List<AboutLink>,
+    viewModel: AboutViewModel,
+) {
     val context = LocalContext.current
     links.forEach {
         ButtonLight(
             text = it.text,
             onClick = {
                 viewModel.linkClicked(context, it.url)
-            }
+            },
         )
         DefaultSpace()
     }

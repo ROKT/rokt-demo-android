@@ -12,6 +12,6 @@ fun RoktBackground() {
     Image(
         painter = painterResource(id = R.drawable.ic_home_background),
         contentDescription = stringResource(R.string.content_description_rokt_bg),
-        contentScale = ContentScale.FillBounds
+        contentScale = ContentScale.FillBounds,
     )
 }

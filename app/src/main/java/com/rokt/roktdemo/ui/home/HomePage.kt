@@ -44,29 +44,31 @@ fun HomePage(actions: MainActions) {
     val viewModel: HomeViewModel = hiltViewModel()
 
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .fillMaxHeight()
-            .background(Color.White, RectangleShape)
+            .background(Color.White, RectangleShape),
     ) {
         HomeLogo()
 
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
                 .padding(PaddingValues(0.dp, 0.dp, 0.dp, LARGE_SPACE.dp)),
             verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-
             HomeButtons(viewModel, actions = actions)
             Footer()
             LargeSpace()
         }
 
         SettingsCog(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .padding(top = 35.dp)
                 .align(Alignment.TopEnd),
             actions = actions,
@@ -77,42 +79,49 @@ fun HomePage(actions: MainActions) {
 @Composable
 private fun HomeLogo() {
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.6F)
+            .fillMaxHeight(0.6F),
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxWidth()
-                .fillMaxHeight()
+                .fillMaxHeight(),
         ) {
             Image(
                 painter = painterResource(id = R.drawable.ic_rokt_logo),
                 contentDescription = stringResource(R.string.content_description_rokt_logo),
-                contentScale = ContentScale.FillBounds
+                contentScale = ContentScale.FillBounds,
             )
 
             Text(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxWidth(0.8F)
                     .padding(PaddingValues(top = DEFAULT_SPACE.dp)),
                 text = stringResource(R.string.content_description_rokt_title),
                 fontFamily = RoktFonts.DefaultFontFamily,
                 fontWeight = FontWeight.Normal,
                 fontSize = 18.sp,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
         }
     }
 }
 
 @Composable
-private fun HomeButtons(viewModel: HomeViewModel, actions: MainActions) {
+private fun HomeButtons(
+    viewModel: HomeViewModel,
+    actions: MainActions,
+) {
     val context = LocalContext.current
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth(0.9F)
             .background(Color.White, RectangleShape)
             .padding(PaddingValues(top = LARGE_SPACE.dp, bottom = DEFAULT_SPACE.dp)),
@@ -120,24 +129,24 @@ private fun HomeButtons(viewModel: HomeViewModel, actions: MainActions) {
     ) {
         ButtonDark(
             text = stringResource(R.string.menu_button_demo),
-            onClick = actions.demoLibraryClicked
+            onClick = actions.demoLibraryClicked,
         )
         DefaultSpace()
         ButtonDark(
             text = stringResource(id = R.string.menu_button_layouts_demo),
-            onClick = actions.demoLayoutsClicked
+            onClick = actions.demoLayoutsClicked,
         )
         DefaultSpace()
         ButtonLight(
             text = stringResource(R.string.menu_button_about),
-            onClick = actions.aboutRoktClicked
+            onClick = actions.aboutRoktClicked,
         )
         DefaultSpace()
         ButtonLight(
             text = stringResource(R.string.menu_button_contact),
             onClick = {
                 viewModel.contactUsClicked(context)
-            }
+            },
         )
     }
 }
@@ -146,7 +155,7 @@ private fun HomeButtons(viewModel: HomeViewModel, actions: MainActions) {
 private fun Footer() {
     Column(
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         FooterText(stringResource(R.string.footer_copyright))
         FooterText("${stringResource(R.string.footer_text_version)}${BuildConfig.VERSION_NAME}")
@@ -156,22 +165,27 @@ private fun Footer() {
 @Composable
 private fun FooterText(text: String) {
     Text(
-        text = text, color = MaterialTheme.colors.secondaryVariant,
-        fontSize = 14.sp, fontFamily = RoktFonts.DefaultFontFamily,
+        text = text,
+        color = MaterialTheme.colors.secondaryVariant,
+        fontSize = 14.sp,
+        fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Normal,
-        lineHeight = 16.sp
+        lineHeight = 16.sp,
     )
 }
 
 @Composable
-private fun SettingsCog(modifier: Modifier, actions: MainActions) {
+private fun SettingsCog(
+    modifier: Modifier,
+    actions: MainActions,
+) {
     TextButton(
         modifier = modifier.then(Modifier.padding(10.dp)),
-        onClick = actions.settingsClicked
+        onClick = actions.settingsClicked,
     ) {
         Image(
             imageVector = Icons.Default.Settings,
-            contentDescription = stringResource(id = R.string.header_settings)
+            contentDescription = stringResource(id = R.string.header_settings),
         )
     }
 }

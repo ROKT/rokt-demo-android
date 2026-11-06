@@ -11,9 +11,11 @@ import java.lang.ref.WeakReference
 import javax.inject.Inject
 
 @HiltViewModel
-class CustomCheckoutViewModel @Inject constructor(private val roktExecutor: RoktExecutor) :
-    ViewModel() {
-
+class CustomCheckoutViewModel
+@Inject
+constructor(
+    private val roktExecutor: RoktExecutor,
+) : ViewModel() {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     internal var state = CustomCheckoutPageState()
         set(value) {
@@ -26,11 +28,12 @@ class CustomCheckoutViewModel @Inject constructor(private val roktExecutor: Rokt
         placementLocation1: String,
         placementLocation2: String,
     ) {
-        state = state.copy(
-            viewName = viewName,
-            placementLocation1 = placementLocation1,
-            placementLocation2 = placementLocation2
-        )
+        state =
+            state.copy(
+                viewName = viewName,
+                placementLocation1 = placementLocation1,
+                placementLocation2 = placementLocation2,
+            )
     }
 
     fun onCustomerDetailsSubmitted(attributes: HashMap<String, String>) {
@@ -42,7 +45,7 @@ class CustomCheckoutViewModel @Inject constructor(private val roktExecutor: Rokt
             viewName = state.viewName,
             state.attributes,
             hashMapOf(state.placementLocation1 to widget),
-            viewModelScope
+            viewModelScope,
         )
     }
 }

@@ -10,12 +10,13 @@ import java.lang.ref.WeakReference
 @Composable
 fun RoktEmbeddedWidget(onWidgetAdded: (WeakReference<Widget>) -> Unit) {
     AndroidView(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth(),
         factory = { context ->
             Widget(context).apply {
                 onWidgetAdded(WeakReference(this))
             }
-        }
+        },
     )
 }

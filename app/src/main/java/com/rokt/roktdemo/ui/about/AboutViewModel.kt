@@ -20,10 +20,11 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AboutViewModel @Inject constructor(
+class AboutViewModel
+@Inject
+constructor(
     private val aboutRepository: AboutRoktRepository,
 ) : ViewModel() {
-
     private val _state: MutableStateFlow<UiState<AboutRokt>> =
         MutableStateFlow(UiState(loading = true))
 
@@ -47,7 +48,10 @@ class AboutViewModel @Inject constructor(
         }
     }
 
-    fun linkClicked(context: Context, url: String) {
+    fun linkClicked(
+        context: Context,
+        url: String,
+    ) {
         url.toUri().openInBrowser(context = context)
     }
 }

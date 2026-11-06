@@ -13,7 +13,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(settingsRepository: SettingsRepository) : ViewModel() {
+class MainActivityViewModel
+@Inject
+constructor(
+    settingsRepository: SettingsRepository,
+) : ViewModel() {
     private val _selectedTagId = MutableLiveData<String>()
     val selectedTagId = _selectedTagId.distinctUntilChanged()
 

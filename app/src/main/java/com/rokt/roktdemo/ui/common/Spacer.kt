@@ -18,7 +18,7 @@ fun DefaultSpace() {
     Spacer(
         Modifier
             .fillMaxWidth()
-            .height(DEFAULT_SPACE.dp)
+            .height(DEFAULT_SPACE.dp),
     )
 }
 
@@ -27,7 +27,7 @@ fun LargeSpace() {
     Spacer(
         Modifier
             .fillMaxWidth()
-            .height(LARGE_SPACE.dp)
+            .height(LARGE_SPACE.dp),
     )
 }
 
@@ -36,7 +36,7 @@ fun MediumSpace() {
     Spacer(
         Modifier
             .fillMaxWidth()
-            .height(MEDIUM_SPACE.dp)
+            .height(MEDIUM_SPACE.dp),
     )
 }
 
@@ -45,7 +45,7 @@ fun SmallSpace() {
     Spacer(
         Modifier
             .fillMaxWidth()
-            .height(SMALL_SPACE.dp)
+            .height(SMALL_SPACE.dp),
     )
 }
 
@@ -54,6 +54,6 @@ fun XSmallSpace() {
     Spacer(
         Modifier
             .fillMaxWidth()
-            .height(X_SMALL_SPACE.dp)
+            .height(X_SMALL_SPACE.dp),
     )
 }

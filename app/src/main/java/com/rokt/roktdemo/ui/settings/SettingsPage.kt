@@ -31,11 +31,15 @@ import com.rokt.roktdemo.ui.common.Heading
 private const val HEADER_TOP_PADDING = 50
 
 @Composable
-fun SettingsPage(backPressed: () -> Unit, viewModel: SettingsViewModel = hiltViewModel()) {
+fun SettingsPage(
+    backPressed: () -> Unit,
+    viewModel: SettingsViewModel = hiltViewModel(),
+) {
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxSize()
-            .background(Color.White, RectangleShape)
+            .background(Color.White, RectangleShape),
     ) {
         Header(backPressed)
         val uiState = viewModel.state.collectAsState()
@@ -52,43 +56,52 @@ fun SettingsPage(backPressed: () -> Unit, viewModel: SettingsViewModel = hiltVie
 }
 
 @Composable
-private fun SettingsRow(text: Int, selected: Boolean, onCheckedChange: (value: Boolean) -> Unit) {
+private fun SettingsRow(
+    text: Int,
+    selected: Boolean,
+    onCheckedChange: (value: Boolean) -> Unit,
+) {
     Row(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
-            .padding(20.dp)
+            .padding(20.dp),
     ) {
         Box(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .align(Alignment.CenterVertically)
-                .weight(1f)
+                .weight(1f),
         ) {
             ButtonText(text = stringResource(id = text))
         }
         Switch(checked = selected, onCheckedChange = onCheckedChange)
     }
     Spacer(
-        modifier = Modifier
+        modifier =
+        Modifier
             .height(1.dp)
             .padding(horizontal = 8.dp)
             .fillMaxWidth()
-            .background(Color.LightGray)
+            .background(Color.LightGray),
     )
 }
 
 @Composable
 private fun Header(backPressed: () -> Unit) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier =
+        Modifier
+            .fillMaxWidth(),
     ) {
         Box(Modifier.padding(PaddingValues(start = 3.dp, top = HEADER_TOP_PADDING.dp))) {
             BackButton(backPressed, MaterialTheme.colors.primaryVariant)
         }
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .padding(30.dp)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
         ) {
             Heading(text = stringResource(id = R.string.header_settings))
         }

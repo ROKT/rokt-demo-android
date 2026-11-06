@@ -71,7 +71,7 @@ fun SummaryPageSuccessPage(
         Modifier
             .background(color = MaterialTheme.colors.primaryVariant)
             .fillMaxWidth()
-            .fillMaxHeight()
+            .fillMaxHeight(),
     ) {
         LargeSpace()
         BackButton(backPressed)
@@ -81,7 +81,7 @@ fun SummaryPageSuccessPage(
             openDialog = openDialog,
             text = summaryPageState.disclaimerText,
             onDismiss = { openDialog.value = false },
-            onPositive = startDemoPressed
+            onPositive = startDemoPressed,
         )
 
         Column(
@@ -91,21 +91,22 @@ fun SummaryPageSuccessPage(
                     PaddingValues(
                         start = MEDIUM_SPACE.dp,
                         end = MEDIUM_SPACE.dp,
-                        bottom = 61.dp
-                    )
+                        bottom = 61.dp,
+                    ),
                 ),
         ) {
-
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Image(
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .fillMaxWidth()
                         .height(64.dp),
                     painter = painterResource(id = summaryPageState.drawableResourceId),
-                    contentDescription = stringResource(
-                        R.string.content_description_walkrough_icon
+                    contentDescription =
+                    stringResource(
+                        R.string.content_description_walkrough_icon,
                     ),
-                    colorFilter = ColorFilter.tint(Color.White)
+                    colorFilter = ColorFilter.tint(Color.White),
                 )
                 MediumSpace()
                 Title(text = summaryPageState.title, color = Color.White)
@@ -116,7 +117,7 @@ fun SummaryPageSuccessPage(
             Modifier
                 .background(Color.White)
                 .fillMaxHeight(),
-            verticalArrangement = Arrangement.Bottom
+            verticalArrangement = Arrangement.Bottom,
         ) {
             Box(
                 Modifier
@@ -124,7 +125,7 @@ fun SummaryPageSuccessPage(
                     .verticalScroll(scroll)
                     .weight(1F)
                     .fillMaxHeight(),
-                Alignment.TopCenter
+                Alignment.TopCenter,
             ) {
                 Column {
                     if (summaryPageState.longDescription.isNotEmpty()) {
@@ -139,9 +140,10 @@ fun SummaryPageSuccessPage(
             }
 
             Box(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .systemBarsPadding()
-                    .padding(MEDIUM_SPACE.dp)
+                    .padding(MEDIUM_SPACE.dp),
             ) {
                 ButtonDark(text = stringResource(R.string.summary_page_button_text)) {
                     openDialog.value = true
@@ -156,13 +158,14 @@ fun SummaryDescriptionItem(item: DescriptionItem) {
     Row(
         Modifier
             .fillMaxWidth()
-            .wrapContentHeight()
+            .wrapContentHeight(),
     ) {
         Image(
             modifier = Modifier.size(width = 30.dp, height = 30.dp),
             painter = painterResource(id = item.iconResource),
-            contentDescription = stringResource(
-                R.string.content_description_walkrough_icon
+            contentDescription =
+            stringResource(
+                R.string.content_description_walkrough_icon,
             ),
         )
 

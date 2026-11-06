@@ -57,7 +57,7 @@ fun CustomerDetailsScreen(
     val viewModel: CustomerDetailsViewModel = hiltViewModel()
     viewModel.init(
         demoLibrary.customConfigurationPage.customerDetails,
-        demoLibrary.customConfigurationPage.advancedDetails
+        demoLibrary.customConfigurationPage.advancedDetails,
     )
 
     val state = viewModel.state.collectAsState()
@@ -76,7 +76,7 @@ fun CustomerDetailsScreen(
         viewModel::onCountrySelected,
         state.value.selectedState,
         state.value.postcode,
-        state.value.countryList
+        state.value.countryList,
     )
 }
 
@@ -98,12 +98,12 @@ private fun CustomerDetailsScreenContent(
             .fillMaxSize()
             .padding(start = 24.dp, end = 24.dp, bottom = 24.dp)
             .verticalScroll(scrollState)
-            .systemBarsPadding()
+            .systemBarsPadding(),
     ) {
         Text(
             text = stringResource(R.string.customer_screen_step_label),
             fontSize = 16.sp,
-            color = MaterialTheme.colors.secondaryVariant
+            color = MaterialTheme.colors.secondaryVariant,
         )
         SmallSpace()
         ScreenHeader(text = stringResource(R.string.customer_details_screen_title))
@@ -114,12 +114,12 @@ private fun CustomerDetailsScreenContent(
         RoktTextField(
             stringResource(R.string.textfield_label_state),
             selectedState.text,
-            selectedState.onValueChanged
+            selectedState.onValueChanged,
         )
         RoktTextField(
             stringResource(R.string.textfield_label_postcode),
             postcode.text,
-            postcode.onValueChanged
+            postcode.onValueChanged,
         )
         AdvancedOptionsToggle(onToggleAdvancedOptions)
         DefaultSpace()
@@ -148,23 +148,24 @@ private fun CountrySelection(
             RoktTextField(
                 stringResource(R.string.label_country),
                 selectedCountry,
-                {}
+                {},
             )
             DropDownList(
                 requestToOpen = isOpen.value,
                 list = countryList,
                 openCloseOfDropDownList,
-                onCountrySelected
+                onCountrySelected,
             )
         }
         Spacer(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .matchParentSize()
                 .background(Color.Transparent)
                 .padding(10.dp)
                 .clickable(
-                    onClick = { isOpen.value = true }
-                )
+                    onClick = { isOpen.value = true },
+                ),
         )
     }
 }
@@ -174,21 +175,23 @@ private fun AdvancedOptionsToggle(onClick: () -> Unit) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center,
-        modifier = Modifier
+        modifier =
+        Modifier
             .padding(top = 20.dp)
-            .fillMaxWidth()
+            .fillMaxWidth(),
     ) {
         HeaderTextButton(
             stringResource(R.string.advanced_options_toggle_text),
             { onClick.invoke() },
-            color = MaterialTheme.colors.primaryVariant
+            color = MaterialTheme.colors.primaryVariant,
         )
         Image(
             modifier = Modifier.padding(start = 6.dp),
             painter = painterResource(id = R.drawable.ic_drop_down),
-            contentDescription = stringResource(
-                R.string.drop_down_content_description
-            )
+            contentDescription =
+            stringResource(
+                R.string.drop_down_content_description,
+            ),
         )
     }
 }
@@ -202,7 +205,7 @@ private fun AdvancedOptionsContent(fields: List<EditableFieldSet>) {
             fontSize = 12.sp,
             fontFamily = RoktFonts.DefaultFontFamily,
             color = MaterialTheme.colors.primaryVariant,
-            textAlign = TextAlign.Center
+            textAlign = TextAlign.Center,
         )
 
         fields.forEach { fieldPair ->
@@ -211,20 +214,22 @@ private fun AdvancedOptionsContent(fields: List<EditableFieldSet>) {
                     stringResource(R.string.label_attribute_name),
                     fieldPair.key,
                     fieldPair.onKeyChanged,
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .wrapContentWidth()
                         .weight(1F)
-                        .padding(end = 4.dp)
+                        .padding(end = 4.dp),
                 )
 
                 RoktTextField(
                     stringResource(R.string.label_attribute_value),
                     fieldPair.value,
                     fieldPair.onValueChanged,
-                    modifier = Modifier
+                    modifier =
+                    Modifier
                         .wrapContentWidth()
                         .weight(1F)
-                        .padding(start = 4.dp)
+                        .padding(start = 4.dp),
                 )
             }
         }
