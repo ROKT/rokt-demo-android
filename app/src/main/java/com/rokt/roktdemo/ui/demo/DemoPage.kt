@@ -32,15 +32,17 @@ fun DemoPage(
         demoPage.loading -> {
             LoadingPage()
         }
+
         demoPage.hasData -> {
             DemoPageContent(
                 navController,
                 demoPage.data!!,
                 actions,
                 backPressed,
-                mainActivityViewModel
+                mainActivityViewModel,
             )
         }
+
         else -> {
             RoktError(errorType = demoPage.error)
         }
@@ -66,7 +68,7 @@ fun DemoPageContent(
                     actions.backPressed,
                     { actions.navigateToDemoDestination(item.navAction) },
                     mainActivityViewModel,
-                    item.summaryViewModel
+                    item.summaryViewModel,
                 )
             }
         }

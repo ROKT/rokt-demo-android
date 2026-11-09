@@ -24,16 +24,17 @@ fun RoktHeader(content: @Composable RowScope.() -> Unit) {
             .fillMaxWidth()
             .height(99.dp)
             .background(
-                RoktColors.LightColors.primaryVariant
-            )
+                RoktColors.LightColors.primaryVariant,
+            ),
     ) {
         Row(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .statusBarsPadding()
                 .fillMaxHeight()
                 .fillMaxWidth()
                 .padding(end = 16.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             content()
         }
@@ -41,14 +42,12 @@ fun RoktHeader(content: @Composable RowScope.() -> Unit) {
 }
 
 @Composable
-fun PreDefinedHeader(
-    onBackPressed: () -> Unit,
-) {
+fun PreDefinedHeader(onBackPressed: () -> Unit) {
     RoktHeader {
         Row(
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             BackButton(backPressed = onBackPressed)
             HeaderTextButton("EXIT", { onBackPressed.invoke() })

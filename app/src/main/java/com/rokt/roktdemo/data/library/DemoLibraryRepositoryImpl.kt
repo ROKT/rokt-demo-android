@@ -7,8 +7,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
-class DemoLibraryRepositoryImpl(private val roktDemoService: RoktDemoService) :
-    DemoLibraryRepository {
+class DemoLibraryRepositoryImpl(
+    private val roktDemoService: RoktDemoService,
+) : DemoLibraryRepository {
     private var library: DemoLibrary? = null
 
     override suspend fun getDemoLibrary(): Flow<Result<DemoLibrary>> {

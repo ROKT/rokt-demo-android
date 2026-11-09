@@ -55,7 +55,7 @@ fun AccountDetailsScreen(
         scroll,
         parentViewModel,
         viewModel,
-        navigateToNextScreen
+        navigateToNextScreen,
     )
 }
 
@@ -73,7 +73,7 @@ private fun AccountDetailsSuccess(
         parentViewModel.onAccountDetailsSubmitted(
             data.viewName.text,
             data.placementLocation1.text,
-            data.placementLocation2.text
+            data.placementLocation2.text,
         )
 
         viewModel.onNavigatedAway()
@@ -91,7 +91,7 @@ private fun AccountDetailsSuccess(
         data.accountId,
         data.viewName,
         data.placementLocation1,
-        data.placementLocation2
+        data.placementLocation2,
     )
 }
 
@@ -102,19 +102,19 @@ private fun AccountDetailsScreenContent(
     accountId: EditableField,
     viewName: EditableField,
     placementLocation1: EditableField,
-    placementLocation2: EditableField
+    placementLocation2: EditableField,
 ) {
     Column(
         Modifier
             .fillMaxSize()
             .padding(start = 24.dp, end = 24.dp, bottom = 24.dp)
             .verticalScroll(scrollState)
-            .systemBarsPadding()
+            .systemBarsPadding(),
     ) {
         Text(
             text = stringResource(R.string.account_details_step_count_text),
             fontSize = 16.sp,
-            color = MaterialTheme.colors.secondaryVariant
+            color = MaterialTheme.colors.secondaryVariant,
         )
         SmallSpace()
         ScreenHeader(text = stringResource(R.string.label_account_details))
@@ -125,22 +125,22 @@ private fun AccountDetailsScreenContent(
             stringResource(R.string.label_account_id),
             accountId.text,
             accountId.onValueChanged,
-            accountId.errorText
+            accountId.errorText,
         )
         RoktTextField(
             stringResource(R.string.label_view_name),
             viewName.text,
-            viewName.onValueChanged
+            viewName.onValueChanged,
         )
         RoktTextField(
             stringResource(R.string.label_location_1),
             placementLocation1.text,
-            placementLocation1.onValueChanged
+            placementLocation1.onValueChanged,
         )
         RoktTextField(
             stringResource(R.string.label_location_2),
             placementLocation2.text,
-            placementLocation2.onValueChanged
+            placementLocation2.onValueChanged,
         )
         MediumSpace()
         ButtonLight(text = stringResource(R.string.button_continue)) {
@@ -154,14 +154,14 @@ private fun ErrorTextField(
     label: String,
     text: String,
     onValueChange: (String) -> Unit,
-    errorText: String
+    errorText: String,
 ) {
     Column(Modifier.fillMaxWidth()) {
         RoktTextField(
             label,
             text,
             onValueChange,
-            errorText
+            errorText,
         )
 
         if (errorText.isNotEmpty()) {
@@ -176,18 +176,18 @@ fun ErrorMessage(text: String) {
         Modifier
             .fillMaxWidth()
             .padding(top = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_exclamation_circle),
-            contentDescription = stringResource(R.string.content_description_exclamation)
+            contentDescription = stringResource(R.string.content_description_exclamation),
         )
         Text(
             modifier = Modifier.padding(start = 5.dp),
             text = text,
             color = ErrorColor,
             fontFamily = RoktFonts.DefaultFontFamily,
-            fontSize = 14.sp
+            fontSize = 14.sp,
         )
     }
 }

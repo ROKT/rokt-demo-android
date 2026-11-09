@@ -24,10 +24,11 @@ import javax.inject.Inject
 import kotlin.concurrent.timerTask
 
 @HiltViewModel
-class ScanQrViewModel @Inject constructor(
-    private val roktExecutor: RoktExecutor
+class ScanQrViewModel
+@Inject
+constructor(
+    private val roktExecutor: RoktExecutor,
 ) : ViewModel() {
-
     private val _state: MutableStateFlow<UiState<ScanQrState>> =
         MutableStateFlow(UiState(loading = true))
     val state: StateFlow<UiState<ScanQrState>>
@@ -40,7 +41,10 @@ class ScanQrViewModel @Inject constructor(
     @Volatile
     private var scanCount = 0
 
-    fun qrCodeScanned(rawData: String?, embeddedWidget: WeakReference<Widget>?) {
+    fun qrCodeScanned(
+        rawData: String?,
+        embeddedWidget: WeakReference<Widget>?,
+    ) {
         scanCount++
         if (rawData == null) {
             _state.update { UiState(data = ScanQrState(false)) }
@@ -51,7 +55,7 @@ class ScanQrViewModel @Inject constructor(
                 _state.update { UiState(data = ScanQrState(scannedData = qrData)) }
                 Timer().schedule(
                     timerTask { executePreview(embeddedWidget) },
-                    TimeUnit.SECONDS.toMillis(EXECUTE_DELAY_SECONDS)
+                    TimeUnit.SECONDS.toMillis(EXECUTE_DELAY_SECONDS),
                 )
             } catch (e: Exception) {
                 Timber.d(e, "Scan QR code error")
@@ -64,18 +68,19 @@ class ScanQrViewModel @Inject constructor(
         val scannedData = _state.value.data?.scannedData
         val scanId = scanCount
         scannedData?.let { data ->
-            val attributes = buildMap {
-                this[ATTRIBUTE_IS_DEMO] = true.toString()
-                data.language?.let { this[ATTRIBUTE_LANGUAGE] = it }
-                getDemoConfig(data)?.let { this[ATTRIBUTE_DEMO_CONFIG] = it }
-            }
+            val attributes =
+                buildMap {
+                    this[ATTRIBUTE_IS_DEMO] = true.toString()
+                    data.language?.let { this[ATTRIBUTE_LANGUAGE] = it }
+                    getDemoConfig(data)?.let { this[ATTRIBUTE_DEMO_CONFIG] = it }
+                }
             val placeholders = embeddedWidget?.let { hashMapOf(PREVIEW_PLACEHOLDER to it) }
             roktExecutor.executeRokt(
                 "",
                 HashMap(attributes),
                 placeholders,
                 viewModelScope,
-                onPlacementFailure = { onPlacementFailed(scanId) }
+                onPlacementFailure = { onPlacementFailed(scanId) },
             )
         }
     }
@@ -93,22 +98,25 @@ private fun getDemoConfig(previewData: PreviewData): String? {
     previewData.layoutVariantIds?.let { layoutVariantIds ->
         val slots = mutableListOf<DemoLayoutSlotConfig>()
         previewData.creativeIds.forEachIndexed { index, creativeId ->
-            val slot = DemoLayoutSlotConfig(
-                layoutVariantId = layoutVariantIds[index % layoutVariantIds.count()],
-                creativeId = creativeId
-            )
+            val slot =
+                DemoLayoutSlotConfig(
+                    layoutVariantId = layoutVariantIds[index % layoutVariantIds.count()],
+                    creativeId = creativeId,
+                )
             slots.add(slot)
         }
-        val demoConfig = DemoModeConfig(
-            layouts = listOf(
-                DemoLayoutConfig(
-                    layoutId = previewData.previewId,
-                    versionId = previewData.versionId,
-                    targetElementSelector = PREVIEW_PLACEHOLDER,
-                    slots = slots,
-                )
+        val demoConfig =
+            DemoModeConfig(
+                layouts =
+                listOf(
+                    DemoLayoutConfig(
+                        layoutId = previewData.previewId,
+                        versionId = previewData.versionId,
+                        targetElementSelector = PREVIEW_PLACEHOLDER,
+                        slots = slots,
+                    ),
+                ),
             )
-        )
         return Gson().toJson(demoConfig)
     }
     return null
@@ -117,7 +125,7 @@ private fun getDemoConfig(previewData: PreviewData): String? {
 data class ScanQrState(
     val scanning: Boolean = true,
     val scannedData: PreviewData? = null,
-    val previewFailed: Boolean = false
+    val previewFailed: Boolean = false,
 )
 
 private const val ATTRIBUTE_IS_DEMO = "isDemo"

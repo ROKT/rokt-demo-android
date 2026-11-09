@@ -45,20 +45,20 @@ import com.rokt.roktdemo.ui.theme.RoktFonts
 fun PreDefined2Page(
     onBackPressed: () -> Unit,
     preDefinedScreenModel: PredefinedScreen,
-    viewModel: PreDefinedViewModel = hiltViewModel()
+    viewModel: PreDefinedViewModel = hiltViewModel(),
 ) {
     viewModel.initWithModel(preDefinedScreenModel)
     val scrollState = rememberScrollState(0)
     Column(
         Modifier
             .fillMaxSize()
-            .background(color = RoktColors.PreDefined2White)
+            .background(color = RoktColors.PreDefined2White),
     ) {
         PreDefinedHeader(onBackPressed)
         Column(
             Modifier
                 .fillMaxSize()
-                .verticalScroll(scrollState)
+                .verticalScroll(scrollState),
         ) {
             Content(viewModel)
         }
@@ -77,7 +77,7 @@ private fun Content(viewModel: PreDefinedViewModel) {
                     .padding(SMALL_SPACE.dp)
                     .align(Alignment.CenterHorizontally),
                 contentScale = ContentScale.FillWidth,
-                alignment = Alignment.Center
+                alignment = Alignment.Center,
             )
         }
 
@@ -85,7 +85,7 @@ private fun Content(viewModel: PreDefinedViewModel) {
             text = stringResource(R.string.text_have_great_time),
             textSize = 30,
             isBold = true,
-            textAlign = TextAlign.Start
+            textAlign = TextAlign.Start,
         )
         WhatsNext(isBranded = viewModel.state.value.isBranded)
         RoktEmbeddedWidget {
@@ -102,23 +102,25 @@ private fun WhatsNext(isBranded: Boolean) {
     TextArial(
         text = stringResource(R.string.text_whats_next),
         textSize = 16,
-        color = RoktColors.PreDefined2Gray1
+        color = RoktColors.PreDefined2Gray1,
     )
     XSmallSpace()
     TextArial(
         text = stringResource(if (isBranded) R.string.text_predefined2_branded else R.string.text_predefined2_unbranded),
-        textSize = 16
+        textSize = 16,
     )
     SmallSpace()
     Button(
         onClick = {},
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .height(49.dp)
             .padding(end = X_SMALL_SPACE.dp),
-        colors = ButtonDefaults.textButtonColors(
+        colors =
+        ButtonDefaults.textButtonColors(
             backgroundColor = RoktColors.PreDefined2Purple,
-            contentColor = RoktColors.PreDefined2White
+            contentColor = RoktColors.PreDefined2White,
         ),
     ) {
         TextArial(
@@ -126,20 +128,22 @@ private fun WhatsNext(isBranded: Boolean) {
             16,
             isBold = true,
             textAlign = TextAlign.Center,
-            color = RoktColors.PreDefined2White
+            color = RoktColors.PreDefined2White,
         )
     }
     SmallSpace()
     Button(
         onClick = {},
         border = BorderStroke(1.5.dp, RoktColors.PreDefined2Black),
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .height(49.dp)
             .padding(end = X_SMALL_SPACE.dp),
-        colors = ButtonDefaults.textButtonColors(
+        colors =
+        ButtonDefaults.textButtonColors(
             backgroundColor = RoktColors.PreDefined2White,
-            contentColor = RoktColors.PreDefined2Purple
+            contentColor = RoktColors.PreDefined2Purple,
         ),
     ) {
         TextArial(
@@ -159,7 +163,7 @@ private fun OrderNumber() {
     TextArial(
         text = stringResource(R.string.text_order_number),
         textSize = 16,
-        color = RoktColors.PreDefined2Gray1
+        color = RoktColors.PreDefined2Gray1,
     )
     TextArial(text = stringResource(R.string.text_numbers), textSize = 16)
     SmallSpace()
@@ -172,42 +176,45 @@ private fun EventInfo() {
     TextArial(
         text = stringResource(R.string.text_event_info),
         textSize = 16,
-        color = RoktColors.PreDefined2Gray1
+        color = RoktColors.PreDefined2Gray1,
     )
     XSmallSpace()
     TextArial(
         text = stringResource(R.string.text_parking_info),
         textSize = 16,
-        isBold = true
+        isBold = true,
     )
     XSmallSpace()
     TextArial(
         text = stringResource(R.string.text_event_time),
         textSize = 16,
-        color = RoktColors.PreDefined2Gray1
+        color = RoktColors.PreDefined2Gray1,
     )
     SmallSpace()
     Button(
         onClick = {},
         border = BorderStroke(1.5.dp, RoktColors.PreDefined2Black),
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .height(49.dp)
             .padding(end = X_SMALL_SPACE.dp),
-        colors = ButtonDefaults.textButtonColors(
+        colors =
+        ButtonDefaults.textButtonColors(
             backgroundColor = RoktColors.PreDefined2White,
-            contentColor = RoktColors.PreDefined2Purple
+            contentColor = RoktColors.PreDefined2Purple,
         ),
     ) {
         Row {
             Image(
                 painter = painterResource(id = R.drawable.ic_calender),
-                contentDescription = stringResource(
-                    R.string.text_share
+                contentDescription =
+                stringResource(
+                    R.string.text_share,
                 ),
                 Modifier
                     .padding(end = X_SMALL_SPACE.dp)
-                    .align(Alignment.CenterVertically)
+                    .align(Alignment.CenterVertically),
             )
 
             TextArial(
@@ -228,7 +235,7 @@ private fun Divider() {
         Modifier
             .fillMaxWidth()
             .height(1.dp)
-            .background(color = RoktColors.PreDefined2Gray2)
+            .background(color = RoktColors.PreDefined2Gray2),
     )
 }
 
@@ -239,7 +246,7 @@ private fun TextArial(
     modifier: Modifier = Modifier,
     isBold: Boolean = false,
     textAlign: TextAlign = TextAlign.Start,
-    color: Color = RoktColors.PreDefined2Black
+    color: Color = RoktColors.PreDefined2Black,
 ) {
     Text(
         text,
@@ -249,6 +256,6 @@ private fun TextArial(
         fontFamily = RoktFonts.Arial,
         fontWeight = if (isBold) FontWeight.Bold else FontWeight.Normal,
         textAlign = textAlign,
-        lineHeight = 22.sp
+        lineHeight = 22.sp,
     )
 }

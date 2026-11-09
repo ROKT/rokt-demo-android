@@ -7,7 +7,6 @@ import timber.log.Timber.DebugTree
 
 @HiltAndroidApp
 class RoktDemoApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) {

@@ -60,11 +60,11 @@ private fun CustomCheckoutConfirmationScreenContent(
             .verticalScroll(scrollState)
             .systemBarsPadding()
             .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_tick_confirmation_page),
-            contentDescription = stringResource(R.string.content_description_tick_icon)
+            contentDescription = stringResource(R.string.content_description_tick_icon),
         )
         DefaultSpace()
         SubHeading(stringResource(R.string.confirmation_heading_text), 24)
@@ -83,14 +83,15 @@ private fun CustomCheckoutConfirmationScreenContent(
 private fun RoktEmbeddedWidget(onWidgetAdded: (WeakReference<Widget>) -> Unit) {
     SmallSpace()
     AndroidView(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxWidth()
             .border(2.dp, MaterialTheme.colors.onSurface),
         factory = { context ->
             Widget(context).apply {
                 onWidgetAdded(WeakReference(this))
             }
-        }
+        },
     )
 }
 
@@ -106,10 +107,10 @@ private fun OrderSummary() {
         Modifier
             .fillMaxWidth()
             .border(2.dp, MaterialTheme.colors.onSurface)
-            .background(Color.White)
+            .background(Color.White),
     ) {
         SectionHeading(
-            text = stringResource(R.string.text_order_summary)
+            text = stringResource(R.string.text_order_summary),
         )
         Column(Modifier.padding(start = 24.dp, end = 24.dp)) {
             Column(Modifier.fillMaxWidth()) {
@@ -117,13 +118,13 @@ private fun OrderSummary() {
                     Modifier
                         .fillMaxWidth()
                         .padding(top = 25.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    horizontalArrangement = Arrangement.SpaceBetween,
                 ) {
                     ConfirmationText(
-                        stringResource(R.string.text_basic_tshirt)
+                        stringResource(R.string.text_basic_tshirt),
                     )
                     ConfirmationText(
-                        stringResource(R.string.text_basic_tshirt_price)
+                        stringResource(R.string.text_basic_tshirt_price),
                     )
                 }
                 Text(
@@ -131,7 +132,7 @@ private fun OrderSummary() {
                     Modifier.padding(bottom = 16.dp),
                     fontSize = 12.sp,
                     color = MaterialTheme.colors.secondaryVariant,
-                    fontFamily = RoktFonts.DefaultFontFamily
+                    fontFamily = RoktFonts.DefaultFontFamily,
                 )
             }
             Divider()
@@ -139,26 +140,26 @@ private fun OrderSummary() {
             Row(
                 Modifier
                     .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 ConfirmationText(
-                    stringResource(R.string.text_subtotal)
+                    stringResource(R.string.text_subtotal),
                 )
                 ConfirmationText(
-                    stringResource(R.string.text_basic_tshirt_price)
+                    stringResource(R.string.text_basic_tshirt_price),
                 )
             }
             SmallSpace()
             Row(
                 Modifier
                     .fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 ConfirmationText(
-                    stringResource(R.string.text_shipping)
+                    stringResource(R.string.text_shipping),
                 )
                 ConfirmationText(
-                    stringResource(R.string.text_shipping_price)
+                    stringResource(R.string.text_shipping_price),
                 )
             }
             SmallSpace()
@@ -167,14 +168,15 @@ private fun OrderSummary() {
                 Modifier
                     .fillMaxWidth()
                     .padding(bottom = 24.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 BoldText(
-                    stringResource(R.string.text_total), Modifier.padding(top = 16.dp)
+                    stringResource(R.string.text_total),
+                    Modifier.padding(top = 16.dp),
                 )
                 BoldText(
                     stringResource(R.string.text_basic_tshirt_price),
-                    Modifier.padding(top = 16.dp)
+                    Modifier.padding(top = 16.dp),
                 )
             }
         }
@@ -182,26 +184,32 @@ private fun OrderSummary() {
 }
 
 @Composable
-private fun BoldText(text: String, modifier: Modifier = Modifier) {
+private fun BoldText(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
         modifier = modifier,
         text = text,
         color = MaterialTheme.colors.primaryVariant,
         fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 16.sp
+        fontSize = 16.sp,
     )
 }
 
 @Composable
-private fun BoldTextSmall(text: String, modifier: Modifier = Modifier) {
+private fun BoldTextSmall(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
         modifier = modifier,
         text = text,
         color = MaterialTheme.colors.primaryVariant,
         fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 14.sp
+        fontSize = 14.sp,
     )
 }
 
@@ -211,7 +219,7 @@ private fun CustomerDetails() {
         Modifier
             .fillMaxWidth()
             .border(2.dp, MaterialTheme.colors.onSurface)
-            .background(Color.White)
+            .background(Color.White),
     ) {
         SectionHeading(text = stringResource(R.string.text_customer_details))
         MediumSpace()
@@ -224,13 +232,13 @@ private fun CustomerDetails() {
             BoldTextSmall(stringResource(R.string.text_shipping_address))
             XSmallSpace()
             ConfirmationText(
-                stringResource(R.string.text_shipping_address_value)
+                stringResource(R.string.text_shipping_address_value),
             )
             MediumSpace()
             BoldTextSmall(stringResource(R.string.text_billing_address))
             XSmallSpace()
             ConfirmationText(
-                stringResource(R.string.text_shipping_address_value)
+                stringResource(R.string.text_shipping_address_value),
             )
 
             MediumSpace()
@@ -241,18 +249,18 @@ private fun CustomerDetails() {
                     Modifier
                         .width(34.dp)
                         .background(MaterialTheme.colors.primaryVariant)
-                        .height(21.dp)
+                        .height(21.dp),
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_apple),
                         contentDescription = stringResource(R.string.content_description_apple_logo),
                         Modifier
-                            .align(Alignment.Center)
+                            .align(Alignment.Center),
                     )
                 }
                 ConfirmationText(
                     text = stringResource(id = R.string.text_payment_details),
-                    Modifier.padding(start = 5.dp)
+                    Modifier.padding(start = 5.dp),
                 )
             }
             MediumSpace()
@@ -263,7 +271,7 @@ private fun CustomerDetails() {
             Image(
                 modifier = Modifier.fillMaxWidth(),
                 painter = painterResource(id = R.drawable.image_map),
-                contentDescription = stringResource(R.string.content_description_map_image)
+                contentDescription = stringResource(R.string.content_description_map_image),
             )
             MediumSpace()
         }
@@ -271,13 +279,16 @@ private fun CustomerDetails() {
 }
 
 @Composable
-private fun ConfirmationText(text: String, modifier: Modifier = Modifier) {
+private fun ConfirmationText(
+    text: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
         text,
         modifier = modifier,
         fontSize = 16.sp,
         color = MaterialTheme.colors.secondaryVariant,
-        fontFamily = RoktFonts.DefaultFontFamily
+        fontFamily = RoktFonts.DefaultFontFamily,
     )
 }
 
@@ -287,6 +298,6 @@ private fun Divider() {
         Modifier
             .fillMaxWidth()
             .height(1.5.dp)
-            .background(color = RoktColors.BorderColor)
+            .background(color = RoktColors.BorderColor),
     )
 }

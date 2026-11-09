@@ -50,7 +50,7 @@ private var embeddedWidget: WeakReference<Widget>? = null
 fun DemoLayoutsPage(
     backPressed: () -> Unit,
     mainActivityViewModel: MainActivityViewModel,
-    viewModel: ScanQrViewModel = hiltViewModel()
+    viewModel: ScanQrViewModel = hiltViewModel(),
 ) {
     val state = viewModel.state.collectAsState()
 
@@ -59,11 +59,11 @@ fun DemoLayoutsPage(
     }
 
     Box(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxSize()
-            .background(Color.White, RectangleShape)
+            .background(Color.White, RectangleShape),
     ) {
-
         when {
             state.value.loading -> {
                 LoadingPage()
@@ -79,7 +79,7 @@ fun DemoLayoutsPage(
                     },
                     onQrCodeScanned = {
                         handleQRCodeData(it)
-                    }
+                    },
                 )
                 state.value.data?.scannedData?.tagId?.let {
                     mainActivityViewModel.updateSelectedTagId(it)
@@ -101,16 +101,18 @@ private fun ScannerContent(
     onQrCodeScanned: (data: String?) -> Unit,
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier =
+        Modifier
+            .fillMaxWidth(),
     ) {
         Box(Modifier.padding(PaddingValues(start = 3.dp, top = HEADER_TOP_PADDING.dp))) {
             BackButton(backPressed, MaterialTheme.colors.primaryVariant)
         }
         Column(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .padding(30.dp)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
         ) {
             Heading(text = stringResource(id = R.string.menu_button_layouts_demo))
             ScannerView(onQrCodeScanned)
@@ -143,22 +145,23 @@ private fun ScannerView(onQrCodeScanned: (data: String?) -> Unit) {
     ) {
         val context = LocalContext.current
         ButtonLight(
-            text = stringResource(id = R.string.button_scan)
+            text = stringResource(id = R.string.button_scan),
         ) {
-            val options = GmsBarcodeScannerOptions.Builder()
-                .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
-                .enableAutoZoom()
-                .allowManualInput()
-                .build()
+            val options =
+                GmsBarcodeScannerOptions
+                    .Builder()
+                    .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
+                    .enableAutoZoom()
+                    .allowManualInput()
+                    .build()
             val scanner = GmsBarcodeScanning.getClient(context, options)
-            scanner.startScan()
+            scanner
+                .startScan()
                 .addOnSuccessListener { barcode ->
                     onQrCodeScanned(barcode.rawValue)
-                }
-                .addOnCanceledListener {
+                }.addOnCanceledListener {
                     // Do nothing
-                }
-                .addOnFailureListener { e ->
+                }.addOnFailureListener { e ->
                     Toast.makeText(context, e.message, Toast.LENGTH_SHORT).show()
                 }
         }

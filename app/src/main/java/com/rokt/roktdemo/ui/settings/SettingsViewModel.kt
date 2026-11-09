@@ -14,22 +14,25 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor(
-    private val settingsRepository: SettingsRepository
+class SettingsViewModel
+@Inject
+constructor(
+    private val settingsRepository: SettingsRepository,
 ) : ViewModel() {
-
     private val _state: MutableStateFlow<UiState<SettingsViewState>> =
         MutableStateFlow(UiState(loading = true))
     val state: StateFlow<UiState<SettingsViewState>>
         get() = _state
 
     init {
-        _state.value = UiState(
-            data = SettingsViewState(
-                stageEnvironment = settingsRepository.getBooleanSettingsValue(STAGE_ENV_ENABLED),
-                debugLogsEnabled = settingsRepository.getBooleanSettingsValue(DEBUG_LOGS_ENABLED),
+        _state.value =
+            UiState(
+                data =
+                SettingsViewState(
+                    stageEnvironment = settingsRepository.getBooleanSettingsValue(STAGE_ENV_ENABLED),
+                    debugLogsEnabled = settingsRepository.getBooleanSettingsValue(DEBUG_LOGS_ENABLED),
+                ),
             )
-        )
     }
 
     fun onStageEnvironmentChange(value: Boolean) {

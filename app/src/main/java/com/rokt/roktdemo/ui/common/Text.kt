@@ -38,7 +38,7 @@ fun Title(
         fontWeight = FontWeight.Bold,
         fontSize = 32.sp,
         color = color,
-        textAlign = textAlign
+        textAlign = textAlign,
     )
 }
 
@@ -46,7 +46,7 @@ fun Title(
 fun SubHeading(
     text: String,
     fontSize: Int = 20,
-    lineHeight: Int = 20
+    lineHeight: Int = 20,
 ) {
     Text(
         text = text,
@@ -54,7 +54,7 @@ fun SubHeading(
         fontWeight = FontWeight.Bold,
         fontSize = fontSize.sp,
         color = MaterialTheme.colors.primaryVariant,
-        lineHeight = lineHeight.sp
+        lineHeight = lineHeight.sp,
     )
 }
 
@@ -63,7 +63,7 @@ fun ContentText(
     text: String,
     fontSize: Int = 16,
     textAlign: TextAlign = TextAlign.Start,
-    lineHeight: Int = 22
+    lineHeight: Int = 22,
 ) {
     Text(
         text = text,
@@ -72,21 +72,26 @@ fun ContentText(
         fontSize = fontSize.sp,
         color = MaterialTheme.colors.primaryVariant,
         textAlign = textAlign,
-        lineHeight = lineHeight.sp
+        lineHeight = lineHeight.sp,
     )
 }
 
 @Composable
-fun HeaderTextButton(text: String, onClick: (Int) -> Unit, color: Color = Color.White) {
+fun HeaderTextButton(
+    text: String,
+    onClick: (Int) -> Unit,
+    color: Color = Color.White,
+) {
     ClickableText(
         AnnotatedString(text),
         onClick = onClick,
-        style = TextStyle(
+        style =
+        TextStyle(
             color = color,
             fontFamily = RoktFonts.DefaultFontFamily,
             fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
-        )
+            fontSize = 16.sp,
+        ),
     )
 }
 
@@ -97,7 +102,7 @@ fun ScreenHeader(text: String) {
         fontSize = 28.sp,
         fontFamily = RoktFonts.DefaultFontFamily,
         fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colors.primaryVariant
+        color = MaterialTheme.colors.primaryVariant,
     )
 }
 
@@ -109,7 +114,7 @@ private fun HeadingDivider() {
             Modifier
                 .width(34.dp)
                 .height(6.dp)
-                .background(RoktColors.LightColors.secondary)
+                .background(RoktColors.LightColors.secondary),
         )
         DefaultSpace()
     }

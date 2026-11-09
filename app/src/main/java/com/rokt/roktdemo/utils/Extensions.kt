@@ -12,7 +12,8 @@ import kotlin.random.Random
 fun Uri.openInBrowser(context: Context) {
     val browserIntent = Intent(Intent.ACTION_VIEW, this)
     if (browserIntent.resolveActivity(context.packageManager) != null) {
-        androidx.core.content.ContextCompat.startActivity(context, browserIntent, null)
+        androidx.core.content.ContextCompat
+            .startActivity(context, browserIntent, null)
     }
 }
 
@@ -42,9 +43,7 @@ fun Random.randomiseEmail(email: String?): String {
     return randomisedEmail
 }
 
-private fun getRandomNumber(): String {
-    return Random.nextInt(10000).toString()
-}
+private fun getRandomNumber(): String = Random.nextInt(10000).toString()
 
 @SuppressLint("SimpleDateFormat")
 private fun getFormattedDate(): String {

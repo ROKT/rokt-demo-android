@@ -32,7 +32,7 @@ fun RoktTextField(
     onValueChange: (String) -> Unit,
     errorText: String = "",
     isPassword: Boolean = false,
-    modifier: Modifier = Modifier.fillMaxWidth()
+    modifier: Modifier = Modifier.fillMaxWidth(),
 ) {
     val borderColor =
         if (errorText.isBlank()) MaterialTheme.colors.onSurface else RoktColors.ErrorColor
@@ -42,31 +42,35 @@ fun RoktTextField(
         value = text,
         onValueChange = { onValueChange(it) },
         singleLine = true,
-        keyboardOptions = KeyboardOptions(
+        keyboardOptions =
+        KeyboardOptions(
             keyboardType = if (isPassword) KeyboardType.Password else KeyboardType.Text,
-            imeAction = ImeAction.Done
+            imeAction = ImeAction.Done,
         ),
-        keyboardActions = KeyboardActions(
-            onDone = { focusManager.clearFocus() }
+        keyboardActions =
+        KeyboardActions(
+            onDone = { focusManager.clearFocus() },
         ),
         label = {
             Text(
                 label,
                 color = RoktColors.HintTextColor,
                 fontFamily = RoktFonts.DefaultFontFamily,
-                fontSize = 12.sp
+                fontSize = 12.sp,
             )
         },
-        textStyle = TextStyle(
+        textStyle =
+        TextStyle(
             color = MaterialTheme.colors.primaryVariant,
             fontSize = 16.sp,
-            fontFamily = RoktFonts.DefaultFontFamily
+            fontFamily = RoktFonts.DefaultFontFamily,
         ),
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
-        modifier = modifier
+        modifier =
+        modifier
             .padding(top = 20.dp)
             .background(Color.White)
             .border(2.dp, borderColor)
-            .focusOrder(focusRequester)
+            .focusOrder(focusRequester),
     )
 }

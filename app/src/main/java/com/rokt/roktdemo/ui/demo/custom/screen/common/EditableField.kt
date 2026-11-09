@@ -18,12 +18,10 @@ fun createEditableField(
     text: String,
     onFieldEdited: (String) -> Unit,
     errorText: String = "",
-): EditableField {
-    return EditableField(
-        text = text,
-        onValueChanged = fun(value: String) {
-            onFieldEdited.invoke(value)
-        },
-        errorText = errorText
-    )
-}
+): EditableField = EditableField(
+    text = text,
+    onValueChanged = fun(value: String) {
+        onFieldEdited.invoke(value)
+    },
+    errorText = errorText,
+)

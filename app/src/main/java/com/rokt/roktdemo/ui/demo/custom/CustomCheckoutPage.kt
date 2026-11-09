@@ -23,20 +23,24 @@ import com.rokt.roktdemo.ui.demo.custom.screen.confirmation.CustomCheckoutConfir
 import com.rokt.roktdemo.ui.demo.custom.screen.customer.CustomerDetailsScreen
 
 @Composable
-fun CustomCheckoutPage(exitCheckoutPage: () -> Unit, demoLibrary: DemoLibrary, mainActivityViewModel: MainActivityViewModel) {
+fun CustomCheckoutPage(
+    exitCheckoutPage: () -> Unit,
+    demoLibrary: DemoLibrary,
+    mainActivityViewModel: MainActivityViewModel,
+) {
     val navController = rememberNavController()
     val actions = CustomCheckoutActions(navController, exitCheckoutPage)
     val customCheckoutViewModel: CustomCheckoutViewModel = hiltViewModel()
     Column(
         Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colors.surface)
+            .background(color = MaterialTheme.colors.surface),
     ) {
         RoktHeader {
             Row(
                 modifier = Modifier.fillMaxSize(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
                 BackButton(backPressed = actions.backPressed)
                 HeaderTextButton("EXIT", { exitCheckoutPage() })
@@ -45,25 +49,24 @@ fun CustomCheckoutPage(exitCheckoutPage: () -> Unit, demoLibrary: DemoLibrary, m
 
         NavHost(
             navController = navController,
-            startDestination = CustomCheckoutDestinations.AccountDetails
+            startDestination = CustomCheckoutDestinations.ACCOUNT_DETAILS,
         ) {
-
-            composable(CustomCheckoutDestinations.AccountDetails) {
+            composable(CustomCheckoutDestinations.ACCOUNT_DETAILS) {
                 AccountDetailsScreen(
                     mainActivityViewModel,
                     customCheckoutViewModel,
                     demoLibrary,
-                    actions.navigateToCustomerDetails
+                    actions.navigateToCustomerDetails,
                 )
             }
-            composable(CustomCheckoutDestinations.CustomerDetails) {
+            composable(CustomCheckoutDestinations.CUSTOMER_DETAILS) {
                 CustomerDetailsScreen(
                     customCheckoutViewModel,
                     demoLibrary,
-                    actions.navigateToConfirmationScreen
+                    actions.navigateToConfirmationScreen,
                 )
             }
-            composable(CustomCheckoutDestinations.ConfirmationScreen) {
+            composable(CustomCheckoutDestinations.CONFIRMATION_SCREEN) {
                 CustomCheckoutConfirmationScreen(customCheckoutViewModel)
             }
         }

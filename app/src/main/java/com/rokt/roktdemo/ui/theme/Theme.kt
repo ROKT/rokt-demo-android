@@ -38,15 +38,16 @@ object RoktColors {
     val PreDefined3Green = Color(55, 171, 50)
     val PreDefined3Blue = Color(14, 39, 125)
 
-    val LightColors = lightColors(
-        primary = Color.White,
-        secondary = RoktPink,
-        primaryVariant = RoktGrey,
-        secondaryVariant = TextLight,
-        onPrimary = Color.White,
-        surface = BackgroundColor,
-        onSurface = BorderColor
-    )
+    val LightColors =
+        lightColors(
+            primary = Color.White,
+            secondary = RoktPink,
+            primaryVariant = RoktGrey,
+            secondaryVariant = TextLight,
+            onPrimary = Color.White,
+            surface = BackgroundColor,
+            onSurface = BorderColor,
+        )
 }
 
 object RoktFonts {

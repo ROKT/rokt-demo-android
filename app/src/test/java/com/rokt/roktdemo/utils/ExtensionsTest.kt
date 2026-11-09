@@ -10,7 +10,6 @@ import java.util.ArrayList
 @ExperimentalCoroutinesApi
 @RunWith(JUnit4::class)
 class ExtensionsTest {
-
     @Test
     fun `updateKeyAtIndex should update the key at given index`() {
         val sampleList: ArrayList<Pair<String, String>> =

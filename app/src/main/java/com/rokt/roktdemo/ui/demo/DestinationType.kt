@@ -1,11 +1,13 @@
 package com.rokt.roktdemo.ui.demo
 
-enum class DestinationType(val value: String) {
+enum class DestinationType(
+    val value: String,
+) {
     FEATURE_WALKTHROUGH("walkthrough"),
     CUSTOM_CHECKOUT("custom_check"),
     CONFIRMATION_PREDEFINED1("predefined1"),
     CONFIRMATION_PREDEFINED2("predefined2"),
-    CONFIRMATION_PREDEFINED3("predefined3")
+    CONFIRMATION_PREDEFINED3("predefined3"),
 }
 
 private const val WALKTHROUGH_DISCLAIMER =
@@ -18,11 +20,12 @@ private const val DISCLAIMER_DEFAULT =
 
 No personal, account, or device data will be captured or stored."""
 
-fun DestinationType.getDisclaimer(): String {
-    return when (DestinationType.FEATURE_WALKTHROUGH) {
-        this -> {
-            WALKTHROUGH_DISCLAIMER
-        }
-        else -> DISCLAIMER_DEFAULT
+fun DestinationType.getDisclaimer(): String = when (DestinationType.FEATURE_WALKTHROUGH) {
+    this -> {
+        WALKTHROUGH_DISCLAIMER
+    }
+
+    else -> {
+        DISCLAIMER_DEFAULT
     }
 }

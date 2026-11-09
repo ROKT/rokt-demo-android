@@ -3,12 +3,15 @@ name: Run tests and lint
 on:
   push:
     branches:
-      - "main"
+      - main
   pull_request:
 
+permissions:
+  contents: read
+
 concurrency:
-    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-    cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   lint:
@@ -36,11 +39,6 @@ jobs:
       - name: Setup JDK
         uses: ./.github/actions/setup-java
 
-      - name: Configure Google Services File
-        env:
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: echo $GOOGLE_SERVICES_JSON | base64 -di > app/google-services.json
-
       - name: Run tests
         run: ./gradlew test
 
@@ -54,11 +52,6 @@ jobs:
 
       - name: Setup JDK
         uses: ./.github/actions/setup-java
-        
-      - name: Configure Google Services File
-        env:
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: echo $GOOGLE_SERVICES_JSON | base64 -di > app/google-services.json
 
       - name: Assemble Debug
         run: ./gradlew --no-daemon assembleDebug
