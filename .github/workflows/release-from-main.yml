@@ -87,6 +87,8 @@ jobs:
           artifacts: app-release.apk
           makeLatest: true
           tag: ${{ steps.version-name.outputs.version_name }}
+          # Tag the commit this run releases, not main's tip when the step runs.
+          commit: ${{ github.sha }}
           body: |
             ## Release notes:
             ${{ steps.release-notes.outputs.release_notes }}
